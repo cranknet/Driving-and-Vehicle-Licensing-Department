@@ -1,0 +1,89 @@
+﻿using System;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+namespace DVLD_UI.Utils
+{
+    public class clsUtils
+    {
+        public static string ImageHandler(PictureBox pictureBox, string imageFolder)
+        {
+            string destinationPath = string.Empty;
+            using (OpenFileDialog ofdImage = new OpenFileDialog())
+            {
+                ofdImage.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+                ofdImage.Multiselect = false;
+                if (ofdImage.ShowDialog() == DialogResult.OK)
+                {
+                    string sourcePath = ofdImage.FileName;
+                    // Create Image Path
+                    string imagesFolder = Path.Combine(Application.StartupPath, imageFolder);
+                    if (!Directory.Exists(imagesFolder))
+                    {
+                        Directory.CreateDirectory(imagesFolder);
+                    }
+                    // I will rename image via GUID
+                    string fileName = Path.GetFileName(sourcePath);
+                    destinationPath = Path.Combine(imagesFolder, fileName);
+                    try
+                    {
+                        File.Copy(sourcePath, destinationPath, true);
+                        pictureBox.ImageLocation = destinationPath;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("_ImageHandler: Error copying image: " + ex.Message);
+                    }
+                }
+            }
+            return destinationPath;
+        }
+        public static bool DeleteImage(string imagePath)
+        {
+            if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+            {
+                try
+                {
+                    File.Delete(imagePath);
+                    return true;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    MessageBox.Show("Access denied! You don't have permission to delete this file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("The file is currently in use. Close any applications using it and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An unexpected error occurred while deleting the image:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return false;
+        }
+        // Validations
+        public static bool IsValidText(string text)
+        {
+            return Regex.IsMatch(text, @"^[A-Za-z\s]+$");
+        }
+        public static bool IsValidEmail(string email)
+        {
+            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        }
+        public static bool IsValidPhone(string phone)
+        {
+            return Regex.IsMatch(phone, @"^\+?\d{7,15}$"); // Allows optional + at start
+        }
+        public static bool IsValidDate(DateTime date)
+        {
+            return date <= DateTime.Today.AddYears(-18);
+        }
+        public static DateTime AllowedDate(int minAge)
+        {
+            return DateTime.Today.AddYears(-minAge);
+        }
+
+
+    }
+}
