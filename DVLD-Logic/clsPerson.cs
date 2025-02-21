@@ -12,7 +12,8 @@ namespace DVLD_Logic
         public string Address { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string Country { get; set; }
+        public string CountryName { get; set; }
+        public int CountryID { get; set; }
         public string ImagePath { get; set; }
         public clsPerson()
         {
@@ -25,10 +26,11 @@ namespace DVLD_Logic
             this.Address = string.Empty;
             this.Email = string.Empty;
             this.Phone = string.Empty;
-            this.Country = string.Empty;
+            this.CountryID = 0;
+            this.CountryName = string.Empty;
             this.ImagePath = string.Empty;
         }
-        protected clsPerson(int personID, string nationalNo, string firstName, string lastName, DateTime birthDate, string gender, string address, string email, string phone, string country, string imagePath)
+        protected clsPerson(int personID, string nationalNo, string firstName, string lastName, DateTime birthDate, string gender, string address, string phone, string email, int countryID, string imagePath)
         {
             this.PersonID = personID;
             this.NationalNo = nationalNo;
@@ -39,7 +41,8 @@ namespace DVLD_Logic
             this.Address = address;
             this.Email = email;
             this.Phone = phone;
-            this.Country = country;
+            this.CountryID = countryID;
+            this.CountryName = "";
             this.ImagePath = imagePath;
         }
     }

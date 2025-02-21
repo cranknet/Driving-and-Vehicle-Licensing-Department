@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.btnAddPeople = new System.Windows.Forms.Button();
-            this.applicationsControl1 = new DVLD_UI.UserControls.ApplicationsControl();
-            this.usersControl1 = new DVLD_UI.UserControls.UsersControl();
             this.SuspendLayout();
             // 
             // btnAddPeople
@@ -44,31 +42,13 @@
             this.btnAddPeople.UseVisualStyleBackColor = false;
             this.btnAddPeople.Click += new System.EventHandler(this.btnAddPeople_Click);
             // 
-            // applicationsControl1
-            // 
-            this.applicationsControl1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applicationsControl1.Location = new System.Drawing.Point(549, 37);
-            this.applicationsControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.applicationsControl1.Name = "applicationsControl1";
-            this.applicationsControl1.Size = new System.Drawing.Size(917, 761);
-            this.applicationsControl1.TabIndex = 1;
-            // 
-            // usersControl1
-            // 
-            this.usersControl1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usersControl1.Location = new System.Drawing.Point(793, 39);
-            this.usersControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.usersControl1.Name = "usersControl1";
-            this.usersControl1.Size = new System.Drawing.Size(917, 761);
-            this.usersControl1.TabIndex = 2;
-            // 
+           
+           
             // ApplicationsSubItemsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.Controls.Add(this.usersControl1);
-            this.Controls.Add(this.applicationsControl1);
             this.Controls.Add(this.btnAddPeople);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(0);
@@ -82,7 +62,5 @@
         #endregion
 
         private System.Windows.Forms.Button btnAddPeople;
-        private ApplicationsControl applicationsControl1;
-        private UsersControl usersControl1;
     }
 }

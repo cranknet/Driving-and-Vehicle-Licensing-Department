@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DVLD_Logic;
+using System;
+using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -83,7 +85,22 @@ namespace DVLD_UI.Utils
         {
             return DateTime.Today.AddYears(-minAge);
         }
-
-
+        public static void LoadFilterOptions(DataGridView gridView, ComboBox cmbFilter)
+        {
+            cmbFilter.Items.Clear();
+            cmbFilter.Items.Add("None");
+            foreach (DataGridViewColumn column in gridView.Columns)
+            {
+                cmbFilter.Items.Add(column.Name);
+            }
+            cmbFilter.SelectedItem = "None";
+        }
+        public static void LoadCountryList(ComboBox cmbCountryList, DataTable countryNames)
+        {
+            countryNames = clsCountry.GetListCountries().DefaultView.ToTable("CountryNames", false, "CountryName", "CountryID");
+            cmbCountryList.DataSource = countryNames;
+            cmbCountryList.DisplayMember = "CountryName";
+            cmbCountryList.ValueMember = "CountryID";
+        }
     }
 }

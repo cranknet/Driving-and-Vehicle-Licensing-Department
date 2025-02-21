@@ -55,7 +55,6 @@
             this.Name = "FrmShowDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmShowDetails";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmShowDetails_KeyDown);
             this.ResumeLayout(false);
 
         }

@@ -1,6 +1,6 @@
 ﻿namespace DVLD_UI.UserControls.SubItems
 {
-    partial class PeoplesSubItemsControl
+    partial class SubMenuControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -43,14 +43,13 @@
             this.btnAddPeople.ForeColor = System.Drawing.Color.White;
             this.btnAddPeople.Image = global::DVLD_UI.Properties.Resources.DVLD_Add_People__32;
             this.btnAddPeople.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPeople.Location = new System.Drawing.Point(278, 2);
+            this.btnAddPeople.Location = new System.Drawing.Point(247, 9);
             this.btnAddPeople.Margin = new System.Windows.Forms.Padding(0);
             this.btnAddPeople.Name = "btnAddPeople";
             this.btnAddPeople.Size = new System.Drawing.Size(165, 46);
             this.btnAddPeople.TabIndex = 1;
             this.btnAddPeople.Text = "ADD NEW";
             this.btnAddPeople.UseVisualStyleBackColor = false;
-            this.btnAddPeople.Click += new System.EventHandler(this.btnAddPeople_Click);
             // 
             // btnEditPeople
             // 
@@ -61,7 +60,7 @@
             this.btnEditPeople.ForeColor = System.Drawing.Color.White;
             this.btnEditPeople.Image = global::DVLD_UI.Properties.Resources.DVLD_Add_People__32;
             this.btnEditPeople.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditPeople.Location = new System.Drawing.Point(474, 2);
+            this.btnEditPeople.Location = new System.Drawing.Point(443, 9);
             this.btnEditPeople.Margin = new System.Windows.Forms.Padding(0);
             this.btnEditPeople.Name = "btnEditPeople";
             this.btnEditPeople.Size = new System.Drawing.Size(165, 46);
@@ -78,7 +77,7 @@
             this.btnDeletePeople.ForeColor = System.Drawing.Color.White;
             this.btnDeletePeople.Image = global::DVLD_UI.Properties.Resources.DVLD_Add_People__32;
             this.btnDeletePeople.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeletePeople.Location = new System.Drawing.Point(670, 2);
+            this.btnDeletePeople.Location = new System.Drawing.Point(639, 9);
             this.btnDeletePeople.Margin = new System.Windows.Forms.Padding(0);
             this.btnDeletePeople.Name = "btnDeletePeople";
             this.btnDeletePeople.Size = new System.Drawing.Size(165, 46);
@@ -95,7 +94,7 @@
             this.btnListRefresh.ForeColor = System.Drawing.Color.White;
             this.btnListRefresh.Image = global::DVLD_UI.Properties.Resources.DVLD_Add_People__32;
             this.btnListRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnListRefresh.Location = new System.Drawing.Point(82, 2);
+            this.btnListRefresh.Location = new System.Drawing.Point(51, 9);
             this.btnListRefresh.Margin = new System.Windows.Forms.Padding(0);
             this.btnListRefresh.Name = "btnListRefresh";
             this.btnListRefresh.Size = new System.Drawing.Size(165, 46);
@@ -103,7 +102,7 @@
             this.btnListRefresh.Text = "DETAILS";
             this.btnListRefresh.UseVisualStyleBackColor = false;
             // 
-            // PeoplesSubItemsControl
+            // SubMenuControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -114,8 +113,8 @@
             this.Controls.Add(this.btnAddPeople);
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "PeoplesSubItemsControl";
-            this.Size = new System.Drawing.Size(917, 50);
+            this.Name = "SubMenuControl";
+            this.Size = new System.Drawing.Size(854, 64);
             this.ResumeLayout(false);
 
         }

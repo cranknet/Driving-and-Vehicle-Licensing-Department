@@ -8,16 +8,15 @@ namespace DVLD_Data
         // FindBy Person Object
         public static bool FindBy(int personID, ref string nationalNo, ref string firstName, ref string lastName,
                                  ref DateTime dateOfBirth, ref string gender, ref string address, ref string phone,
-                                 ref string email, ref string countryName, ref string imagePath)
+                                 ref string email, ref int countryID, ref string imagePath)
         {
             bool isFound = false;
             string query = @"SELECT PersonID, NationalNo, FirstName, LastName, DateOfBirth, 
                             CASE 
                             WHEN Gendor = 0 THEN 'Male'
                             WHEN Gendor = 1 THEN 'Female'
-                            END AS Gender, Address, Phone, Email, Countries.CountryName, ImagePath
+                            END AS Gender, Address, Phone, Email, NationalityCountryID, ImagePath
                             FROM People 
-							JOIN Countries ON People.NationalityCountryID = Countries.CountryID
 							WHERE People.PersonID = @PersonID";
             using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
@@ -38,7 +37,7 @@ namespace DVLD_Data
                         address = reader["Address"].ToString();
                         phone = reader["Phone"].ToString();
                         email = reader["Email"].ToString();
-                        countryName = reader["CountryName"].ToString();
+                        countryID = (int)reader["NationalityCountryID"];
                         imagePath = (reader["ImagePath"] != DBNull.Value) ? reader["ImagePath"].ToString() : string.Empty;
                     }
                     else isFound = false;
@@ -122,7 +121,7 @@ namespace DVLD_Data
         // Update Person
         public static bool UpdatePerson(int personID, string nationalNo, string firstName, string lastName,
                                   DateTime dateOfBirth, string gender, string address, string phone,
-                                  string email, string countryName, string imagePath)
+                                  string email, int countryID, string imagePath)
         {
             // Handle Gender 
             int Gender = (gender == "Male") ? 0 : 1;
@@ -136,10 +135,9 @@ namespace DVLD_Data
                                 Address = @Address, 
                                 Phone = @Phone, 
                                 Email = @Email, 
-                                NationalityCountryID = Countries.CountryID, 
+                                NationalityCountryID = @CountryID, 
                                 ImagePath = @ImagePath
                              FROM People
-                             INNER JOIN Countries ON Countries.CountryName = @CountryName
                              WHERE People.PersonID = @PersonID";
             using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
@@ -152,7 +150,7 @@ namespace DVLD_Data
                 cmd.Parameters.AddWithValue("@Address", address);
                 cmd.Parameters.AddWithValue("@Phone", phone);
                 cmd.Parameters.AddWithValue("@Email", email);
-                cmd.Parameters.AddWithValue("@CountryName", countryName);
+                cmd.Parameters.AddWithValue("@CountryID", countryID);
                 cmd.Parameters.AddWithValue("@ImagePath", imagePath);
                 cmd.Parameters.AddWithValue("@PersonID", personID);
                 try
@@ -187,6 +185,44 @@ namespace DVLD_Data
                 }
             }
             return rowAffected > 0;
+        }
+        // Add new Person
+        public static int AddNewPerson(string nationalNo, string firstName, string lastName,
+                                  DateTime dateOfBirth, string gender, string address, string phone,
+                                  string email, int countryID, string imagePath)
+        {
+            int personID = -1;
+            int intGender = (gender == "Male") ? 0 : 1;
+            string query = @"INSERT INTO People (NationalNo, FirstName, LastName, DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath)
+                                         VALUES (@NationalNo, @FirstName, @LastName, @DateOfBirth, @Gender, @Address, @Phone, @Email, @CountryID, @ImagePath);
+                                         SELECT SCOPE_IDENTITY()";
+            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                cmd.Parameters.AddWithValue("@NationalNo", nationalNo);
+                cmd.Parameters.AddWithValue("@FirstName", firstName);
+                cmd.Parameters.AddWithValue("@LastName", lastName);
+                cmd.Parameters.AddWithValue("@DateOfBirth", dateOfBirth);
+                cmd.Parameters.AddWithValue("@Gender", intGender);
+                cmd.Parameters.AddWithValue("@Address", address);
+                cmd.Parameters.AddWithValue("@Phone", phone);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@CountryID", countryID);
+                cmd.Parameters.AddWithValue("@ImagePath", imagePath);
+                try
+                {
+                    connection.Open();
+                    object queryResult = cmd.ExecuteScalar();
+                    if (queryResult != null && int.TryParse(queryResult.ToString(), out int newPersonID)) personID = newPersonID;
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"Add New Person: SQL Error -> {ex.Message}");
+                }
+            }
+
+            return personID;
+
         }
     }
 }

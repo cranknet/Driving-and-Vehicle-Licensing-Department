@@ -103,6 +103,26 @@ namespace DVLD_UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Applications_32 {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Applications-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Applications_321 {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Applications-321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DVLD_Default_Photo {
             get {
                 object obj = ResourceManager.GetObject("DVLD-Default-Photo", resourceCulture);
@@ -116,6 +136,26 @@ namespace DVLD_UI.Properties {
         internal static System.Drawing.Bitmap DVLD_Drivers {
             get {
                 object obj = ResourceManager.GetObject("DVLD_Drivers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Drivers_32 {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Drivers-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Drivers_321 {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Drivers-321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +186,26 @@ namespace DVLD_UI.Properties {
         internal static System.Drawing.Bitmap DVLD_Exit2 {
             get {
                 object obj = ResourceManager.GetObject("DVLD_Exit2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Login_Password {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Login-Password", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Login_Username {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Login-Username", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,6 +273,16 @@ namespace DVLD_UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Peoples_32 {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Peoples-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DVLD_Profile_Picture {
             get {
                 object obj = ResourceManager.GetObject("DVLD-Profile-Picture", resourceCulture);
@@ -236,6 +306,26 @@ namespace DVLD_UI.Properties {
         internal static System.Drawing.Bitmap DVLD_Users {
             get {
                 object obj = ResourceManager.GetObject("DVLD_Users", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Users_32 {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Users-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DVLD_UserSettings_32 {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-UserSettings-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

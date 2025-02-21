@@ -1,44 +1,72 @@
 ﻿using DVLD_Logic;
 using DVLD_UI.Utils;
-using System;
-using System.Data;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
 {
     public partial class PersonProfileCard : UserControl
     {
-        // Create Action Events
-        public event Action PersonChanged;
-        public event Func<int, bool> OnPersonDelete;
-        public event Action OnShowDetailsFormClose;
-        // Create Person
         clsPeople Person = null;
-        private void DisplayPersonDetails(int personID)
+
+        private CardUtils.EnDisplayMode EnMode { get; set; }
+        private void InitializePerson(int personID)
         {
-            bool isAddMode = personID == -1;
-            lblPersonID.Text = isAddMode ? string.Empty : $"PERSON ID: {Person.PersonID}";
-            txtFirstName.Text = isAddMode ? string.Empty : Person.FirstName;
-            txtLastName.Text = isAddMode ? string.Empty : Person.LastName;
-            txtNationalNo.Text = isAddMode ? string.Empty : Person.NationalNo;
-            dtpBirthDate.Value = isAddMode ? clsUtils.AllowedDate(18) : Person.DateOfBirth;
-            cmbGender.SelectedItem = isAddMode ? string.Empty : Person.Gender;
-            txtAddress.Text = isAddMode ? string.Empty : Person.Address;
-            txtEmail.Text = isAddMode ? string.Empty : Person.Email;
-            txtPhone.Text = isAddMode ? string.Empty : Person.Phone;
-            cmbCountryList.SelectedValue = isAddMode ? string.Empty : Person.Country;
-            pbPersonImage.ImageLocation = isAddMode ? string.Empty : Person.ImagePath;
-            if (isAddMode) SetEditMode();
+            if (personID < 0) return;
+            Person = (EnMode == CardUtils.EnDisplayMode.Read || EnMode == CardUtils.EnDisplayMode.Update) ? clsPeople.FindByPersonID(personID) : new clsPeople();
         }
-        public void SetEditMode(bool Enabled = true)
+        private void ShowReadMode()
         {
-            txtFirstName.Enabled = Enabled;
-            txtLastName.Enabled = Enabled;
-            cmbGender.Enabled = Enabled;
-            cmbCountryList.Enabled = Enabled;
-            dtpBirthDate.Enabled = Enabled;
-            btnChangeImage.Visible = Enabled;
-            btnRemoveImage.Visible = Enabled;
-            if (Enabled)
+            if (Person == null) return;
+            lblPersonID.Text = $"PERSON ID: {Person.PersonID}";
+            txtFirstName.Text = Person.FirstName;
+            txtLastName.Text = Person.LastName;
+            txtNationalNo.Text = Person.NationalNo;
+            dtpBirthDate.Value = Person.DateOfBirth;
+            cmbGender.SelectedItem = Person.Gender;
+            txtAddress.Text = Person.Address;
+            txtEmail.Text = Person.Email;
+            txtPhone.Text = Person.Phone;
+            cmbCountryList.SelectedValue = Person.CountryID;
+            pbPersonImage.ImageLocation = Person.ImagePath;
+            btnSavePerson.Text = "SAVE";
+        }
+        private void ShowUpdateMode()
+        {
+            ShowReadMode();
+            ToggleControlStatus();
+        }
+        private void ShowAddMode()
+        {
+            ShowReadMode();
+            ToggleControlStatus();
+            dtpBirthDate.MaxDate = clsUtils.AllowedDate(18);
+            btnSavePerson.Text = "ADD";
+            pbPersonImage.Image = Properties.Resources.Body;
+        }
+        private void Display()
+        {
+            switch (EnMode)
+            {
+                case CardUtils.EnDisplayMode.Read:
+                    ShowReadMode();
+                    break;
+                case CardUtils.EnDisplayMode.Update:
+                    ShowUpdateMode();
+                    break;
+                case CardUtils.EnDisplayMode.Add:
+                    ShowAddMode();
+                    break;
+            }
+        }
+        private void ToggleControlStatus(bool enabled = true)
+        {
+            txtFirstName.Enabled = enabled;
+            txtLastName.Enabled = enabled;
+            cmbGender.Enabled = enabled;
+            cmbCountryList.Enabled = enabled;
+            dtpBirthDate.Enabled = enabled;
+            btnChangeImage.Visible = enabled;
+            btnRemoveImage.Visible = enabled;
+            if (enabled)
             {
                 txtFirstName.BorderStyle = BorderStyle.Fixed3D;
                 txtLastName.BorderStyle = BorderStyle.Fixed3D;
@@ -50,18 +78,10 @@ namespace DVLD_UI.UserControls.Cards
             }
             foreach (Control control in grbPersonDetails.Controls)
             {
-                if (control is TextBox) control.Enabled = Enabled;
+                if (control is TextBox) control.Enabled = enabled;
             }
-            btnSavePerson.Visible = Enabled;
-            btnReset.Visible = Enabled;
-        }
-        private void LoadCountryList()
-        {
-            DataTable CountryNames = clsCountry.GetListCountries().DefaultView.ToTable("CountryNames", false, "CountryName");
-            string displayValue = "CountryName";
-            cmbCountryList.DataSource = CountryNames;
-            cmbCountryList.DisplayMember = displayValue;
-            cmbCountryList.ValueMember = displayValue;
+            btnSavePerson.Visible = enabled;
+            btnReset.Visible = enabled;
         }
         private bool ValidateAllFields()
         {
@@ -101,18 +121,17 @@ namespace DVLD_UI.UserControls.Cards
         private bool SavePerson()
         {
             if (!ValidateAllFields()) return false;
-
             Person.FirstName = txtFirstName.Text.Trim();
             Person.LastName = txtLastName.Text.Trim();
             Person.NationalNo = txtNationalNo.Text.Trim();
             Person.Gender = cmbGender.SelectedItem.ToString();
             Person.DateOfBirth = dtpBirthDate.Value;
-            Person.Address = textBoxAddress.Text.Trim();
-            Person.Email = textBoxEmail.Text.Trim();
-            Person.Phone = textBoxPhone.Text.Trim();
-            Person.Country = comboBoxCountryList.SelectedValue.ToString();
-            Person.ImagePath = pbPeoplePicture.ImageLocation;
-
+            Person.Address = txtAddress.Text.Trim();
+            Person.Email = txtEmail.Text.Trim();
+            Person.Phone = txtPhone.Text.Trim();
+            Person.CountryName = cmbCountryList.SelectedText;
+            Person.CountryID = (int)cmbCountryList.SelectedValue;
+            Person.ImagePath = pbPersonImage.ImageLocation;
             return Person.Save();
         }
     }

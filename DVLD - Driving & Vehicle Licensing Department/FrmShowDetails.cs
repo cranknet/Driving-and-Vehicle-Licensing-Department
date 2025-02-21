@@ -9,12 +9,5 @@ namespace DVLD_UI
             InitializeComponent();
         }
 
-        private void FrmShowDetails_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-            }
-        }
     }
 }

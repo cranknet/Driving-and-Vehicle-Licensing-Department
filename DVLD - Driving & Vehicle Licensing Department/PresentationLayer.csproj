@@ -86,12 +86,17 @@
       <HintPath>..\packages\Avalonia.11.2.3\lib\netstandard2.0\Avalonia.Vulkan.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.6.6.0\lib\net48\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
     <Reference Include="MicroCom.Runtime, Version=0.11.0.0, Culture=neutral, PublicKeyToken=b30be05a5f7688e9, processorArchitecture=MSIL">
       <HintPath>..\packages\MicroCom.Runtime.0.11.0\lib\netstandard2.0\MicroCom.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -114,6 +119,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -123,6 +129,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FrmMain.cs">
@@ -131,14 +138,27 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPersonProfileCardHost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPersonProfileCardHost.Designer.cs">
+      <DependentUpon>FrmPersonProfileCardHost.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmShowDetails.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmShowDetails.Designer.cs">
       <DependentUpon>FrmShowDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\Cards\CardUtils.cs" />
     <Compile Include="UserControls\Cards\PersonProfileCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -148,17 +168,11 @@
     <Compile Include="UserControls\Cards\PersonProfileCard.Logic.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\SubItems\ApplicationsControl.cs">
+    <Compile Include="UserControls\Cards\UserProfileCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\SubItems\ApplicationsControl.Designer.cs">
-      <DependentUpon>ApplicationsControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\DriversControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\DriversControl.Designer.cs">
-      <DependentUpon>DriversControl.cs</DependentUpon>
+    <Compile Include="UserControls\Cards\UserProfileCard.Designer.cs">
+      <DependentUpon>UserProfileCard.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\PeoplesControl.cs">
       <SubType>UserControl</SubType>
@@ -172,30 +186,24 @@
     <Compile Include="UserControls\SubItems\ApplicationsSubItemsControl.Designer.cs">
       <DependentUpon>ApplicationsSubItemsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\PeoplesSubItemsControl.cs">
+    <Compile Include="UserControls\SubMenuControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\PeoplesSubItemsControl.Designer.cs">
-      <DependentUpon>PeoplesSubItemsControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UsersControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\UsersControl.Designer.cs">
-      <DependentUpon>UsersControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UserSettingsControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\UserSettingsControl.Designer.cs">
-      <DependentUpon>UserSettingsControl.cs</DependentUpon>
+    <Compile Include="UserControls\SubMenuControl.Designer.cs">
+      <DependentUpon>SubMenuControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\clsUtils.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmPersonProfileCardHost.resx">
+      <DependentUpon>FrmPersonProfileCardHost.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmShowDetails.resx">
       <DependentUpon>FrmShowDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -210,11 +218,8 @@
     <EmbeddedResource Include="UserControls\Cards\PersonProfileCard.resx">
       <DependentUpon>PersonProfileCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\SubItems\ApplicationsControl.resx">
-      <DependentUpon>ApplicationsControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\DriversControl.resx">
-      <DependentUpon>DriversControl.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Cards\UserProfileCard.resx">
+      <DependentUpon>UserProfileCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\PeoplesControl.resx">
       <DependentUpon>PeoplesControl.cs</DependentUpon>
@@ -222,14 +227,8 @@
     <EmbeddedResource Include="UserControls\SubItems\ApplicationsSubItemsControl.resx">
       <DependentUpon>ApplicationsSubItemsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\PeoplesSubItemsControl.resx">
-      <DependentUpon>PeoplesSubItemsControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UsersControl.resx">
-      <DependentUpon>UsersControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UserSettingsControl.resx">
-      <DependentUpon>UserSettingsControl.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\SubMenuControl.resx">
+      <DependentUpon>SubMenuControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -240,6 +239,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserControls\PeoplesControl.Logic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Cards\UserProfileCard.Logic.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +285,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DVLD-Main.ico" />
+    <None Include="Resources\DVLD-Applications-321.png" />
+    <None Include="Resources\DVLD-Drivers-321.png" />
+    <None Include="Resources\DVLD-Peoples-32.png" />
+    <None Include="Resources\DVLD-Users-32.png" />
+    <None Include="Resources\DVLD-UserSettings-32.png" />
+    <None Include="Resources\DVLD-Drivers-32.png" />
+    <None Include="Resources\DVLD-Applications-32.png" />
+    <None Include="Resources\DVLD-Login-Username.png" />
+    <None Include="Resources\DVLD-Login-Password.png" />
     <None Include="Resources\DVLD-Error-Photo.png" />
     <None Include="Resources\DVLD-Default-Photo.png" />
     <None Include="Resources\Body.png" />
