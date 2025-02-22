@@ -26,7 +26,7 @@ namespace DVLD_UI.UserControls.Cards
         private void btnUserEditPerson_Click(object sender, System.EventArgs e)
         {
             PersonProfileCard personProfileCard = new PersonProfileCard(CardUtils.EnDisplayMode.Update, User.PersonID);
-            using (FrmPersonProfileCardHost frmHost = new FrmPersonProfileCardHost(personProfileCard))
+            using (FrmHost frmHost = new FrmHost(personProfileCard))
             {
                 frmHost.FormClosing += FrmHost_FormClosing;
                 frmHost.ShowDialog();

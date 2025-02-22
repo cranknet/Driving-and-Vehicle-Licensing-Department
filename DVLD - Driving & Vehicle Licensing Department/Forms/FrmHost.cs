@@ -2,9 +2,9 @@
 
 namespace DVLD_UI
 {
-    public partial class FrmPersonProfileCardHost : Form
+    public partial class FrmHost : Form
     {
-        public FrmPersonProfileCardHost(UserControl personProfileCard)
+        public FrmHost(UserControl personProfileCard)
         {
             InitializeComponent();
             this.Controls.Add(personProfileCard);

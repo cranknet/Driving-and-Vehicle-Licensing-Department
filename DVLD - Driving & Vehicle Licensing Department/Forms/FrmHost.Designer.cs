@@ -1,6 +1,6 @@
 ﻿namespace DVLD_UI
 {
-    partial class FrmPersonProfileCardHost
+    partial class FrmHost
     {
         /// <summary>
         /// Required designer variable.

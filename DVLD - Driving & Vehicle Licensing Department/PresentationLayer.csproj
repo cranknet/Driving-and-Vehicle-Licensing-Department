@@ -141,17 +141,11 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmPersonProfileCardHost.cs">
+    <Compile Include="Forms\FrmHost.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmPersonProfileCardHost.Designer.cs">
-      <DependentUpon>FrmPersonProfileCardHost.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FrmShowDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmShowDetails.Designer.cs">
-      <DependentUpon>FrmShowDetails.cs</DependentUpon>
+    <Compile Include="Forms\FrmHost.Designer.cs">
+      <DependentUpon>FrmHost.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Login\FrmLogin.cs">
       <SubType>Form</SubType>
@@ -188,11 +182,8 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmPersonProfileCardHost.resx">
-      <DependentUpon>FrmPersonProfileCardHost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmShowDetails.resx">
-      <DependentUpon>FrmShowDetails.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmHost.resx">
+      <DependentUpon>FrmHost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Login\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

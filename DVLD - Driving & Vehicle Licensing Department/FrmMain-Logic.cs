@@ -92,7 +92,7 @@ namespace DVLD_UI
             if (selectedMenuOption.Equals(MainMenuOptions.Peoples))
             {
                 PersonProfileCard card = new PersonProfileCard(enMode, selectedID);
-                using (FrmPersonProfileCardHost frmHost = new FrmPersonProfileCardHost(card))
+                using (FrmHost frmHost = new FrmHost(card))
                 {
                     frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
                     frmHost.ShowDialog();
@@ -101,7 +101,7 @@ namespace DVLD_UI
             else if (selectedMenuOption.Equals(MainMenuOptions.Users) || selectedMenuOption.Equals(MainMenuOptions.UserSettings))
             {
                 UserProfileCard card = new UserProfileCard(enMode, selectedID);
-                using (FrmPersonProfileCardHost frmHost = new FrmPersonProfileCardHost(card))
+                using (FrmHost frmHost = new FrmHost(card))
                 {
                     frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
                     frmHost.ShowDialog();
