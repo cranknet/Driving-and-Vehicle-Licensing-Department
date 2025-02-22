@@ -1,4 +1,5 @@
 ﻿using DVLD_Logic;
+using DVLD_UI.Utils;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -6,7 +7,6 @@ namespace DVLD_UI.Login
 {
     public partial class FrmLogin : Form
     {
-        private int userID = -1;
         public FrmLogin()
         {
             InitializeComponent();
@@ -26,7 +26,6 @@ namespace DVLD_UI.Login
                 ResetFields();
                 if (ValidateLogin(txtUsername.Text.Trim(), txtPassword.Text))
                 {
-                    Program.LoggedUserID = userID;
                     this.Close();
                 }
                 else
@@ -68,8 +67,8 @@ namespace DVLD_UI.Login
             }
             else
             {
-                userID = clsUser.IsUserExistsByUserNamePassword(username, password);
-                if (userID != -1)
+                clsSettings.LoggedUserID = clsUser.IsUserExistsByUserNamePassword(username, password);
+                if (clsSettings.LoggedUserID != clsSettings.DefaultUserID)
                 {
                     isValid = true;
                     ResetFields();

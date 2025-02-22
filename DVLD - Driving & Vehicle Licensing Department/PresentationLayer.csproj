@@ -183,6 +183,7 @@
     <Compile Include="UserControls\FilterOptionsUC.Designer.cs">
       <DependentUpon>FilterOptionsUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\clsSettings.cs" />
     <Compile Include="Utils\clsUtils.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>

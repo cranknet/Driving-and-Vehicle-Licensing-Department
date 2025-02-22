@@ -6,7 +6,6 @@ namespace DVLD_UI.UserControls.Cards
     public partial class PersonProfileCard : UserControl
     {
         clsPeople Person = null;
-
         private CardUtils.EnDisplayMode EnMode { get; set; }
         private void InitializePerson(int personID)
         {

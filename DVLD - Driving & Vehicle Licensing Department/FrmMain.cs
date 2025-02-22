@@ -1,4 +1,6 @@
-﻿using DVLD_UI.UserControls.Cards;
+﻿using DVLD_Logic;
+using DVLD_UI.UserControls.Cards;
+using DVLD_UI.Utils;
 using System;
 using System.Windows.Forms;
 namespace DVLD_UI
@@ -7,10 +9,9 @@ namespace DVLD_UI
     {
         public FrmMain(int loggedUserID)
         {
-            InitializeCurrentUser(loggedUserID);
             InitializeComponent();
-            LoggedUserID = loggedUserID;
             HighlightMenuButtons(this);
+            CurrentUser = clsUser.Find(loggedUserID);
         }
         private void pbExitApplication_Click(object sender, EventArgs e)
         {
@@ -68,6 +69,33 @@ namespace DVLD_UI
 
         }
 
+        private void pbUserPicture_Click(object sender, EventArgs e)
+        {
+            SelectedMenuOption = MainMenuOptions.UserSettings;
+            contextMenuUserOptions.Show(pbUserPicture, 0, pbUserPicture.Height);
+        }
 
+        private void userInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayProfileCard(CardUtils.EnDisplayMode.Read, clsSettings.LoggedUserID, SelectedMenuOption);
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayProfileCard(CardUtils.EnDisplayMode.Update, clsSettings.LoggedUserID, SelectedMenuOption);
+
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clsSettings.LoggedUserID = clsSettings.DefaultUserID;
+            CurrentUser = null;
+            this.Close();
+        }
+
+        private void pbCloseCard_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

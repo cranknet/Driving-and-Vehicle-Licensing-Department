@@ -10,8 +10,8 @@ namespace DVLD_Data
         {
             bool isFound = true;
             string query = @"SELECT UserID, PersonID, UserName, Password, IsActive 
-                             FROM Users
-                             WHERE UserID = @UserID";
+                                 FROM Users
+                                 WHERE UserID = @UserID";
             using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -41,6 +41,7 @@ namespace DVLD_Data
             }
             return isFound;
         }
+
         public static bool IsUserExistsBy(int userID)
         {
             string query = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID;";
@@ -61,6 +62,7 @@ namespace DVLD_Data
             }
             return false;
         }
+
         public static int IsUserExistsBy(string userName, string Password)
         {
             int userID = -1;
@@ -73,7 +75,11 @@ namespace DVLD_Data
                 try
                 {
                     connection.Open();
-                    userID = (int)cmd.ExecuteScalar();
+                    var result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        userID = (int)result;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -82,6 +88,7 @@ namespace DVLD_Data
             }
             return userID;
         }
+
         public static DataTable GetAllUsers()
         {
             DataTable dt = new DataTable();
@@ -103,6 +110,44 @@ namespace DVLD_Data
                 }
             }
             return dt;
+        }
+
+        public static bool UpdatePassword(int userID, string oldPassword, string newPassword)
+        {
+            string queryCheckPassword = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID AND Password = @OldPassword";
+            string queryUpdatePassword = "UPDATE Users SET Password = @NewPassword WHERE UserID = @UserID";
+
+            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlCommand cmdCheckPassword = new SqlCommand(queryCheckPassword, connection))
+            using (SqlCommand cmdUpdatePassword = new SqlCommand(queryUpdatePassword, connection))
+            {
+                cmdCheckPassword.Parameters.AddWithValue("@UserID", userID);
+                cmdCheckPassword.Parameters.AddWithValue("@OldPassword", oldPassword);
+                cmdUpdatePassword.Parameters.AddWithValue("@UserID", userID);
+                cmdUpdatePassword.Parameters.AddWithValue("@NewPassword", newPassword);
+
+                try
+                {
+                    connection.Open();
+
+                    // Check if the old password is correct
+                    int passwordMatchCount = (int)cmdCheckPassword.ExecuteScalar();
+                    if (passwordMatchCount == 0)
+                    {
+                        // Old password is incorrect
+                        return false;
+                    }
+
+                    // Update to the new password
+                    int rowsAffected = cmdUpdatePassword.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"UpdatePassword: SQL Error -> {ex.Message}");
+                    return false;
+                }
+            }
         }
     }
 }

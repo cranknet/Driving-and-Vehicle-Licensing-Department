@@ -1,20 +1,21 @@
 ﻿using DVLD_Data;
+using System;
 using System.Data;
-
 namespace DVLD_Logic
 {
     public class clsUser
     {
         enum EnMode
         {
-            UpdateMode = 0,
-            AddNewMode = 1
+            Update = 0,
+            AddNew = 1
         }
-        EnMode Mode = EnMode.UpdateMode;
+        EnMode Mode = EnMode.Update;
         public int UserID { get; set; }
         public int PersonID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public string NewPassword { get; set; }
         public bool IsActive { get; set; }
         public clsUser()
         {
@@ -23,7 +24,7 @@ namespace DVLD_Logic
             this.UserName = string.Empty;
             this.Password = string.Empty;
             this.IsActive = false;
-            Mode = EnMode.AddNewMode;
+            Mode = EnMode.AddNew;
         }
         private clsUser(int userID, int personID, string userName, string password, bool isActive)
         {
@@ -32,7 +33,7 @@ namespace DVLD_Logic
             UserName = userName;
             Password = password;
             IsActive = isActive;
-            Mode = EnMode.UpdateMode;
+            Mode = EnMode.Update;
         }
         public static clsUser Find(int userID)
         {
@@ -56,6 +57,30 @@ namespace DVLD_Logic
         public static DataTable GetAllUsers()
         {
             return clsUserDAL.GetAllUsers();
+        }
+        private bool _Update()
+        {
+            return clsUserDAL.UpdatePassword(this.UserID, this.Password, this.NewPassword);
+        }
+        public bool Save()
+        {
+            switch (Mode)
+            {
+                case EnMode.AddNew:
+                    if (_Add())
+                    {
+                        Mode = EnMode.Update;
+                        return true;
+                    }
+                    else return false;
+                case EnMode.Update:
+                    return _Update();
+            }
+            return false;
+        }
+        private bool _Add()
+        {
+            throw new NotImplementedException();
         }
     }
 }

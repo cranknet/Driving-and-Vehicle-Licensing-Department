@@ -1,5 +1,4 @@
 ﻿using DVLD_Logic;
-using DVLD_UI.Login;
 using DVLD_UI.UserControls.Cards;
 using System;
 using System.Linq;
@@ -14,6 +13,7 @@ namespace DVLD_UI
             public const string Drivers = "DRIVERS";
             public const string Peoples = "PEOPLES";
             public const string Users = "USERS";
+            public const string UserSettings = "USERSETTINGS";
         }
         enum EnMainMenuOptions
         {
@@ -22,20 +22,12 @@ namespace DVLD_UI
             enPeoples = 2,
             enUsers = 3
         }
-        private int LoggedUserID { get; set; }
         private clsUser CurrentUser = null;
         private Button HighlightedButton;
         private int CurrentRowIndex { get; set; }
         private int SelectedID;
         private string SelectedMenuOption { get; set; }
-        private void InitializeCurrentUser(int userID)
-        {
-            if (userID == -1)
-            {
-                Application.Run(new FrmLogin());
-            }
-            CurrentUser = clsUser.Find(userID);
-        }
+
         private int GetIDBy(string cellName, DataGridView mainView, int rowIndex)
         {
             if (rowIndex < 0 || mainView == null || !mainView.Columns.Contains(cellName)) return -1;
@@ -106,13 +98,18 @@ namespace DVLD_UI
                     frmHost.ShowDialog();
                 }
             }
-            else if (selectedMenuOption.Equals(MainMenuOptions.Users))
+            else if (selectedMenuOption.Equals(MainMenuOptions.Users) || selectedMenuOption.Equals(MainMenuOptions.UserSettings))
             {
                 UserProfileCard card = new UserProfileCard(enMode, selectedID);
                 using (FrmPersonProfileCardHost frmHost = new FrmPersonProfileCardHost(card))
                 {
                     frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
+                    frmHost.ShowDialog();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Can't display profile card for selected menu option!");
             }
         }
         private bool DeleteDialog(int personID)
@@ -141,7 +138,7 @@ namespace DVLD_UI
             {
                 LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
             }
-            else if (SelectedMenuOption.Equals(MainMenuOptions.Users))
+            else if (SelectedMenuOption.Equals(MainMenuOptions.Users) || SelectedMenuOption.Equals(MainMenuOptions.UserSettings))
             {
                 LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
             }

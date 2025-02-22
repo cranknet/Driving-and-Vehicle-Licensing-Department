@@ -7,18 +7,19 @@ namespace DVLD_UI
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        public static int LoggedUserID = -1;
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Login.FrmLogin frmLogin = new Login.FrmLogin();
-            Application.Run(new FrmMain(15));
-            if (LoggedUserID != -1)
-            {
-                Application.Run(new FrmMain(LoggedUserID));
-            }
+            //while (clsSettings.LoggedUserID == clsSettings.DefaultUserID)
+            //{
+            //    using (FrmLogin frmLogin = new FrmLogin())
+            //    {
+            //        frmLogin.ShowDialog();
+            //    }
+            //}
+            Application.Run(new FrmMain(1));
         }
     }
 }

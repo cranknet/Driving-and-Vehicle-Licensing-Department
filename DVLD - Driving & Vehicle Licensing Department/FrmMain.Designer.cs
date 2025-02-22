@@ -39,17 +39,23 @@
             this.toolStripMenuPeopleDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pbUserPicture = new System.Windows.Forms.PictureBox();
-            this.pictureMainLogo = new System.Windows.Forms.PictureBox();
             this.btnApplications = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
             this.btnPeoples = new System.Windows.Forms.Button();
             this.btnDrivers = new System.Windows.Forms.Button();
+            this.contextMenuUserOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.userInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbCloseCard = new System.Windows.Forms.PictureBox();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataVeiw.SuspendLayout();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureMainLogo)).BeginInit();
+            this.contextMenuUserOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMain
@@ -122,8 +128,8 @@
             // panelHeader
             // 
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panelHeader.Controls.Add(this.pbCloseCard);
             this.panelHeader.Controls.Add(this.pbUserPicture);
-            this.panelHeader.Controls.Add(this.pictureMainLogo);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Margin = new System.Windows.Forms.Padding(0);
@@ -133,26 +139,18 @@
             // 
             // pbUserPicture
             // 
+            this.pbUserPicture.ContextMenuStrip = this.contextMenuUserOptions;
             this.pbUserPicture.ErrorImage = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
+            this.pbUserPicture.Image = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
             this.pbUserPicture.InitialImage = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
-            this.pbUserPicture.Location = new System.Drawing.Point(1127, 9);
+            this.pbUserPicture.Location = new System.Drawing.Point(9, 9);
             this.pbUserPicture.Margin = new System.Windows.Forms.Padding(0);
             this.pbUserPicture.Name = "pbUserPicture";
             this.pbUserPicture.Size = new System.Drawing.Size(48, 48);
             this.pbUserPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbUserPicture.TabIndex = 0;
             this.pbUserPicture.TabStop = false;
-            // 
-            // pictureMainLogo
-            // 
-            this.pictureMainLogo.Image = global::DVLD_UI.Properties.Resources.DVLD_Main_Logo_Black;
-            this.pictureMainLogo.Location = new System.Drawing.Point(22, 9);
-            this.pictureMainLogo.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureMainLogo.Name = "pictureMainLogo";
-            this.pictureMainLogo.Size = new System.Drawing.Size(48, 48);
-            this.pictureMainLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureMainLogo.TabIndex = 0;
-            this.pictureMainLogo.TabStop = false;
+            this.pbUserPicture.Click += new System.EventHandler(this.pbUserPicture_Click);
             // 
             // btnApplications
             // 
@@ -230,6 +228,54 @@
             this.btnDrivers.UseVisualStyleBackColor = false;
             this.btnDrivers.Click += new System.EventHandler(this.btnDrivers_Click);
             // 
+            // contextMenuUserOptions
+            // 
+            this.contextMenuUserOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.userInfoToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.changePasswordToolStripMenuItem,
+            this.logoutToolStripMenuItem});
+            this.contextMenuUserOptions.Name = "contextMenuUserOptions";
+            this.contextMenuUserOptions.Size = new System.Drawing.Size(169, 76);
+            // 
+            // userInfoToolStripMenuItem
+            // 
+            this.userInfoToolStripMenuItem.Name = "userInfoToolStripMenuItem";
+            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.userInfoToolStripMenuItem.Text = "User Info";
+            this.userInfoToolStripMenuItem.Click += new System.EventHandler(this.userInfoToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(165, 6);
+            // 
+            // changePasswordToolStripMenuItem
+            // 
+            this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.changePasswordToolStripMenuItem.Text = "Change Password";
+            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
+            // 
+            // pbCloseCard
+            // 
+            this.pbCloseCard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbCloseCard.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseCard.Image")));
+            this.pbCloseCard.Location = new System.Drawing.Point(1135, 12);
+            this.pbCloseCard.Name = "pbCloseCard";
+            this.pbCloseCard.Size = new System.Drawing.Size(37, 40);
+            this.pbCloseCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCloseCard.TabIndex = 18;
+            this.pbCloseCard.TabStop = false;
+            this.pbCloseCard.Click += new System.EventHandler(this.pbCloseCard_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -256,7 +302,8 @@
             this.contextMenuStripMainDataVeiw.ResumeLayout(false);
             this.panelHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbUserPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureMainLogo)).EndInit();
+            this.contextMenuUserOptions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -270,12 +317,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorPeople;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuIPeopleEdit;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuPeopleDelete;
-        private System.Windows.Forms.PictureBox pictureMainLogo;
         private System.Windows.Forms.Button btnDrivers;
         private System.Windows.Forms.Button btnPeoples;
         private System.Windows.Forms.Button btnUsers;
         private System.Windows.Forms.Button btnApplications;
         private System.Windows.Forms.PictureBox pbUserPicture;
+        private System.Windows.Forms.ContextMenuStrip contextMenuUserOptions;
+        private System.Windows.Forms.ToolStripMenuItem userInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pbCloseCard;
     }
 }
 

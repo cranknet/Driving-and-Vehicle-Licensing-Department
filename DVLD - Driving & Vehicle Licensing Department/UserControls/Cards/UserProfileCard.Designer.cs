@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserProfileCard));
             this.panelMain = new System.Windows.Forms.Panel();
             this.grpUserPassword = new System.Windows.Forms.GroupBox();
@@ -53,12 +54,14 @@
             this.lblPhone = new System.Windows.Forms.Label();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
             this.btnUserEditPerson = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelMain.SuspendLayout();
             this.grpUserPassword.SuspendLayout();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
             this.grbPersonDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMain
@@ -300,6 +303,7 @@
             this.btnSave.Text = "SAVE";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Visible = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblFullName
             // 
@@ -365,6 +369,11 @@
             this.btnUserEditPerson.Visible = false;
             this.btnUserEditPerson.Click += new System.EventHandler(this.btnUserEditPerson_Click);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
+            // 
             // UserProfileCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -384,6 +393,7 @@
             this.grbPersonDetails.ResumeLayout(false);
             this.grbPersonDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -414,5 +424,6 @@
         private System.Windows.Forms.Label lblUserNameValue;
         private System.Windows.Forms.Label lblFullNameValue;
         private System.Windows.Forms.Button btnUserEditPerson;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
