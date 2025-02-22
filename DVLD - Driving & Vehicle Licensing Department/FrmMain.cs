@@ -5,17 +5,13 @@ namespace DVLD_UI
 {
     public partial class FrmMain : Form
     {
-
         public FrmMain(int loggedUserID)
         {
             InitializeCurrentUser(loggedUserID);
             InitializeComponent();
             LoggedUserID = loggedUserID;
-            HighlightMenuButtons(panelMenu);
+            HighlightMenuButtons(this);
         }
-
-
-
         private void pbExitApplication_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -34,18 +30,11 @@ namespace DVLD_UI
         private void btnUsers_Click(object sender, EventArgs e)
         {
             LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
-
-        }
-        private void btnUserSettings_Click(object sender, EventArgs e)
-        {
-            LoadMainGridView(EnMainMenuOptions.enUserSettings, mainGridView);
         }
         private void mainGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DisplayProfileCard(CardUtils.EnDisplayMode.Read, SelectedID, SelectedMenuOption);
         }
-
-
         private void toolStripMenuPeopleCardShow_Click(object sender, EventArgs e)
         {
             DisplayProfileCard(CardUtils.EnDisplayMode.Read, SelectedID, SelectedMenuOption);
@@ -54,7 +43,6 @@ namespace DVLD_UI
         {
             DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
         }
-
         private void toolStripMenuPeopleDelete_Click(object sender, EventArgs e)
         {
             if (DeleteDialog(SelectedID))
@@ -62,8 +50,6 @@ namespace DVLD_UI
                 DeleteViewRow(mainGridView, CurrentRowIndex);
             }
         }
-
-
         private void mainGridView_CurrentCellChanged(object sender, EventArgs e)
         {
             CurrentRowIndex = mainGridView.CurrentRow?.Index ?? -1;
@@ -75,8 +61,13 @@ namespace DVLD_UI
             {
                 SelectedID = GetIDBy("PersonID", mainGridView, CurrentRowIndex);
             }
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
 
         }
+
 
     }
 }

@@ -177,23 +177,11 @@
     <Compile Include="UserControls\Cards\UserProfileCard.Designer.cs">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\PeoplesControl.cs">
+    <Compile Include="UserControls\FilterOptionsUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\PeoplesControl.Designer.cs">
-      <DependentUpon>PeoplesControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\SubItems\ApplicationsSubItemsControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\SubItems\ApplicationsSubItemsControl.Designer.cs">
-      <DependentUpon>ApplicationsSubItemsControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\SubMenuControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\SubMenuControl.Designer.cs">
-      <DependentUpon>SubMenuControl.cs</DependentUpon>
+    <Compile Include="UserControls\FilterOptionsUC.Designer.cs">
+      <DependentUpon>FilterOptionsUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\clsUtils.cs" />
     <EmbeddedResource Include="FrmMain.resx">
@@ -224,14 +212,8 @@
     <EmbeddedResource Include="UserControls\Cards\UserProfileCard.resx">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\PeoplesControl.resx">
-      <DependentUpon>PeoplesControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\SubItems\ApplicationsSubItemsControl.resx">
-      <DependentUpon>ApplicationsSubItemsControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\SubMenuControl.resx">
-      <DependentUpon>SubMenuControl.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\FilterOptionsUC.resx">
+      <DependentUpon>FilterOptionsUC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -242,9 +224,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="UserControls\PeoplesControl.Logic.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\Cards\UserProfileCard.Logic.cs">
       <SubType>UserControl</SubType>
@@ -312,6 +291,7 @@
       <Name>BusinessLogicLayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Avalonia.BuildServices.0.0.29\build\Avalonia.BuildServices.targets" Condition="Exists('..\packages\Avalonia.BuildServices.0.0.29\build\Avalonia.BuildServices.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

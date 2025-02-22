@@ -8,13 +8,19 @@ namespace DVLD_UI
 {
     public partial class FrmMain : Form
     {
+        private static class MainMenuOptions
+        {
+            public const string Applications = "APPLICATIONS";
+            public const string Drivers = "DRIVERS";
+            public const string Peoples = "PEOPLES";
+            public const string Users = "USERS";
+        }
         enum EnMainMenuOptions
         {
             enApplications = 0,
             enDrivers = 1,
             enPeoples = 2,
-            enUsers = 3,
-            enUserSettings = 4
+            enUsers = 3
         }
         private int LoggedUserID { get; set; }
         private clsUser CurrentUser = null;
@@ -51,10 +57,6 @@ namespace DVLD_UI
                 case EnMainMenuOptions.enUsers:
                     mainView.DataSource = clsUser.GetAllUsers();
                     break;
-                case EnMainMenuOptions.enUserSettings:
-                    DisplayProfileCard(CardUtils.EnDisplayMode.Update, CurrentUser.PersonID, SelectedMenuOption);
-                    SelectedMenuOption = "Home";
-                    break;
             }
         }
         private void CustomizePeopleViewColumns(DataGridView people)
@@ -82,19 +84,20 @@ namespace DVLD_UI
             }
             HighlightedButton = button;
             HighlightedButton.FlatAppearance.BorderSize = 1;
+            HighlightedButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(31, 95, 137);
             SelectedMenuOption = button.Text;
         }
-        private void HighlightMenuButtons(Panel panel)
+        private void HighlightMenuButtons(Form currentForm)
         {
-            foreach (Button button in panel.Controls.OfType<Button>())
+            foreach (Button button in currentForm.Controls.OfType<Button>())
             {
                 button.Click += (s, e) => HighlightButton((Button)s);
             }
         }
         private void DisplayProfileCard(CardUtils.EnDisplayMode enMode, int selectedID, string selectedMenuOption)
         {
-            if (string.IsNullOrEmpty(selectedMenuOption)) return;
-            if (selectedMenuOption == "PEOPLES")
+            if (string.IsNullOrEmpty(selectedMenuOption) || selectedID < 0) return;
+            if (selectedMenuOption.Equals(MainMenuOptions.Peoples))
             {
                 PersonProfileCard card = new PersonProfileCard(enMode, selectedID);
                 using (FrmPersonProfileCardHost frmHost = new FrmPersonProfileCardHost(card))
@@ -103,13 +106,12 @@ namespace DVLD_UI
                     frmHost.ShowDialog();
                 }
             }
-            else if (selectedMenuOption == "USERS")
+            else if (selectedMenuOption.Equals(MainMenuOptions.Users))
             {
                 UserProfileCard card = new UserProfileCard(enMode, selectedID);
                 using (FrmPersonProfileCardHost frmHost = new FrmPersonProfileCardHost(card))
                 {
                     frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
-                    frmHost.ShowDialog();
                 }
             }
         }
@@ -135,20 +137,13 @@ namespace DVLD_UI
         }
         private void RefreshMainGridViewOnFromClosing(object sender, FormClosingEventArgs e)
         {
-            switch (SelectedMenuOption)
+            if (SelectedMenuOption.Equals(MainMenuOptions.Peoples))
             {
-                case "APPLICATIONS":
-                    break;
-                case "DRIVERS":
-                    break;
-                case "PEOPLES":
-                    mainGridView.DataSource = clsPeople.GetAllPeople();
-                    break;
-                case "USERS":
-                    mainGridView.DataSource = clsUser.GetAllUsers();
-                    break;
-                case "USER SETTINGS":
-                    break;
+                LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
+            }
+            else if (SelectedMenuOption.Equals(MainMenuOptions.Users))
+            {
+                LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
             }
         }
     }
