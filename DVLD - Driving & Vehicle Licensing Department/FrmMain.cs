@@ -9,7 +9,7 @@ namespace DVLD_UI
     public partial class FrmMain : Form
     {
         private int LoggedUserID { get; set; }
-        clsUser CurrentUser = null;
+        private clsUser CurrentUser = null;
         private Button HighlightedButton;
         private int CurrentRowIndex { get; set; }
         private int SelectedID;

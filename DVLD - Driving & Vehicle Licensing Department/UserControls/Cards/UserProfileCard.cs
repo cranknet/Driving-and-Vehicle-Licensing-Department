@@ -14,6 +14,8 @@ namespace DVLD_UI.UserControls.Cards
         private void UserProfileCard_Load(object sender, System.EventArgs e)
         {
             Display();
+
+            //
         }
 
         private void pbCloseCard_Click(object sender, System.EventArgs e)
