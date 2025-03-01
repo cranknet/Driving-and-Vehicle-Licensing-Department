@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_UI.Utils;
+using System;
 using System.Windows.Forms;
 namespace DVLD_UI
 {
@@ -19,6 +20,7 @@ namespace DVLD_UI
             //        frmLogin.ShowDialog();
             //    }
             //}
+            clsSettings.LoggedUserID = 1;
             Application.Run(new FrmMain(1));
         }
     }

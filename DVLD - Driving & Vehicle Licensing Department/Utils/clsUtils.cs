@@ -95,12 +95,58 @@ namespace DVLD_UI.Utils
             }
             cmbFilter.SelectedItem = "None";
         }
+        public static void ApplyFilterOptions(DataGridView dataGridView, TextBox txtFilterValue, ComboBox cmbFilterOptions)
+        {
+            if (cmbFilterOptions.SelectedItem == null) return;
+            string selectedFilterColumn = cmbFilterOptions.SelectedItem.ToString();
+            string selectedFilterText = txtFilterValue.Text.Trim().Replace("'", "''");
+            if (dataGridView.DataSource is DataTable dt)
+            {
+                DataView filteredView = dt.DefaultView;
+                txtFilterValue.Visible = selectedFilterColumn != "None";
+                if (selectedFilterColumn == "None")
+                {
+                    ClearFilter(filteredView, txtFilterValue);
+                }
+                else if (selectedFilterColumn == "Age" || selectedFilterColumn == "PersonID")
+                {
+                    ApplyNumericFilter(filteredView, selectedFilterColumn, selectedFilterText);
+                }
+                else
+                {
+                    filteredView.RowFilter = $"CONVERT({selectedFilterColumn}, System.String) LIKE '%{selectedFilterText}%'";
+                }
+            }
+        }
+        public static void ClearFilter(DataView filteredPeopleView, TextBox txtFilterValue)
+        {
+            txtFilterValue.Clear();
+            filteredPeopleView.RowFilter = "";
+        }
+        public static void ApplyNumericFilter(DataView filteredPeopleView, string columnName, string filterText)
+        {
+            if (int.TryParse(filterText, out int filterNumber))
+            {
+                filteredPeopleView.RowFilter = $"{columnName} = {filterNumber}";
+            }
+            else
+            {
+                filteredPeopleView.RowFilter = "";
+            }
+        }
         public static void LoadCountryList(ComboBox cmbCountryList, DataTable countryNames)
         {
             countryNames = clsCountry.GetListCountries().DefaultView.ToTable("CountryNames", false, "CountryName", "CountryID");
             cmbCountryList.DataSource = countryNames;
             cmbCountryList.DisplayMember = "CountryName";
             cmbCountryList.ValueMember = "CountryID";
+        }
+        public static void AdjustGridViewColumns(DataGridView dataGridView)
+        {
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
         }
     }
 }

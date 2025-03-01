@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panelMain = new System.Windows.Forms.Panel();
             this.mainGridView = new System.Windows.Forms.DataGridView();
@@ -38,35 +39,44 @@
             this.toolStripMenuIPeopleEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuPeopleDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.pbCloseCard = new System.Windows.Forms.PictureBox();
             this.pbUserPicture = new System.Windows.Forms.PictureBox();
-            this.btnApplications = new System.Windows.Forms.Button();
-            this.btnUsers = new System.Windows.Forms.Button();
-            this.btnPeoples = new System.Windows.Forms.Button();
-            this.btnDrivers = new System.Windows.Forms.Button();
             this.contextMenuUserOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.userInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pbCloseCard = new System.Windows.Forms.PictureBox();
+            this.btnApplications = new System.Windows.Forms.Button();
+            this.btnUsers = new System.Windows.Forms.Button();
+            this.btnPeoples = new System.Windows.Forms.Button();
+            this.btnDrivers = new System.Windows.Forms.Button();
+            this.panelSubMenu = new System.Windows.Forms.Panel();
+            this.panelMainMenu = new System.Windows.Forms.Panel();
+            this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC(mainGridView);
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataVeiw.SuspendLayout();
             this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserPicture)).BeginInit();
             this.contextMenuUserOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
+            this.panelSubMenu.SuspendLayout();
+            this.panelMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMain
             // 
-            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.panelMain.BackColor = System.Drawing.Color.White;
             this.panelMain.Controls.Add(this.mainGridView);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelMain.Location = new System.Drawing.Point(0, 133);
+            this.panelMain.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelMain.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.panelMain.Location = new System.Drawing.Point(0, 196);
             this.panelMain.Margin = new System.Windows.Forms.Padding(0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1184, 628);
+            this.panelMain.Padding = new System.Windows.Forms.Padding(5);
+            this.panelMain.Size = new System.Drawing.Size(1184, 565);
             this.panelMain.TabIndex = 1;
             // 
             // mainGridView
@@ -74,17 +84,34 @@
             this.mainGridView.AllowUserToAddRows = false;
             this.mainGridView.AllowUserToDeleteRows = false;
             this.mainGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.mainGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.mainGridView.BackgroundColor = System.Drawing.Color.White;
+            this.mainGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mainGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.mainGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.mainGridView.ContextMenuStrip = this.contextMenuStripMainDataVeiw;
-            this.mainGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.mainGridView.GridColor = System.Drawing.Color.White;
-            this.mainGridView.Location = new System.Drawing.Point(0, 61);
+            this.mainGridView.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.mainGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(137)))));
+            this.mainGridView.Location = new System.Drawing.Point(5, 5);
             this.mainGridView.Margin = new System.Windows.Forms.Padding(0);
+            this.mainGridView.MultiSelect = false;
             this.mainGridView.Name = "mainGridView";
             this.mainGridView.ReadOnly = true;
+            this.mainGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mainGridView.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
+            this.mainGridView.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(1);
+            this.mainGridView.RowTemplate.Height = 25;
             this.mainGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.mainGridView.Size = new System.Drawing.Size(1184, 567);
+            this.mainGridView.Size = new System.Drawing.Size(1174, 555);
             this.mainGridView.TabIndex = 1;
             this.mainGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mainGridView_CellContentDoubleClick);
             this.mainGridView.CurrentCellChanged += new System.EventHandler(this.mainGridView_CurrentCellChanged);
@@ -137,6 +164,18 @@
             this.panelHeader.Size = new System.Drawing.Size(1184, 71);
             this.panelHeader.TabIndex = 1;
             // 
+            // pbCloseCard
+            // 
+            this.pbCloseCard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbCloseCard.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseCard.Image")));
+            this.pbCloseCard.Location = new System.Drawing.Point(1135, 12);
+            this.pbCloseCard.Name = "pbCloseCard";
+            this.pbCloseCard.Size = new System.Drawing.Size(37, 40);
+            this.pbCloseCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCloseCard.TabIndex = 18;
+            this.pbCloseCard.TabStop = false;
+            this.pbCloseCard.Click += new System.EventHandler(this.pbCloseCard_Click);
+            // 
             // pbUserPicture
             // 
             this.pbUserPicture.ContextMenuStrip = this.contextMenuUserOptions;
@@ -151,82 +190,6 @@
             this.pbUserPicture.TabIndex = 0;
             this.pbUserPicture.TabStop = false;
             this.pbUserPicture.Click += new System.EventHandler(this.pbUserPicture_Click);
-            // 
-            // btnApplications
-            // 
-            this.btnApplications.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.btnApplications.FlatAppearance.BorderSize = 0;
-            this.btnApplications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApplications.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApplications.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnApplications.Image = global::DVLD_UI.Properties.Resources.DVLD_Applications_32;
-            this.btnApplications.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnApplications.Location = new System.Drawing.Point(46, 77);
-            this.btnApplications.Margin = new System.Windows.Forms.Padding(0);
-            this.btnApplications.Name = "btnApplications";
-            this.btnApplications.Size = new System.Drawing.Size(215, 50);
-            this.btnApplications.TabIndex = 0;
-            this.btnApplications.Text = "APPLICATIONS";
-            this.btnApplications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnApplications.UseVisualStyleBackColor = false;
-            this.btnApplications.Click += new System.EventHandler(this.btnApplications_Click);
-            // 
-            // btnUsers
-            // 
-            this.btnUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.btnUsers.FlatAppearance.BorderSize = 0;
-            this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsers.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUsers.ForeColor = System.Drawing.Color.White;
-            this.btnUsers.Image = global::DVLD_UI.Properties.Resources.DVLD_Users_32;
-            this.btnUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUsers.Location = new System.Drawing.Point(919, 77);
-            this.btnUsers.Margin = new System.Windows.Forms.Padding(0);
-            this.btnUsers.Name = "btnUsers";
-            this.btnUsers.Size = new System.Drawing.Size(215, 50);
-            this.btnUsers.TabIndex = 0;
-            this.btnUsers.Text = "USERS";
-            this.btnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsers.UseVisualStyleBackColor = false;
-            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
-            // 
-            // btnPeoples
-            // 
-            this.btnPeoples.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.btnPeoples.FlatAppearance.BorderSize = 0;
-            this.btnPeoples.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPeoples.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPeoples.ForeColor = System.Drawing.Color.White;
-            this.btnPeoples.Image = global::DVLD_UI.Properties.Resources.DVLD_Peoples_32;
-            this.btnPeoples.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPeoples.Location = new System.Drawing.Point(628, 77);
-            this.btnPeoples.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPeoples.Name = "btnPeoples";
-            this.btnPeoples.Size = new System.Drawing.Size(215, 50);
-            this.btnPeoples.TabIndex = 0;
-            this.btnPeoples.Text = "PEOPLES";
-            this.btnPeoples.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPeoples.UseVisualStyleBackColor = false;
-            this.btnPeoples.Click += new System.EventHandler(this.btnPeoples_Click);
-            // 
-            // btnDrivers
-            // 
-            this.btnDrivers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.btnDrivers.FlatAppearance.BorderSize = 0;
-            this.btnDrivers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDrivers.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDrivers.ForeColor = System.Drawing.Color.White;
-            this.btnDrivers.Image = global::DVLD_UI.Properties.Resources.DVLD_Drivers_32;
-            this.btnDrivers.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDrivers.Location = new System.Drawing.Point(337, 77);
-            this.btnDrivers.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDrivers.Name = "btnDrivers";
-            this.btnDrivers.Size = new System.Drawing.Size(215, 50);
-            this.btnDrivers.TabIndex = 0;
-            this.btnDrivers.Text = "DRIVERS";
-            this.btnDrivers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDrivers.UseVisualStyleBackColor = false;
-            this.btnDrivers.Click += new System.EventHandler(this.btnDrivers_Click);
             // 
             // contextMenuUserOptions
             // 
@@ -264,17 +227,132 @@
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
-            // pbCloseCard
+            // btnApplications
             // 
-            this.pbCloseCard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbCloseCard.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseCard.Image")));
-            this.pbCloseCard.Location = new System.Drawing.Point(1135, 12);
-            this.pbCloseCard.Name = "pbCloseCard";
-            this.pbCloseCard.Size = new System.Drawing.Size(37, 40);
-            this.pbCloseCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCloseCard.TabIndex = 18;
-            this.pbCloseCard.TabStop = false;
-            this.pbCloseCard.Click += new System.EventHandler(this.pbCloseCard_Click);
+            this.btnApplications.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnApplications.FlatAppearance.BorderSize = 0;
+            this.btnApplications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApplications.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApplications.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnApplications.Image = global::DVLD_UI.Properties.Resources.DVLD_Applications_32;
+            this.btnApplications.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnApplications.Location = new System.Drawing.Point(39, 5);
+            this.btnApplications.Margin = new System.Windows.Forms.Padding(0);
+            this.btnApplications.Name = "btnApplications";
+            this.btnApplications.Size = new System.Drawing.Size(215, 50);
+            this.btnApplications.TabIndex = 0;
+            this.btnApplications.Text = "APPLICATIONS";
+            this.btnApplications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnApplications.UseVisualStyleBackColor = false;
+            this.btnApplications.Click += new System.EventHandler(this.btnApplications_Click);
+            // 
+            // btnUsers
+            // 
+            this.btnUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnUsers.FlatAppearance.BorderSize = 0;
+            this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUsers.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsers.ForeColor = System.Drawing.Color.White;
+            this.btnUsers.Image = global::DVLD_UI.Properties.Resources.DVLD_Users_32;
+            this.btnUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUsers.Location = new System.Drawing.Point(912, 5);
+            this.btnUsers.Margin = new System.Windows.Forms.Padding(0);
+            this.btnUsers.Name = "btnUsers";
+            this.btnUsers.Size = new System.Drawing.Size(215, 50);
+            this.btnUsers.TabIndex = 0;
+            this.btnUsers.Text = "USERS";
+            this.btnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUsers.UseVisualStyleBackColor = false;
+            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
+            // 
+            // btnPeoples
+            // 
+            this.btnPeoples.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnPeoples.FlatAppearance.BorderSize = 0;
+            this.btnPeoples.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPeoples.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPeoples.ForeColor = System.Drawing.Color.White;
+            this.btnPeoples.Image = global::DVLD_UI.Properties.Resources.DVLD_Peoples_32;
+            this.btnPeoples.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPeoples.Location = new System.Drawing.Point(621, 5);
+            this.btnPeoples.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPeoples.Name = "btnPeoples";
+            this.btnPeoples.Size = new System.Drawing.Size(215, 50);
+            this.btnPeoples.TabIndex = 0;
+            this.btnPeoples.Text = "PEOPLES";
+            this.btnPeoples.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPeoples.UseVisualStyleBackColor = false;
+            this.btnPeoples.Click += new System.EventHandler(this.btnPeoples_Click);
+            // 
+            // btnDrivers
+            // 
+            this.btnDrivers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnDrivers.FlatAppearance.BorderSize = 0;
+            this.btnDrivers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDrivers.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDrivers.ForeColor = System.Drawing.Color.White;
+            this.btnDrivers.Image = global::DVLD_UI.Properties.Resources.DVLD_Drivers_32;
+            this.btnDrivers.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDrivers.Location = new System.Drawing.Point(330, 5);
+            this.btnDrivers.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDrivers.Name = "btnDrivers";
+            this.btnDrivers.Size = new System.Drawing.Size(215, 50);
+            this.btnDrivers.TabIndex = 0;
+            this.btnDrivers.Text = "DRIVERS";
+            this.btnDrivers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDrivers.UseVisualStyleBackColor = false;
+            this.btnDrivers.Click += new System.EventHandler(this.btnDrivers_Click);
+            // 
+            // panelSubMenu
+            // 
+            this.panelSubMenu.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panelSubMenu.Controls.Add(this.filterOptionsUC);
+            this.panelSubMenu.Controls.Add(this.iconButtonAdd);
+            this.panelSubMenu.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelSubMenu.Location = new System.Drawing.Point(0, 131);
+            this.panelSubMenu.Name = "panelSubMenu";
+            this.panelSubMenu.Size = new System.Drawing.Size(1184, 65);
+            this.panelSubMenu.TabIndex = 2;
+            // 
+            // panelMainMenu
+            // 
+            this.panelMainMenu.BackColor = System.Drawing.Color.White;
+            this.panelMainMenu.Controls.Add(this.btnPeoples);
+            this.panelMainMenu.Controls.Add(this.btnApplications);
+            this.panelMainMenu.Controls.Add(this.btnDrivers);
+            this.panelMainMenu.Controls.Add(this.btnUsers);
+            this.panelMainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMainMenu.Location = new System.Drawing.Point(0, 71);
+            this.panelMainMenu.Name = "panelMainMenu";
+            this.panelMainMenu.Size = new System.Drawing.Size(1184, 60);
+            this.panelMainMenu.TabIndex = 3;
+            // 
+            // iconButtonAdd
+            // 
+            this.iconButtonAdd.FlatAppearance.BorderSize = 0;
+            this.iconButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.iconButtonAdd.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.iconButtonAdd.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.iconButtonAdd.IconColor = System.Drawing.Color.Black;
+            this.iconButtonAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButtonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButtonAdd.Location = new System.Drawing.Point(1061, 13);
+            this.iconButtonAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.iconButtonAdd.Name = "iconButtonAdd";
+            this.iconButtonAdd.Size = new System.Drawing.Size(66, 40);
+            this.iconButtonAdd.TabIndex = 2;
+            this.iconButtonAdd.UseVisualStyleBackColor = true;
+            this.iconButtonAdd.Click += new System.EventHandler(this.iconButtonAdd_Click);
+            // 
+            // filterOptionsUC
+            // 
+            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterOptionsUC.Location = new System.Drawing.Point(39, 0);
+            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.filterOptionsUC.Name = "filterOptionsUC";
+            this.filterOptionsUC.Size = new System.Drawing.Size(478, 64);
+            this.filterOptionsUC.TabIndex = 3;
             // 
             // FrmMain
             // 
@@ -282,17 +360,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1184, 761);
-            this.Controls.Add(this.btnApplications);
-            this.Controls.Add(this.btnUsers);
-            this.Controls.Add(this.btnPeoples);
+            this.Controls.Add(this.panelMainMenu);
+            this.Controls.Add(this.panelSubMenu);
             this.Controls.Add(this.panelHeader);
-            this.Controls.Add(this.btnDrivers);
             this.Controls.Add(this.panelMain);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1184, 761);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DVLD V1.0";
@@ -301,9 +377,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).EndInit();
             this.contextMenuStripMainDataVeiw.ResumeLayout(false);
             this.panelHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserPicture)).EndInit();
             this.contextMenuUserOptions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).EndInit();
+            this.panelSubMenu.ResumeLayout(false);
+            this.panelMainMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -328,6 +406,10 @@
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.PictureBox pbCloseCard;
+        private System.Windows.Forms.Panel panelSubMenu;
+        private System.Windows.Forms.Panel panelMainMenu;
+        private FontAwesome.Sharp.IconButton iconButtonAdd;
+        private UserControls.FilterOptionsUC filterOptionsUC;
     }
 }
 

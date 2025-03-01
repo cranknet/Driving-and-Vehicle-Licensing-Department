@@ -25,9 +25,8 @@ namespace DVLD_UI
         private clsUser CurrentUser = null;
         private Button HighlightedButton;
         private int CurrentRowIndex { get; set; }
-        private int SelectedID;
+        public int SelectedID;
         private string SelectedMenuOption { get; set; }
-
         private int GetIDBy(string cellName, DataGridView mainView, int rowIndex)
         {
             if (rowIndex < 0 || mainView == null || !mainView.Columns.Contains(cellName)) return -1;
@@ -35,7 +34,6 @@ namespace DVLD_UI
         }
         private void LoadMainGridView(EnMainMenuOptions enMenuOption, DataGridView mainView)
         {
-            if (mainView == null) return;
             switch (enMenuOption)
             {
                 case EnMainMenuOptions.enApplications:
@@ -44,22 +42,11 @@ namespace DVLD_UI
                     break;
                 case EnMainMenuOptions.enPeoples:
                     mainView.DataSource = clsPeople.GetAllPeople();
-                    CustomizePeopleViewColumns(mainView);
                     break;
                 case EnMainMenuOptions.enUsers:
                     mainView.DataSource = clsUser.GetAllUsers();
                     break;
             }
-        }
-        private void CustomizePeopleViewColumns(DataGridView people)
-        {
-            people.Columns["PersonID"].Width = 80;
-            people.Columns["NationalNo"].Width = 140;
-            people.Columns["FirstName"].Width = 120;
-            people.Columns["LastName"].Width = 120;
-            people.Columns["Age"].Width = 50;
-            people.Columns["Gender"].Width = 80;
-            people.Columns["Phone"].Width = 120;
         }
         private void LoadUserControl(Panel panel, UserControl userControl)
         {
@@ -75,11 +62,11 @@ namespace DVLD_UI
                 HighlightedButton.FlatAppearance.BorderSize = 0;
             }
             HighlightedButton = button;
-            HighlightedButton.FlatAppearance.BorderSize = 1;
+            HighlightedButton.FlatAppearance.BorderSize = 2;
             HighlightedButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(31, 95, 137);
             SelectedMenuOption = button.Text;
         }
-        private void HighlightMenuButtons(Form currentForm)
+        private void HighlightMenuButtons(Panel currentForm)
         {
             foreach (Button button in currentForm.Controls.OfType<Button>())
             {

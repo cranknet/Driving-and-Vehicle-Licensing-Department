@@ -10,8 +10,9 @@ namespace DVLD_UI
         public FrmMain(int loggedUserID)
         {
             InitializeComponent();
-            HighlightMenuButtons(this);
+            HighlightMenuButtons(panelMainMenu);
             CurrentUser = clsUser.Find(loggedUserID);
+
         }
         private void pbExitApplication_Click(object sender, EventArgs e)
         {
@@ -26,11 +27,17 @@ namespace DVLD_UI
         private void btnPeoples_Click(object sender, EventArgs e)
         {
             LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
+            clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
+
         }
         // Users Button Click Event
         private void btnUsers_Click(object sender, EventArgs e)
         {
+            //LoadUserControl(panelSubMenu, new UserSubMenuUC());
+
             LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
+            clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
+
         }
         private void mainGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -57,45 +64,44 @@ namespace DVLD_UI
             if (mainGridView.Columns.Contains("UserID"))
             {
                 SelectedID = GetIDBy("UserID", mainGridView, CurrentRowIndex);
+                // Broadcast SelectedID change to UserSubMenu Control
+                OnSelectedIDChange?.Invoke(SelectedID);
             }
             else
             {
                 SelectedID = GetIDBy("PersonID", mainGridView, CurrentRowIndex);
             }
         }
-
         private void FrmMain_Load(object sender, EventArgs e)
         {
-
+            clsUtils.AdjustGridViewColumns(mainGridView);
         }
-
         private void pbUserPicture_Click(object sender, EventArgs e)
         {
             SelectedMenuOption = MainMenuOptions.UserSettings;
             contextMenuUserOptions.Show(pbUserPicture, 0, pbUserPicture.Height);
         }
-
         private void userInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisplayProfileCard(CardUtils.EnDisplayMode.Read, clsSettings.LoggedUserID, SelectedMenuOption);
         }
-
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisplayProfileCard(CardUtils.EnDisplayMode.Update, clsSettings.LoggedUserID, SelectedMenuOption);
-
         }
-
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             clsSettings.LoggedUserID = clsSettings.DefaultUserID;
             CurrentUser = null;
             this.Close();
         }
-
         private void pbCloseCard_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+        private void iconButtonAdd_Click(object sender, EventArgs e)
+        {
+            DisplayProfileCard(CardUtils.EnDisplayMode.Add, SelectedID, SelectedMenuOption);
         }
     }
 }

@@ -54,6 +54,7 @@
             this.cmbFilterOptions.Name = "cmbFilterOptions";
             this.cmbFilterOptions.Size = new System.Drawing.Size(158, 29);
             this.cmbFilterOptions.TabIndex = 1;
+            this.cmbFilterOptions.SelectedIndexChanged += new System.EventHandler(this.cmbFilterOptions_SelectedIndexChanged);
             // 
             // lblFilter
             // 
@@ -72,6 +73,7 @@
             this.txtFilterValue.Size = new System.Drawing.Size(212, 29);
             this.txtFilterValue.TabIndex = 3;
             this.txtFilterValue.Visible = false;
+            this.txtFilterValue.TextChanged += new System.EventHandler(this.txtFilterValue_TextChanged);
             // 
             // FilterOptionsUC
             // 
@@ -82,6 +84,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FilterOptionsUC";
             this.Size = new System.Drawing.Size(478, 64);
+            this.Load += new System.EventHandler(this.FilterOptionsUC_Load);
             this.panelFilterOptions.ResumeLayout(false);
             this.panelFilterOptions.PerformLayout();
             this.ResumeLayout(false);
@@ -91,8 +94,8 @@
         #endregion
 
         private System.Windows.Forms.Panel panelFilterOptions;
-        private System.Windows.Forms.ComboBox cmbFilterOptions;
-        private System.Windows.Forms.Label lblFilter;
-        private System.Windows.Forms.TextBox txtFilterValue;
+        public System.Windows.Forms.ComboBox cmbFilterOptions;
+        public System.Windows.Forms.Label lblFilter;
+        public System.Windows.Forms.TextBox txtFilterValue;
     }
 }

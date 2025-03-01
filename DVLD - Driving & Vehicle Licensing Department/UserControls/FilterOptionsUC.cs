@@ -1,52 +1,36 @@
-﻿using System.Data;
+﻿using DVLD_UI.Utils;
 using System.Windows.Forms;
 
 namespace DVLD_UI.UserControls
 {
     public partial class FilterOptionsUC : UserControl
     {
+        private DataGridView _GridView = null;
         public FilterOptionsUC()
         {
             InitializeComponent();
+
         }
-        private void ApplyFilterOptions(DataGridView dataGridViewPeople)
+        public FilterOptionsUC(DataGridView mainGridView)
         {
-            if (cmbFilterOptions.SelectedItem == null) return;
-            string selectedFilterColumn = cmbFilterOptions.SelectedItem.ToString();
-            string selectedFilterText = txtFilterValue.Text.Trim().Replace("'", "''");
-            if (dataGridViewPeople.DataSource is DataView filteredPeopleView)
-            {
-                txtFilterValue.Visible = selectedFilterColumn != "None";
-                if (selectedFilterColumn == "None")
-                {
-                    ClearFilter(filteredPeopleView);
-                }
-                else if (selectedFilterColumn == "Age" || selectedFilterColumn == "PersonID")
-                {
-                    ApplyNumericFilter(filteredPeopleView, selectedFilterColumn, selectedFilterText);
-                }
-                else
-                {
-                    filteredPeopleView.RowFilter = $"{selectedFilterColumn} LIKE '%{selectedFilterText}%'";
-                }
-                dataGridViewPeople.Refresh();
-            }
+            InitializeComponent();
+            _GridView = mainGridView;
+
         }
-        private void ClearFilter(DataView filteredPeopleView)
+        private void FilterOptionsUC_Load(object sender, System.EventArgs e)
         {
-            txtFilterValue.Clear();
-            filteredPeopleView.RowFilter = "";
+
         }
-        private void ApplyNumericFilter(DataView filteredPeopleView, string columnName, string filterText)
+
+        private void cmbFilterOptions_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (int.TryParse(filterText, out int filterNumber))
-            {
-                filteredPeopleView.RowFilter = $"{columnName} = {filterNumber}";
-            }
-            else
-            {
-                filteredPeopleView.RowFilter = "";
-            }
+            clsUtils.ApplyFilterOptions(_GridView, txtFilterValue, cmbFilterOptions);
+
+        }
+
+        private void txtFilterValue_TextChanged(object sender, System.EventArgs e)
+        {
+            clsUtils.ApplyFilterOptions(_GridView, txtFilterValue, cmbFilterOptions);
         }
     }
 }
