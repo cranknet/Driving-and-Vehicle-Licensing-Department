@@ -53,7 +53,7 @@
             this.panelSubMenu = new System.Windows.Forms.Panel();
             this.panelMainMenu = new System.Windows.Forms.Panel();
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC(mainGridView);
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataVeiw.SuspendLayout();

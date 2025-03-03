@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Data;
-using System.Windows.Controls;
 using System.Windows.Forms;
-
 namespace DVLD_UI.Utils
 {
     public class DataFilter
@@ -10,22 +8,21 @@ namespace DVLD_UI.Utils
         DataGridView _dataGridView;
         ComboBox _cmbFilterOptions;
         TextBox _txtFilterValue;
-        string _defaultFilterOptionValue = "None";
-
+        private readonly string _defaultFilterOptionValue = "None";
         public DataFilter(DataGridView dataGridView, ComboBox cmbFilterOptions, TextBox txtFilterValue)
         {
-            _dataGridView = dataGridView;
-            _cmbFilterOptions = cmbFilterOptions;
-            _txtFilterValue = txtFilterValue;
-
+            _dataGridView = dataGridView ?? throw new ArgumentNullException(nameof(dataGridView));
+            _cmbFilterOptions = cmbFilterOptions ?? throw new ArgumentNullException(nameof(cmbFilterOptions));
+            _txtFilterValue = txtFilterValue ?? throw new ArgumentNullException(nameof(txtFilterValue));
         }
-        private void LoadFilterOptions()
+        public void LoadFilterOptions()
         {
             _cmbFilterOptions.Items.Clear();
             _cmbFilterOptions.Items.Add(_defaultFilterOptionValue);
             foreach (DataGridViewColumn column in _dataGridView.Columns)
             {
-                if (column.ValueType == typeof(string) || column.ValueType == typeof(int))
+                Type columnType = column.ValueType;
+                if (columnType == typeof(string) || columnType == typeof(int) || columnType == typeof(double) || columnType == typeof(decimal))
                 {
                     _cmbFilterOptions.Items.Add(column.Name);
                 }
@@ -34,26 +31,41 @@ namespace DVLD_UI.Utils
         }
         public void Apply()
         {
-            LoadFilterOptions();
-            string selectedFilterColumn = _cmbFilterOptions.SelectedItem.ToString();
+            if (_cmbFilterOptions.SelectedItem == null)
+            {
+                return;
+            }
+            string selectedFilterColumn = _cmbFilterOptions.SelectedItem?.ToString() ?? _defaultFilterOptionValue;
             string selectedFilterText = _txtFilterValue.Text.Trim().Replace("'", "''");
             if (_dataGridView.DataSource is DataTable dt)
             {
                 DataView filteredView = dt.DefaultView;
                 _txtFilterValue.Visible = selectedFilterColumn != _defaultFilterOptionValue;
-                if (selectedFilterColumn == _defaultFilterOptionValue)
+                if (selectedFilterColumn == _defaultFilterOptionValue || string.IsNullOrWhiteSpace(selectedFilterColumn))
                 {
                     _txtFilterValue.Clear();
                     filteredView.RowFilter = string.Empty;
                 }
-                else if (_dataGridView.Columns[selectedFilterColumn].ValueType == typeof(string))
+                else
                 {
-                    filteredView.RowFilter = $"CONVERT({selectedFilterColumn}, System.String) LIKE '%{selectedFilterText}%'";
+                    Type columnType = _dataGridView.Columns[selectedFilterColumn].ValueType;
+                    if (columnType == typeof(int) || columnType == typeof(double) || columnType == typeof(decimal))
+                    {
+                        if (decimal.TryParse(selectedFilterText, out decimal parsedText))
+                        {
+                            filteredView.RowFilter = $"{selectedFilterColumn} = {parsedText}";
+                        }
+                        else
+                        {
+                            filteredView.RowFilter = string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        filteredView.RowFilter = $"CONVERT({selectedFilterColumn}, System.String) LIKE '%{selectedFilterText}%'";
+                    }
                 }
-
             }
         }
-
-
     }
 }

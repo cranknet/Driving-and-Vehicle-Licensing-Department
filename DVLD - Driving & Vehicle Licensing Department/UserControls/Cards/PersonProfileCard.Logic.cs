@@ -15,18 +15,18 @@ namespace DVLD_UI.UserControls.Cards
         {
             // Fix Reset Empty Mode
             if (Person == null) return;
-            lblPersonID.Text = $"PERSON ID: {Person.PersonID}";
+            lblPersonID.Text = (Person.PersonID == -1) ? "ADD NEW PERSON" : $"PERSON ID: {Person.PersonID}";
             txtFirstName.Text = Person.FirstName;
             txtLastName.Text = Person.LastName;
             txtNationalNo.Text = Person.NationalNo;
-            dtpBirthDate.Value = Person.DateOfBirth;
+            dtpBirthDate.Value = (Person.PersonID == -1) ? clsUtils.AllowedDate(18) : Person.DateOfBirth;
             cmbGender.SelectedItem = Person.Gender;
             txtAddress.Text = Person.Address;
             txtEmail.Text = Person.Email;
             txtPhone.Text = Person.Phone;
             cmbCountryList.SelectedValue = Person.CountryID;
             pbPersonImage.ImageLocation = Person.ImagePath;
-            btnSavePerson.Text = "SAVE";
+            btnSavePerson.Text = (Person.PersonID == -1) ? "ADD NEW" : "SAVE";
         }
         private void ShowUpdateMode()
         {
@@ -38,7 +38,6 @@ namespace DVLD_UI.UserControls.Cards
             ShowReadMode();
             ToggleControlStatus();
             dtpBirthDate.MaxDate = clsUtils.AllowedDate(18);
-            btnSavePerson.Text = "ADD";
             pbPersonImage.Image = Properties.Resources.Body;
         }
         private void Display()
