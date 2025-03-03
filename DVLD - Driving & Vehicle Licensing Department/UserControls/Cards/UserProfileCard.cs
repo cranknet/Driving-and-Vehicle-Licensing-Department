@@ -55,5 +55,10 @@ namespace DVLD_UI.UserControls.Cards
                 MessageBox.Show("Can't update User password!");
             }
         }
+
+        private void tabPageUserSettings_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

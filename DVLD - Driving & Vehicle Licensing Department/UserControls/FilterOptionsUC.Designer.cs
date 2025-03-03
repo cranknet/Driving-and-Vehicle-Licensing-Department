@@ -50,7 +50,7 @@
             // 
             this.cmbFilterOptions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFilterOptions.FormattingEnabled = true;
-            this.cmbFilterOptions.Location = new System.Drawing.Point(75, 12);
+            this.cmbFilterOptions.Location = new System.Drawing.Point(94, 12);
             this.cmbFilterOptions.Name = "cmbFilterOptions";
             this.cmbFilterOptions.Size = new System.Drawing.Size(158, 29);
             this.cmbFilterOptions.TabIndex = 1;
@@ -62,16 +62,16 @@
             this.lblFilter.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFilter.Location = new System.Drawing.Point(3, 14);
             this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(57, 25);
-            this.lblFilter.TabIndex = 2;
-            this.lblFilter.Text = "Filter";
+            this.lblFilter.Size = new System.Drawing.Size(84, 25);
+            this.lblFilter.TabIndex = 0;
+            this.lblFilter.Text = "Filter By";
             // 
             // txtFilterValue
             // 
-            this.txtFilterValue.Location = new System.Drawing.Point(248, 12);
+            this.txtFilterValue.Location = new System.Drawing.Point(259, 12);
             this.txtFilterValue.Name = "txtFilterValue";
             this.txtFilterValue.Size = new System.Drawing.Size(212, 29);
-            this.txtFilterValue.TabIndex = 3;
+            this.txtFilterValue.TabIndex = 2;
             this.txtFilterValue.Visible = false;
             this.txtFilterValue.TextChanged += new System.EventHandler(this.txtFilterValue_TextChanged);
             // 

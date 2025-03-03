@@ -101,7 +101,7 @@
             this.tabControlUser.Location = new System.Drawing.Point(366, 48);
             this.tabControlUser.Name = "tabControlUser";
             this.tabControlUser.SelectedIndex = 0;
-            this.tabControlUser.Size = new System.Drawing.Size(517, 382);
+            this.tabControlUser.Size = new System.Drawing.Size(517, 334);
             this.tabControlUser.TabIndex = 22;
             // 
             // tabPageUserDetails
@@ -117,7 +117,7 @@
             this.tabPageUserDetails.Location = new System.Drawing.Point(4, 34);
             this.tabPageUserDetails.Name = "tabPageUserDetails";
             this.tabPageUserDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUserDetails.Size = new System.Drawing.Size(509, 344);
+            this.tabPageUserDetails.Size = new System.Drawing.Size(509, 296);
             this.tabPageUserDetails.TabIndex = 1;
             this.tabPageUserDetails.Text = "DETAILS";
             this.tabPageUserDetails.UseVisualStyleBackColor = true;
@@ -221,14 +221,15 @@
             this.tabPageUserSettings.Location = new System.Drawing.Point(4, 34);
             this.tabPageUserSettings.Name = "tabPageUserSettings";
             this.tabPageUserSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUserSettings.Size = new System.Drawing.Size(509, 344);
+            this.tabPageUserSettings.Size = new System.Drawing.Size(509, 296);
             this.tabPageUserSettings.TabIndex = 2;
             this.tabPageUserSettings.Text = "SETTINGS";
             this.tabPageUserSettings.UseVisualStyleBackColor = true;
+            this.tabPageUserSettings.Click += new System.EventHandler(this.tabPageUserSettings_Click);
             // 
             // txtConfimPassword
             // 
-            this.txtConfimPassword.Location = new System.Drawing.Point(38, 260);
+            this.txtConfimPassword.Location = new System.Drawing.Point(39, 256);
             this.txtConfimPassword.Margin = new System.Windows.Forms.Padding(0);
             this.txtConfimPassword.MaxLength = 20;
             this.txtConfimPassword.Name = "txtConfimPassword";
@@ -241,7 +242,7 @@
             this.lblConfirmNewPassword.AutoSize = true;
             this.lblConfirmNewPassword.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblConfirmNewPassword.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfirmNewPassword.Location = new System.Drawing.Point(33, 212);
+            this.lblConfirmNewPassword.Location = new System.Drawing.Point(34, 208);
             this.lblConfirmNewPassword.Name = "lblConfirmNewPassword";
             this.lblConfirmNewPassword.Size = new System.Drawing.Size(209, 25);
             this.lblConfirmNewPassword.TabIndex = 38;
@@ -249,7 +250,7 @@
             // 
             // txtNewPassword
             // 
-            this.txtNewPassword.Location = new System.Drawing.Point(38, 160);
+            this.txtNewPassword.Location = new System.Drawing.Point(39, 156);
             this.txtNewPassword.Margin = new System.Windows.Forms.Padding(0);
             this.txtNewPassword.MaxLength = 20;
             this.txtNewPassword.Name = "txtNewPassword";
@@ -259,7 +260,7 @@
             // 
             // txtOldPassword
             // 
-            this.txtOldPassword.Location = new System.Drawing.Point(38, 60);
+            this.txtOldPassword.Location = new System.Drawing.Point(39, 56);
             this.txtOldPassword.Margin = new System.Windows.Forms.Padding(0);
             this.txtOldPassword.MaxLength = 20;
             this.txtOldPassword.Name = "txtOldPassword";
@@ -272,7 +273,7 @@
             this.lblOldPassword.AutoSize = true;
             this.lblOldPassword.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblOldPassword.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOldPassword.Location = new System.Drawing.Point(33, 12);
+            this.lblOldPassword.Location = new System.Drawing.Point(34, 8);
             this.lblOldPassword.Name = "lblOldPassword";
             this.lblOldPassword.Size = new System.Drawing.Size(160, 25);
             this.lblOldPassword.TabIndex = 34;
@@ -283,7 +284,7 @@
             this.lblNewPassword.AutoSize = true;
             this.lblNewPassword.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.lblNewPassword.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewPassword.Location = new System.Drawing.Point(33, 112);
+            this.lblNewPassword.Location = new System.Drawing.Point(34, 108);
             this.lblNewPassword.Name = "lblNewPassword";
             this.lblNewPassword.Size = new System.Drawing.Size(166, 25);
             this.lblNewPassword.TabIndex = 35;
@@ -300,7 +301,7 @@
             this.tabPageUserAdd.Location = new System.Drawing.Point(4, 34);
             this.tabPageUserAdd.Name = "tabPageUserAdd";
             this.tabPageUserAdd.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUserAdd.Size = new System.Drawing.Size(509, 344);
+            this.tabPageUserAdd.Size = new System.Drawing.Size(509, 296);
             this.tabPageUserAdd.TabIndex = 3;
             this.tabPageUserAdd.Text = "ADD USER";
             this.tabPageUserAdd.UseVisualStyleBackColor = true;

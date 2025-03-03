@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panelMain = new System.Windows.Forms.Panel();
             this.mainGridView = new System.Windows.Forms.DataGridView();
@@ -51,9 +51,9 @@
             this.btnPeoples = new System.Windows.Forms.Button();
             this.btnDrivers = new System.Windows.Forms.Button();
             this.panelSubMenu = new System.Windows.Forms.Panel();
-            this.panelMainMenu = new System.Windows.Forms.Panel();
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC(mainGridView);
+            this.panelMainMenu = new System.Windows.Forms.Panel();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataVeiw.SuspendLayout();
@@ -79,7 +79,7 @@
             this.panelMain.Size = new System.Drawing.Size(1184, 565);
             this.panelMain.TabIndex = 1;
             // 
-            // personNonUserGridView
+            // mainGridView
             // 
             this.mainGridView.AllowUserToAddRows = false;
             this.mainGridView.AllowUserToDeleteRows = false;
@@ -87,15 +87,15 @@
             this.mainGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.mainGridView.BackgroundColor = System.Drawing.Color.White;
             this.mainGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.mainGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(1);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mainGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.mainGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.mainGridView.ContextMenuStrip = this.contextMenuStripMainDataVeiw;
             this.mainGridView.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -104,7 +104,7 @@
             this.mainGridView.Location = new System.Drawing.Point(5, 5);
             this.mainGridView.Margin = new System.Windows.Forms.Padding(0);
             this.mainGridView.MultiSelect = false;
-            this.mainGridView.Name = "personNonUserGridView";
+            this.mainGridView.Name = "mainGridView";
             this.mainGridView.ReadOnly = true;
             this.mainGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainGridView.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
@@ -118,37 +118,38 @@
             // 
             // contextMenuStripMainDataVeiw
             // 
+            this.contextMenuStripMainDataVeiw.Font = new System.Drawing.Font("Roboto", 12F);
             this.contextMenuStripMainDataVeiw.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuPeopleCardShow,
             this.toolStripSeparatorPeople,
             this.toolStripMenuIPeopleEdit,
             this.toolStripMenuPeopleDelete});
             this.contextMenuStripMainDataVeiw.Name = "contextMenuStripPeople";
-            this.contextMenuStripMainDataVeiw.Size = new System.Drawing.Size(110, 76);
+            this.contextMenuStripMainDataVeiw.Size = new System.Drawing.Size(128, 82);
             // 
             // toolStripMenuPeopleCardShow
             // 
             this.toolStripMenuPeopleCardShow.Name = "toolStripMenuPeopleCardShow";
-            this.toolStripMenuPeopleCardShow.Size = new System.Drawing.Size(109, 22);
+            this.toolStripMenuPeopleCardShow.Size = new System.Drawing.Size(127, 24);
             this.toolStripMenuPeopleCardShow.Text = "Details";
             this.toolStripMenuPeopleCardShow.Click += new System.EventHandler(this.toolStripMenuPeopleCardShow_Click);
             // 
             // toolStripSeparatorPeople
             // 
             this.toolStripSeparatorPeople.Name = "toolStripSeparatorPeople";
-            this.toolStripSeparatorPeople.Size = new System.Drawing.Size(106, 6);
+            this.toolStripSeparatorPeople.Size = new System.Drawing.Size(124, 6);
             // 
             // toolStripMenuIPeopleEdit
             // 
             this.toolStripMenuIPeopleEdit.Name = "toolStripMenuIPeopleEdit";
-            this.toolStripMenuIPeopleEdit.Size = new System.Drawing.Size(109, 22);
+            this.toolStripMenuIPeopleEdit.Size = new System.Drawing.Size(127, 24);
             this.toolStripMenuIPeopleEdit.Text = "Edit";
             this.toolStripMenuIPeopleEdit.Click += new System.EventHandler(this.toolStripMenuIPeopleEdit_Click);
             // 
             // toolStripMenuPeopleDelete
             // 
             this.toolStripMenuPeopleDelete.Name = "toolStripMenuPeopleDelete";
-            this.toolStripMenuPeopleDelete.Size = new System.Drawing.Size(109, 22);
+            this.toolStripMenuPeopleDelete.Size = new System.Drawing.Size(127, 24);
             this.toolStripMenuPeopleDelete.Text = "Delete";
             this.toolStripMenuPeopleDelete.Click += new System.EventHandler(this.toolStripMenuPeopleDelete_Click);
             // 
@@ -193,37 +194,38 @@
             // 
             // contextMenuUserOptions
             // 
+            this.contextMenuUserOptions.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contextMenuUserOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.userInfoToolStripMenuItem,
             this.toolStripMenuItem1,
             this.changePasswordToolStripMenuItem,
             this.logoutToolStripMenuItem});
             this.contextMenuUserOptions.Name = "contextMenuUserOptions";
-            this.contextMenuUserOptions.Size = new System.Drawing.Size(169, 76);
+            this.contextMenuUserOptions.Size = new System.Drawing.Size(172, 82);
             // 
             // userInfoToolStripMenuItem
             // 
             this.userInfoToolStripMenuItem.Name = "userInfoToolStripMenuItem";
-            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.userInfoToolStripMenuItem.Text = "User Info";
+            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(171, 24);
+            this.userInfoToolStripMenuItem.Text = "Show Details";
             this.userInfoToolStripMenuItem.Click += new System.EventHandler(this.userInfoToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(165, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(168, 6);
             // 
             // changePasswordToolStripMenuItem
             // 
             this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.changePasswordToolStripMenuItem.Text = "Change Password";
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(171, 24);
+            this.changePasswordToolStripMenuItem.Text = "Settings";
             this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(171, 24);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
@@ -314,19 +316,6 @@
             this.panelSubMenu.Size = new System.Drawing.Size(1184, 65);
             this.panelSubMenu.TabIndex = 2;
             // 
-            // panelMainMenu
-            // 
-            this.panelMainMenu.BackColor = System.Drawing.Color.White;
-            this.panelMainMenu.Controls.Add(this.btnPeoples);
-            this.panelMainMenu.Controls.Add(this.btnApplications);
-            this.panelMainMenu.Controls.Add(this.btnDrivers);
-            this.panelMainMenu.Controls.Add(this.btnUsers);
-            this.panelMainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMainMenu.Location = new System.Drawing.Point(0, 71);
-            this.panelMainMenu.Name = "panelMainMenu";
-            this.panelMainMenu.Size = new System.Drawing.Size(1184, 60);
-            this.panelMainMenu.TabIndex = 3;
-            // 
             // iconButtonAdd
             // 
             this.iconButtonAdd.FlatAppearance.BorderSize = 0;
@@ -344,6 +333,19 @@
             this.iconButtonAdd.TabIndex = 2;
             this.iconButtonAdd.UseVisualStyleBackColor = true;
             this.iconButtonAdd.Click += new System.EventHandler(this.iconButtonAdd_Click);
+            // 
+            // panelMainMenu
+            // 
+            this.panelMainMenu.BackColor = System.Drawing.Color.White;
+            this.panelMainMenu.Controls.Add(this.btnPeoples);
+            this.panelMainMenu.Controls.Add(this.btnApplications);
+            this.panelMainMenu.Controls.Add(this.btnDrivers);
+            this.panelMainMenu.Controls.Add(this.btnUsers);
+            this.panelMainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMainMenu.Location = new System.Drawing.Point(0, 71);
+            this.panelMainMenu.Name = "panelMainMenu";
+            this.panelMainMenu.Size = new System.Drawing.Size(1184, 60);
+            this.panelMainMenu.TabIndex = 3;
             // 
             // filterOptionsUC
             // 

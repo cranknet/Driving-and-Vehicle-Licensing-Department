@@ -19,16 +19,13 @@ namespace DVLD_UI.UserControls
         }
         private void cmbFilterOptions_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            // clsUtils.ApplyFilterOptions(_GridView, txtFilterValue, cmbFilterOptions);
             if (_DataFilter != null)
             {
                 _DataFilter.Apply();
             }
-
         }
         private void txtFilterValue_TextChanged(object sender, System.EventArgs e)
         {
-            // clsUtils.ApplyFilterOptions(_GridView, txtFilterValue, cmbFilterOptions);
             if (_DataFilter != null)
             {
                 _DataFilter.Apply();
