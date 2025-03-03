@@ -45,6 +45,7 @@
     <Compile Include="clsPeople.cs" />
     <Compile Include="clsPerson.cs" />
     <Compile Include="clsUser.cs" />
+    <Compile Include="DataCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

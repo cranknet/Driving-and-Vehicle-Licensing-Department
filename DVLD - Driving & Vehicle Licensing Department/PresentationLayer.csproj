@@ -179,6 +179,7 @@
     </Compile>
     <Compile Include="Utils\clsSettings.cs" />
     <Compile Include="Utils\clsUtils.cs" />
+    <Compile Include="Utils\DataFilter.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>

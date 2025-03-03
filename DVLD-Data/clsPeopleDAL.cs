@@ -77,6 +77,30 @@ namespace DVLD_Data
             }
             return dt;
         }
+        // Get People with no user account
+        public static DataTable GetNonUserPeople()
+        {
+            DataTable dt = new DataTable();
+            string query = @"SELECT PersonID, NationalNo, FirstName, LastName FROM People
+                             WHERE PersonID NOT IN (SELECT PersonID FROM Users);";
+            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"GetNonUserPeople: SQL Error -> {ex.Message}");
+                }
+            }
+            return dt;
+        }
         // Check Person Existence
         public static bool IsPersonExistsBy(int personID)
         {

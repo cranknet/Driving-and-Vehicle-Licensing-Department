@@ -9,11 +9,11 @@ namespace DVLD_UI.UserControls.Cards
         private CardUtils.EnDisplayMode EnMode { get; set; }
         private void InitializePerson(int personID)
         {
-            if (personID < 0) return;
             Person = (EnMode == CardUtils.EnDisplayMode.Read || EnMode == CardUtils.EnDisplayMode.Update) ? clsPeople.FindByPersonID(personID) : new clsPeople();
         }
         private void ShowReadMode()
         {
+            // Fix Reset Empty Mode
             if (Person == null) return;
             lblPersonID.Text = $"PERSON ID: {Person.PersonID}";
             txtFirstName.Text = Person.FirstName;

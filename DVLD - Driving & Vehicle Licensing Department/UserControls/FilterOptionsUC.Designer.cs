@@ -84,7 +84,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FilterOptionsUC";
             this.Size = new System.Drawing.Size(478, 64);
-            this.Load += new System.EventHandler(this.FilterOptionsUC_Load);
             this.panelFilterOptions.ResumeLayout(false);
             this.panelFilterOptions.PerformLayout();
             this.ResumeLayout(false);

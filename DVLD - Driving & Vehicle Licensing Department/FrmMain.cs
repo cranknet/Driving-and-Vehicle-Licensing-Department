@@ -64,8 +64,6 @@ namespace DVLD_UI
             if (mainGridView.Columns.Contains("UserID"))
             {
                 SelectedID = GetIDBy("UserID", mainGridView, CurrentRowIndex);
-                // Broadcast SelectedID change to UserSubMenu Control
-                OnSelectedIDChange?.Invoke(SelectedID);
             }
             else
             {

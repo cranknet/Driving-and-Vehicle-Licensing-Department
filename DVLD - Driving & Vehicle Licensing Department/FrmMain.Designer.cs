@@ -53,7 +53,7 @@
             this.panelSubMenu = new System.Windows.Forms.Panel();
             this.panelMainMenu = new System.Windows.Forms.Panel();
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC(mainGridView);
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataVeiw.SuspendLayout();
@@ -79,7 +79,7 @@
             this.panelMain.Size = new System.Drawing.Size(1184, 565);
             this.panelMain.TabIndex = 1;
             // 
-            // mainGridView
+            // personNonUserGridView
             // 
             this.mainGridView.AllowUserToAddRows = false;
             this.mainGridView.AllowUserToDeleteRows = false;
@@ -104,7 +104,7 @@
             this.mainGridView.Location = new System.Drawing.Point(5, 5);
             this.mainGridView.Margin = new System.Windows.Forms.Padding(0);
             this.mainGridView.MultiSelect = false;
-            this.mainGridView.Name = "mainGridView";
+            this.mainGridView.Name = "personNonUserGridView";
             this.mainGridView.ReadOnly = true;
             this.mainGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainGridView.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));

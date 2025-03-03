@@ -20,12 +20,11 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void btnReset_Click(object sender, System.EventArgs e)
         {
-            ShowReadMode();
-            ToggleControlStatus(true);
+
         }
         private void btnUserEditPerson_Click(object sender, System.EventArgs e)
         {
-            PersonProfileCard personProfileCard = new PersonProfileCard(CardUtils.EnDisplayMode.Update, User.PersonID);
+            PersonProfileCard personProfileCard = new PersonProfileCard(EnMode, User.PersonID);
             using (FrmHost frmHost = new FrmHost(personProfileCard))
             {
                 frmHost.FormClosing += FrmHost_FormClosing;
@@ -37,6 +36,7 @@ namespace DVLD_UI.UserControls.Cards
         {
             // Reset The User Card Info When The Person Card about to close.
             Person = clsPeople.FindByPersonID(User.PersonID);
+            LoadUserInfo();
             btnReset_Click(sender, e);
         }
         private void btnSave_Click(object sender, System.EventArgs e)

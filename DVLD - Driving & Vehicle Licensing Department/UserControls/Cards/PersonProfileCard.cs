@@ -20,7 +20,10 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void btnChangeImage_Click(object sender, System.EventArgs e)
         {
-            clsUtils.DeleteImage(Person.ImagePath);
+            if (Person != null)
+            {
+                clsUtils.DeleteImage(Person.ImagePath);
+            }
             Person.ImagePath = clsUtils.ImageHandler(pbPersonImage, "Images");
         }
         private void btnReset_Click(object sender, System.EventArgs e)

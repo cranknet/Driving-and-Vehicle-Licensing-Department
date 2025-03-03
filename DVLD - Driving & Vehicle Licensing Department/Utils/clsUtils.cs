@@ -85,15 +85,16 @@ namespace DVLD_UI.Utils
         {
             return DateTime.Today.AddYears(-minAge);
         }
-        public static void LoadFilterOptions(DataGridView gridView, ComboBox cmbFilter)
+        public static void LoadFilterOptions(DataGridView gridView, ComboBox cmbFilter, string none = "None")
         {
+            if (gridView == null) return;
             cmbFilter.Items.Clear();
-            cmbFilter.Items.Add("None");
+            cmbFilter.Items.Add(none);
             foreach (DataGridViewColumn column in gridView.Columns)
             {
                 cmbFilter.Items.Add(column.Name);
             }
-            cmbFilter.SelectedItem = "None";
+            cmbFilter.SelectedItem = none;
         }
         public static void ApplyFilterOptions(DataGridView dataGridView, TextBox txtFilterValue, ComboBox cmbFilterOptions)
         {

@@ -12,7 +12,7 @@ namespace DVLD_UI.UserControls.Cards
             User = (EnMode == CardUtils.EnDisplayMode.Read || EnMode == CardUtils.EnDisplayMode.Update) ? clsUser.Find(userID) : new clsUser();
             Person = clsPeople.FindByPersonID(User.PersonID);
         }
-        private void ShowReadMode()
+        private void LoadUserInfo()
         {
             if (User == null || Person == null) return;
             lblUserID.Text = $"USER ID: {User.UserID}";
@@ -23,40 +23,50 @@ namespace DVLD_UI.UserControls.Cards
             txtOldPassword.Text = string.Empty;
             txtNewPassword.Text = string.Empty;
             txtConfimPassword.Text = string.Empty;
-            // Image does not refresh because its deleted.
             pbPersonImage.ImageLocation = Person.ImagePath;
-            btnSave.Text = "SAVE";
-            ToggleControlStatus(false);
         }
-        private void ShowUpdateMode()
+        private void ShowUserDetailsPage()
         {
-            ShowReadMode();
-            ToggleControlStatus();
+            tabControlUser.TabPages.Clear();
+            tabControlUser.TabPages.Add(tabPageUserDetails);
+            LoadUserInfo();
         }
-        private void ShowAddMode()
+        private void ShowUserSettingsPage()
         {
-            ShowReadMode();
-            ToggleControlStatus();
-            btnSave.Text = "ADD";
+            tabControlUser.TabPages.Clear();
+            tabControlUser.TabPages.Add(tabPageUserSettings);
+            LoadUserInfo();
+            ToggleUserButtons(true);
+        }
+        //private DataGridView CustomizePersonGridView(DataGridView dataGridView)
+        //{
+        //    foreach()
+        //}
+
+        private void ShowUserAddPage()
+        {
+            tabControlUser.TabPages.Clear();
+            tabControlUser.TabPages.Add(tabPageUserAdd);
+            ToggleUserButtons(true);
+            btnUserEditPerson.Text = "ADD PERSON";
         }
         private void Display()
         {
             switch (EnMode)
             {
                 case CardUtils.EnDisplayMode.Read:
-                    ShowReadMode();
+                    ShowUserDetailsPage();
                     break;
                 case CardUtils.EnDisplayMode.Update:
-                    ShowUpdateMode();
+                    ShowUserSettingsPage();
                     break;
                 case CardUtils.EnDisplayMode.Add:
-                    ShowAddMode();
+                    ShowUserAddPage();
                     break;
             }
         }
-        public void ToggleControlStatus(bool enabled = true)
+        public void ToggleUserButtons(bool enabled = true)
         {
-            grpUserPassword.Enabled = enabled;
             btnSave.Visible = enabled;
             btnReset.Visible = enabled;
             btnUserEditPerson.Visible = enabled;
@@ -95,7 +105,6 @@ namespace DVLD_UI.UserControls.Cards
             isValid &= ValidatePasswordMatch(txtNewPassword, txtConfimPassword, "Passwords do not match!");
             return isValid;
         }
-
         private bool SaveUser()
         {
             if (!ValidatePasswordFields()) return false;

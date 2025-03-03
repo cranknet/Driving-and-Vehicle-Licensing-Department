@@ -47,6 +47,11 @@ namespace DVLD_Logic
         {
             return DVLD_Data.clsPeopleDAL.GetAllPeople();
         }
+        public static DataTable GetNonUserPeople()
+        {
+            return DVLD_Data.clsPeopleDAL.GetNonUserPeople();
+        }
+
         // FindBy People Person by Person ID
         public static bool IsPersonExistsByID(int personID)
         {
