@@ -56,22 +56,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panelHeader = new System.Windows.Forms.Panel();
-            this.pbCloseCard = new System.Windows.Forms.PictureBox();
             this.lblUserID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.pbPersonImage = new System.Windows.Forms.PictureBox();
             this.btnUserEditPerson = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pbCloseCard = new System.Windows.Forms.PictureBox();
+            this.pbPersonImage = new System.Windows.Forms.PictureBox();
+            this.lblPersonSelector = new System.Windows.Forms.Label();
             this.panelMain.SuspendLayout();
             this.tabControlUser.SuspendLayout();
             this.tabPageUserDetails.SuspendLayout();
             this.tabPageUserSettings.SuspendLayout();
             this.tabPageUserAdd.SuspendLayout();
             this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMain
@@ -292,6 +293,7 @@
             // 
             // tabPageUserAdd
             // 
+            this.tabPageUserAdd.Controls.Add(this.lblPersonSelector);
             this.tabPageUserAdd.Controls.Add(this.textBox1);
             this.tabPageUserAdd.Controls.Add(this.label1);
             this.tabPageUserAdd.Controls.Add(this.textBox2);
@@ -308,12 +310,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(36, 237);
+            this.textBox1.Location = new System.Drawing.Point(36, 258);
             this.textBox1.Margin = new System.Windows.Forms.Padding(0);
             this.textBox1.MaxLength = 20;
-            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(250, 45);
+            this.textBox1.Size = new System.Drawing.Size(250, 32);
             this.textBox1.TabIndex = 43;
             this.textBox1.UseSystemPasswordChar = true;
             // 
@@ -322,7 +323,7 @@
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 200);
+            this.label1.Location = new System.Drawing.Point(31, 219);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(209, 25);
             this.label1.TabIndex = 44;
@@ -330,23 +331,21 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(36, 143);
+            this.textBox2.Location = new System.Drawing.Point(36, 173);
             this.textBox2.Margin = new System.Windows.Forms.Padding(0);
             this.textBox2.MaxLength = 20;
-            this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(250, 45);
+            this.textBox2.Size = new System.Drawing.Size(250, 32);
             this.textBox2.TabIndex = 40;
             this.textBox2.UseSystemPasswordChar = true;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(36, 49);
+            this.textBox3.Location = new System.Drawing.Point(36, 88);
             this.textBox3.Margin = new System.Windows.Forms.Padding(0);
             this.textBox3.MaxLength = 20;
-            this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(250, 45);
+            this.textBox3.Size = new System.Drawing.Size(250, 32);
             this.textBox3.TabIndex = 39;
             this.textBox3.UseSystemPasswordChar = true;
             // 
@@ -355,7 +354,7 @@
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(31, 12);
+            this.label2.Location = new System.Drawing.Point(31, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(120, 25);
             this.label2.TabIndex = 41;
@@ -366,7 +365,7 @@
             this.label3.AutoSize = true;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(31, 106);
+            this.label3.Location = new System.Drawing.Point(31, 134);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 25);
             this.label3.TabIndex = 42;
@@ -382,18 +381,6 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(903, 42);
             this.panelHeader.TabIndex = 18;
-            // 
-            // pbCloseCard
-            // 
-            this.pbCloseCard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbCloseCard.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseCard.Image")));
-            this.pbCloseCard.Location = new System.Drawing.Point(867, 0);
-            this.pbCloseCard.Name = "pbCloseCard";
-            this.pbCloseCard.Size = new System.Drawing.Size(37, 40);
-            this.pbCloseCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCloseCard.TabIndex = 17;
-            this.pbCloseCard.TabStop = false;
-            this.pbCloseCard.Click += new System.EventHandler(this.pbCloseCard_Click);
             // 
             // lblUserID
             // 
@@ -424,18 +411,6 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Visible = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // pbPersonImage
-            // 
-            this.pbPersonImage.ErrorImage = global::DVLD_UI.Properties.Resources.DVLD_Error_Photo;
-            this.pbPersonImage.InitialImage = global::DVLD_UI.Properties.Resources.DVLD_Default_Photo;
-            this.pbPersonImage.Location = new System.Drawing.Point(48, 82);
-            this.pbPersonImage.Margin = new System.Windows.Forms.Padding(0);
-            this.pbPersonImage.Name = "pbPersonImage";
-            this.pbPersonImage.Size = new System.Drawing.Size(300, 300);
-            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPersonImage.TabIndex = 0;
-            this.pbPersonImage.TabStop = false;
             // 
             // btnUserEditPerson
             // 
@@ -479,6 +454,42 @@
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
+            // pbCloseCard
+            // 
+            this.pbCloseCard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbCloseCard.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseCard.Image")));
+            this.pbCloseCard.Location = new System.Drawing.Point(867, 0);
+            this.pbCloseCard.Name = "pbCloseCard";
+            this.pbCloseCard.Size = new System.Drawing.Size(37, 40);
+            this.pbCloseCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCloseCard.TabIndex = 17;
+            this.pbCloseCard.TabStop = false;
+            this.pbCloseCard.Click += new System.EventHandler(this.pbCloseCard_Click);
+            // 
+            // pbPersonImage
+            // 
+            this.pbPersonImage.ErrorImage = global::DVLD_UI.Properties.Resources.DVLD_Error_Photo;
+            this.pbPersonImage.InitialImage = global::DVLD_UI.Properties.Resources.DVLD_Default_Photo;
+            this.pbPersonImage.Location = new System.Drawing.Point(48, 82);
+            this.pbPersonImage.Margin = new System.Windows.Forms.Padding(0);
+            this.pbPersonImage.Name = "pbPersonImage";
+            this.pbPersonImage.Size = new System.Drawing.Size(300, 300);
+            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPersonImage.TabIndex = 0;
+            this.pbPersonImage.TabStop = false;
+            // 
+            // lblPersonSelector
+            // 
+            this.lblPersonSelector.AutoSize = true;
+            this.lblPersonSelector.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblPersonSelector.Font = new System.Drawing.Font("Segoe UI", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPersonSelector.Location = new System.Drawing.Point(176, 10);
+            this.lblPersonSelector.Name = "lblPersonSelector";
+            this.lblPersonSelector.Size = new System.Drawing.Size(180, 25);
+            this.lblPersonSelector.TabIndex = 45;
+            this.lblPersonSelector.Text = "PERSON SELECTOR";
+            this.lblPersonSelector.Click += new System.EventHandler(this.lblPersonSelector_Click);
+            // 
             // UserProfileCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -499,9 +510,9 @@
             this.tabPageUserAdd.PerformLayout();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -541,5 +552,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblPersonSelector;
     }
 }

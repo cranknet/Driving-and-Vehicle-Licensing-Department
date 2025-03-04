@@ -35,5 +35,7 @@
         // Other common notifications and messages
         public const string ProfileSavedSuccess = "Person saved successfully";
         public const string ProfileSaveFailed = "Can't save Person";
+        public const string UserIDCellName = "UserID";
+        public const string PersonIDCellName = "PersonID";
     }
 }

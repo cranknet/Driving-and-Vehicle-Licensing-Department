@@ -60,5 +60,15 @@ namespace DVLD_UI.UserControls.Cards
         {
 
         }
+
+        private void lblPersonSelector_Click(object sender, System.EventArgs e)
+        {
+            PersonSelectCard personSelectCard = new PersonSelectCard();
+            using (FrmHost frmHost = new FrmHost(personSelectCard))
+            {
+                frmHost.FormClosing += FrmHost_FormClosing;
+                frmHost.ShowDialog();
+            }
+        }
     }
 }

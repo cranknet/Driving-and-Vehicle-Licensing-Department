@@ -1,6 +1,5 @@
 ﻿using DVLD_Logic;
 using DVLD_UI.UserControls.Cards;
-using System;
 using System.Linq;
 using System.Windows.Forms;
 namespace DVLD_UI
@@ -24,14 +23,8 @@ namespace DVLD_UI
         }
         private clsUser CurrentUser = null;
         private Button HighlightedButton;
-        private int CurrentRowIndex { get; set; }
         public int SelectedID;
         private string SelectedMenuOption { get; set; }
-        private int GetIDBy(string cellName, DataGridView mainView, int rowIndex)
-        {
-            if (rowIndex < 0 || mainView == null || !mainView.Columns.Contains(cellName)) return -1;
-            return Convert.ToInt32(mainView.Rows[rowIndex].Cells[cellName].Value);
-        }
         private void LoadMainGridView(EnMainMenuOptions enMenuOption, DataGridView mainView)
         {
             switch (enMenuOption)
@@ -47,13 +40,6 @@ namespace DVLD_UI
                     mainView.DataSource = clsUser.GetAllUsers();
                     break;
             }
-        }
-        private void LoadUserControl(Panel panel, UserControl userControl)
-        {
-            if (panel == null) return;
-            panel.Controls.Clear();
-            userControl.Dock = DockStyle.Fill;
-            panel.Controls.Add(userControl);
         }
         private void HighlightButton(Button button)
         {
@@ -113,11 +99,6 @@ namespace DVLD_UI
                 MessageBox.Show($"Couldn't delete Person with selectedID: {personID}!");
                 return false;
             }
-        }
-        private void DeleteViewRow(DataGridView dGView, int rowIndex)
-        {
-            if (dGView == null || rowIndex < 0) return;
-            dGView.Rows.RemoveAt(rowIndex);
         }
         private void RefreshMainGridViewOnFromClosing(object sender, FormClosingEventArgs e)
         {

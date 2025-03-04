@@ -33,7 +33,6 @@ namespace DVLD_UI
         // Users Button Click Event
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            //LoadUserControl(panelSubMenu, new UserSubMenuUC());
 
             LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
             clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
@@ -55,19 +54,19 @@ namespace DVLD_UI
         {
             if (DeleteDialog(SelectedID))
             {
-                DeleteViewRow(mainGridView, CurrentRowIndex);
+                LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
             }
         }
         private void mainGridView_CurrentCellChanged(object sender, EventArgs e)
         {
-            CurrentRowIndex = mainGridView.CurrentRow?.Index ?? -1;
-            if (mainGridView.Columns.Contains("UserID"))
+
+            if (mainGridView.Columns.Contains(clsSettings.UserIDCellName))
             {
-                SelectedID = GetIDBy("UserID", mainGridView, CurrentRowIndex);
+                SelectedID = clsUtils.GetIDFrom(clsSettings.UserIDCellName, mainGridView);
             }
             else
             {
-                SelectedID = GetIDBy("PersonID", mainGridView, CurrentRowIndex);
+                SelectedID = clsUtils.GetIDFrom(clsSettings.PersonIDCellName, mainGridView);
             }
         }
         private void FrmMain_Load(object sender, EventArgs e)

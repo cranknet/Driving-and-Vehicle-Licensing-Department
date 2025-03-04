@@ -165,6 +165,12 @@
     <Compile Include="UserControls\Cards\PersonProfileCard.Logic.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControls\Cards\PersonSelectCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Cards\PersonSelectCard.Designer.cs">
+      <DependentUpon>PersonSelectCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Cards\UserProfileCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\Cards\PersonProfileCard.resx">
       <DependentUpon>PersonProfileCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Cards\PersonSelectCard.resx">
+      <DependentUpon>PersonSelectCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Cards\UserProfileCard.resx">
       <DependentUpon>UserProfileCard.cs</DependentUpon>

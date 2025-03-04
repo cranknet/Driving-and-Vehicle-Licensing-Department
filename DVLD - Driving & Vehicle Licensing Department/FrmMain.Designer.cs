@@ -51,9 +51,9 @@
             this.btnPeoples = new System.Windows.Forms.Button();
             this.btnDrivers = new System.Windows.Forms.Button();
             this.panelSubMenu = new System.Windows.Forms.Panel();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
             this.panelMainMenu = new System.Windows.Forms.Panel();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataVeiw.SuspendLayout();
@@ -106,6 +106,7 @@
             this.mainGridView.MultiSelect = false;
             this.mainGridView.Name = "mainGridView";
             this.mainGridView.ReadOnly = true;
+            this.mainGridView.RowHeadersVisible = false;
             this.mainGridView.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainGridView.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.mainGridView.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(1);
@@ -316,6 +317,15 @@
             this.panelSubMenu.Size = new System.Drawing.Size(1184, 65);
             this.panelSubMenu.TabIndex = 2;
             // 
+            // filterOptionsUC
+            // 
+            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterOptionsUC.Location = new System.Drawing.Point(39, 0);
+            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.filterOptionsUC.Name = "filterOptionsUC";
+            this.filterOptionsUC.Size = new System.Drawing.Size(478, 64);
+            this.filterOptionsUC.TabIndex = 3;
+            // 
             // iconButtonAdd
             // 
             this.iconButtonAdd.FlatAppearance.BorderSize = 0;
@@ -346,15 +356,6 @@
             this.panelMainMenu.Name = "panelMainMenu";
             this.panelMainMenu.Size = new System.Drawing.Size(1184, 60);
             this.panelMainMenu.TabIndex = 3;
-            // 
-            // filterOptionsUC
-            // 
-            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterOptionsUC.Location = new System.Drawing.Point(39, 0);
-            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.filterOptionsUC.Name = "filterOptionsUC";
-            this.filterOptionsUC.Size = new System.Drawing.Size(478, 64);
-            this.filterOptionsUC.TabIndex = 3;
             // 
             // FrmMain
             // 

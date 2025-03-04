@@ -92,7 +92,11 @@ namespace DVLD_UI.Utils
             cmbFilter.Items.Add(none);
             foreach (DataGridViewColumn column in gridView.Columns)
             {
-                cmbFilter.Items.Add(column.Name);
+                Type columnType = column.ValueType;
+                if (columnType == typeof(string) || columnType == typeof(int) || columnType == typeof(double) || columnType == typeof(decimal))
+                {
+                    cmbFilter.Items.Add(column.Name);
+                }
             }
             cmbFilter.SelectedItem = none;
         }
@@ -109,6 +113,18 @@ namespace DVLD_UI.Utils
             {
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
+        }
+        public static int GetIDFrom(string cellName, DataGridView dataGridView)
+        {
+            if (dataGridView == null || !dataGridView.Columns.Contains(cellName)) return -1;
+            return Convert.ToInt32(dataGridView.CurrentRow.Cells[cellName]?.Value ?? -1);
+        }
+        public static void LoadUserControl(Panel panel, UserControl userControl)
+        {
+            if (panel == null) return;
+            panel.Controls.Clear();
+            userControl.Dock = DockStyle.Fill;
+            panel.Controls.Add(userControl);
         }
     }
 }

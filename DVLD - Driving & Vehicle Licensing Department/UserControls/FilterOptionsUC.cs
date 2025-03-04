@@ -15,7 +15,6 @@ namespace DVLD_UI.UserControls
             InitializeComponent();
             _GridView = dataGridView;
             _DataFilter = new DataFilter(_GridView, cmbFilterOptions, txtFilterValue);
-            _DataFilter.LoadFilterOptions();
         }
         private void cmbFilterOptions_SelectedIndexChanged(object sender, System.EventArgs e)
         {
