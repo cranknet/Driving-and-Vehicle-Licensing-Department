@@ -116,8 +116,8 @@ namespace DVLD_UI.Utils
         }
         public static int GetIDFrom(string cellName, DataGridView dataGridView)
         {
-            if (dataGridView == null || !dataGridView.Columns.Contains(cellName)) return -1;
-            return Convert.ToInt32(dataGridView.CurrentRow.Cells[cellName]?.Value ?? -1);
+            if (dataGridView?.CurrentRow?.Cells[cellName]?.Value is int ID) return ID;
+            return -1;
         }
         public static void LoadUserControl(Panel panel, UserControl userControl)
         {

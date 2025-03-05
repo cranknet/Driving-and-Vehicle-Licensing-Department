@@ -28,7 +28,7 @@ namespace DVLD_UI.UserControls.Cards
 
         private void selectPersonCardGridView_SelectionChanged(object sender, System.EventArgs e)
         {
-            selectedPersonID = Convert.ToInt32(selectPersonCardGridView.CurrentRow.Cells["PersonID"]?.Value ?? -1);
+            selectedPersonID = Convert.ToInt32(selectPersonCardGridView.CurrentRow?.Cells["PersonID"]?.Value ?? -1);
             SelectedPerson = clsPeople.FindByPersonID(selectedPersonID);
             pbPersonImage.ImageLocation = (SelectedPerson != null) ? SelectedPerson.ImagePath : string.Empty;
         }
