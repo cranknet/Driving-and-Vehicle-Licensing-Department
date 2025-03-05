@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-
 namespace DVLD_Data
 {
     public class clsUserDAL
@@ -41,7 +40,6 @@ namespace DVLD_Data
             }
             return isFound;
         }
-
         public static bool IsUserExistsBy(int userID)
         {
             string query = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID;";
@@ -62,7 +60,6 @@ namespace DVLD_Data
             }
             return false;
         }
-
         public static int IsUserExistsBy(string userName, string Password)
         {
             int userID = -1;
@@ -88,7 +85,6 @@ namespace DVLD_Data
             }
             return userID;
         }
-
         public static DataTable GetAllUsers()
         {
             DataTable dt = new DataTable();
@@ -111,12 +107,10 @@ namespace DVLD_Data
             }
             return dt;
         }
-
         public static bool UpdatePassword(int userID, string oldPassword, string newPassword)
         {
             string queryCheckPassword = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID AND Password = @OldPassword";
             string queryUpdatePassword = "UPDATE Users SET Password = @NewPassword WHERE UserID = @UserID";
-
             using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
             using (SqlCommand cmdCheckPassword = new SqlCommand(queryCheckPassword, connection))
             using (SqlCommand cmdUpdatePassword = new SqlCommand(queryUpdatePassword, connection))
@@ -125,11 +119,9 @@ namespace DVLD_Data
                 cmdCheckPassword.Parameters.AddWithValue("@OldPassword", oldPassword);
                 cmdUpdatePassword.Parameters.AddWithValue("@UserID", userID);
                 cmdUpdatePassword.Parameters.AddWithValue("@NewPassword", newPassword);
-
                 try
                 {
                     connection.Open();
-
                     // Check if the old password is correct
                     int passwordMatchCount = (int)cmdCheckPassword.ExecuteScalar();
                     if (passwordMatchCount == 0)
@@ -137,7 +129,6 @@ namespace DVLD_Data
                         // Old password is incorrect
                         return false;
                     }
-
                     // Update to the new password
                     int rowsAffected = cmdUpdatePassword.ExecuteNonQuery();
                     return rowsAffected > 0;
@@ -148,6 +139,32 @@ namespace DVLD_Data
                     return false;
                 }
             }
+        }
+        public static int AddNewUser(string userName, string password, bool isActive)
+        {
+            int userID = -1;
+            string query = @"INSERT INTO Users (UserName, Password, IsActive) 
+                             OUTPUT INSERTED.UserID
+                             VALUES (@UserName, @Password, @IsActive);";
+            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                cmd.Parameters.AddWithValue("@UserName", userName);
+                cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@IsActive", isActive);
+                try
+                {
+                    connection.Open();
+                    object queryResult = cmd.ExecuteScalar();
+                    if (queryResult != null && int.TryParse(queryResult.ToString(), out int newPersonID)) userID = newPersonID;
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"Add New User: SQL Error -> {ex.Message}");
+                    throw ex;
+                }
+            }
+            return userID;
         }
     }
 }

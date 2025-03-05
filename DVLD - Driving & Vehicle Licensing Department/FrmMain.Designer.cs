@@ -115,7 +115,7 @@
             this.mainGridView.Size = new System.Drawing.Size(1174, 555);
             this.mainGridView.TabIndex = 1;
             this.mainGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mainGridView_CellContentDoubleClick);
-            this.mainGridView.CurrentCellChanged += new System.EventHandler(this.mainGridView_CurrentCellChanged);
+            this.mainGridView.SelectionChanged += new System.EventHandler(this.mainGridView_SelectionChanged);
             // 
             // contextMenuStripMainDataVeiw
             // 

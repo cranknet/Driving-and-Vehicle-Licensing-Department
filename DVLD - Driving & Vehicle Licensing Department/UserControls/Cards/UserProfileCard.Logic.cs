@@ -1,4 +1,5 @@
 ﻿using DVLD_Logic;
+using System.Linq;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
 {
@@ -42,12 +43,12 @@ namespace DVLD_UI.UserControls.Cards
         //{
         //    foreach()
         //}
-
         private void ShowUserAddPage()
         {
             tabControlUser.TabPages.Clear();
             tabControlUser.TabPages.Add(tabPageUserAdd);
             ToggleUserButtons(true);
+            ToggleAddUserTextBoxes(false);
             btnUserEditPerson.Text = "ADD PERSON";
         }
         private void Display()
@@ -70,6 +71,14 @@ namespace DVLD_UI.UserControls.Cards
             btnSave.Visible = enabled;
             btnReset.Visible = enabled;
             btnUserEditPerson.Visible = enabled;
+            btnPersonSelect.Visible = enabled;
+        }
+        public void ToggleAddUserTextBoxes(bool enabled = true)
+        {
+            foreach (TextBox textBox in tabPageUserAdd.Controls.OfType<TextBox>())
+            {
+                textBox.Enabled = enabled;
+            }
         }
         private bool ValidateField(TextBox textBox, string emptyMsg, int minLength = 0, string minLengthMsg = "")
         {
@@ -107,9 +116,17 @@ namespace DVLD_UI.UserControls.Cards
         }
         private bool SaveUser()
         {
-            if (!ValidatePasswordFields()) return false;
-            User.Password = txtOldPassword.Text;
-            User.NewPassword = txtNewPassword.Text;
+            if (EnMode == CardUtils.EnDisplayMode.Update)
+            {
+                if (!ValidatePasswordFields()) return false;
+                User.Password = txtOldPassword.Text;
+                User.NewPassword = txtNewPassword.Text;
+            }
+            // I will add validation for Add mode later
+            else if (EnMode == CardUtils.EnDisplayMode.Add)
+            {
+                MessageBox.Show("Add User");
+            }
             return User.Save();
         }
     }

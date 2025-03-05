@@ -12,7 +12,6 @@ namespace DVLD_UI
             InitializeComponent();
             HighlightMenuButtons(panelMainMenu);
             CurrentUser = clsUser.Find(loggedUserID);
-
         }
         private void pbExitApplication_Click(object sender, EventArgs e)
         {
@@ -28,15 +27,12 @@ namespace DVLD_UI
         {
             LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
             clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
-
         }
         // Users Button Click Event
         private void btnUsers_Click(object sender, EventArgs e)
         {
-
             LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
             clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
-
         }
         private void mainGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -55,18 +51,6 @@ namespace DVLD_UI
             if (DeleteDialog(SelectedID))
             {
                 LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
-            }
-        }
-        private void mainGridView_CurrentCellChanged(object sender, EventArgs e)
-        {
-
-            if (mainGridView.Columns.Contains(clsSettings.UserIDCellName))
-            {
-                SelectedID = clsUtils.GetIDFrom(clsSettings.UserIDCellName, mainGridView);
-            }
-            else
-            {
-                SelectedID = clsUtils.GetIDFrom(clsSettings.PersonIDCellName, mainGridView);
             }
         }
         private void FrmMain_Load(object sender, EventArgs e)
@@ -99,6 +83,17 @@ namespace DVLD_UI
         private void iconButtonAdd_Click(object sender, EventArgs e)
         {
             DisplayProfileCard(CardUtils.EnDisplayMode.Add, SelectedID, SelectedMenuOption);
+        }
+        private void mainGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (mainGridView.Columns.Contains(clsSettings.UserIDCellName))
+            {
+                SelectedID = clsUtils.GetIDFrom(clsSettings.UserIDCellName, mainGridView);
+            }
+            else
+            {
+                SelectedID = clsUtils.GetIDFrom(clsSettings.PersonIDCellName, mainGridView);
+            }
         }
     }
 }

@@ -7,7 +7,9 @@ namespace DVLD_UI.UserControls.Cards
 {
     public partial class PersonSelectCard : UserControl
     {
-        private int _selectedPersonID { get; set; }
+        public Action<int> OnPersonIDSelected;
+        clsPeople SelectedPerson { get; set; }
+        private int selectedPersonID { get; set; }
         public PersonSelectCard()
         {
             InitializeComponent();
@@ -22,24 +24,33 @@ namespace DVLD_UI.UserControls.Cards
         private void pbCloseCard_Click(object sender, System.EventArgs e)
         {
             this.FindForm()?.Close();
-
         }
 
         private void selectPersonCardGridView_SelectionChanged(object sender, System.EventArgs e)
         {
-            _selectedPersonID = Convert.ToInt32(selectPersonCardGridView.CurrentRow.Cells["PersonID"]?.Value ?? -1);
-            clsPeople person = clsPeople.FindByPersonID(_selectedPersonID);
-            pbPersonImage.ImageLocation = (person != null) ? person.ImagePath : string.Empty;
+            selectedPersonID = Convert.ToInt32(selectPersonCardGridView.CurrentRow.Cells["PersonID"]?.Value ?? -1);
+            SelectedPerson = clsPeople.FindByPersonID(selectedPersonID);
+            pbPersonImage.ImageLocation = (SelectedPerson != null) ? SelectedPerson.ImagePath : string.Empty;
         }
 
         private void btnUserEditPerson_Click(object sender, EventArgs e)
         {
-            PersonProfileCard personProfileCard = new PersonProfileCard(CardUtils.EnDisplayMode.Update, _selectedPersonID);
+            PersonProfileCard personProfileCard = new PersonProfileCard(CardUtils.EnDisplayMode.Update, selectedPersonID);
             using (FrmHost frmHost = new FrmHost(personProfileCard))
             {
-                //frmHost.FormClosing += FrmHost_FormClosing;
                 frmHost.ShowDialog();
             }
+        }
+
+        private void btnSelectPerson_Click(object sender, EventArgs e)
+        {
+            lblSelectPerson.Text = $"You Selected: {SelectedPerson.FirstName} {SelectedPerson.LastName}";
+            OnPersonIDSelected?.Invoke(selectedPersonID);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.FindForm()?.Close();
         }
     }
 }

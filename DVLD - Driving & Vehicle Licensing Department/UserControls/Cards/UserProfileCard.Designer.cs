@@ -49,36 +49,37 @@
             this.lblOldPassword = new System.Windows.Forms.Label();
             this.lblNewPassword = new System.Windows.Forms.Label();
             this.tabPageUserAdd = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnPersonSelect = new System.Windows.Forms.Button();
+            this.txtNewUserConfirmPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtNewUserPassword = new System.Windows.Forms.TextBox();
+            this.txtNewUserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.pbCloseCard = new System.Windows.Forms.PictureBox();
             this.lblUserID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
+            this.pbPersonImage = new System.Windows.Forms.PictureBox();
             this.btnUserEditPerson = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.pbCloseCard = new System.Windows.Forms.PictureBox();
-            this.pbPersonImage = new System.Windows.Forms.PictureBox();
-            this.lblPersonSelector = new System.Windows.Forms.Label();
             this.panelMain.SuspendLayout();
             this.tabControlUser.SuspendLayout();
             this.tabPageUserDetails.SuspendLayout();
             this.tabPageUserSettings.SuspendLayout();
             this.tabPageUserAdd.SuspendLayout();
             this.panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.Color.White;
             this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMain.Controls.Add(this.btnPersonSelect);
             this.panelMain.Controls.Add(this.tabControlUser);
             this.panelMain.Controls.Add(this.panelHeader);
             this.panelMain.Controls.Add(this.btnSave);
@@ -226,7 +227,6 @@
             this.tabPageUserSettings.TabIndex = 2;
             this.tabPageUserSettings.Text = "SETTINGS";
             this.tabPageUserSettings.UseVisualStyleBackColor = true;
-            this.tabPageUserSettings.Click += new System.EventHandler(this.tabPageUserSettings_Click);
             // 
             // txtConfimPassword
             // 
@@ -293,11 +293,10 @@
             // 
             // tabPageUserAdd
             // 
-            this.tabPageUserAdd.Controls.Add(this.lblPersonSelector);
-            this.tabPageUserAdd.Controls.Add(this.textBox1);
+            this.tabPageUserAdd.Controls.Add(this.txtNewUserConfirmPassword);
             this.tabPageUserAdd.Controls.Add(this.label1);
-            this.tabPageUserAdd.Controls.Add(this.textBox2);
-            this.tabPageUserAdd.Controls.Add(this.textBox3);
+            this.tabPageUserAdd.Controls.Add(this.txtNewUserPassword);
+            this.tabPageUserAdd.Controls.Add(this.txtNewUserName);
             this.tabPageUserAdd.Controls.Add(this.label2);
             this.tabPageUserAdd.Controls.Add(this.label3);
             this.tabPageUserAdd.Location = new System.Drawing.Point(4, 34);
@@ -308,15 +307,34 @@
             this.tabPageUserAdd.Text = "ADD USER";
             this.tabPageUserAdd.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // btnPersonSelect
             // 
-            this.textBox1.Location = new System.Drawing.Point(36, 258);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox1.MaxLength = 20;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(250, 32);
-            this.textBox1.TabIndex = 43;
-            this.textBox1.UseSystemPasswordChar = true;
+            this.btnPersonSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnPersonSelect.FlatAppearance.BorderSize = 0;
+            this.btnPersonSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPersonSelect.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPersonSelect.ForeColor = System.Drawing.Color.White;
+            this.btnPersonSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPersonSelect.Location = new System.Drawing.Point(98, 68);
+            this.btnPersonSelect.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPersonSelect.Name = "btnPersonSelect";
+            this.btnPersonSelect.Size = new System.Drawing.Size(196, 37);
+            this.btnPersonSelect.TabIndex = 0;
+            this.btnPersonSelect.TabStop = false;
+            this.btnPersonSelect.Text = "SELECT PERSON";
+            this.btnPersonSelect.UseVisualStyleBackColor = false;
+            this.btnPersonSelect.Visible = false;
+            this.btnPersonSelect.Click += new System.EventHandler(this.btnPersonSelect_Click);
+            // 
+            // txtNewUserConfirmPassword
+            // 
+            this.txtNewUserConfirmPassword.Location = new System.Drawing.Point(36, 258);
+            this.txtNewUserConfirmPassword.Margin = new System.Windows.Forms.Padding(0);
+            this.txtNewUserConfirmPassword.MaxLength = 20;
+            this.txtNewUserConfirmPassword.Name = "txtNewUserConfirmPassword";
+            this.txtNewUserConfirmPassword.Size = new System.Drawing.Size(250, 32);
+            this.txtNewUserConfirmPassword.TabIndex = 43;
+            this.txtNewUserConfirmPassword.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -329,25 +347,25 @@
             this.label1.TabIndex = 44;
             this.label1.Text = "CONFIRM PASSWORD";
             // 
-            // textBox2
+            // txtNewUserPassword
             // 
-            this.textBox2.Location = new System.Drawing.Point(36, 173);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox2.MaxLength = 20;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(250, 32);
-            this.textBox2.TabIndex = 40;
-            this.textBox2.UseSystemPasswordChar = true;
+            this.txtNewUserPassword.Location = new System.Drawing.Point(36, 173);
+            this.txtNewUserPassword.Margin = new System.Windows.Forms.Padding(0);
+            this.txtNewUserPassword.MaxLength = 20;
+            this.txtNewUserPassword.Name = "txtNewUserPassword";
+            this.txtNewUserPassword.Size = new System.Drawing.Size(250, 32);
+            this.txtNewUserPassword.TabIndex = 40;
+            this.txtNewUserPassword.UseSystemPasswordChar = true;
             // 
-            // textBox3
+            // txtNewUserName
             // 
-            this.textBox3.Location = new System.Drawing.Point(36, 88);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox3.MaxLength = 20;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(250, 32);
-            this.textBox3.TabIndex = 39;
-            this.textBox3.UseSystemPasswordChar = true;
+            this.txtNewUserName.Location = new System.Drawing.Point(36, 88);
+            this.txtNewUserName.Margin = new System.Windows.Forms.Padding(0);
+            this.txtNewUserName.MaxLength = 20;
+            this.txtNewUserName.Name = "txtNewUserName";
+            this.txtNewUserName.Size = new System.Drawing.Size(250, 32);
+            this.txtNewUserName.TabIndex = 39;
+            this.txtNewUserName.UseSystemPasswordChar = true;
             // 
             // label2
             // 
@@ -382,6 +400,18 @@
             this.panelHeader.Size = new System.Drawing.Size(903, 42);
             this.panelHeader.TabIndex = 18;
             // 
+            // pbCloseCard
+            // 
+            this.pbCloseCard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbCloseCard.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseCard.Image")));
+            this.pbCloseCard.Location = new System.Drawing.Point(867, 0);
+            this.pbCloseCard.Name = "pbCloseCard";
+            this.pbCloseCard.Size = new System.Drawing.Size(37, 40);
+            this.pbCloseCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCloseCard.TabIndex = 17;
+            this.pbCloseCard.TabStop = false;
+            this.pbCloseCard.Click += new System.EventHandler(this.pbCloseCard_Click);
+            // 
             // lblUserID
             // 
             this.lblUserID.AutoSize = true;
@@ -412,6 +442,18 @@
             this.btnSave.Visible = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // pbPersonImage
+            // 
+            this.pbPersonImage.ErrorImage = global::DVLD_UI.Properties.Resources.DVLD_Error_Photo;
+            this.pbPersonImage.InitialImage = global::DVLD_UI.Properties.Resources.DVLD_Default_Photo;
+            this.pbPersonImage.Location = new System.Drawing.Point(66, 122);
+            this.pbPersonImage.Margin = new System.Windows.Forms.Padding(0);
+            this.pbPersonImage.Name = "pbPersonImage";
+            this.pbPersonImage.Size = new System.Drawing.Size(256, 256);
+            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPersonImage.TabIndex = 0;
+            this.pbPersonImage.TabStop = false;
+            // 
             // btnUserEditPerson
             // 
             this.btnUserEditPerson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
@@ -423,7 +465,7 @@
             this.btnUserEditPerson.Location = new System.Drawing.Point(98, 422);
             this.btnUserEditPerson.Margin = new System.Windows.Forms.Padding(0);
             this.btnUserEditPerson.Name = "btnUserEditPerson";
-            this.btnUserEditPerson.Size = new System.Drawing.Size(187, 37);
+            this.btnUserEditPerson.Size = new System.Drawing.Size(196, 37);
             this.btnUserEditPerson.TabIndex = 12;
             this.btnUserEditPerson.TabStop = false;
             this.btnUserEditPerson.Text = "EDIT INFO";
@@ -454,42 +496,6 @@
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
-            // pbCloseCard
-            // 
-            this.pbCloseCard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbCloseCard.Image = ((System.Drawing.Image)(resources.GetObject("pbCloseCard.Image")));
-            this.pbCloseCard.Location = new System.Drawing.Point(867, 0);
-            this.pbCloseCard.Name = "pbCloseCard";
-            this.pbCloseCard.Size = new System.Drawing.Size(37, 40);
-            this.pbCloseCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbCloseCard.TabIndex = 17;
-            this.pbCloseCard.TabStop = false;
-            this.pbCloseCard.Click += new System.EventHandler(this.pbCloseCard_Click);
-            // 
-            // pbPersonImage
-            // 
-            this.pbPersonImage.ErrorImage = global::DVLD_UI.Properties.Resources.DVLD_Error_Photo;
-            this.pbPersonImage.InitialImage = global::DVLD_UI.Properties.Resources.DVLD_Default_Photo;
-            this.pbPersonImage.Location = new System.Drawing.Point(48, 82);
-            this.pbPersonImage.Margin = new System.Windows.Forms.Padding(0);
-            this.pbPersonImage.Name = "pbPersonImage";
-            this.pbPersonImage.Size = new System.Drawing.Size(300, 300);
-            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbPersonImage.TabIndex = 0;
-            this.pbPersonImage.TabStop = false;
-            // 
-            // lblPersonSelector
-            // 
-            this.lblPersonSelector.AutoSize = true;
-            this.lblPersonSelector.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblPersonSelector.Font = new System.Drawing.Font("Segoe UI", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPersonSelector.Location = new System.Drawing.Point(176, 10);
-            this.lblPersonSelector.Name = "lblPersonSelector";
-            this.lblPersonSelector.Size = new System.Drawing.Size(180, 25);
-            this.lblPersonSelector.TabIndex = 45;
-            this.lblPersonSelector.Text = "PERSON SELECTOR";
-            this.lblPersonSelector.Click += new System.EventHandler(this.lblPersonSelector_Click);
-            // 
             // UserProfileCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -510,9 +516,9 @@
             this.tabPageUserAdd.PerformLayout();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -546,12 +552,12 @@
         private System.Windows.Forms.Label lblOldPassword;
         private System.Windows.Forms.Label lblNewPassword;
         private System.Windows.Forms.TabPage tabPageUserAdd;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNewUserConfirmPassword;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtNewUserPassword;
+        private System.Windows.Forms.TextBox txtNewUserName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblPersonSelector;
+        private System.Windows.Forms.Button btnPersonSelect;
     }
 }

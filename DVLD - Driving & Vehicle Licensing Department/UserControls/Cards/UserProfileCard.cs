@@ -20,7 +20,6 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void btnReset_Click(object sender, System.EventArgs e)
         {
-
         }
         private void btnUserEditPerson_Click(object sender, System.EventArgs e)
         {
@@ -31,7 +30,6 @@ namespace DVLD_UI.UserControls.Cards
                 frmHost.ShowDialog();
             }
         }
-
         private void FrmHost_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Reset The User Card Info When The Person Card about to close.
@@ -48,25 +46,25 @@ namespace DVLD_UI.UserControls.Cards
                 {
                     this.FindForm()?.Close();
                 }
-
             }
             else
             {
                 MessageBox.Show("Can't update User password!");
             }
         }
-
-        private void tabPageUserSettings_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void lblPersonSelector_Click(object sender, System.EventArgs e)
+        private void btnPersonSelect_Click(object sender, System.EventArgs e)
         {
             PersonSelectCard personSelectCard = new PersonSelectCard();
             using (FrmHost frmHost = new FrmHost(personSelectCard))
             {
-                frmHost.FormClosing += FrmHost_FormClosing;
+                //frmHost.FormClosing += FrmHost_FormClosing;
+                personSelectCard.OnPersonIDSelected += (personID) =>
+                {
+                    User.PersonID = personID;
+                    Person = clsPeople.FindByPersonID(personID);
+                    pbPersonImage.ImageLocation = (Person != null) ? Person.ImagePath : string.Empty;
+                    ToggleAddUserTextBoxes(true);
+                };
                 frmHost.ShowDialog();
             }
         }

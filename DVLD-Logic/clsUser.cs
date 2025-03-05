@@ -1,5 +1,4 @@
 ﻿using DVLD_Data;
-using System;
 using System.Data;
 namespace DVLD_Logic
 {
@@ -80,7 +79,8 @@ namespace DVLD_Logic
         }
         private bool _Add()
         {
-            throw new NotImplementedException();
+            this.UserID = clsUserDAL.AddNewUser(this.UserName, this.Password, this.IsActive);
+            return this.UserID != -1;
         }
     }
 }
