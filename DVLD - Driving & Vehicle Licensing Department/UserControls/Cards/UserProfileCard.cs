@@ -39,12 +39,24 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void btnSave_Click(object sender, System.EventArgs e)
         {
+
             if (SaveUser())
             {
-                DialogResult result = MessageBox.Show("User Password updated successfully\nDo you want to close the card?", "User Password Update", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
+                if (EnMode == CardUtils.EnDisplayMode.Update)
                 {
-                    this.FindForm()?.Close();
+                    DialogResult result = MessageBox.Show("User Password updated successfully\nDo you want to close the card?", "User Password Update", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.FindForm()?.Close();
+                    }
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("User added successfully\nDo you want to close the card?", "User Add New", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        this.FindForm()?.Close();
+                    }
                 }
             }
             else

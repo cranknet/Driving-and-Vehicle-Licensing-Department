@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserProfileCard));
             this.panelMain = new System.Windows.Forms.Panel();
+            this.btnPersonSelect = new System.Windows.Forms.Button();
             this.tabControlUser = new System.Windows.Forms.TabControl();
             this.tabPageUserDetails = new System.Windows.Forms.TabPage();
             this.lblFullName = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@
             this.lblOldPassword = new System.Windows.Forms.Label();
             this.lblNewPassword = new System.Windows.Forms.Label();
             this.tabPageUserAdd = new System.Windows.Forms.TabPage();
-            this.btnPersonSelect = new System.Windows.Forms.Button();
             this.txtNewUserConfirmPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNewUserPassword = new System.Windows.Forms.TextBox();
@@ -64,6 +64,7 @@
             this.btnUserEditPerson = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ckbNewUserIsActive = new System.Windows.Forms.CheckBox();
             this.panelMain.SuspendLayout();
             this.tabControlUser.SuspendLayout();
             this.tabPageUserDetails.SuspendLayout();
@@ -93,6 +94,25 @@
             this.panelMain.Size = new System.Drawing.Size(905, 479);
             this.panelMain.TabIndex = 2;
             this.panelMain.TabStop = true;
+            // 
+            // btnPersonSelect
+            // 
+            this.btnPersonSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnPersonSelect.FlatAppearance.BorderSize = 0;
+            this.btnPersonSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPersonSelect.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPersonSelect.ForeColor = System.Drawing.Color.White;
+            this.btnPersonSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPersonSelect.Location = new System.Drawing.Point(98, 68);
+            this.btnPersonSelect.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPersonSelect.Name = "btnPersonSelect";
+            this.btnPersonSelect.Size = new System.Drawing.Size(196, 37);
+            this.btnPersonSelect.TabIndex = 0;
+            this.btnPersonSelect.TabStop = false;
+            this.btnPersonSelect.Text = "SELECT PERSON";
+            this.btnPersonSelect.UseVisualStyleBackColor = false;
+            this.btnPersonSelect.Visible = false;
+            this.btnPersonSelect.Click += new System.EventHandler(this.btnPersonSelect_Click);
             // 
             // tabControlUser
             // 
@@ -293,6 +313,7 @@
             // 
             // tabPageUserAdd
             // 
+            this.tabPageUserAdd.Controls.Add(this.ckbNewUserIsActive);
             this.tabPageUserAdd.Controls.Add(this.txtNewUserConfirmPassword);
             this.tabPageUserAdd.Controls.Add(this.label1);
             this.tabPageUserAdd.Controls.Add(this.txtNewUserPassword);
@@ -307,28 +328,9 @@
             this.tabPageUserAdd.Text = "ADD USER";
             this.tabPageUserAdd.UseVisualStyleBackColor = true;
             // 
-            // btnPersonSelect
-            // 
-            this.btnPersonSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.btnPersonSelect.FlatAppearance.BorderSize = 0;
-            this.btnPersonSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPersonSelect.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPersonSelect.ForeColor = System.Drawing.Color.White;
-            this.btnPersonSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPersonSelect.Location = new System.Drawing.Point(98, 68);
-            this.btnPersonSelect.Margin = new System.Windows.Forms.Padding(0);
-            this.btnPersonSelect.Name = "btnPersonSelect";
-            this.btnPersonSelect.Size = new System.Drawing.Size(196, 37);
-            this.btnPersonSelect.TabIndex = 0;
-            this.btnPersonSelect.TabStop = false;
-            this.btnPersonSelect.Text = "SELECT PERSON";
-            this.btnPersonSelect.UseVisualStyleBackColor = false;
-            this.btnPersonSelect.Visible = false;
-            this.btnPersonSelect.Click += new System.EventHandler(this.btnPersonSelect_Click);
-            // 
             // txtNewUserConfirmPassword
             // 
-            this.txtNewUserConfirmPassword.Location = new System.Drawing.Point(36, 258);
+            this.txtNewUserConfirmPassword.Location = new System.Drawing.Point(36, 219);
             this.txtNewUserConfirmPassword.Margin = new System.Windows.Forms.Padding(0);
             this.txtNewUserConfirmPassword.MaxLength = 20;
             this.txtNewUserConfirmPassword.Name = "txtNewUserConfirmPassword";
@@ -341,7 +343,7 @@
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 219);
+            this.label1.Location = new System.Drawing.Point(31, 180);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(209, 25);
             this.label1.TabIndex = 44;
@@ -349,7 +351,7 @@
             // 
             // txtNewUserPassword
             // 
-            this.txtNewUserPassword.Location = new System.Drawing.Point(36, 173);
+            this.txtNewUserPassword.Location = new System.Drawing.Point(36, 134);
             this.txtNewUserPassword.Margin = new System.Windows.Forms.Padding(0);
             this.txtNewUserPassword.MaxLength = 20;
             this.txtNewUserPassword.Name = "txtNewUserPassword";
@@ -359,20 +361,19 @@
             // 
             // txtNewUserName
             // 
-            this.txtNewUserName.Location = new System.Drawing.Point(36, 88);
+            this.txtNewUserName.Location = new System.Drawing.Point(36, 49);
             this.txtNewUserName.Margin = new System.Windows.Forms.Padding(0);
             this.txtNewUserName.MaxLength = 20;
             this.txtNewUserName.Name = "txtNewUserName";
             this.txtNewUserName.Size = new System.Drawing.Size(250, 32);
             this.txtNewUserName.TabIndex = 39;
-            this.txtNewUserName.UseSystemPasswordChar = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(31, 49);
+            this.label2.Location = new System.Drawing.Point(31, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(120, 25);
             this.label2.TabIndex = 41;
@@ -383,7 +384,7 @@
             this.label3.AutoSize = true;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(31, 134);
+            this.label3.Location = new System.Drawing.Point(31, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 25);
             this.label3.TabIndex = 42;
@@ -496,6 +497,16 @@
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
+            // ckbNewUserIsActive
+            // 
+            this.ckbNewUserIsActive.AutoSize = true;
+            this.ckbNewUserIsActive.Location = new System.Drawing.Point(36, 261);
+            this.ckbNewUserIsActive.Name = "ckbNewUserIsActive";
+            this.ckbNewUserIsActive.Size = new System.Drawing.Size(104, 29);
+            this.ckbNewUserIsActive.TabIndex = 46;
+            this.ckbNewUserIsActive.Text = "Is Active";
+            this.ckbNewUserIsActive.UseVisualStyleBackColor = true;
+            // 
             // UserProfileCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -559,5 +570,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnPersonSelect;
+        private System.Windows.Forms.CheckBox ckbNewUserIsActive;
     }
 }

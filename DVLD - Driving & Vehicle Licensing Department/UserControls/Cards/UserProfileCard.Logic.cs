@@ -114,6 +114,14 @@ namespace DVLD_UI.UserControls.Cards
             isValid &= ValidatePasswordMatch(txtNewPassword, txtConfimPassword, "Passwords do not match!");
             return isValid;
         }
+        private bool ValidateAddUser()
+        {
+
+            bool isValid = true;
+            isValid &= ValidateField(txtNewUserName, "User Name must not be empty!");
+            isValid &= ValidateField(txtNewUserPassword, "Password must not be empty!", 6, "Password must be at least 6 characters!");
+            return isValid;
+        }
         private bool SaveUser()
         {
             if (EnMode == CardUtils.EnDisplayMode.Update)
@@ -125,7 +133,11 @@ namespace DVLD_UI.UserControls.Cards
             // I will add validation for Add mode later
             else if (EnMode == CardUtils.EnDisplayMode.Add)
             {
-                MessageBox.Show("Add User");
+                if (!ValidateAddUser()) return false;
+                User.PersonID = Person.PersonID;
+                User.UserName = txtNewUserName.Text;
+                User.Password = txtNewUserPassword.Text;
+                User.IsActive = ckbNewUserIsActive.Checked;
             }
             return User.Save();
         }

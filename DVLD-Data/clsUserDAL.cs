@@ -140,15 +140,16 @@ namespace DVLD_Data
                 }
             }
         }
-        public static int AddNewUser(string userName, string password, bool isActive)
+        public static int AddNewUser(int personID, string userName, string password, bool isActive)
         {
             int userID = -1;
-            string query = @"INSERT INTO Users (UserName, Password, IsActive) 
+            string query = @"INSERT INTO Users (PersonID, UserName, Password, IsActive) 
                              OUTPUT INSERTED.UserID
-                             VALUES (@UserName, @Password, @IsActive);";
+                             VALUES (@PersonID, @UserName, @Password, @IsActive);";
             using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
+                cmd.Parameters.AddWithValue("@PersonID", personID);
                 cmd.Parameters.AddWithValue("@UserName", userName);
                 cmd.Parameters.AddWithValue("@Password", password);
                 cmd.Parameters.AddWithValue("@IsActive", isActive);
