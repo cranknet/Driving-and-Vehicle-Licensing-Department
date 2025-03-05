@@ -51,7 +51,7 @@
             this.btnPeoples = new System.Windows.Forms.Button();
             this.btnDrivers = new System.Windows.Forms.Button();
             this.panelSubMenu = new System.Windows.Forms.Panel();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC(mainGridView);
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
             this.panelMainMenu = new System.Windows.Forms.Panel();
             this.panelMain.SuspendLayout();

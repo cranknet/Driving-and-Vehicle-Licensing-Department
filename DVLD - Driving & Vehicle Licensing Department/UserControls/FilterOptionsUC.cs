@@ -6,10 +6,10 @@ namespace DVLD_UI.UserControls
     {
         DataGridView _GridView;
         DataFilter _DataFilter;
-        public FilterOptionsUC()
-        {
-            InitializeComponent();
-        }
+        //public FilterOptionsUC()
+        //{
+        //    InitializeComponent();
+        //}
         public FilterOptionsUC(DataGridView dataGridView)
         {
             InitializeComponent();

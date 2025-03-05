@@ -1,4 +1,5 @@
-﻿using DVLD_Logic;
+﻿using DVLD_Data;
+using DVLD_Logic;
 using DVLD_UI.UserControls.Cards;
 using System.Linq;
 using System.Windows.Forms;
@@ -34,10 +35,10 @@ namespace DVLD_UI
                 case EnMainMenuOptions.enDrivers:
                     break;
                 case EnMainMenuOptions.enPeoples:
-                    mainView.DataSource = clsPeople.GetAllPeople();
+                    mainView.DataSource = DataCache.Instance.GetPersons();
                     break;
                 case EnMainMenuOptions.enUsers:
-                    mainView.DataSource = clsUser.GetAllUsers();
+                    mainView.DataSource = DataCache.Instance.GetUsers();
                     break;
             }
         }
@@ -104,11 +105,15 @@ namespace DVLD_UI
         {
             if (SelectedMenuOption.Equals(MainMenuOptions.Peoples))
             {
-                LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
+                //LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
+                DataCache.Instance.RefreshPersons();
+                mainGridView.DataSource = DataCache.Instance.GetPersons();
             }
             else if (SelectedMenuOption.Equals(MainMenuOptions.Users) || SelectedMenuOption.Equals(MainMenuOptions.UserSettings))
             {
-                LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
+                //LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
+                DataCache.Instance.RefreshUsers();
+                mainGridView.DataSource = DataCache.Instance.GetUsers();
             }
         }
     }

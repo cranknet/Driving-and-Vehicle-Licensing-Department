@@ -1,4 +1,5 @@
-﻿using DVLD_Logic;
+﻿using DVLD_Data;
+using DVLD_Logic;
 using DVLD_UI.UserControls.Cards;
 using DVLD_UI.Utils;
 using System;
@@ -25,13 +26,15 @@ namespace DVLD_UI
         }
         private void btnPeoples_Click(object sender, EventArgs e)
         {
-            LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
+            //LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
+            mainGridView.DataSource = DataCache.Instance.GetPersons();
             clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
         }
         // Users Button Click Event
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
+            //LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
+            mainGridView.DataSource = DataCache.Instance.GetUsers();
             clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
         }
         private void mainGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -50,7 +53,9 @@ namespace DVLD_UI
         {
             if (DeleteDialog(SelectedID))
             {
-                LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
+                //LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
+                DataCache.Instance.RefreshPersons();
+                mainGridView.DataSource = DataCache.Instance.GetPersons();
             }
         }
         private void FrmMain_Load(object sender, EventArgs e)
