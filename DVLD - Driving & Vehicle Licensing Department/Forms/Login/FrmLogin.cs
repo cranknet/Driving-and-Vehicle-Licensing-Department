@@ -1,7 +1,5 @@
-﻿using DVLD_Logic;
-using DVLD_UI.Utils;
+﻿using DVLD_UI.Utils;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 namespace DVLD_UI.Login
 {
@@ -13,9 +11,11 @@ namespace DVLD_UI.Login
         }
         private void FrmLogin_Load(object sender, EventArgs e)
         {
+            LoadLoginInfo();
         }
         private void lblExit_Click(object sender, EventArgs e)
         {
+            clsSettings.LoggedUserID = 0;
             Application.Exit();
         }
         private void btnLogin_Click(object sender, EventArgs e)
@@ -37,49 +37,6 @@ namespace DVLD_UI.Login
             {
                 btnLogin.Enabled = true;
             }
-        }
-        private void ResetFields()
-        {
-            errorProviderLogin.Clear();
-            panelUsernameSeperator.BackColor = Color.FromArgb(41, 128, 185);
-            panelPasswordSeperator.BackColor = Color.FromArgb(41, 128, 185);
-        }
-        private void ClearFields()
-        {
-            txtUsername.Clear();
-            txtPassword.Clear();
-            txtUsername.Focus();
-        }
-        private bool ValidateLogin(string username, string password)
-        {
-            bool isValid = true;
-            if (string.IsNullOrWhiteSpace(username) || username.Length < 4)
-            {
-                errorProviderLogin.SetError(txtUsername, "Invalid Username: Minimum 4 characters.");
-                panelUsernameSeperator.BackColor = Color.DarkRed;
-                isValid = false;
-            }
-            if (string.IsNullOrWhiteSpace(password) || password.Length < 4)
-            {
-                errorProviderLogin.SetError(txtPassword, "Invalid Password: Minimum 4 characters.");
-                panelPasswordSeperator.BackColor = Color.DarkRed;
-                isValid = false;
-            }
-            else
-            {
-                clsSettings.LoggedUserID = clsUser.IsUserExistsByUserNamePassword(username, password);
-                if (clsSettings.LoggedUserID != clsSettings.DefaultUserID)
-                {
-                    isValid = true;
-                    ResetFields();
-                }
-                else
-                {
-                    isValid = false;
-                    ClearFields();
-                }
-            }
-            return isValid;
         }
         private void pbUsername_Click(object sender, EventArgs e)
         {

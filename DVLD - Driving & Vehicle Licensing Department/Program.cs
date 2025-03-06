@@ -1,4 +1,5 @@
-﻿using DVLD_UI.Utils;
+﻿using DVLD_UI.Login;
+using DVLD_UI.Utils;
 using System;
 using System.Windows.Forms;
 namespace DVLD_UI
@@ -13,15 +14,15 @@ namespace DVLD_UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //while (clsSettings.LoggedUserID == clsSettings.DefaultUserID)
-            //{
-            //    using (FrmLogin frmLogin = new FrmLogin())
-            //    {
-            //        frmLogin.ShowDialog();
-            //    }
-            //}
-            clsSettings.LoggedUserID = 1;
-            Application.Run(new FrmMain(1));
+            while (clsSettings.LoggedUserID == clsSettings.DefaultUserID)
+            {
+                using (FrmLogin frmLogin = new FrmLogin())
+                {
+                    frmLogin.ShowDialog();
+                }
+            }
+            //clsSettings.LoggedUserID = 1;
+            Application.Run(new FrmMain(clsSettings.LoggedUserID));
         }
     }
 }

@@ -39,10 +39,6 @@ namespace DVLD_UI.UserControls.Cards
             LoadUserInfo();
             ToggleUserButtons(true);
         }
-        //private DataGridView CustomizePersonGridView(DataGridView dataGridView)
-        //{
-        //    foreach()
-        //}
         private void ShowUserAddPage()
         {
             tabControlUser.TabPages.Clear();
@@ -116,7 +112,6 @@ namespace DVLD_UI.UserControls.Cards
         }
         private bool ValidateAddUser()
         {
-
             bool isValid = true;
             isValid &= ValidateField(txtNewUserName, "User Name must not be empty!");
             isValid &= ValidateField(txtNewUserPassword, "Password must not be empty!", 6, "Password must be at least 6 characters!");
@@ -130,7 +125,6 @@ namespace DVLD_UI.UserControls.Cards
                 User.Password = txtOldPassword.Text;
                 User.NewPassword = txtNewPassword.Text;
             }
-            // I will add validation for Add mode later
             else if (EnMode == CardUtils.EnDisplayMode.Add)
             {
                 if (!ValidateAddUser()) return false;
