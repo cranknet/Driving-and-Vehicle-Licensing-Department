@@ -18,14 +18,12 @@ namespace DVLD_UI.Utils
                 if (ofdImage.ShowDialog() == DialogResult.OK)
                 {
                     string sourcePath = ofdImage.FileName;
-                    // Create Image Path
                     string imagesFolder = Path.Combine(Application.StartupPath, imageFolder);
                     if (!Directory.Exists(imagesFolder))
                     {
                         Directory.CreateDirectory(imagesFolder);
                     }
-                    // I will rename image via GUID
-                    string fileName = Path.GetFileName(sourcePath);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(sourcePath);
                     destinationPath = Path.Combine(imagesFolder, fileName);
                     try
                     {

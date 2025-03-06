@@ -2,6 +2,7 @@
 using DVLD_UI.Utils;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 namespace DVLD_UI.Login
 {
@@ -41,14 +42,7 @@ namespace DVLD_UI.Login
                 {
                     isValid = true;
                     ResetFields();
-                    if (chkRemember.Checked == true)
-                    {
-                        if (!File.Exists(clsSettings.LoginSavePath)) SaveLoginInfo();
-                    }
-                    else
-                    {
-                        DeleteLoginInfo();
-                    }
+                    HandleRememberMe();
                 }
                 else
                 {
@@ -57,6 +51,17 @@ namespace DVLD_UI.Login
                 }
             }
             return isValid;
+        }
+        private void HandleRememberMe()
+        {
+            if (chkRemember.Checked)
+            {
+                if (!File.Exists(clsSettings.LoginSavePath)) SaveLoginInfo();
+            }
+            else
+            {
+                DeleteLoginInfo();
+            }
         }
         private void SaveLoginInfo()
         {

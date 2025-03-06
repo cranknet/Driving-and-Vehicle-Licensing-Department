@@ -14,6 +14,11 @@ namespace DVLD_UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            ShowLoginForm();
+            Application.Run(new FrmMain(clsSettings.LoggedUserID));
+        }
+        private static void ShowLoginForm()
+        {
             while (clsSettings.LoggedUserID == clsSettings.DefaultUserID)
             {
                 using (FrmLogin frmLogin = new FrmLogin())
@@ -21,8 +26,6 @@ namespace DVLD_UI
                     frmLogin.ShowDialog();
                 }
             }
-            //clsSettings.LoggedUserID = 1;
-            Application.Run(new FrmMain(clsSettings.LoggedUserID));
         }
     }
 }
