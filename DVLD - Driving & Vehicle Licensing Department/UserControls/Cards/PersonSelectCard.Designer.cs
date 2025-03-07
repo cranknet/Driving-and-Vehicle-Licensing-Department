@@ -41,7 +41,7 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnClose = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterUC();
             ((System.ComponentModel.ISupportInitialize)(this.selectPersonCardGridView)).BeginInit();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
@@ -249,7 +249,7 @@
         private System.Windows.Forms.Button btnUserEditPerson;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Panel panelMain;
-        private FilterOptionsUC filterOptionsUC;
+        private FilterUC filterOptionsUC;
         private System.Windows.Forms.Button btnClose;
     }
 }

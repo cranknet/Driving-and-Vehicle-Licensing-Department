@@ -9,7 +9,7 @@ namespace DVLD_UI.UserControls.Cards
     public partial class PersonSelectCard : UserControl
     {
         public Action<int> OnPersonIDSelected;
-        clsPeople SelectedPerson { get; set; }
+        People SelectedPerson { get; set; }
         private int selectedPersonID { get; set; }
         public PersonSelectCard()
         {
@@ -17,11 +17,11 @@ namespace DVLD_UI.UserControls.Cards
             selectPersonCardGridView.DataSource = DataCache.Instance.GetNonUserPersons();
             filterOptionsUC.txtFilterValue.TextChanged += (s, e) => ApplyFilter();
             filterOptionsUC.cmbFilterOptions.SelectedIndexChanged += (s, e) => ApplyFilter();
-            clsUtils.LoadFilterOptions(selectPersonCardGridView, filterOptionsUC.cmbFilterOptions);
+            Utils.Utils.LoadFilterOptions(selectPersonCardGridView, filterOptionsUC.cmbFilterOptions);
         }
         private void ApplyFilter()
         {
-            clsUtils.ApplyFilter(selectPersonCardGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
+            Utils.Utils.ApplyFilter(selectPersonCardGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
         }
         private void pbCloseCard_Click(object sender, System.EventArgs e)
         {
@@ -30,7 +30,7 @@ namespace DVLD_UI.UserControls.Cards
         private void selectPersonCardGridView_SelectionChanged(object sender, System.EventArgs e)
         {
             selectedPersonID = Convert.ToInt32(selectPersonCardGridView.CurrentRow?.Cells["PersonID"]?.Value ?? -1);
-            SelectedPerson = clsPeople.FindByPersonID(selectedPersonID);
+            SelectedPerson = People.FindByPersonID(selectedPersonID);
             pbPersonImage.ImageLocation = (SelectedPerson != null) ? SelectedPerson.ImagePath : string.Empty;
         }
         private void btnUserEditPerson_Click(object sender, EventArgs e)

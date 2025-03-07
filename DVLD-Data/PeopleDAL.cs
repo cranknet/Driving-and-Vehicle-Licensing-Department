@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 namespace DVLD_Data
 {
-    public class clsPeopleDAL
+    public class PeopleDAL
     {
         // FindBy Person Object
         public static bool FindBy(int personID, ref string nationalNo, ref string firstName, ref string lastName,
@@ -18,7 +18,7 @@ namespace DVLD_Data
                             END AS Gender, Address, Phone, Email, NationalityCountryID, ImagePath
                             FROM People 
 							WHERE People.PersonID = @PersonID";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("@PersonID", personID);
@@ -59,7 +59,7 @@ namespace DVLD_Data
                             WHEN Gendor = 1 THEN 'Female'
                             END AS Gender, Phone, Email 
                             FROM People;";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 try
@@ -83,7 +83,7 @@ namespace DVLD_Data
             DataTable dt = new DataTable();
             string query = @"SELECT PersonID, NationalNo, FirstName, LastName FROM People
                              WHERE PersonID NOT IN (SELECT PersonID FROM Users);";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 try
@@ -105,7 +105,7 @@ namespace DVLD_Data
         public static bool IsPersonExistsBy(int personID)
         {
             string query = "SELECT COUNT(*) FROM People WHERE PersonID = @PersonID;";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("PersonID", personID);
@@ -125,7 +125,7 @@ namespace DVLD_Data
         public static bool IsPersonExistsBy(string nationalNo)
         {
             string query = "SELECT COUNT(*) FROM People WHERE NationalNo = @NationalNo;";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("NationalNo", nationalNo);
@@ -163,7 +163,7 @@ namespace DVLD_Data
                                 ImagePath = @ImagePath
                              FROM People
                              WHERE People.PersonID = @PersonID";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("@NationalNo", nationalNo);
@@ -193,7 +193,7 @@ namespace DVLD_Data
         {
             int rowAffected = 0;
             string query = "DELETE People WHERE PersonID = @PersonID";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("@PersonID", personID);
@@ -219,7 +219,7 @@ namespace DVLD_Data
             string query = @"INSERT INTO People (NationalNo, FirstName, LastName, DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath)
                                          VALUES (@NationalNo, @FirstName, @LastName, @DateOfBirth, @Gender, @Address, @Phone, @Email, @CountryID, @ImagePath);
                                          SELECT SCOPE_IDENTITY()";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("@NationalNo", nationalNo);

@@ -10,7 +10,7 @@ namespace DVLD_Data
         {
             DataTable dt = new DataTable();
             string query = @"SELECT * FROM ApplicationTypes;";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 try

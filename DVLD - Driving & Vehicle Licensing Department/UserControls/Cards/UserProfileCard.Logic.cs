@@ -5,13 +5,13 @@ namespace DVLD_UI.UserControls.Cards
 {
     public partial class UserProfileCard : UserControl
     {
-        clsUser User = null;
-        clsPeople Person = null;
+        User User = null;
+        People Person = null;
         private CardUtils.EnDisplayMode EnMode { get; set; }
         private void InitializeUser(int userID)
         {
-            User = (EnMode == CardUtils.EnDisplayMode.Read || EnMode == CardUtils.EnDisplayMode.Update) ? clsUser.Find(userID) : new clsUser();
-            Person = clsPeople.FindByPersonID(User.PersonID);
+            User = (EnMode == CardUtils.EnDisplayMode.Read || EnMode == CardUtils.EnDisplayMode.Update) ? User.Find(userID) : new User();
+            Person = People.FindByPersonID(User.PersonID);
         }
         private void LoadUserInfo()
         {

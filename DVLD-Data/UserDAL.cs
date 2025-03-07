@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 namespace DVLD_Data
 {
-    public class clsUserDAL
+    public class UserDAL
     {
         public static bool Find(int userID, ref int personID, ref string userName, ref string password, ref bool isActive)
         {
@@ -11,7 +11,7 @@ namespace DVLD_Data
             string query = @"SELECT UserID, PersonID, UserName, Password, IsActive 
                                  FROM Users
                                  WHERE UserID = @UserID";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@UserID", userID);
@@ -43,7 +43,7 @@ namespace DVLD_Data
         public static bool IsUserExistsBy(int userID)
         {
             string query = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID;";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("@UserID", userID);
@@ -64,7 +64,7 @@ namespace DVLD_Data
         {
             int userID = -1;
             string query = "SELECT UserID FROM Users WHERE Username = @UserName AND Password = @Password";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("@UserName", userName);
@@ -89,7 +89,7 @@ namespace DVLD_Data
         {
             DataTable dt = new DataTable();
             string query = @"SELECT UserID, PersonID, UserName, Password, IsActive FROM Users;";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 try
@@ -111,7 +111,7 @@ namespace DVLD_Data
         {
             string queryCheckPassword = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID AND Password = @OldPassword";
             string queryUpdatePassword = "UPDATE Users SET Password = @NewPassword WHERE UserID = @UserID";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmdCheckPassword = new SqlCommand(queryCheckPassword, connection))
             using (SqlCommand cmdUpdatePassword = new SqlCommand(queryUpdatePassword, connection))
             {
@@ -146,7 +146,7 @@ namespace DVLD_Data
             string query = @"INSERT INTO Users (PersonID, UserName, Password, IsActive) 
                              OUTPUT INSERTED.UserID
                              VALUES (@PersonID, @UserName, @Password, @IsActive);";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 cmd.Parameters.AddWithValue("@PersonID", personID);

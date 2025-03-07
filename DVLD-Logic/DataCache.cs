@@ -43,7 +43,7 @@ namespace DVLD_Data
         }
         public DataTable GetNonUserPersons()
         {
-            return clsPeopleDAL.GetNonUserPeople();
+            return PeopleDAL.GetNonUserPeople();
         }
         public void RefreshUsers()
         {
@@ -67,15 +67,15 @@ namespace DVLD_Data
         }
         private DataTable LoadPersons()
         {
-            return clsPeopleDAL.GetAllPeople();
+            return PeopleDAL.GetAllPeople();
         }
         private DataTable LoadUsers()
         {
-            return clsUserDAL.GetAllUsers();
+            return UserDAL.GetAllUsers();
         }
         private DataTable LoadNonUserPersons()
         {
-            return clsPeopleDAL.GetNonUserPeople();
+            return PeopleDAL.GetNonUserPeople();
         }
     }
 }

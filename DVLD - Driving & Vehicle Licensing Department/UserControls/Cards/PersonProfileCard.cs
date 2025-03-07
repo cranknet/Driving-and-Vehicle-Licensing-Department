@@ -12,7 +12,7 @@ namespace DVLD_UI.UserControls.Cards
             InitializeComponent();
             EnMode = enMode;
             InitializePerson(personID);
-            clsUtils.LoadCountryList(cmbCountryList, new DataTable());
+            Utils.Utils.LoadCountryList(cmbCountryList, new DataTable());
         }
         private void PersonProfileCard_Load(object sender, EventArgs e)
         {
@@ -22,9 +22,9 @@ namespace DVLD_UI.UserControls.Cards
         {
             if (Person != null)
             {
-                clsUtils.DeleteImage(Person.ImagePath);
+                Utils.Utils.DeleteImage(Person.ImagePath);
             }
-            Person.ImagePath = clsUtils.ImageHandler(pbPersonImage, "Images");
+            Person.ImagePath = Utils.Utils.ImageHandler(pbPersonImage, "Images");
         }
         private void btnReset_Click(object sender, System.EventArgs e)
         {
@@ -44,7 +44,7 @@ namespace DVLD_UI.UserControls.Cards
         private void textBoxNationalNo_Leave(object sender, System.EventArgs e)
         {
             string nationalNoEntered = txtNationalNo.Text.Trim();
-            if (clsPeople.IsPersonExistsByNationalNo(nationalNoEntered) && nationalNoEntered != Person.NationalNo)
+            if (People.IsPersonExistsByNationalNo(nationalNoEntered) && nationalNoEntered != Person.NationalNo)
             {
                 errorProvider.SetError(txtNationalNo, "National number already exists!");
                 btnSavePerson.Enabled = false;

@@ -1,6 +1,6 @@
 ﻿namespace DVLD_UI.UserControls
 {
-    partial class FilterOptionsUC
+    partial class FilterUC
     {
         /// <summary> 
         /// Required designer variable.

@@ -15,7 +15,7 @@ namespace DVLD_UI.Login
         }
         private void lblExit_Click(object sender, EventArgs e)
         {
-            clsSettings.LoggedUserID = 0;
+            Settings.LoggedUserID = 0;
             Application.Exit();
         }
         private void btnLogin_Click(object sender, EventArgs e)

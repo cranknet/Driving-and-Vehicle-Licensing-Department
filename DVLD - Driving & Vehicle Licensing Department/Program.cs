@@ -15,11 +15,11 @@ namespace DVLD_UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ShowLoginForm();
-            Application.Run(new FrmMain(clsSettings.LoggedUserID));
+            Application.Run(new FrmMain(Settings.LoggedUserID));
         }
         private static void ShowLoginForm()
         {
-            while (clsSettings.LoggedUserID == clsSettings.DefaultUserID)
+            while (Settings.LoggedUserID == Settings.DefaultUserID)
             {
                 using (FrmLogin frmLogin = new FrmLogin())
                 {

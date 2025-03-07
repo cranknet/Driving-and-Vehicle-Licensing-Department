@@ -2,7 +2,7 @@
 using System.Data;
 namespace DVLD_Logic
 {
-    public class clsUser
+    public class User
     {
         enum EnMode
         {
@@ -16,7 +16,7 @@ namespace DVLD_Logic
         public string Password { get; set; }
         public string NewPassword { get; set; }
         public bool IsActive { get; set; }
-        public clsUser()
+        public User()
         {
             this.UserID = -1;
             this.PersonID = -1;
@@ -25,7 +25,7 @@ namespace DVLD_Logic
             this.IsActive = false;
             Mode = EnMode.AddNew;
         }
-        private clsUser(int userID, int personID, string userName, string password, bool isActive)
+        private User(int userID, int personID, string userName, string password, bool isActive)
         {
             UserID = userID;
             PersonID = personID;
@@ -34,15 +34,15 @@ namespace DVLD_Logic
             IsActive = isActive;
             Mode = EnMode.Update;
         }
-        public static clsUser Find(int userID)
+        public static User Find(int userID)
         {
             int personID = -1;
             string userName = string.Empty;
             string password = string.Empty;
             bool isActive = false;
-            if (clsUserDAL.Find(userID, ref personID, ref userName, ref password, ref isActive))
+            if (UserDAL.Find(userID, ref personID, ref userName, ref password, ref isActive))
             {
-                return new clsUser(userID, personID, userName, password, isActive);
+                return new User(userID, personID, userName, password, isActive);
             }
             else
             {
@@ -51,15 +51,15 @@ namespace DVLD_Logic
         }
         public static int IsUserExistsByUserNamePassword(string userName, string password)
         {
-            return clsUserDAL.IsUserExistsBy(userName, password);
+            return UserDAL.IsUserExistsBy(userName, password);
         }
         public static DataTable GetAllUsers()
         {
-            return clsUserDAL.GetAllUsers();
+            return UserDAL.GetAllUsers();
         }
         private bool _Update()
         {
-            return clsUserDAL.UpdatePassword(this.UserID, this.Password, this.NewPassword);
+            return UserDAL.UpdatePassword(this.UserID, this.Password, this.NewPassword);
         }
         public bool Save()
         {
@@ -79,7 +79,7 @@ namespace DVLD_Logic
         }
         private bool _Add()
         {
-            this.UserID = clsUserDAL.AddNewUser(this.PersonID, this.UserName, this.Password, this.IsActive);
+            this.UserID = UserDAL.AddNewUser(this.PersonID, this.UserName, this.Password, this.IsActive);
             return this.UserID != -1;
         }
     }

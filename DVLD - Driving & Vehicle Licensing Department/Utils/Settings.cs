@@ -1,6 +1,6 @@
 ﻿namespace DVLD_UI.Utils
 {
-    public static class clsSettings
+    public static class Settings
     {
         public const int DefaultUserID = -1;
         public static int LoggedUserID { get; set; } = DefaultUserID;

@@ -22,7 +22,7 @@ namespace DVLD_UI
             enPeoples = 2,
             enUsers = 3
         }
-        private clsUser CurrentUser = null;
+        private User CurrentUser = null;
         private Button HighlightedButton;
         public int SelectedID;
         private string SelectedMenuOption { get; set; }
@@ -74,7 +74,7 @@ namespace DVLD_UI
         {
             string deletionMessage = $"Are you sure you want to delete!\nPerson with selectedID {personID}";
             DialogResult deleteDialogResult = MessageBox.Show(deletionMessage, "Confirm Person Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (deleteDialogResult == DialogResult.Yes && clsPeople.DeleteBy(personID))
+            if (deleteDialogResult == DialogResult.Yes && People.DeleteBy(personID))
             {
                 MessageBox.Show($"Person with selectedID: {personID} deleted successfully");
                 return true;

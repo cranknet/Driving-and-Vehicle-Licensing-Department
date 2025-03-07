@@ -42,10 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationTypesDAL.cs" />
-    <Compile Include="clsCountryDAL.cs" />
-    <Compile Include="clsPeopleDAL.cs" />
-    <Compile Include="clsDatabaseHelper.cs" />
-    <Compile Include="clsUserDAL.cs" />
+    <Compile Include="CountryDAL.cs" />
+    <Compile Include="PeopleDAL.cs" />
+    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

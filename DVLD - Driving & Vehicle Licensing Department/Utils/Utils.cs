@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 namespace DVLD_UI.Utils
 {
-    public class clsUtils
+    public class Utils
     {
         public static string ImageHandler(PictureBox pictureBox, string imageFolder)
         {
@@ -85,7 +85,7 @@ namespace DVLD_UI.Utils
         }
         public static void LoadCountryList(ComboBox cmbCountryList, DataTable countryNames)
         {
-            countryNames = clsCountry.GetListCountries().DefaultView.ToTable("CountryNames", false, "CountryName", "CountryID");
+            countryNames = Country.GetListCountries().DefaultView.ToTable("CountryNames", false, "CountryName", "CountryID");
             cmbCountryList.DataSource = countryNames;
             cmbCountryList.DisplayMember = "CountryName";
             cmbCountryList.ValueMember = "CountryID";
@@ -113,7 +113,7 @@ namespace DVLD_UI.Utils
         {
             if (gridView == null) return;
             cmbFilter.Items.Clear();
-            cmbFilter.Items.Add(clsSettings.DefaultFilterOptionValue);
+            cmbFilter.Items.Add(Settings.DefaultFilterOptionValue);
             foreach (DataGridViewColumn column in gridView.Columns)
             {
                 Type columnType = column.ValueType;
@@ -122,7 +122,7 @@ namespace DVLD_UI.Utils
                     cmbFilter.Items.Add(column.Name);
                 }
             }
-            cmbFilter.SelectedItem = clsSettings.DefaultFilterOptionValue;
+            cmbFilter.SelectedItem = Settings.DefaultFilterOptionValue;
         }
         public static void ApplyFilter(DataTable dataTable, ComboBox cmbFilterOptions, TextBox txtFilterValue)
         {
@@ -131,10 +131,10 @@ namespace DVLD_UI.Utils
                 return;
             }
             DataView filteredView = dataTable.DefaultView;
-            string selectedFilterColumn = cmbFilterOptions.SelectedItem?.ToString() ?? clsSettings.DefaultFilterOptionValue;
+            string selectedFilterColumn = cmbFilterOptions.SelectedItem?.ToString() ?? Settings.DefaultFilterOptionValue;
             string selectedFilterText = txtFilterValue.Text.Trim().Replace("'", "''");
-            txtFilterValue.Visible = selectedFilterColumn != clsSettings.DefaultFilterOptionValue;
-            if (selectedFilterColumn == clsSettings.DefaultFilterOptionValue || string.IsNullOrWhiteSpace(selectedFilterColumn))
+            txtFilterValue.Visible = selectedFilterColumn != Settings.DefaultFilterOptionValue;
+            if (selectedFilterColumn == Settings.DefaultFilterOptionValue || string.IsNullOrWhiteSpace(selectedFilterColumn))
             {
                 txtFilterValue.Clear();
                 filteredView.RowFilter = string.Empty;

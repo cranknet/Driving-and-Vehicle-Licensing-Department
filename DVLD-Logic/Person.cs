@@ -1,7 +1,7 @@
 ﻿using System;
 namespace DVLD_Logic
 {
-    public class clsPerson
+    public class Person
     {
         public int PersonID { get; set; }
         public string NationalNo { get; set; }
@@ -15,7 +15,7 @@ namespace DVLD_Logic
         public string CountryName { get; set; }
         public int CountryID { get; set; }
         public string ImagePath { get; set; }
-        public clsPerson()
+        public Person()
         {
             this.PersonID = -1;
             this.NationalNo = string.Empty;
@@ -30,7 +30,7 @@ namespace DVLD_Logic
             this.CountryName = string.Empty;
             this.ImagePath = string.Empty;
         }
-        protected clsPerson(int personID, string nationalNo, string firstName, string lastName, DateTime birthDate, string gender, string address, string phone, string email, int countryID, string imagePath)
+        protected Person(int personID, string nationalNo, string firstName, string lastName, DateTime birthDate, string gender, string address, string phone, string email, int countryID, string imagePath)
         {
             this.PersonID = personID;
             this.NationalNo = nationalNo;

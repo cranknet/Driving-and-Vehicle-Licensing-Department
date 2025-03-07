@@ -4,13 +4,13 @@ using System.Data.SqlClient;
 
 namespace DVLD_Data
 {
-    public class clsCountryDAL
+    public class CountryDAL
     {
         public static DataTable GetCountries()
         {
             DataTable dt = new DataTable();
             string query = "SELECT CountryID, CountryName FROM Countries";
-            using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
                 try

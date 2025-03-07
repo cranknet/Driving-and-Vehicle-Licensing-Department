@@ -53,7 +53,7 @@
             this.panelSubMenu = new System.Windows.Forms.Panel();
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
             this.panelMainMenu = new System.Windows.Forms.Panel();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterUC();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataVeiw.SuspendLayout();
@@ -440,6 +440,6 @@
         private System.Windows.Forms.ToolStripMenuItem userDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem personDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applicationDetailsToolStripMenuItem;
-        private UserControls.FilterOptionsUC filterOptionsUC;
+        private UserControls.FilterUC filterOptionsUC;
     }
 }

@@ -33,7 +33,7 @@ namespace DVLD_UI.UserControls.Cards
         private void FrmHost_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Reset The User Card Info When The Person Card about to close.
-            Person = clsPeople.FindByPersonID(User.PersonID);
+            Person = People.FindByPersonID(User.PersonID);
             LoadUserInfo();
             btnReset_Click(sender, e);
         }
@@ -73,7 +73,7 @@ namespace DVLD_UI.UserControls.Cards
                 personSelectCard.OnPersonIDSelected += (personID) =>
                 {
                     User.PersonID = personID;
-                    Person = clsPeople.FindByPersonID(personID);
+                    Person = People.FindByPersonID(personID);
                     pbPersonImage.ImageLocation = (Person != null) ? Person.ImagePath : string.Empty;
                     ToggleAddUserTextBoxes(true);
                 };

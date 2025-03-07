@@ -3,11 +3,11 @@ using System.Data;
 
 namespace DVLD_Logic
 {
-    public class clsCountry
+    public class Country
     {
         public static DataTable GetListCountries()
         {
-            return clsCountryDAL.GetCountries();
+            return CountryDAL.GetCountries();
         }
     }
 }

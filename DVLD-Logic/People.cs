@@ -3,7 +3,7 @@ using System;
 using System.Data;
 namespace DVLD_Logic
 {
-    public class clsPeople : clsPerson
+    public class People : Person
     {
         enum EnMode
         {
@@ -11,18 +11,18 @@ namespace DVLD_Logic
             AddNew = 1
         }
         EnMode enMode = EnMode.Update;
-        public clsPeople()
+        public People()
         {
             enMode = EnMode.AddNew;
 
         }
-        private clsPeople(int personID, string nationalNo, string firstName, string lastName,
+        private People(int personID, string nationalNo, string firstName, string lastName,
                           DateTime dateOfBirth, string gender, string address, string phone,
                           string email, int countryID, string imagePath) : base(personID, nationalNo, firstName, lastName, dateOfBirth, gender, address, phone, email, countryID, imagePath)
         {
             enMode = EnMode.Update;
         }
-        public static clsPeople FindByPersonID(int personID)
+        public static People FindByPersonID(int personID)
         {
             string nationalNo = string.Empty;
             string firstName = string.Empty;
@@ -34,9 +34,9 @@ namespace DVLD_Logic
             string phone = string.Empty;
             int countryID = 0;
             string imagePath = string.Empty;
-            if (clsPeopleDAL.FindBy(personID, ref nationalNo, ref firstName, ref lastName, ref dateOfBirth, ref gender, ref address, ref phone, ref email, ref countryID, ref imagePath))
+            if (PeopleDAL.FindBy(personID, ref nationalNo, ref firstName, ref lastName, ref dateOfBirth, ref gender, ref address, ref phone, ref email, ref countryID, ref imagePath))
             {
-                return new clsPeople(personID, nationalNo, firstName, lastName, dateOfBirth, gender, address, phone, email, countryID, imagePath);
+                return new People(personID, nationalNo, firstName, lastName, dateOfBirth, gender, address, phone, email, countryID, imagePath);
             }
             else
             {
@@ -45,33 +45,33 @@ namespace DVLD_Logic
         }
         public static DataTable GetAllPeople()
         {
-            return DVLD_Data.clsPeopleDAL.GetAllPeople();
+            return DVLD_Data.PeopleDAL.GetAllPeople();
         }
         public static DataTable GetNonUserPeople()
         {
-            return DVLD_Data.clsPeopleDAL.GetNonUserPeople();
+            return DVLD_Data.PeopleDAL.GetNonUserPeople();
         }
 
         // FindBy People Person by Person ID
         public static bool IsPersonExistsByID(int personID)
         {
-            return clsPeopleDAL.IsPersonExistsBy(personID);
+            return PeopleDAL.IsPersonExistsBy(personID);
         }
         public static bool IsPersonExistsByNationalNo(string nationalNo)
         {
-            return clsPeopleDAL.IsPersonExistsBy(nationalNo);
+            return PeopleDAL.IsPersonExistsBy(nationalNo);
         }
         private bool _Update()
         {
-            return clsPeopleDAL.UpdatePerson(this.PersonID, this.NationalNo, this.FirstName, this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email, this.CountryID, this.ImagePath);
+            return PeopleDAL.UpdatePerson(this.PersonID, this.NationalNo, this.FirstName, this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email, this.CountryID, this.ImagePath);
         }
         public static bool DeleteBy(int personID)
         {
-            return clsPeopleDAL.DeletePeopleByID(personID);
+            return PeopleDAL.DeletePeopleByID(personID);
         }
         public bool _Add()
         {
-            this.PersonID = clsPeopleDAL.AddNewPerson(NationalNo, FirstName, LastName, DateOfBirth, Gender, Address, Phone, Email, CountryID, ImagePath);
+            this.PersonID = PeopleDAL.AddNewPerson(NationalNo, FirstName, LastName, DateOfBirth, Gender, Address, Phone, Email, CountryID, ImagePath);
             return this.PersonID != -1;
         }
         public bool Save()

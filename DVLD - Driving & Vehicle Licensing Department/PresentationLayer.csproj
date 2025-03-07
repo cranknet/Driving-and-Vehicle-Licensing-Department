@@ -180,14 +180,14 @@
     <Compile Include="UserControls\Cards\UserProfileCard.Designer.cs">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\FilterOptionsUC.cs">
+    <Compile Include="UserControls\FilterUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\FilterOptionsUC.Designer.cs">
-      <DependentUpon>FilterOptionsUC.cs</DependentUpon>
+    <Compile Include="UserControls\FilterUC.Designer.cs">
+      <DependentUpon>FilterUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\clsSettings.cs" />
-    <Compile Include="Utils\clsUtils.cs" />
+    <Compile Include="Utils\Settings.cs" />
+    <Compile Include="Utils\Utils.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,8 +216,8 @@
     <EmbeddedResource Include="UserControls\Cards\UserProfileCard.resx">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\FilterOptionsUC.resx">
-      <DependentUpon>FilterOptionsUC.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\FilterUC.resx">
+      <DependentUpon>FilterUC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
