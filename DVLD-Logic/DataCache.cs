@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using DVLD_Logic;
+using System.Data;
 namespace DVLD_Data
 {
     public class DataCache
@@ -6,6 +7,7 @@ namespace DVLD_Data
         private static DataCache _instance;
         private DataTable _usersTable;
         private DataTable _personsTable;
+        private DataTable _applicationTypesTable;
         private DataCache() { }
         public static DataCache Instance
         {
@@ -31,6 +33,14 @@ namespace DVLD_Data
             }
             return _personsTable;
         }
+        public DataTable GetApplicationTypes()
+        {
+            if ((_applicationTypesTable == null))
+            {
+                _applicationTypesTable = LoadApplicationTypes();
+            }
+            return _applicationTypesTable;
+        }
         public void RefreshUsers()
         {
             _usersTable = LoadUsers();
@@ -38,6 +48,14 @@ namespace DVLD_Data
         public void RefreshPersons()
         {
             _personsTable = LoadPersons();
+        }
+        public void RefreshApplicationTypes()
+        {
+            _applicationTypesTable = LoadApplicationTypes();
+        }
+        private DataTable LoadApplicationTypes()
+        {
+            return ApplicationTypes.GetAllApplicationTypes();
         }
         private DataTable LoadPersons()
         {

@@ -26,22 +26,6 @@ namespace DVLD_UI
         private Button HighlightedButton;
         public int SelectedID;
         private string SelectedMenuOption { get; set; }
-        private void LoadMainGridView(EnMainMenuOptions enMenuOption, DataGridView mainView)
-        {
-            switch (enMenuOption)
-            {
-                case EnMainMenuOptions.enApplications:
-                    break;
-                case EnMainMenuOptions.enDrivers:
-                    break;
-                case EnMainMenuOptions.enPeoples:
-                    mainView.DataSource = DataCache.Instance.GetPersons();
-                    break;
-                case EnMainMenuOptions.enUsers:
-                    mainView.DataSource = DataCache.Instance.GetUsers();
-                    break;
-            }
-        }
         private void HighlightButton(Button button)
         {
             if (HighlightedButton != null)

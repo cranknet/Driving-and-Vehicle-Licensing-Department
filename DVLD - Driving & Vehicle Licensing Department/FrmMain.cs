@@ -20,20 +20,20 @@ namespace DVLD_UI
         }
         private void btnApplications_Click(object sender, EventArgs e)
         {
+            mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
+            clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
         }
         private void btnDrivers_Click(object sender, EventArgs e)
         {
+
         }
         private void btnPeoples_Click(object sender, EventArgs e)
         {
-            //LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
             mainGridView.DataSource = DataCache.Instance.GetPersons();
             clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
         }
-        // Users Button Click Event
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            //LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
             mainGridView.DataSource = DataCache.Instance.GetUsers();
             clsUtils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
         }
@@ -95,10 +95,20 @@ namespace DVLD_UI
             {
                 SelectedID = clsUtils.GetIDFrom(clsSettings.UserIDCellName, mainGridView);
             }
-            else
+            else if (mainGridView.Columns.Contains(clsSettings.PersonIDCellName))
             {
                 SelectedID = clsUtils.GetIDFrom(clsSettings.PersonIDCellName, mainGridView);
             }
+            else if (mainGridView.Columns.Contains(clsSettings.ApplicationTypeIDCellName))
+            {
+                SelectedID = clsUtils.GetIDFrom(clsSettings.ApplicationTypeIDCellName, mainGridView);
+
+            }
+            else
+            {
+                SelectedID = -1;
+            }
+
         }
     }
 }

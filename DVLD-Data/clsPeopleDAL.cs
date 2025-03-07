@@ -195,7 +195,6 @@ namespace DVLD_Data
             string query = "DELETE People WHERE PersonID = @PersonID";
             using (SqlConnection connection = new SqlConnection(clsDatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
-
             {
                 cmd.Parameters.AddWithValue("@PersonID", personID);
                 try
@@ -244,9 +243,7 @@ namespace DVLD_Data
                     Console.WriteLine($"Add New Person: SQL Error -> {ex.Message}");
                 }
             }
-
             return personID;
-
         }
     }
 }
