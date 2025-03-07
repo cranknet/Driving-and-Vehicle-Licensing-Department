@@ -54,7 +54,6 @@
             this.cmbFilterOptions.Name = "cmbFilterOptions";
             this.cmbFilterOptions.Size = new System.Drawing.Size(158, 29);
             this.cmbFilterOptions.TabIndex = 1;
-            this.cmbFilterOptions.SelectedIndexChanged += new System.EventHandler(this.cmbFilterOptions_SelectedIndexChanged);
             // 
             // lblFilter
             // 
@@ -73,7 +72,6 @@
             this.txtFilterValue.Size = new System.Drawing.Size(212, 29);
             this.txtFilterValue.TabIndex = 2;
             this.txtFilterValue.Visible = false;
-            this.txtFilterValue.TextChanged += new System.EventHandler(this.txtFilterValue_TextChanged);
             // 
             // FilterOptionsUC
             // 

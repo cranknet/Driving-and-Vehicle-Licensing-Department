@@ -3,6 +3,7 @@ using DVLD_Logic;
 using DVLD_UI.UserControls.Cards;
 using DVLD_UI.Utils;
 using System;
+using System.Data;
 using System.Windows.Forms;
 namespace DVLD_UI
 {
@@ -13,6 +14,12 @@ namespace DVLD_UI
             InitializeComponent();
             HighlightMenuButtons(panelMainMenu);
             CurrentUser = clsUser.Find(loggedUserID);
+            filterOptionsUC.txtFilterValue.TextChanged += (s, e) => ApplyFilter();
+            filterOptionsUC.cmbFilterOptions.SelectedIndexChanged += (s, e) => ApplyFilter();
+        }
+        private void ApplyFilter()
+        {
+            clsUtils.ApplyFilter(mainGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
         }
         private void pbExitApplication_Click(object sender, EventArgs e)
         {
@@ -25,7 +32,6 @@ namespace DVLD_UI
         }
         private void btnDrivers_Click(object sender, EventArgs e)
         {
-
         }
         private void btnPeoples_Click(object sender, EventArgs e)
         {
@@ -47,13 +53,11 @@ namespace DVLD_UI
         }
         private void toolStripMenuIPeopleEdit_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
         }
         private void toolStripMenuPeopleDelete_Click(object sender, EventArgs e)
         {
             if (DeleteDialog(SelectedID))
             {
-                //LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
                 DataCache.Instance.RefreshPersons();
                 mainGridView.DataSource = DataCache.Instance.GetPersons();
             }
@@ -102,13 +106,28 @@ namespace DVLD_UI
             else if (mainGridView.Columns.Contains(clsSettings.ApplicationTypeIDCellName))
             {
                 SelectedID = clsUtils.GetIDFrom(clsSettings.ApplicationTypeIDCellName, mainGridView);
-
             }
             else
             {
                 SelectedID = -1;
             }
-
+        }
+        private void personDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
+        }
+        private void userDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
+        }
+        private void applicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+        private void contextMenuStripMainDataVeiw_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            userDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Users);
+            personDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Peoples);
+            applicationDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Applications);
         }
     }
 }

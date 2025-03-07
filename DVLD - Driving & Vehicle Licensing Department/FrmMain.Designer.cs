@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +18,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -37,6 +34,9 @@
             this.toolStripMenuPeopleCardShow = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparatorPeople = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuIPeopleEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.userDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.personDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.applicationDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuPeopleDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pbCloseCard = new System.Windows.Forms.PictureBox();
@@ -51,9 +51,9 @@
             this.btnPeoples = new System.Windows.Forms.Button();
             this.btnDrivers = new System.Windows.Forms.Button();
             this.panelSubMenu = new System.Windows.Forms.Panel();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC(mainGridView);
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
             this.panelMainMenu = new System.Windows.Forms.Panel();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterOptionsUC();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataVeiw.SuspendLayout();
@@ -127,6 +127,7 @@
             this.toolStripMenuPeopleDelete});
             this.contextMenuStripMainDataVeiw.Name = "contextMenuStripPeople";
             this.contextMenuStripMainDataVeiw.Size = new System.Drawing.Size(128, 82);
+            this.contextMenuStripMainDataVeiw.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripMainDataVeiw_Opening);
             // 
             // toolStripMenuPeopleCardShow
             // 
@@ -142,10 +143,35 @@
             // 
             // toolStripMenuIPeopleEdit
             // 
+            this.toolStripMenuIPeopleEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.userDetailsToolStripMenuItem,
+            this.personDetailsToolStripMenuItem,
+            this.applicationDetailsToolStripMenuItem});
             this.toolStripMenuIPeopleEdit.Name = "toolStripMenuIPeopleEdit";
             this.toolStripMenuIPeopleEdit.Size = new System.Drawing.Size(127, 24);
             this.toolStripMenuIPeopleEdit.Text = "Edit";
             this.toolStripMenuIPeopleEdit.Click += new System.EventHandler(this.toolStripMenuIPeopleEdit_Click);
+            // 
+            // userDetailsToolStripMenuItem
+            // 
+            this.userDetailsToolStripMenuItem.Name = "userDetailsToolStripMenuItem";
+            this.userDetailsToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.userDetailsToolStripMenuItem.Text = "User";
+            this.userDetailsToolStripMenuItem.Click += new System.EventHandler(this.userDetailsToolStripMenuItem_Click);
+            // 
+            // personDetailsToolStripMenuItem
+            // 
+            this.personDetailsToolStripMenuItem.Name = "personDetailsToolStripMenuItem";
+            this.personDetailsToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.personDetailsToolStripMenuItem.Text = "Person";
+            this.personDetailsToolStripMenuItem.Click += new System.EventHandler(this.personDetailsToolStripMenuItem_Click);
+            // 
+            // applicationDetailsToolStripMenuItem
+            // 
+            this.applicationDetailsToolStripMenuItem.Name = "applicationDetailsToolStripMenuItem";
+            this.applicationDetailsToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.applicationDetailsToolStripMenuItem.Text = "Application";
+            this.applicationDetailsToolStripMenuItem.Click += new System.EventHandler(this.applicationDetailsToolStripMenuItem_Click);
             // 
             // toolStripMenuPeopleDelete
             // 
@@ -317,15 +343,6 @@
             this.panelSubMenu.Size = new System.Drawing.Size(1184, 65);
             this.panelSubMenu.TabIndex = 2;
             // 
-            // filterOptionsUC
-            // 
-            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterOptionsUC.Location = new System.Drawing.Point(39, 0);
-            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.filterOptionsUC.Name = "filterOptionsUC";
-            this.filterOptionsUC.Size = new System.Drawing.Size(478, 64);
-            this.filterOptionsUC.TabIndex = 3;
-            // 
             // iconButtonAdd
             // 
             this.iconButtonAdd.FlatAppearance.BorderSize = 0;
@@ -356,6 +373,15 @@
             this.panelMainMenu.Name = "panelMainMenu";
             this.panelMainMenu.Size = new System.Drawing.Size(1184, 60);
             this.panelMainMenu.TabIndex = 3;
+            // 
+            // filterOptionsUC
+            // 
+            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterOptionsUC.Location = new System.Drawing.Point(0, 1);
+            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.filterOptionsUC.Name = "filterOptionsUC";
+            this.filterOptionsUC.Size = new System.Drawing.Size(478, 64);
+            this.filterOptionsUC.TabIndex = 3;
             // 
             // FrmMain
             // 
@@ -388,7 +414,6 @@
             this.ResumeLayout(false);
 
         }
-
         #endregion
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Panel panelHeader;
@@ -412,7 +437,9 @@
         private System.Windows.Forms.Panel panelSubMenu;
         private System.Windows.Forms.Panel panelMainMenu;
         private FontAwesome.Sharp.IconButton iconButtonAdd;
+        private System.Windows.Forms.ToolStripMenuItem userDetailsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem personDetailsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem applicationDetailsToolStripMenuItem;
         private UserControls.FilterOptionsUC filterOptionsUC;
     }
 }
-

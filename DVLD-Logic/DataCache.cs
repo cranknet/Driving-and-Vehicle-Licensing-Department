@@ -41,6 +41,10 @@ namespace DVLD_Data
             }
             return _applicationTypesTable;
         }
+        public DataTable GetNonUserPersons()
+        {
+            return clsPeopleDAL.GetNonUserPeople();
+        }
         public void RefreshUsers()
         {
             _usersTable = LoadUsers();
@@ -53,6 +57,10 @@ namespace DVLD_Data
         {
             _applicationTypesTable = LoadApplicationTypes();
         }
+        public void RefreshNonUserPersons()
+        {
+            _personsTable = LoadNonUserPersons();
+        }
         private DataTable LoadApplicationTypes()
         {
             return ApplicationTypes.GetAllApplicationTypes();
@@ -64,6 +72,10 @@ namespace DVLD_Data
         private DataTable LoadUsers()
         {
             return clsUserDAL.GetAllUsers();
+        }
+        private DataTable LoadNonUserPersons()
+        {
+            return clsPeopleDAL.GetNonUserPeople();
         }
     }
 }

@@ -83,21 +83,6 @@ namespace DVLD_UI.Utils
         {
             return DateTime.Today.AddYears(-minAge);
         }
-        public static void LoadFilterOptions(DataGridView gridView, ComboBox cmbFilter, string none = "None")
-        {
-            if (gridView == null) return;
-            cmbFilter.Items.Clear();
-            cmbFilter.Items.Add(none);
-            foreach (DataGridViewColumn column in gridView.Columns)
-            {
-                Type columnType = column.ValueType;
-                if (columnType == typeof(string) || columnType == typeof(int) || columnType == typeof(double) || columnType == typeof(decimal))
-                {
-                    cmbFilter.Items.Add(column.Name);
-                }
-            }
-            cmbFilter.SelectedItem = none;
-        }
         public static void LoadCountryList(ComboBox cmbCountryList, DataTable countryNames)
         {
             countryNames = clsCountry.GetListCountries().DefaultView.ToTable("CountryNames", false, "CountryName", "CountryID");
@@ -123,6 +108,56 @@ namespace DVLD_UI.Utils
             panel.Controls.Clear();
             userControl.Dock = DockStyle.Fill;
             panel.Controls.Add(userControl);
+        }
+        public static void LoadFilterOptions(DataGridView gridView, ComboBox cmbFilter)
+        {
+            if (gridView == null) return;
+            cmbFilter.Items.Clear();
+            cmbFilter.Items.Add(clsSettings.DefaultFilterOptionValue);
+            foreach (DataGridViewColumn column in gridView.Columns)
+            {
+                Type columnType = column.ValueType;
+                if (columnType == typeof(string) || columnType == typeof(int) || columnType == typeof(double) || columnType == typeof(decimal))
+                {
+                    cmbFilter.Items.Add(column.Name);
+                }
+            }
+            cmbFilter.SelectedItem = clsSettings.DefaultFilterOptionValue;
+        }
+        public static void ApplyFilter(DataTable dataTable, ComboBox cmbFilterOptions, TextBox txtFilterValue)
+        {
+            if (dataTable == null || cmbFilterOptions == null || txtFilterValue == null)
+            {
+                return;
+            }
+            DataView filteredView = dataTable.DefaultView;
+            string selectedFilterColumn = cmbFilterOptions.SelectedItem?.ToString() ?? clsSettings.DefaultFilterOptionValue;
+            string selectedFilterText = txtFilterValue.Text.Trim().Replace("'", "''");
+            txtFilterValue.Visible = selectedFilterColumn != clsSettings.DefaultFilterOptionValue;
+            if (selectedFilterColumn == clsSettings.DefaultFilterOptionValue || string.IsNullOrWhiteSpace(selectedFilterColumn))
+            {
+                txtFilterValue.Clear();
+                filteredView.RowFilter = string.Empty;
+            }
+            else
+            {
+                Type columnType = dataTable.Columns[selectedFilterColumn].DataType;
+                if (columnType == typeof(int) || columnType == typeof(double) || columnType == typeof(decimal))
+                {
+                    if (decimal.TryParse(selectedFilterText, out decimal parsedText))
+                    {
+                        filteredView.RowFilter = $"{selectedFilterColumn} = {parsedText}";
+                    }
+                    else
+                    {
+                        filteredView.RowFilter = string.Empty;
+                    }
+                }
+                else
+                {
+                    filteredView.RowFilter = $"CONVERT({selectedFilterColumn}, System.String) LIKE '%{selectedFilterText}%'";
+                }
+            }
         }
     }
 }

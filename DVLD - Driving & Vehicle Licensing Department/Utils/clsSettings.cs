@@ -41,5 +41,6 @@
         //Login Data Path & Record
         public const string LoginRecord = "{0}@-@{1}";
         public const string LoginSavePath = "LoginData.txt";
+        public const string DefaultFilterOptionValue = "None";
     }
 }
