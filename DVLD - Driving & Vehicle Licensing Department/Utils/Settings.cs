@@ -24,8 +24,14 @@
         public const string NationalNumberExists = "National number already exists!";
         // Delete Confirmation and Result Messages
         public const string ConfirmDeletePerson = "Are you sure you want to delete!\nPerson with ID {0}?";
+        public const string DeletePersonDialogTitle = "Confirm Person Deletion";
         public const string PersonDeleteSuccess = "Person with ID: {0} deleted successfully";
         public const string PersonDeleteFailed = "Couldn't delete Person with ID: {0}!";
+        // Delete Confirmation and Result Messages
+        public const string ConfirmDeleteUser = "Are you sure you want to delete!\nUser with ID {0}?";
+        public const string DeleteUserDialogTitle = "Confirm User Deletion";
+        public const string UserDeleteSuccess = "User with ID: {0} deleted successfully";
+        public const string UserDeleteFailed = "Couldn't delete User with ID: {0}!";
         // Menu Options (as text for buttons and selections)
         public const string MenuApplications = "APPLICATIONS";
         public const string MenuDrivers = "DRIVERS";

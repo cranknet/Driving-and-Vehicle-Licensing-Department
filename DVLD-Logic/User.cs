@@ -57,6 +57,10 @@ namespace DVLD_Logic
         {
             return UserDAL.GetAllUsers();
         }
+        public static bool DeleteBy(int userID)
+        {
+            return UserDAL.DeleteUserByID(userID);
+        }
         private bool _Update()
         {
             return UserDAL.UpdatePassword(this.UserID, this.Password, this.NewPassword);

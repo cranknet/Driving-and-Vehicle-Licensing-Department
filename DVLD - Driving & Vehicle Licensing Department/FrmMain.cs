@@ -21,10 +21,6 @@ namespace DVLD_UI
         {
             Utils.Utils.ApplyFilter(mainGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
         }
-        private void pbExitApplication_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
         private void btnApplications_Click(object sender, EventArgs e)
         {
             mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
@@ -70,8 +66,7 @@ namespace DVLD_UI
         {
             if (DeleteDialog(SelectedID))
             {
-                DataCache.Instance.RefreshPersons();
-                mainGridView.DataSource = DataCache.Instance.GetPersons();
+                RefreshMainGridView();
             }
         }
         private void FrmMain_Load(object sender, EventArgs e)

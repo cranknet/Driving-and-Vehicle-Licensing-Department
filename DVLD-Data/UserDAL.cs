@@ -167,5 +167,25 @@ namespace DVLD_Data
             }
             return userID;
         }
+        public static bool DeleteUserByID(int userID)
+        {
+            int rowAffected = 0;
+            string query = "DELETE Users WHERE UserID = @UserID";
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                cmd.Parameters.AddWithValue("@UserID", userID);
+                try
+                {
+                    connection.Open();
+                    rowAffected = cmd.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"DeleteUserByID: SQL Error -> {ex.Message}");
+                }
+            }
+            return rowAffected > 0;
+        }
     }
 }

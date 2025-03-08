@@ -1,6 +1,8 @@
 ﻿using DVLD_Data;
 using DVLD_Logic;
 using DVLD_UI.UserControls.Cards;
+using DVLD_UI.Utils;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 namespace DVLD_UI
@@ -74,21 +76,51 @@ namespace DVLD_UI
         }
         private bool DeleteDialog(int selectedID)
         {
-
-            string deletionMessage = $"Are you sure you want to delete!\nPerson with selectedID {selectedID}";
-            DialogResult deleteDialogResult = MessageBox.Show(deletionMessage, "Confirm Person Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (deleteDialogResult == DialogResult.Yes && People.DeleteBy(selectedID))
+            switch (SelectedMenuOption)
             {
-                MessageBox.Show($"Person with selectedID: {selectedID} deleted successfully");
+                case MainMenuOptions.Peoples:
+                    return DeletePerson(selectedID);
+                case MainMenuOptions.Users:
+                    return DeleteUser(selectedID);
+                case MainMenuOptions.Applications:
+                    return DeleteApplication(selectedID);
+                default:
+                    return false;
+            }
+        }
+        private bool DeleteApplication(int selectedID)
+        {
+            throw new NotImplementedException();
+        }
+        private bool DeleteUser(int selectedID)
+        {
+            DialogResult deleteDialogResult = MessageBox.Show(string.Format(Settings.ConfirmDeleteUser, selectedID), Settings.DeleteUserDialogTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (deleteDialogResult == DialogResult.Yes && User.DeleteBy(selectedID))
+            {
+                MessageBox.Show(string.Format(Settings.UserDeleteSuccess, selectedID));
                 return true;
             }
             else
             {
-                MessageBox.Show($"Couldn't delete Person with selectedID: {selectedID}!");
+                MessageBox.Show(string.Format(Settings.UserDeleteFailed, selectedID));
                 return false;
             }
         }
-        private void RefreshMainGridViewOnFromClosing(object sender, FormClosingEventArgs e)
+        private bool DeletePerson(int selectedID)
+        {
+            DialogResult deleteDialogResult = MessageBox.Show(string.Format(Settings.ConfirmDeletePerson, selectedID), Settings.DeletePersonDialogTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (deleteDialogResult == DialogResult.Yes && People.DeleteBy(selectedID))
+            {
+                MessageBox.Show(string.Format(Settings.PersonDeleteSuccess, selectedID));
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(string.Format(Settings.PersonDeleteFailed, selectedID));
+                return false;
+            }
+        }
+        private void RefreshMainGridView()
         {
             if (SelectedMenuOption.Equals(MainMenuOptions.Peoples))
             {
@@ -105,6 +137,10 @@ namespace DVLD_UI
                 DataCache.Instance.RefreshApplicationTypes();
                 mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
             }
+        }
+        private void RefreshMainGridViewOnFromClosing(object sender, FormClosingEventArgs e)
+        {
+            RefreshMainGridView();
         }
     }
 }
