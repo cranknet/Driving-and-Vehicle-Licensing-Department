@@ -63,7 +63,7 @@ namespace DVLD_Data
         }
         private DataTable LoadApplicationTypes()
         {
-            return ApplicationTypes.GetAllApplicationTypes();
+            return ApplicationType.GetAllApplicationTypes();
         }
         private DataTable LoadPersons()
         {

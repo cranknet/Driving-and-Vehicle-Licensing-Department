@@ -159,5 +159,30 @@ namespace DVLD_UI.Utils
                 }
             }
         }
+        public static bool ValidateField(TextBox textBox, string emptyMsg, ErrorProvider errorProvider, int minLength = 0, string minLengthMsg = "")
+        {
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                errorProvider.SetError(textBox, emptyMsg);
+                return false;
+            }
+            if (minLength > 0 && textBox.Text.Length < minLength)
+            {
+                errorProvider.SetError(textBox, minLengthMsg);
+                return false;
+            }
+            errorProvider.SetError(textBox, "");
+            return true;
+        }
+        public static bool ValidatePasswordMatch(TextBox newPassword, TextBox confirmPassword, string mismatchMsg, ErrorProvider errorProvider)
+        {
+            if (newPassword.Text != confirmPassword.Text)
+            {
+                errorProvider.SetError(confirmPassword, mismatchMsg);
+                return false;
+            }
+            errorProvider.SetError(confirmPassword, "");
+            return true;
+        }
     }
 }

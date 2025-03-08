@@ -29,23 +29,35 @@ namespace DVLD_UI
         {
             mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
             Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
+            iconButtonAdd.Enabled = false;
         }
         private void btnDrivers_Click(object sender, EventArgs e)
         {
+            iconButtonAdd.Enabled = true;
         }
         private void btnPeoples_Click(object sender, EventArgs e)
         {
             mainGridView.DataSource = DataCache.Instance.GetPersons();
             Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
+            iconButtonAdd.Enabled = true;
         }
         private void btnUsers_Click(object sender, EventArgs e)
         {
             mainGridView.DataSource = DataCache.Instance.GetUsers();
             Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
+            iconButtonAdd.Enabled = true;
         }
         private void mainGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Read, SelectedID, SelectedMenuOption);
+            // On Application Menu Show Update Mode instead of Read Mode
+            if (SelectedMenuOption.Equals(MainMenuOptions.Applications))
+            {
+                DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
+            }
+            else
+            {
+                DisplayProfileCard(CardUtils.EnDisplayMode.Read, SelectedID, SelectedMenuOption);
+            }
         }
         private void toolStripMenuPeopleCardShow_Click(object sender, EventArgs e)
         {
@@ -122,9 +134,13 @@ namespace DVLD_UI
         }
         private void applicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
         }
         private void contextMenuStripMainDataVeiw_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            toolStripMenuDetails.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
+            toolStripMenuDelete.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
+            toolStripSeparator.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
             userDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Users);
             personDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Peoples);
             applicationDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Applications);

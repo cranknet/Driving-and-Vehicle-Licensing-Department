@@ -15,13 +15,6 @@ namespace DVLD_UI
             public const string Users = "USERS";
             public const string UserSettings = "USERSETTINGS";
         }
-        enum EnMainMenuOptions
-        {
-            enApplications = 0,
-            enDrivers = 1,
-            enPeoples = 2,
-            enUsers = 3
-        }
         private User CurrentUser = null;
         private Button HighlightedButton;
         public int SelectedID;
@@ -65,23 +58,33 @@ namespace DVLD_UI
                     frmHost.ShowDialog();
                 }
             }
+            else if (selectedMenuOption.Equals(MainMenuOptions.Applications))
+            {
+                ApplicationTypeCard card = new ApplicationTypeCard(enMode, selectedID);
+                using (FrmHost frmHost = new FrmHost(card))
+                {
+                    frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
+                    frmHost.ShowDialog();
+                }
+            }
             else
             {
                 MessageBox.Show("Can't display profile card for selected menu option!");
             }
         }
-        private bool DeleteDialog(int personID)
+        private bool DeleteDialog(int selectedID)
         {
-            string deletionMessage = $"Are you sure you want to delete!\nPerson with selectedID {personID}";
+
+            string deletionMessage = $"Are you sure you want to delete!\nPerson with selectedID {selectedID}";
             DialogResult deleteDialogResult = MessageBox.Show(deletionMessage, "Confirm Person Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (deleteDialogResult == DialogResult.Yes && People.DeleteBy(personID))
+            if (deleteDialogResult == DialogResult.Yes && People.DeleteBy(selectedID))
             {
-                MessageBox.Show($"Person with selectedID: {personID} deleted successfully");
+                MessageBox.Show($"Person with selectedID: {selectedID} deleted successfully");
                 return true;
             }
             else
             {
-                MessageBox.Show($"Couldn't delete Person with selectedID: {personID}!");
+                MessageBox.Show($"Couldn't delete Person with selectedID: {selectedID}!");
                 return false;
             }
         }
@@ -89,15 +92,18 @@ namespace DVLD_UI
         {
             if (SelectedMenuOption.Equals(MainMenuOptions.Peoples))
             {
-                //LoadMainGridView(EnMainMenuOptions.enPeoples, mainGridView);
                 DataCache.Instance.RefreshPersons();
                 mainGridView.DataSource = DataCache.Instance.GetPersons();
             }
             else if (SelectedMenuOption.Equals(MainMenuOptions.Users) || SelectedMenuOption.Equals(MainMenuOptions.UserSettings))
             {
-                //LoadMainGridView(EnMainMenuOptions.enUsers, mainGridView);
                 DataCache.Instance.RefreshUsers();
                 mainGridView.DataSource = DataCache.Instance.GetUsers();
+            }
+            else if (SelectedMenuOption.Equals(MainMenuOptions.Applications))
+            {
+                DataCache.Instance.RefreshApplicationTypes();
+                mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
             }
         }
     }

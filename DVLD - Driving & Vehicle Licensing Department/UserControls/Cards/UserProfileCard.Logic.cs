@@ -76,45 +76,21 @@ namespace DVLD_UI.UserControls.Cards
                 textBox.Enabled = enabled;
             }
         }
-        private bool ValidateField(TextBox textBox, string emptyMsg, int minLength = 0, string minLengthMsg = "")
-        {
-            if (string.IsNullOrEmpty(textBox.Text))
-            {
-                errorProvider.SetError(textBox, emptyMsg);
-                return false;
-            }
-            if (minLength > 0 && textBox.Text.Length < minLength)
-            {
-                errorProvider.SetError(textBox, minLengthMsg);
-                return false;
-            }
-            errorProvider.SetError(textBox, "");
-            return true;
-        }
-        private bool ValidatePasswordMatch(TextBox newPassword, TextBox confirmPassword, string mismatchMsg)
-        {
-            if (newPassword.Text != confirmPassword.Text)
-            {
-                errorProvider.SetError(confirmPassword, mismatchMsg);
-                return false;
-            }
-            errorProvider.SetError(confirmPassword, "");
-            return true;
-        }
+
         private bool ValidatePasswordFields()
         {
             bool isValid = true;
-            isValid &= ValidateField(txtOldPassword, "Old Password must not be empty");
-            isValid &= ValidateField(txtNewPassword, "New Password must not be empty!", 6, "New password must be at least 6 characters!");
-            isValid &= ValidateField(txtConfimPassword, "Confirm Password must not be empty!");
-            isValid &= ValidatePasswordMatch(txtNewPassword, txtConfimPassword, "Passwords do not match!");
+            isValid &= Utils.Utils.ValidateField(txtOldPassword, "Old Password must not be empty!", errorProvider, 6, "password must be at least 6 characters!");
+            isValid &= Utils.Utils.ValidateField(txtNewPassword, "New Password must not be empty!", errorProvider, 6, "New password must be at least 6 characters!");
+            isValid &= Utils.Utils.ValidateField(txtConfimPassword, "Confirm Password must not be empty!", errorProvider, 6, "New password must be at least 6 characters!");
+            isValid &= Utils.Utils.ValidatePasswordMatch(txtNewPassword, txtConfimPassword, "Passwords do not match!", errorProvider);
             return isValid;
         }
         private bool ValidateAddUser()
         {
             bool isValid = true;
-            isValid &= ValidateField(txtNewUserName, "User Name must not be empty!");
-            isValid &= ValidateField(txtNewUserPassword, "Password must not be empty!", 6, "Password must be at least 6 characters!");
+            isValid &= Utils.Utils.ValidateField(txtNewUserName, "User Name must not be empty!", errorProvider);
+            isValid &= Utils.Utils.ValidateField(txtNewUserPassword, "User Name must not be empty!", errorProvider, 6, "Password must be at least 6 characters!");
             return isValid;
         }
         private bool SaveUser()

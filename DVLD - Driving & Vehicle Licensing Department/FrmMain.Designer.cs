@@ -30,14 +30,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panelMain = new System.Windows.Forms.Panel();
             this.mainGridView = new System.Windows.Forms.DataGridView();
-            this.contextMenuStripMainDataVeiw = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuPeopleCardShow = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorPeople = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuIPeopleEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripMainDataView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.userDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuPeopleDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pbCloseCard = new System.Windows.Forms.PictureBox();
             this.pbUserPicture = new System.Windows.Forms.PictureBox();
@@ -56,7 +56,7 @@
             this.filterOptionsUC = new DVLD_UI.UserControls.FilterUC();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
-            this.contextMenuStripMainDataVeiw.SuspendLayout();
+            this.contextMenuStripMainDataView.SuspendLayout();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserPicture)).BeginInit();
@@ -97,7 +97,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.mainGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.mainGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.mainGridView.ContextMenuStrip = this.contextMenuStripMainDataVeiw;
+            this.mainGridView.ContextMenuStrip = this.contextMenuStripMainDataView;
             this.mainGridView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.mainGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(137)))));
@@ -117,40 +117,40 @@
             this.mainGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mainGridView_CellContentDoubleClick);
             this.mainGridView.SelectionChanged += new System.EventHandler(this.mainGridView_SelectionChanged);
             // 
-            // contextMenuStripMainDataVeiw
+            // contextMenuStripMainDataView
             // 
-            this.contextMenuStripMainDataVeiw.Font = new System.Drawing.Font("Roboto", 12F);
-            this.contextMenuStripMainDataVeiw.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuPeopleCardShow,
-            this.toolStripSeparatorPeople,
-            this.toolStripMenuIPeopleEdit,
-            this.toolStripMenuPeopleDelete});
-            this.contextMenuStripMainDataVeiw.Name = "contextMenuStripPeople";
-            this.contextMenuStripMainDataVeiw.Size = new System.Drawing.Size(128, 82);
-            this.contextMenuStripMainDataVeiw.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripMainDataVeiw_Opening);
+            this.contextMenuStripMainDataView.Font = new System.Drawing.Font("Roboto", 12F);
+            this.contextMenuStripMainDataView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuDetails,
+            this.toolStripSeparator,
+            this.toolStripMenuEdit,
+            this.toolStripMenuDelete});
+            this.contextMenuStripMainDataView.Name = "contextMenuStripPeople";
+            this.contextMenuStripMainDataView.Size = new System.Drawing.Size(128, 82);
+            this.contextMenuStripMainDataView.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripMainDataVeiw_Opening);
             // 
-            // toolStripMenuPeopleCardShow
+            // toolStripMenuDetails
             // 
-            this.toolStripMenuPeopleCardShow.Name = "toolStripMenuPeopleCardShow";
-            this.toolStripMenuPeopleCardShow.Size = new System.Drawing.Size(127, 24);
-            this.toolStripMenuPeopleCardShow.Text = "Details";
-            this.toolStripMenuPeopleCardShow.Click += new System.EventHandler(this.toolStripMenuPeopleCardShow_Click);
+            this.toolStripMenuDetails.Name = "toolStripMenuDetails";
+            this.toolStripMenuDetails.Size = new System.Drawing.Size(127, 24);
+            this.toolStripMenuDetails.Text = "Details";
+            this.toolStripMenuDetails.Click += new System.EventHandler(this.toolStripMenuPeopleCardShow_Click);
             // 
-            // toolStripSeparatorPeople
+            // toolStripSeparator
             // 
-            this.toolStripSeparatorPeople.Name = "toolStripSeparatorPeople";
-            this.toolStripSeparatorPeople.Size = new System.Drawing.Size(124, 6);
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(124, 6);
             // 
-            // toolStripMenuIPeopleEdit
+            // toolStripMenuEdit
             // 
-            this.toolStripMenuIPeopleEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.userDetailsToolStripMenuItem,
             this.personDetailsToolStripMenuItem,
             this.applicationDetailsToolStripMenuItem});
-            this.toolStripMenuIPeopleEdit.Name = "toolStripMenuIPeopleEdit";
-            this.toolStripMenuIPeopleEdit.Size = new System.Drawing.Size(127, 24);
-            this.toolStripMenuIPeopleEdit.Text = "Edit";
-            this.toolStripMenuIPeopleEdit.Click += new System.EventHandler(this.toolStripMenuIPeopleEdit_Click);
+            this.toolStripMenuEdit.Name = "toolStripMenuEdit";
+            this.toolStripMenuEdit.Size = new System.Drawing.Size(127, 24);
+            this.toolStripMenuEdit.Text = "Edit";
+            this.toolStripMenuEdit.Click += new System.EventHandler(this.toolStripMenuIPeopleEdit_Click);
             // 
             // userDetailsToolStripMenuItem
             // 
@@ -173,12 +173,12 @@
             this.applicationDetailsToolStripMenuItem.Text = "Application";
             this.applicationDetailsToolStripMenuItem.Click += new System.EventHandler(this.applicationDetailsToolStripMenuItem_Click);
             // 
-            // toolStripMenuPeopleDelete
+            // toolStripMenuDelete
             // 
-            this.toolStripMenuPeopleDelete.Name = "toolStripMenuPeopleDelete";
-            this.toolStripMenuPeopleDelete.Size = new System.Drawing.Size(127, 24);
-            this.toolStripMenuPeopleDelete.Text = "Delete";
-            this.toolStripMenuPeopleDelete.Click += new System.EventHandler(this.toolStripMenuPeopleDelete_Click);
+            this.toolStripMenuDelete.Name = "toolStripMenuDelete";
+            this.toolStripMenuDelete.Size = new System.Drawing.Size(127, 24);
+            this.toolStripMenuDelete.Text = "Delete";
+            this.toolStripMenuDelete.Click += new System.EventHandler(this.toolStripMenuPeopleDelete_Click);
             // 
             // panelHeader
             // 
@@ -262,7 +262,7 @@
             this.btnApplications.FlatAppearance.BorderSize = 0;
             this.btnApplications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnApplications.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApplications.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnApplications.ForeColor = System.Drawing.Color.White;
             this.btnApplications.Image = global::DVLD_UI.Properties.Resources.DVLD_Applications_32;
             this.btnApplications.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnApplications.Location = new System.Drawing.Point(39, 5);
@@ -377,7 +377,7 @@
             // filterOptionsUC
             // 
             this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterOptionsUC.Location = new System.Drawing.Point(0, 1);
+            this.filterOptionsUC.Location = new System.Drawing.Point(39, 1);
             this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.filterOptionsUC.Name = "filterOptionsUC";
             this.filterOptionsUC.Size = new System.Drawing.Size(478, 64);
@@ -404,7 +404,7 @@
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.panelMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).EndInit();
-            this.contextMenuStripMainDataVeiw.ResumeLayout(false);
+            this.contextMenuStripMainDataView.ResumeLayout(false);
             this.panelHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserPicture)).EndInit();
@@ -418,11 +418,11 @@
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.DataGridView mainGridView;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripMainDataVeiw;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuPeopleCardShow;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorPeople;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuIPeopleEdit;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuPeopleDelete;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripMainDataView;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuDetails;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuEdit;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuDelete;
         private System.Windows.Forms.Button btnDrivers;
         private System.Windows.Forms.Button btnPeoples;
         private System.Windows.Forms.Button btnUsers;
