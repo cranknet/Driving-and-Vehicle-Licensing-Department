@@ -7,9 +7,10 @@ namespace DVLD_Data
         private static DataCache _instance;
         private DataTable _usersTable;
         private DataTable _personsTable;
-        private DataTable _nonUserPersons;
-        private DataTable _applicationTypes;
-        private DataTable _testTypes;
+        private DataTable _nonUserPersonsTable;
+        private DataTable _applicationTypesTable;
+        private DataTable _testTypesTable;
+        private DataTable _driversTable;
         private DataCache() { }
         public static DataCache Instance
         {
@@ -37,27 +38,35 @@ namespace DVLD_Data
         }
         public DataTable GetApplicationTypes()
         {
-            if ((_applicationTypes == null))
+            if ((_applicationTypesTable == null))
             {
-                _applicationTypes = LoadApplicationTypes();
+                _applicationTypesTable = LoadApplicationTypes();
             }
-            return _applicationTypes;
+            return _applicationTypesTable;
         }
         public DataTable GetNonUserPersons()
         {
-            if (_nonUserPersons == null)
+            if (_nonUserPersonsTable == null)
             {
-                _nonUserPersons = LoadNonUserPersons();
+                _nonUserPersonsTable = LoadNonUserPersons();
             }
-            return _nonUserPersons;
+            return _nonUserPersonsTable;
         }
         public DataTable GetTestTypes()
         {
-            if (_testTypes == null)
+            if (_testTypesTable == null)
             {
-                _testTypes = LoadTestTypes();
+                _testTypesTable = LoadTestTypes();
             }
-            return _testTypes;
+            return _testTypesTable;
+        }
+        public DataTable GetDrivers()
+        {
+            if (_driversTable == null)
+            {
+                _driversTable = LoadDrivers();
+            }
+            return _driversTable;
         }
         public void RefreshUsers()
         {
@@ -69,7 +78,7 @@ namespace DVLD_Data
         }
         public void RefreshApplicationTypes()
         {
-            _applicationTypes = LoadApplicationTypes();
+            _applicationTypesTable = LoadApplicationTypes();
         }
         public void RefreshNonUserPersons()
         {
@@ -77,7 +86,11 @@ namespace DVLD_Data
         }
         public void RefreshTestTypes()
         {
-            _testTypes = LoadTestTypes();
+            _testTypesTable = LoadTestTypes();
+        }
+        public void RefreshDrivers()
+        {
+            _driversTable = LoadDrivers();
         }
         private DataTable LoadApplicationTypes()
         {
@@ -98,6 +111,10 @@ namespace DVLD_Data
         private DataTable LoadTestTypes()
         {
             return TestTypeDAL.GetTestTypes();
+        }
+        private DataTable LoadDrivers()
+        {
+            return Driver.GetAllDrivers();
         }
     }
 }

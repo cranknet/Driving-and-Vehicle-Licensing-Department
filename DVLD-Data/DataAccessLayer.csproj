@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ApplicationTypeDAL.cs" />
     <Compile Include="CountryDAL.cs" />
+    <Compile Include="DriverDAL.cs" />
     <Compile Include="PeopleDAL.cs" />
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="TestTypeDAL.cs" />
