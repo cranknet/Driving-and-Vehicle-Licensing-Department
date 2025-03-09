@@ -55,7 +55,7 @@ namespace DVLD_Logic
         }
         public static DataTable GetAllUsers()
         {
-            return UserDAL.GetAllUsers();
+            return UserDAL.GetUsers();
         }
         public static bool DeleteBy(int userID)
         {

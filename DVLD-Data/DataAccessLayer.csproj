@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationDAL.cs" />
     <Compile Include="ApplicationTypeDAL.cs" />
     <Compile Include="CountryDAL.cs" />
     <Compile Include="DriverDAL.cs" />
+    <Compile Include="LicenseClassDAL.cs" />
     <Compile Include="PeopleDAL.cs" />
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="TestTypeDAL.cs" />

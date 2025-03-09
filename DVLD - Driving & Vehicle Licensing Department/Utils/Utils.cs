@@ -1,4 +1,5 @@
-﻿using DVLD_Logic;
+﻿using DVLD_Data;
+using DVLD_Logic;
 using System;
 using System.Data;
 using System.IO;
@@ -183,6 +184,13 @@ namespace DVLD_UI.Utils
             }
             errorProvider.SetError(confirmPassword, "");
             return true;
+        }
+        public static void LoadLicenseClasses(ComboBox cmbLicenseClasses, DataTable licenseClasses)
+        {
+            licenseClasses = DataCache.Instance.GetLicenseClasses().DefaultView.ToTable("LicenseClasses", false, "ClassName", "LicenseClassID");
+            cmbLicenseClasses.DataSource = licenseClasses;
+            cmbLicenseClasses.DisplayMember = "ClassName";
+            cmbLicenseClasses.ValueMember = "LicenseClassID";
         }
     }
 }

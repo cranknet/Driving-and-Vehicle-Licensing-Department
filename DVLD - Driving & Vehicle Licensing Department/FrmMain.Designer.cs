@@ -26,7 +26,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panelMain = new System.Windows.Forms.Panel();
             this.mainGridView = new System.Windows.Forms.DataGridView();
@@ -52,11 +52,14 @@
             this.btnDrivers = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
             this.panelSubMenu = new System.Windows.Forms.Panel();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterUC();
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
             this.contextMenuStripApplicationMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.applicationTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drivingLicenseServicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newDrivingLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterUC();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataView.SuspendLayout();
@@ -90,15 +93,15 @@
             this.mainGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.mainGridView.BackgroundColor = System.Drawing.Color.White;
             this.mainGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(1);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.mainGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mainGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.mainGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.mainGridView.ContextMenuStrip = this.contextMenuStripMainDataView;
             this.mainGridView.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -363,15 +366,6 @@
             this.panelSubMenu.Size = new System.Drawing.Size(1184, 69);
             this.panelSubMenu.TabIndex = 2;
             // 
-            // filterOptionsUC
-            // 
-            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterOptionsUC.Location = new System.Drawing.Point(80, 8);
-            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.filterOptionsUC.Name = "filterOptionsUC";
-            this.filterOptionsUC.Size = new System.Drawing.Size(522, 54);
-            this.filterOptionsUC.TabIndex = 3;
-            // 
             // iconButtonAdd
             // 
             this.iconButtonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -393,26 +387,60 @@
             // 
             // contextMenuStripApplicationMenu
             // 
-            this.contextMenuStripApplicationMenu.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contextMenuStripApplicationMenu.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contextMenuStripApplicationMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.drivingLicenseServicesToolStripMenuItem,
             this.applicationTypesToolStripMenuItem,
             this.testTypesToolStripMenuItem});
             this.contextMenuStripApplicationMenu.Name = "contextMenuStripApplicationMenu";
-            this.contextMenuStripApplicationMenu.Size = new System.Drawing.Size(205, 52);
+            this.contextMenuStripApplicationMenu.Size = new System.Drawing.Size(270, 98);
             // 
             // applicationTypesToolStripMenuItem
             // 
+            this.applicationTypesToolStripMenuItem.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.applicationTypesToolStripMenuItem.Name = "applicationTypesToolStripMenuItem";
-            this.applicationTypesToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
-            this.applicationTypesToolStripMenuItem.Text = "Application Types";
+            this.applicationTypesToolStripMenuItem.Size = new System.Drawing.Size(269, 24);
+            this.applicationTypesToolStripMenuItem.Text = "Manage Application Types";
             this.applicationTypesToolStripMenuItem.Click += new System.EventHandler(this.applicationTypesToolStripMenuItem_Click);
             // 
             // testTypesToolStripMenuItem
             // 
             this.testTypesToolStripMenuItem.Name = "testTypesToolStripMenuItem";
-            this.testTypesToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
-            this.testTypesToolStripMenuItem.Text = "Test Types";
+            this.testTypesToolStripMenuItem.Size = new System.Drawing.Size(269, 24);
+            this.testTypesToolStripMenuItem.Text = "Manage Test Types";
             this.testTypesToolStripMenuItem.Click += new System.EventHandler(this.testTypesToolStripMenuItem_Click);
+            // 
+            // drivingLicenseServicesToolStripMenuItem
+            // 
+            this.drivingLicenseServicesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newDrivingLicenseToolStripMenuItem});
+            this.drivingLicenseServicesToolStripMenuItem.Name = "drivingLicenseServicesToolStripMenuItem";
+            this.drivingLicenseServicesToolStripMenuItem.Size = new System.Drawing.Size(269, 24);
+            this.drivingLicenseServicesToolStripMenuItem.Text = "Driving License Services";
+            // 
+            // newDrivingLicenseToolStripMenuItem
+            // 
+            this.newDrivingLicenseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.localLicenseToolStripMenuItem});
+            this.newDrivingLicenseToolStripMenuItem.Name = "newDrivingLicenseToolStripMenuItem";
+            this.newDrivingLicenseToolStripMenuItem.Size = new System.Drawing.Size(224, 24);
+            this.newDrivingLicenseToolStripMenuItem.Text = "New Driving License";
+            // 
+            // localLicenseToolStripMenuItem
+            // 
+            this.localLicenseToolStripMenuItem.Name = "localLicenseToolStripMenuItem";
+            this.localLicenseToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.localLicenseToolStripMenuItem.Text = "Local License";
+            this.localLicenseToolStripMenuItem.Click += new System.EventHandler(this.localLicenseToolStripMenuItem_Click);
+            // 
+            // filterOptionsUC
+            // 
+            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterOptionsUC.Location = new System.Drawing.Point(80, 8);
+            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.filterOptionsUC.Name = "filterOptionsUC";
+            this.filterOptionsUC.Size = new System.Drawing.Size(522, 54);
+            this.filterOptionsUC.TabIndex = 3;
             // 
             // FrmMain
             // 
@@ -475,5 +503,8 @@
         private System.Windows.Forms.ToolStripMenuItem applicationTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editTestTypeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem drivingLicenseServicesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newDrivingLicenseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem localLicenseToolStripMenuItem;
     }
 }

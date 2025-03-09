@@ -27,6 +27,9 @@ namespace DVLD_UI
         }
         private void btnDrivers_Click(object sender, EventArgs e)
         {
+            DataCache.Instance.RefreshDrivers();
+            mainGridView.DataSource = DataCache.Instance.GetDrivers();
+            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
             iconButtonAdd.Enabled = true;
         }
         private void btnPeoples_Click(object sender, EventArgs e)
@@ -167,6 +170,16 @@ namespace DVLD_UI
         {
             HighlightButton(btnApplications);
             LoadTestTypes();
+        }
+
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddLocalDLApplicationCard addLocalDLApplicationCard = new AddLocalDLApplicationCard();
+            using (FrmHost frmHost = new FrmHost(addLocalDLApplicationCard))
+            {
+                frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
+                frmHost.ShowDialog();
+            }
         }
     }
 }

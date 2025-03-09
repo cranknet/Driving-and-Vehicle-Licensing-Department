@@ -139,6 +139,7 @@ namespace DVLD_UI
         }
         private void RefreshMainGridView()
         {
+            if (SelectedMenuOption == null) return;
             if (SelectedMenuOption.Equals(MainMenuOptions.Peoples))
             {
                 DataCache.Instance.RefreshPersons();

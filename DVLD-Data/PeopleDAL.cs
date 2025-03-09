@@ -50,7 +50,7 @@ namespace DVLD_Data
             }
         }
         // Get All Peoples
-        public static DataTable GetAllPeople()
+        public static DataTable GetPeople()
         {
             DataTable dt = new DataTable();
             string query = @"SELECT PersonID, NationalNo, FirstName, LastName, DATEDIFF(YEAR, DateOfBirth, GETDATE()) AS Age,
@@ -72,7 +72,7 @@ namespace DVLD_Data
                 }
                 catch (SqlException ex)
                 {
-                    Console.WriteLine($"GetAllPeople: SQL Error -> {ex.Message}");
+                    Console.WriteLine($"GetPeople: SQL Error -> {ex.Message}");
                 }
             }
             return dt;

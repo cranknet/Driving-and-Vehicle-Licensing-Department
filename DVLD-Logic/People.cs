@@ -45,9 +45,9 @@ namespace DVLD_Logic
         }
         public static DataTable GetAllPeople()
         {
-            return DVLD_Data.PeopleDAL.GetAllPeople();
+            return DVLD_Data.PeopleDAL.GetPeople();
         }
-        public static DataTable GetNonUserPeople()
+        public static DataTable GetAllNonUserPeople()
         {
             return DVLD_Data.PeopleDAL.GetNonUserPeople();
         }

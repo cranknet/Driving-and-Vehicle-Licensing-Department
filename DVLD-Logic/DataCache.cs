@@ -11,6 +11,7 @@ namespace DVLD_Data
         private DataTable _applicationTypesTable;
         private DataTable _testTypesTable;
         private DataTable _driversTable;
+        private DataTable _licenseClassesTable;
         private DataCache() { }
         public static DataCache Instance
         {
@@ -68,6 +69,14 @@ namespace DVLD_Data
             }
             return _driversTable;
         }
+        public DataTable GetLicenseClasses()
+        {
+            if (_licenseClassesTable == null)
+            {
+                _licenseClassesTable = LoadLicenseClasses();
+            }
+            return _licenseClassesTable;
+        }
         public void RefreshUsers()
         {
             _usersTable = LoadUsers();
@@ -92,29 +101,37 @@ namespace DVLD_Data
         {
             _driversTable = LoadDrivers();
         }
+        public void RefreshLicenseClasses()
+        {
+            _licenseClassesTable = LoadLicenseClasses();
+        }
         private DataTable LoadApplicationTypes()
         {
             return ApplicationType.GetAllApplicationTypes();
         }
         private DataTable LoadPersons()
         {
-            return PeopleDAL.GetAllPeople();
+            return People.GetAllPeople();
         }
         private DataTable LoadUsers()
         {
-            return UserDAL.GetAllUsers();
+            return User.GetAllUsers();
         }
         private DataTable LoadNonUserPersons()
         {
-            return PeopleDAL.GetNonUserPeople();
+            return People.GetAllNonUserPeople();
         }
         private DataTable LoadTestTypes()
         {
-            return TestTypeDAL.GetTestTypes();
+            return TestType.GetAllTestTypes();
         }
         private DataTable LoadDrivers()
         {
             return Driver.GetAllDrivers();
+        }
+        private DataTable LoadLicenseClasses()
+        {
+            return LicenseClass.GetAllLicenseClasses();
         }
     }
 }

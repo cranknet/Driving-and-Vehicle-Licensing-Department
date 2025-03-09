@@ -85,7 +85,7 @@ namespace DVLD_Data
             }
             return userID;
         }
-        public static DataTable GetAllUsers()
+        public static DataTable GetUsers()
         {
             DataTable dt = new DataTable();
             string query = @"SELECT UserID, PersonID, UserName, Password, IsActive FROM Users;";
@@ -102,7 +102,7 @@ namespace DVLD_Data
                 }
                 catch (SqlException ex)
                 {
-                    Console.WriteLine($"GetAllUsers: SQL Error -> {ex.Message}");
+                    Console.WriteLine($"GetUsers: SQL Error -> {ex.Message}");
                 }
             }
             return dt;
