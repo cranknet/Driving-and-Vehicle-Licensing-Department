@@ -168,7 +168,5 @@ namespace DVLD_UI
             HighlightButton(btnApplications);
             LoadTestTypes();
         }
-
-
     }
 }

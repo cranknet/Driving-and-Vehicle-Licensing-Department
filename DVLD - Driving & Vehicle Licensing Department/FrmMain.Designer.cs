@@ -40,32 +40,32 @@
             this.editTestTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.pbUserPicture = new System.Windows.Forms.PictureBox();
             this.contextMenuUserOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.userInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelSubMenu = new System.Windows.Forms.Panel();
             this.panelMainMenu = new System.Windows.Forms.Panel();
-            this.contextMenuStripApplicationMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.applicationTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
-            this.pbUserPicture = new System.Windows.Forms.PictureBox();
             this.btnPeoples = new System.Windows.Forms.Button();
             this.btnApplications = new System.Windows.Forms.Button();
             this.btnDrivers = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
+            this.panelSubMenu = new System.Windows.Forms.Panel();
             this.filterOptionsUC = new DVLD_UI.UserControls.FilterUC();
+            this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
+            this.contextMenuStripApplicationMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.applicationTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataView.SuspendLayout();
             this.panelHeader.SuspendLayout();
-            this.contextMenuUserOptions.SuspendLayout();
-            this.panelSubMenu.SuspendLayout();
-            this.panelMainMenu.SuspendLayout();
-            this.contextMenuStripApplicationMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbUserPicture)).BeginInit();
+            this.contextMenuUserOptions.SuspendLayout();
+            this.panelMainMenu.SuspendLayout();
+            this.panelSubMenu.SuspendLayout();
+            this.contextMenuStripApplicationMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMain
@@ -203,6 +203,23 @@
             this.panelHeader.Size = new System.Drawing.Size(1184, 61);
             this.panelHeader.TabIndex = 1;
             // 
+            // pbUserPicture
+            // 
+            this.pbUserPicture.BackColor = System.Drawing.Color.White;
+            this.pbUserPicture.ContextMenuStrip = this.contextMenuUserOptions;
+            this.pbUserPicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbUserPicture.ErrorImage = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
+            this.pbUserPicture.Image = global::DVLD_UI.Properties.Resources.LoggedUser;
+            this.pbUserPicture.InitialImage = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
+            this.pbUserPicture.Location = new System.Drawing.Point(11, 11);
+            this.pbUserPicture.Margin = new System.Windows.Forms.Padding(0);
+            this.pbUserPicture.Name = "pbUserPicture";
+            this.pbUserPicture.Size = new System.Drawing.Size(48, 48);
+            this.pbUserPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbUserPicture.TabIndex = 0;
+            this.pbUserPicture.TabStop = false;
+            this.pbUserPicture.Click += new System.EventHandler(this.pbUserPicture_Click);
+            // 
             // contextMenuUserOptions
             // 
             this.contextMenuUserOptions.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -240,17 +257,6 @@
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
-            // panelSubMenu
-            // 
-            this.panelSubMenu.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panelSubMenu.Controls.Add(this.filterOptionsUC);
-            this.panelSubMenu.Controls.Add(this.iconButtonAdd);
-            this.panelSubMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSubMenu.Location = new System.Drawing.Point(0, 61);
-            this.panelSubMenu.Name = "panelSubMenu";
-            this.panelSubMenu.Size = new System.Drawing.Size(1184, 69);
-            this.panelSubMenu.TabIndex = 2;
-            // 
             // panelMainMenu
             // 
             this.panelMainMenu.BackColor = System.Drawing.Color.White;
@@ -263,65 +269,6 @@
             this.panelMainMenu.Name = "panelMainMenu";
             this.panelMainMenu.Size = new System.Drawing.Size(1184, 61);
             this.panelMainMenu.TabIndex = 3;
-            // 
-            // contextMenuStripApplicationMenu
-            // 
-            this.contextMenuStripApplicationMenu.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.contextMenuStripApplicationMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.applicationTypesToolStripMenuItem,
-            this.testTypesToolStripMenuItem});
-            this.contextMenuStripApplicationMenu.Name = "contextMenuStripApplicationMenu";
-            this.contextMenuStripApplicationMenu.Size = new System.Drawing.Size(205, 52);
-            // 
-            // applicationTypesToolStripMenuItem
-            // 
-            this.applicationTypesToolStripMenuItem.Name = "applicationTypesToolStripMenuItem";
-            this.applicationTypesToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
-            this.applicationTypesToolStripMenuItem.Text = "Application Types";
-            this.applicationTypesToolStripMenuItem.Click += new System.EventHandler(this.applicationTypesToolStripMenuItem_Click);
-            // 
-            // testTypesToolStripMenuItem
-            // 
-            this.testTypesToolStripMenuItem.Name = "testTypesToolStripMenuItem";
-            this.testTypesToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
-            this.testTypesToolStripMenuItem.Text = "Test Types";
-            this.testTypesToolStripMenuItem.Click += new System.EventHandler(this.testTypesToolStripMenuItem_Click);
-            // 
-            // iconButtonAdd
-            // 
-            this.iconButtonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButtonAdd.FlatAppearance.BorderSize = 0;
-            this.iconButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.iconButtonAdd.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.iconButtonAdd.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
-            this.iconButtonAdd.IconColor = System.Drawing.Color.Black;
-            this.iconButtonAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButtonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButtonAdd.Location = new System.Drawing.Point(1102, 8);
-            this.iconButtonAdd.Margin = new System.Windows.Forms.Padding(0);
-            this.iconButtonAdd.Name = "iconButtonAdd";
-            this.iconButtonAdd.Size = new System.Drawing.Size(66, 54);
-            this.iconButtonAdd.TabIndex = 2;
-            this.iconButtonAdd.UseVisualStyleBackColor = true;
-            this.iconButtonAdd.Click += new System.EventHandler(this.iconButtonAdd_Click);
-            // 
-            // pbUserPicture
-            // 
-            this.pbUserPicture.BackColor = System.Drawing.Color.White;
-            this.pbUserPicture.ContextMenuStrip = this.contextMenuUserOptions;
-            this.pbUserPicture.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbUserPicture.ErrorImage = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
-            this.pbUserPicture.Image = global::DVLD_UI.Properties.Resources.LoggedUser;
-            this.pbUserPicture.InitialImage = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
-            this.pbUserPicture.Location = new System.Drawing.Point(11, 11);
-            this.pbUserPicture.Margin = new System.Windows.Forms.Padding(0);
-            this.pbUserPicture.Name = "pbUserPicture";
-            this.pbUserPicture.Size = new System.Drawing.Size(48, 48);
-            this.pbUserPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbUserPicture.TabIndex = 0;
-            this.pbUserPicture.TabStop = false;
-            this.pbUserPicture.Click += new System.EventHandler(this.pbUserPicture_Click);
             // 
             // btnPeoples
             // 
@@ -405,6 +352,17 @@
             this.btnUsers.UseVisualStyleBackColor = false;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
+            // panelSubMenu
+            // 
+            this.panelSubMenu.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panelSubMenu.Controls.Add(this.filterOptionsUC);
+            this.panelSubMenu.Controls.Add(this.iconButtonAdd);
+            this.panelSubMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSubMenu.Location = new System.Drawing.Point(0, 61);
+            this.panelSubMenu.Name = "panelSubMenu";
+            this.panelSubMenu.Size = new System.Drawing.Size(1184, 69);
+            this.panelSubMenu.TabIndex = 2;
+            // 
             // filterOptionsUC
             // 
             this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -413,6 +371,48 @@
             this.filterOptionsUC.Name = "filterOptionsUC";
             this.filterOptionsUC.Size = new System.Drawing.Size(522, 54);
             this.filterOptionsUC.TabIndex = 3;
+            // 
+            // iconButtonAdd
+            // 
+            this.iconButtonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconButtonAdd.FlatAppearance.BorderSize = 0;
+            this.iconButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.iconButtonAdd.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.iconButtonAdd.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.iconButtonAdd.IconColor = System.Drawing.Color.Black;
+            this.iconButtonAdd.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButtonAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButtonAdd.Location = new System.Drawing.Point(1102, 8);
+            this.iconButtonAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.iconButtonAdd.Name = "iconButtonAdd";
+            this.iconButtonAdd.Size = new System.Drawing.Size(66, 54);
+            this.iconButtonAdd.TabIndex = 2;
+            this.iconButtonAdd.UseVisualStyleBackColor = true;
+            this.iconButtonAdd.Click += new System.EventHandler(this.iconButtonAdd_Click);
+            // 
+            // contextMenuStripApplicationMenu
+            // 
+            this.contextMenuStripApplicationMenu.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contextMenuStripApplicationMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.applicationTypesToolStripMenuItem,
+            this.testTypesToolStripMenuItem});
+            this.contextMenuStripApplicationMenu.Name = "contextMenuStripApplicationMenu";
+            this.contextMenuStripApplicationMenu.Size = new System.Drawing.Size(205, 52);
+            // 
+            // applicationTypesToolStripMenuItem
+            // 
+            this.applicationTypesToolStripMenuItem.Name = "applicationTypesToolStripMenuItem";
+            this.applicationTypesToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
+            this.applicationTypesToolStripMenuItem.Text = "Application Types";
+            this.applicationTypesToolStripMenuItem.Click += new System.EventHandler(this.applicationTypesToolStripMenuItem_Click);
+            // 
+            // testTypesToolStripMenuItem
+            // 
+            this.testTypesToolStripMenuItem.Name = "testTypesToolStripMenuItem";
+            this.testTypesToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
+            this.testTypesToolStripMenuItem.Text = "Test Types";
+            this.testTypesToolStripMenuItem.Click += new System.EventHandler(this.testTypesToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -437,11 +437,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).EndInit();
             this.contextMenuStripMainDataView.ResumeLayout(false);
             this.panelHeader.ResumeLayout(false);
-            this.contextMenuUserOptions.ResumeLayout(false);
-            this.panelSubMenu.ResumeLayout(false);
-            this.panelMainMenu.ResumeLayout(false);
-            this.contextMenuStripApplicationMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbUserPicture)).EndInit();
+            this.contextMenuUserOptions.ResumeLayout(false);
+            this.panelMainMenu.ResumeLayout(false);
+            this.panelSubMenu.ResumeLayout(false);
+            this.contextMenuStripApplicationMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

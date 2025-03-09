@@ -88,7 +88,7 @@ namespace DVLD_UI
             }
             else
             {
-                MessageBox.Show("Can't display profile applicationTypeCard for selected menu option!");
+                MessageBox.Show("Can't display any profile Card for selected menu option!");
             }
         }
         private bool DeleteDialog(int selectedID)
