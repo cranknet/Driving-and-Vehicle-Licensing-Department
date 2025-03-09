@@ -10,15 +10,15 @@ namespace DVLD_Logic
         }
         EnMode Mode = EnMode.Update;
         public int TestTypeID { get; set; }
-        public string TestTypeTitle { get; set; }
-        public string TestTypeDescription { get; set; }
-        public decimal TestTypeFees { get; set; }
-        private TestType(int testTypeID, string testTypeTitle, string testTypeDescription, decimal testTypeFees)
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public decimal Fees { get; set; }
+        private TestType(int testTypeID, string title, string description, decimal fees)
         {
             TestTypeID = testTypeID;
-            TestTypeTitle = testTypeTitle;
-            TestTypeDescription = testTypeDescription;
-            TestTypeFees = testTypeFees;
+            Title = title;
+            Description = description;
+            Fees = fees;
             Mode = EnMode.Update;
         }
         public static DataTable GetAllTestTypes()
@@ -41,7 +41,7 @@ namespace DVLD_Logic
         }
         private bool _Update()
         {
-            return TestTypeDAL.Update(TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees);
+            return TestTypeDAL.Update(TestTypeID, Title, Description, Fees);
         }
         public bool Save()
         {

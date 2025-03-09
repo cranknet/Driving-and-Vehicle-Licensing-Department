@@ -118,88 +118,94 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DVLD-Drivers-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Drivers-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD-Add-People" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Add-People.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Body" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Body.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD_Main_Colored" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Main-Colored.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD_Drivers" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Drivers.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD_Main_Logo_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Main-Logo-Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD_Main_Logo_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Main-Logo-Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD-Add-People -32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Add-People -32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD_Exit2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Exit2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD_Peoples" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Peoples.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD-Error-Photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Error-Photo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD-Login-Password" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Login-Password.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD-Applications-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Applications-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Girl" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Girl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD-Login-Username" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Login-Username.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD-Applications" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Applications.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD_Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DVLD-UserSettings-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-UserSettings-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DVLD_Main_Logo_Bright_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVLD-Main-Logo-Bright-Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DVLD-Add-People -32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Add-People -32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD-Applications-321" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Applications-321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD-Error-Photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Error-Photo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DVLD_User_Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVLD-User-Settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DVLD-Profile-Picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Profile-Picture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DVLD_Drivers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Drivers.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD-Login-Username" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Login-Username.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD-Logged-User" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Logged-User.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD_Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DVLD-Default-Photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVLD-Default-Photo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DVLD_Main" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Main.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DVLD_Exit2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Exit2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD-Applications" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Applications.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD_Main_Logo_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Main-Logo-Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD-Add-People" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Add-People.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD_Peoples" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Peoples.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DVLD_Users" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVLD-Users.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DVLD-UserSettings-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-UserSettings-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DVLD-Profile-Picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Profile-Picture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DVLD-Users-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Users-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DVLD-Drivers-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Drivers-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DVLD-Peoples-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVLD-Peoples-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DVLD-Users-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Users-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD-Login-Password" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Login-Password.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD_Main" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Main.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD_Main_Colored" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Main-Colored.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD-Applications-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Applications-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DVLD-Drivers-321" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVLD-Drivers-321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DVLD-Applications-321" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD-Applications-321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Body" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Body.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Girl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Girl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD_Main_Logo_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD-Main-Logo-Blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LoggedUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LoggedUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

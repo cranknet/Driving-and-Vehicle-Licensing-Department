@@ -193,6 +193,16 @@ namespace DVLD_UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DVLD_Logged_User {
+            get {
+                object obj = ResourceManager.GetObject("DVLD-Logged-User", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DVLD_Login_Password {
             get {
                 object obj = ResourceManager.GetObject("DVLD-Login-Password", resourceCulture);
@@ -336,6 +346,16 @@ namespace DVLD_UI.Properties {
         internal static System.Drawing.Bitmap Girl {
             get {
                 object obj = ResourceManager.GetObject("Girl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LoggedUser {
+            get {
+                object obj = ResourceManager.GetObject("LoggedUser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

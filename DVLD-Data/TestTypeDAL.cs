@@ -42,8 +42,8 @@ namespace DVLD_Data
                     if (reader.Read())
                     {
                         isFound = true;
-                        testTypeID = (int)reader["TestTypeTitle"];
-                        testTypeTitle = (string)reader["TestTypeName"];
+                        testTypeID = (int)reader["TestTypeID"];
+                        testTypeTitle = (string)reader["TestTypeTitle"];
                         testTypeDescription = (string)(reader["TestTypeDescription"]);
                         testTypeFees = (decimal)(reader["TestTypeFees"]);
                     }

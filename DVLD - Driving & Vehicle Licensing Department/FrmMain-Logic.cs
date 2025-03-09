@@ -67,14 +67,20 @@ namespace DVLD_UI
                 switch (enApplicationSubMenuOption)
                 {
                     case Settings.EnApplicationSubMenuOptions.enApplicationType:
-                        ApplicationTypeCard card = new ApplicationTypeCard(enMode, selectedID);
-                        using (FrmHost frmHost = new FrmHost(card))
+                        ApplicationTypeCard applicationTypeCard = new ApplicationTypeCard(enMode, selectedID);
+                        using (FrmHost frmHost = new FrmHost(applicationTypeCard))
                         {
                             frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
                             frmHost.ShowDialog();
                         }
                         break;
                     case Settings.EnApplicationSubMenuOptions.enTestType:
+                        TestTypeCard testTypeCard = new TestTypeCard(enMode, selectedID);
+                        using (FrmHost frmHost = new FrmHost(testTypeCard))
+                        {
+                            frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
+                            frmHost.ShowDialog();
+                        }
                         break;
                     default:
                         break;
@@ -82,7 +88,7 @@ namespace DVLD_UI
             }
             else
             {
-                MessageBox.Show("Can't display profile card for selected menu option!");
+                MessageBox.Show("Can't display profile applicationTypeCard for selected menu option!");
             }
         }
         private bool DeleteDialog(int selectedID)
@@ -138,10 +144,14 @@ namespace DVLD_UI
                 DataCache.Instance.RefreshPersons();
                 mainGridView.DataSource = DataCache.Instance.GetPersons();
             }
-            else if (SelectedMenuOption.Equals(MainMenuOptions.Users) || SelectedMenuOption.Equals(MainMenuOptions.UserSettings))
+            else if (SelectedMenuOption.Equals(MainMenuOptions.Users))
             {
                 DataCache.Instance.RefreshUsers();
                 mainGridView.DataSource = DataCache.Instance.GetUsers();
+            }
+            else if (SelectedMenuOption.Equals(MainMenuOptions.UserSettings))
+            {
+                DataCache.Instance.RefreshUsers();
             }
             else if (SelectedMenuOption.Equals(MainMenuOptions.Applications))
             {
@@ -150,10 +160,12 @@ namespace DVLD_UI
                 switch (enApplicationSubMenuOption)
                 {
                     case Settings.EnApplicationSubMenuOptions.enApplicationType:
-                        LoadApplicationTypes();
+                        DataCache.Instance.RefreshApplicationTypes();
+                        mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
                         break;
                     case Settings.EnApplicationSubMenuOptions.enTestType:
-                        LoadTestTypes();
+                        DataCache.Instance.RefreshTestTypes();
+                        mainGridView.DataSource = DataCache.Instance.GetTestTypes();
                         break;
                     default:
                         break;

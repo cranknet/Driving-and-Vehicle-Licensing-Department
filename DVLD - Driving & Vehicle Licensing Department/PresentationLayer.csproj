@@ -183,6 +183,15 @@
     <Compile Include="UserControls\Cards\PersonSelectCard.Designer.cs">
       <DependentUpon>PersonSelectCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Cards\TestTypeCard-Logic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Cards\TestTypeCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Cards\TestTypeCard.Designer.cs">
+      <DependentUpon>TestTypeCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Cards\UserProfileCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -224,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Cards\PersonSelectCard.resx">
       <DependentUpon>PersonSelectCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Cards\TestTypeCard.resx">
+      <DependentUpon>TestTypeCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Cards\UserProfileCard.resx">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
@@ -283,6 +295,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DVLD-Main.ico" />
+    <None Include="Resources\LoggedUser.png" />
+    <None Include="Resources\DVLD-Logged-User.png" />
     <None Include="Resources\DVLD-Applications-321.png" />
     <None Include="Resources\DVLD-Drivers-321.png" />
     <None Include="Resources\DVLD-Peoples-32.png" />
