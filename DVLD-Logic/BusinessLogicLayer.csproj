@@ -45,6 +45,7 @@
     <Compile Include="Country.cs" />
     <Compile Include="People.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="TestType.cs" />
     <Compile Include="User.cs" />
     <Compile Include="DataCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -44,9 +44,15 @@
         public const string UserIDCellName = "UserID";
         public const string PersonIDCellName = "PersonID";
         public const string ApplicationTypeIDCellName = "ApplicationTypeID";
+        public const string TestITypeDCellName = "TestTypeID";
         //Login Data Path & Record
         public const string LoginRecord = "{0}@-@{1}";
         public const string LoginSavePath = "LoginData.txt";
         public const string DefaultFilterOptionValue = "None";
+        public enum EnApplicationSubMenuOptions
+        {
+            enApplicationType,
+            enTestType
+        }
     }
 }

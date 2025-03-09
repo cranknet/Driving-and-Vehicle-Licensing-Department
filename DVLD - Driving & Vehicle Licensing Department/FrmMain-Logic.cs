@@ -20,6 +20,7 @@ namespace DVLD_UI
         private User CurrentUser = null;
         private Button HighlightedButton;
         public int SelectedID;
+        private Settings.EnApplicationSubMenuOptions enApplicationSubMenuOption;
         private string SelectedMenuOption { get; set; }
         private void HighlightButton(Button button)
         {
@@ -31,6 +32,7 @@ namespace DVLD_UI
             HighlightedButton.FlatAppearance.BorderSize = 2;
             HighlightedButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(31, 95, 137);
             SelectedMenuOption = button.Text;
+
         }
         private void HighlightMenuButtons(Panel currentForm)
         {
@@ -62,11 +64,20 @@ namespace DVLD_UI
             }
             else if (selectedMenuOption.Equals(MainMenuOptions.Applications))
             {
-                ApplicationTypeCard card = new ApplicationTypeCard(enMode, selectedID);
-                using (FrmHost frmHost = new FrmHost(card))
+                switch (enApplicationSubMenuOption)
                 {
-                    frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
-                    frmHost.ShowDialog();
+                    case Settings.EnApplicationSubMenuOptions.enApplicationType:
+                        ApplicationTypeCard card = new ApplicationTypeCard(enMode, selectedID);
+                        using (FrmHost frmHost = new FrmHost(card))
+                        {
+                            frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
+                            frmHost.ShowDialog();
+                        }
+                        break;
+                    case Settings.EnApplicationSubMenuOptions.enTestType:
+                        break;
+                    default:
+                        break;
                 }
             }
             else
@@ -136,11 +147,36 @@ namespace DVLD_UI
             {
                 DataCache.Instance.RefreshApplicationTypes();
                 mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
+                switch (enApplicationSubMenuOption)
+                {
+                    case Settings.EnApplicationSubMenuOptions.enApplicationType:
+                        LoadApplicationTypes();
+                        break;
+                    case Settings.EnApplicationSubMenuOptions.enTestType:
+                        LoadTestTypes();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         private void RefreshMainGridViewOnFromClosing(object sender, FormClosingEventArgs e)
         {
             RefreshMainGridView();
+        }
+        private void LoadApplicationTypes()
+        {
+
+            mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
+            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
+            iconButtonAdd.Enabled = false;
+
+        }
+        private void LoadTestTypes()
+        {
+            mainGridView.DataSource = DataCache.Instance.GetTestTypes();
+            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
+            iconButtonAdd.Enabled = false;
         }
     }
 }

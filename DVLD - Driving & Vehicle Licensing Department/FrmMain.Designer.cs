@@ -34,9 +34,10 @@
             this.toolStripMenuDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.userDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.personDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.applicationDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editPersonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editApplicationTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editTestTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pbCloseCard = new System.Windows.Forms.PictureBox();
@@ -51,9 +52,12 @@
             this.btnPeoples = new System.Windows.Forms.Button();
             this.btnDrivers = new System.Windows.Forms.Button();
             this.panelSubMenu = new System.Windows.Forms.Panel();
+            this.filterOptionsUC = new DVLD_UI.UserControls.FilterUC();
             this.iconButtonAdd = new FontAwesome.Sharp.IconButton();
             this.panelMainMenu = new System.Windows.Forms.Panel();
-            this.filterOptionsUC = new DVLD_UI.UserControls.FilterUC();
+            this.contextMenuStripApplicationMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.applicationTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
             this.contextMenuStripMainDataView.SuspendLayout();
@@ -63,6 +67,7 @@
             this.contextMenuUserOptions.SuspendLayout();
             this.panelSubMenu.SuspendLayout();
             this.panelMainMenu.SuspendLayout();
+            this.contextMenuStripApplicationMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMain
@@ -144,34 +149,42 @@
             // toolStripMenuEdit
             // 
             this.toolStripMenuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.userDetailsToolStripMenuItem,
-            this.personDetailsToolStripMenuItem,
-            this.applicationDetailsToolStripMenuItem});
+            this.editUserToolStripMenuItem,
+            this.editPersonToolStripMenuItem,
+            this.editApplicationTypeToolStripMenuItem,
+            this.editTestTypeToolStripMenuItem});
             this.toolStripMenuEdit.Name = "toolStripMenuEdit";
             this.toolStripMenuEdit.Size = new System.Drawing.Size(127, 24);
             this.toolStripMenuEdit.Text = "Edit";
             this.toolStripMenuEdit.Click += new System.EventHandler(this.toolStripMenuIPeopleEdit_Click);
             // 
-            // userDetailsToolStripMenuItem
+            // editUserToolStripMenuItem
             // 
-            this.userDetailsToolStripMenuItem.Name = "userDetailsToolStripMenuItem";
-            this.userDetailsToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
-            this.userDetailsToolStripMenuItem.Text = "User";
-            this.userDetailsToolStripMenuItem.Click += new System.EventHandler(this.userDetailsToolStripMenuItem_Click);
+            this.editUserToolStripMenuItem.Name = "editUserToolStripMenuItem";
+            this.editUserToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.editUserToolStripMenuItem.Text = "User";
+            this.editUserToolStripMenuItem.Click += new System.EventHandler(this.editUserToolStripMenuItem_Click);
             // 
-            // personDetailsToolStripMenuItem
+            // editPersonToolStripMenuItem
             // 
-            this.personDetailsToolStripMenuItem.Name = "personDetailsToolStripMenuItem";
-            this.personDetailsToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
-            this.personDetailsToolStripMenuItem.Text = "Person";
-            this.personDetailsToolStripMenuItem.Click += new System.EventHandler(this.personDetailsToolStripMenuItem_Click);
+            this.editPersonToolStripMenuItem.Name = "editPersonToolStripMenuItem";
+            this.editPersonToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.editPersonToolStripMenuItem.Text = "Person";
+            this.editPersonToolStripMenuItem.Click += new System.EventHandler(this.editPersonToolStripMenuItem_Click);
             // 
-            // applicationDetailsToolStripMenuItem
+            // editApplicationTypeToolStripMenuItem
             // 
-            this.applicationDetailsToolStripMenuItem.Name = "applicationDetailsToolStripMenuItem";
-            this.applicationDetailsToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
-            this.applicationDetailsToolStripMenuItem.Text = "Application";
-            this.applicationDetailsToolStripMenuItem.Click += new System.EventHandler(this.applicationDetailsToolStripMenuItem_Click);
+            this.editApplicationTypeToolStripMenuItem.Name = "editApplicationTypeToolStripMenuItem";
+            this.editApplicationTypeToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.editApplicationTypeToolStripMenuItem.Text = "Application Type";
+            this.editApplicationTypeToolStripMenuItem.Click += new System.EventHandler(this.editApplicationTypeToolStripMenuItem_Click);
+            // 
+            // editTestTypeToolStripMenuItem
+            // 
+            this.editTestTypeToolStripMenuItem.Name = "editTestTypeToolStripMenuItem";
+            this.editTestTypeToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.editTestTypeToolStripMenuItem.Text = "Test Type";
+            this.editTestTypeToolStripMenuItem.Click += new System.EventHandler(this.editTestTypeToolStripMenuItem_Click);
             // 
             // toolStripMenuDelete
             // 
@@ -207,6 +220,7 @@
             // pbUserPicture
             // 
             this.pbUserPicture.ContextMenuStrip = this.contextMenuUserOptions;
+            this.pbUserPicture.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbUserPicture.ErrorImage = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
             this.pbUserPicture.Image = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
             this.pbUserPicture.InitialImage = global::DVLD_UI.Properties.Resources.DVLD_Drivers;
@@ -259,6 +273,8 @@
             // btnApplications
             // 
             this.btnApplications.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnApplications.ContextMenuStrip = this.contextMenuUserOptions;
+            this.btnApplications.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnApplications.FlatAppearance.BorderSize = 0;
             this.btnApplications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnApplications.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -274,10 +290,12 @@
             this.btnApplications.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnApplications.UseVisualStyleBackColor = false;
             this.btnApplications.Click += new System.EventHandler(this.btnApplications_Click);
+            this.btnApplications.MouseHover += new System.EventHandler(this.btnApplications_MouseHover);
             // 
             // btnUsers
             // 
             this.btnUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUsers.FlatAppearance.BorderSize = 0;
             this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUsers.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -297,6 +315,7 @@
             // btnPeoples
             // 
             this.btnPeoples.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnPeoples.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPeoples.FlatAppearance.BorderSize = 0;
             this.btnPeoples.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPeoples.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -316,6 +335,7 @@
             // btnDrivers
             // 
             this.btnDrivers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnDrivers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDrivers.FlatAppearance.BorderSize = 0;
             this.btnDrivers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDrivers.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -343,8 +363,18 @@
             this.panelSubMenu.Size = new System.Drawing.Size(1184, 65);
             this.panelSubMenu.TabIndex = 2;
             // 
+            // filterOptionsUC
+            // 
+            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filterOptionsUC.Location = new System.Drawing.Point(39, 1);
+            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.filterOptionsUC.Name = "filterOptionsUC";
+            this.filterOptionsUC.Size = new System.Drawing.Size(478, 64);
+            this.filterOptionsUC.TabIndex = 3;
+            // 
             // iconButtonAdd
             // 
+            this.iconButtonAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.iconButtonAdd.FlatAppearance.BorderSize = 0;
             this.iconButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.iconButtonAdd.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -374,14 +404,28 @@
             this.panelMainMenu.Size = new System.Drawing.Size(1184, 60);
             this.panelMainMenu.TabIndex = 3;
             // 
-            // filterOptionsUC
+            // contextMenuStripApplicationMenu
             // 
-            this.filterOptionsUC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filterOptionsUC.Location = new System.Drawing.Point(39, 1);
-            this.filterOptionsUC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.filterOptionsUC.Name = "filterOptionsUC";
-            this.filterOptionsUC.Size = new System.Drawing.Size(478, 64);
-            this.filterOptionsUC.TabIndex = 3;
+            this.contextMenuStripApplicationMenu.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contextMenuStripApplicationMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.applicationTypesToolStripMenuItem,
+            this.testTypesToolStripMenuItem});
+            this.contextMenuStripApplicationMenu.Name = "contextMenuStripApplicationMenu";
+            this.contextMenuStripApplicationMenu.Size = new System.Drawing.Size(205, 52);
+            // 
+            // applicationTypesToolStripMenuItem
+            // 
+            this.applicationTypesToolStripMenuItem.Name = "applicationTypesToolStripMenuItem";
+            this.applicationTypesToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
+            this.applicationTypesToolStripMenuItem.Text = "Application Types";
+            this.applicationTypesToolStripMenuItem.Click += new System.EventHandler(this.applicationTypesToolStripMenuItem_Click);
+            // 
+            // testTypesToolStripMenuItem
+            // 
+            this.testTypesToolStripMenuItem.Name = "testTypesToolStripMenuItem";
+            this.testTypesToolStripMenuItem.Size = new System.Drawing.Size(204, 24);
+            this.testTypesToolStripMenuItem.Text = "Test Types";
+            this.testTypesToolStripMenuItem.Click += new System.EventHandler(this.testTypesToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -411,6 +455,7 @@
             this.contextMenuUserOptions.ResumeLayout(false);
             this.panelSubMenu.ResumeLayout(false);
             this.panelMainMenu.ResumeLayout(false);
+            this.contextMenuStripApplicationMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -437,9 +482,13 @@
         private System.Windows.Forms.Panel panelSubMenu;
         private System.Windows.Forms.Panel panelMainMenu;
         private FontAwesome.Sharp.IconButton iconButtonAdd;
-        private System.Windows.Forms.ToolStripMenuItem userDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem personDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem applicationDetailsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editPersonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editApplicationTypeToolStripMenuItem;
         private UserControls.FilterUC filterOptionsUC;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripApplicationMenu;
+        private System.Windows.Forms.ToolStripMenuItem applicationTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editTestTypeToolStripMenuItem;
     }
 }

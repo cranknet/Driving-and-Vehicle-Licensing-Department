@@ -42,7 +42,13 @@ namespace DVLD_Logic
         }
         public bool Save()
         {
-            return _Update();
+            switch (enMode)
+            {
+                case EnMode.Update:
+                    return _Update();
+                default:
+                    return false;
+            }
         }
     }
 }

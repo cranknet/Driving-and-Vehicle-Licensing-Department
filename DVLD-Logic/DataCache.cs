@@ -7,7 +7,9 @@ namespace DVLD_Data
         private static DataCache _instance;
         private DataTable _usersTable;
         private DataTable _personsTable;
-        private DataTable _applicationTypesTable;
+        private DataTable _nonUserPersons;
+        private DataTable _applicationTypes;
+        private DataTable _testTypes;
         private DataCache() { }
         public static DataCache Instance
         {
@@ -35,15 +37,27 @@ namespace DVLD_Data
         }
         public DataTable GetApplicationTypes()
         {
-            if ((_applicationTypesTable == null))
+            if ((_applicationTypes == null))
             {
-                _applicationTypesTable = LoadApplicationTypes();
+                _applicationTypes = LoadApplicationTypes();
             }
-            return _applicationTypesTable;
+            return _applicationTypes;
         }
         public DataTable GetNonUserPersons()
         {
-            return PeopleDAL.GetNonUserPeople();
+            if (_nonUserPersons == null)
+            {
+                _nonUserPersons = LoadNonUserPersons();
+            }
+            return _nonUserPersons;
+        }
+        public DataTable GetTestTypes()
+        {
+            if (_testTypes == null)
+            {
+                _testTypes = LoadTestTypes();
+            }
+            return _testTypes;
         }
         public void RefreshUsers()
         {
@@ -55,11 +69,15 @@ namespace DVLD_Data
         }
         public void RefreshApplicationTypes()
         {
-            _applicationTypesTable = LoadApplicationTypes();
+            _applicationTypes = LoadApplicationTypes();
         }
         public void RefreshNonUserPersons()
         {
             _personsTable = LoadNonUserPersons();
+        }
+        public void RefreshTestTypes()
+        {
+            _testTypes = LoadTestTypes();
         }
         private DataTable LoadApplicationTypes()
         {
@@ -76,6 +94,10 @@ namespace DVLD_Data
         private DataTable LoadNonUserPersons()
         {
             return PeopleDAL.GetNonUserPeople();
+        }
+        private DataTable LoadTestTypes()
+        {
+            return TestTypeDAL.GetTestTypes();
         }
     }
 }

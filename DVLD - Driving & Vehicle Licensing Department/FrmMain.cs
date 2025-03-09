@@ -23,9 +23,7 @@ namespace DVLD_UI
         }
         private void btnApplications_Click(object sender, EventArgs e)
         {
-            mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
-            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
-            iconButtonAdd.Enabled = false;
+            LoadApplicationTypes();
         }
         private void btnDrivers_Click(object sender, EventArgs e)
         {
@@ -114,21 +112,31 @@ namespace DVLD_UI
             {
                 SelectedID = Utils.Utils.GetIDFrom(Settings.ApplicationTypeIDCellName, mainGridView);
             }
+            else if (mainGridView.Columns.Contains(Settings.TestITypeDCellName))
+            {
+                SelectedID = Utils.Utils.GetIDFrom(Settings.TestITypeDCellName, mainGridView);
+            }
             else
             {
                 SelectedID = -1;
             }
         }
-        private void personDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
         }
-        private void userDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
         }
-        private void applicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editApplicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            enApplicationSubMenuOption = Settings.EnApplicationSubMenuOptions.enApplicationType;
+            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
+        }
+        private void editTestTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            enApplicationSubMenuOption = Settings.EnApplicationSubMenuOptions.enTestType;
             DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
         }
         private void contextMenuStripMainDataVeiw_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -136,9 +144,31 @@ namespace DVLD_UI
             toolStripMenuDetails.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
             toolStripMenuDelete.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
             toolStripSeparator.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
-            userDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Users);
-            personDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Peoples);
-            applicationDetailsToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Applications);
+            editUserToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Users);
+            editPersonToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Peoples);
+            editApplicationTypeToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Applications);
+            //editApplicationTypeToolStripMenuItem.Visible = (enApplicationSubMenuOption == Settings.EnApplicationSubMenuOptions.enApplicationType);
+            //editTestTypeToolStripMenuItem.Visible = (enApplicationSubMenuOption == Settings.EnApplicationSubMenuOptions.enTestType);
         }
+
+        private void btnApplications_MouseHover(object sender, EventArgs e)
+        {
+
+            contextMenuStripApplicationMenu.Show(btnApplications, 0, btnApplications.Height);
+        }
+
+        private void applicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HighlightButton(btnApplications);
+            LoadApplicationTypes();
+        }
+
+        private void testTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HighlightButton(btnApplications);
+            LoadTestTypes();
+        }
+
+
     }
 }
