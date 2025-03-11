@@ -19,7 +19,7 @@ namespace DVLD_UI.Utils
                 if (ofdImage.ShowDialog() == DialogResult.OK)
                 {
                     string sourcePath = ofdImage.FileName;
-                    string imagesFolder = Path.Combine(Application.StartupPath, imageFolder);
+                    string imagesFolder = Path.Combine(System.Windows.Forms.Application.StartupPath, imageFolder);
                     if (!Directory.Exists(imagesFolder))
                     {
                         Directory.CreateDirectory(imagesFolder);
@@ -114,7 +114,7 @@ namespace DVLD_UI.Utils
         {
             if (gridView == null) return;
             cmbFilter.Items.Clear();
-            cmbFilter.Items.Add(Settings.DefaultFilterOptionValue);
+            cmbFilter.Items.Add(AppSettings.DefaultFilterOptionValue);
             foreach (DataGridViewColumn column in gridView.Columns)
             {
                 Type columnType = column.ValueType;
@@ -123,7 +123,7 @@ namespace DVLD_UI.Utils
                     cmbFilter.Items.Add(column.Name);
                 }
             }
-            cmbFilter.SelectedItem = Settings.DefaultFilterOptionValue;
+            cmbFilter.SelectedItem = AppSettings.DefaultFilterOptionValue;
         }
         public static void ApplyFilter(DataTable dataTable, ComboBox cmbFilterOptions, TextBox txtFilterValue)
         {
@@ -132,10 +132,10 @@ namespace DVLD_UI.Utils
                 return;
             }
             DataView filteredView = dataTable.DefaultView;
-            string selectedFilterColumn = cmbFilterOptions.SelectedItem?.ToString() ?? Settings.DefaultFilterOptionValue;
+            string selectedFilterColumn = cmbFilterOptions.SelectedItem?.ToString() ?? AppSettings.DefaultFilterOptionValue;
             string selectedFilterText = txtFilterValue.Text.Trim().Replace("'", "''");
-            txtFilterValue.Visible = selectedFilterColumn != Settings.DefaultFilterOptionValue;
-            if (selectedFilterColumn == Settings.DefaultFilterOptionValue || string.IsNullOrWhiteSpace(selectedFilterColumn))
+            txtFilterValue.Visible = selectedFilterColumn != AppSettings.DefaultFilterOptionValue;
+            if (selectedFilterColumn == AppSettings.DefaultFilterOptionValue || string.IsNullOrWhiteSpace(selectedFilterColumn))
             {
                 txtFilterValue.Clear();
                 filteredView.RowFilter = string.Empty;

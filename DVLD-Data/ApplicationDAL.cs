@@ -26,7 +26,6 @@ namespace DVLD_Data
             }
             return null;
         }
-
         public static bool Find(int applicationID, ref int applicantPersonID, ref DateTime applicationDate, ref int applicationTypeID, ref int applicationStatus, ref DateTime lastStatusDate, ref decimal paidFees, ref int createdByUserID)
         {
             bool isFound = false;
@@ -61,7 +60,6 @@ namespace DVLD_Data
             }
             return isFound;
         }
-
         public static int AddNewApplication(int applicantPersonID, DateTime applicationDate, int applicationTypeID, int applicationStatus, DateTime lastStatusDate, decimal paidFees, int createdByUserID)
         {
             string query = @"INSERT INTO Applications (ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID)
@@ -89,7 +87,6 @@ namespace DVLD_Data
             }
             return -1;
         }
-
         public static bool UpdateApplicationStatus(int applicationID, int applicationStatus, DateTime lastStatusDate)
         {
             string query = @"UPDATE Applications
@@ -110,6 +107,28 @@ namespace DVLD_Data
                 catch (SqlException ex)
                 {
                     Console.WriteLine($"UpdateApplicationStatus: Error updating application status: {ex.Message}");
+                }
+            }
+            return false;
+        }
+        public static bool AddLocalLicenseApplication(int applicationType, int licenseClassID)
+        {
+            string query = @"INSERT INTO LocalDrivingLicenseApplications (ApplicationID, LicenseClassID)
+                             OUTPUT INSERTED.ApplicationID
+                             VALUES (@ApplicationID, @LicenseClassID)";
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, connection))
+            {
+                cmd.Parameters.AddWithValue("@ApplicationID", applicationType);
+                cmd.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
+                try
+                {
+                    connection.Open();
+                    return (int)cmd.ExecuteScalar() > 0;
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"AddLocalLicenseApplication: Error adding new application: {ex.Message}");
                 }
             }
             return false;

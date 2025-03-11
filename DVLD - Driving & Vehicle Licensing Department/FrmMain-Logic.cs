@@ -20,7 +20,7 @@ namespace DVLD_UI
         private User CurrentUser = null;
         private Button HighlightedButton;
         public int SelectedID;
-        private Settings.EnApplicationSubMenuOptions enApplicationSubMenuOption;
+        private AppSettings.EnApplicationSubMenuOptions enApplicationSubMenuOption;
         private string SelectedMenuOption { get; set; }
         private void HighlightButton(Button button)
         {
@@ -66,7 +66,7 @@ namespace DVLD_UI
             {
                 switch (enApplicationSubMenuOption)
                 {
-                    case Settings.EnApplicationSubMenuOptions.enApplicationType:
+                    case AppSettings.EnApplicationSubMenuOptions.enApplicationType:
                         ApplicationTypeCard applicationTypeCard = new ApplicationTypeCard(enMode, selectedID);
                         using (FrmHost frmHost = new FrmHost(applicationTypeCard))
                         {
@@ -74,7 +74,7 @@ namespace DVLD_UI
                             frmHost.ShowDialog();
                         }
                         break;
-                    case Settings.EnApplicationSubMenuOptions.enTestType:
+                    case AppSettings.EnApplicationSubMenuOptions.enTestType:
                         TestTypeCard testTypeCard = new TestTypeCard(enMode, selectedID);
                         using (FrmHost frmHost = new FrmHost(testTypeCard))
                         {
@@ -111,29 +111,29 @@ namespace DVLD_UI
         }
         private bool DeleteUser(int selectedID)
         {
-            DialogResult deleteDialogResult = MessageBox.Show(string.Format(Settings.ConfirmDeleteUser, selectedID), Settings.DeleteUserDialogTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult deleteDialogResult = MessageBox.Show(string.Format(AppSettings.ConfirmDeleteUser, selectedID), AppSettings.DeleteUserDialogTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (deleteDialogResult == DialogResult.Yes && User.DeleteBy(selectedID))
             {
-                MessageBox.Show(string.Format(Settings.UserDeleteSuccess, selectedID));
+                MessageBox.Show(string.Format(AppSettings.UserDeleteSuccess, selectedID));
                 return true;
             }
             else
             {
-                MessageBox.Show(string.Format(Settings.UserDeleteFailed, selectedID));
+                MessageBox.Show(string.Format(AppSettings.UserDeleteFailed, selectedID));
                 return false;
             }
         }
         private bool DeletePerson(int selectedID)
         {
-            DialogResult deleteDialogResult = MessageBox.Show(string.Format(Settings.ConfirmDeletePerson, selectedID), Settings.DeletePersonDialogTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult deleteDialogResult = MessageBox.Show(string.Format(AppSettings.ConfirmDeletePerson, selectedID), AppSettings.DeletePersonDialogTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (deleteDialogResult == DialogResult.Yes && People.DeleteBy(selectedID))
             {
-                MessageBox.Show(string.Format(Settings.PersonDeleteSuccess, selectedID));
+                MessageBox.Show(string.Format(AppSettings.PersonDeleteSuccess, selectedID));
                 return true;
             }
             else
             {
-                MessageBox.Show(string.Format(Settings.PersonDeleteFailed, selectedID));
+                MessageBox.Show(string.Format(AppSettings.PersonDeleteFailed, selectedID));
                 return false;
             }
         }
@@ -160,11 +160,11 @@ namespace DVLD_UI
                 mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
                 switch (enApplicationSubMenuOption)
                 {
-                    case Settings.EnApplicationSubMenuOptions.enApplicationType:
+                    case AppSettings.EnApplicationSubMenuOptions.enApplicationType:
                         DataCache.Instance.RefreshApplicationTypes();
                         mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
                         break;
-                    case Settings.EnApplicationSubMenuOptions.enTestType:
+                    case AppSettings.EnApplicationSubMenuOptions.enTestType:
                         DataCache.Instance.RefreshTestTypes();
                         mainGridView.DataSource = DataCache.Instance.GetTestTypes();
                         break;

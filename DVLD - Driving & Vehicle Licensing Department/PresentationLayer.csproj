@@ -210,7 +210,7 @@
     <Compile Include="UserControls\FilterUC.Designer.cs">
       <DependentUpon>FilterUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\Settings.cs" />
+    <Compile Include="Utils\AppSettings.cs" />
     <Compile Include="Utils\Utils.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>

@@ -3,7 +3,7 @@ using System;
 using System.Data;
 namespace DVLD_Logic
 {
-    public class Application
+    public class clsApplication
     {
         enum EnMode
         {
@@ -18,7 +18,8 @@ namespace DVLD_Logic
         public DateTime LastStatusDate { get; set; }
         public decimal PaidFees { get; set; }
         public int CreatedByUserID { get; set; }
-        public Application()
+        public int LicenseClassID { get; set; }
+        public clsApplication()
         {
             ApplicationID = -1;
             ApplicantPersonID = -1;
@@ -30,7 +31,7 @@ namespace DVLD_Logic
             CreatedByUserID = -1;
             Mode = EnMode.AddNew;
         }
-        private Application(int applicationID, int applicantPersonID, DateTime applicationDate, int applicationTypeID, int applicationStatus, DateTime lastStatusDate, decimal paidFees, int createdByUserID)
+        private clsApplication(int applicationID, int applicantPersonID, DateTime applicationDate, int applicationTypeID, int applicationStatus, DateTime lastStatusDate, decimal paidFees, int createdByUserID)
         {
             ApplicationID = applicationID;
             ApplicantPersonID = applicantPersonID;
@@ -46,7 +47,7 @@ namespace DVLD_Logic
         {
             return ApplicationDAL.GetApplications();
         }
-        public static Application Find(int applicationID)
+        public static clsApplication Find(int applicationID)
         {
             int applicantPersonID = -1;
             DateTime applicationDate = DateTime.Now;
@@ -57,16 +58,44 @@ namespace DVLD_Logic
             int createdByUserID = -1;
             if (ApplicationDAL.Find(applicationID, ref applicantPersonID, ref applicationDate, ref applicationTypeID, ref applicationStatus, ref lastStatusDate, ref paidFees, ref createdByUserID))
             {
-                return new Application(applicationID, applicantPersonID, applicationDate, applicationTypeID, applicationStatus, lastStatusDate, paidFees, createdByUserID);
+                return new clsApplication(applicationID, applicantPersonID, applicationDate, applicationTypeID, applicationStatus, lastStatusDate, paidFees, createdByUserID);
             }
             else
             {
                 return null;
             }
         }
-        public static bool UpdateApplicationStatus(int applicationID, int applicationStatus, DateTime lastStatusDate)
+        private bool UpdateStatus()
         {
-            return ApplicationDAL.UpdateApplicationStatus(applicationID, applicationStatus, lastStatusDate);
+            return ApplicationDAL.UpdateApplicationStatus(ApplicationID, ApplicationStatus, LastStatusDate);
+        }
+        private bool Add()
+        {
+            this.ApplicationID = ApplicationDAL.AddNewApplication(ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID);
+            if (ApplicationID != -1)
+            {
+                return ApplicationDAL.AddLocalLicenseApplication(ApplicationID, LicenseClassID);
+            }
+            return false;
+        }
+        public bool Save()
+        {
+            switch (Mode)
+            {
+                case EnMode.AddNew:
+                    if (Add())
+                    {
+                        Mode = EnMode.Update;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case EnMode.Update:
+                    return UpdateStatus();
+            }
+            return false;
         }
     }
 }

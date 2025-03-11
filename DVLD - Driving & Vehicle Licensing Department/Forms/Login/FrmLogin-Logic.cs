@@ -37,8 +37,8 @@ namespace DVLD_UI.Login
             }
             else
             {
-                Settings.LoggedUserID = User.IsUserExistsByUserNamePassword(username, password);
-                if (Settings.LoggedUserID != Settings.DefaultUserID)
+                AppSettings.LoggedUserID = User.IsUserExistsByUserNamePassword(username, password);
+                if (AppSettings.LoggedUserID != AppSettings.DefaultUserID)
                 {
                     isValid = true;
                     ResetFields();
@@ -56,7 +56,7 @@ namespace DVLD_UI.Login
         {
             if (chkRemember.Checked)
             {
-                if (!File.Exists(Settings.LoginSavePath)) SaveLoginInfo();
+                if (!File.Exists(AppSettings.LoginSavePath)) SaveLoginInfo();
             }
             else
             {
@@ -65,10 +65,10 @@ namespace DVLD_UI.Login
         }
         private void SaveLoginInfo()
         {
-            string formattedLoginRecord = string.Format(Settings.LoginRecord, txtUsername.Text.Trim(), txtPassword.Text);
+            string formattedLoginRecord = string.Format(AppSettings.LoginRecord, txtUsername.Text.Trim(), txtPassword.Text);
             try
             {
-                File.WriteAllText(Settings.LoginSavePath, formattedLoginRecord); // Allow overwriting
+                File.WriteAllText(AppSettings.LoginSavePath, formattedLoginRecord); // Allow overwriting
             }
             catch (Exception ex)
             {
@@ -77,11 +77,11 @@ namespace DVLD_UI.Login
         }
         private void LoadLoginInfo()
         {
-            if (File.Exists(Settings.LoginSavePath))
+            if (File.Exists(AppSettings.LoginSavePath))
             {
                 try
                 {
-                    string[] loginRecord = File.ReadAllText(Settings.LoginSavePath).Split(new string[] { "@-@" }, StringSplitOptions.None);
+                    string[] loginRecord = File.ReadAllText(AppSettings.LoginSavePath).Split(new string[] { "@-@" }, StringSplitOptions.None);
                     if (loginRecord.Length == 2) // Ensure valid format
                     {
                         chkRemember.Checked = true;
@@ -104,9 +104,9 @@ namespace DVLD_UI.Login
         {
             try
             {
-                if (File.Exists(Settings.LoginSavePath))
+                if (File.Exists(AppSettings.LoginSavePath))
                 {
-                    File.Delete(Settings.LoginSavePath);
+                    File.Delete(AppSettings.LoginSavePath);
                 }
             }
             catch (Exception ex)

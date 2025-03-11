@@ -37,6 +37,7 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnClose = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.lblFullName = new System.Windows.Forms.Label();
             this.btnSelectPerson = new System.Windows.Forms.Button();
             this.grbNewApplicationDetails = new System.Windows.Forms.GroupBox();
             this.lblApplicationCreatedByUserID = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@
             this.lblFees = new System.Windows.Forms.Label();
             this.lblLicenseClass = new System.Windows.Forms.Label();
             this.pbPersonImage = new System.Windows.Forms.PictureBox();
-            this.lblFullName = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCloseCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -109,6 +109,7 @@
             this.btnSaveApplication.TabStop = false;
             this.btnSaveApplication.Text = "SAVE";
             this.btnSaveApplication.UseVisualStyleBackColor = false;
+            this.btnSaveApplication.Click += new System.EventHandler(this.btnSaveApplication_Click);
             // 
             // errorProvider
             // 
@@ -151,6 +152,16 @@
             this.panelMain.Size = new System.Drawing.Size(905, 479);
             this.panelMain.TabIndex = 5;
             this.panelMain.TabStop = true;
+            // 
+            // lblFullName
+            // 
+            this.lblFullName.AutoSize = true;
+            this.lblFullName.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblFullName.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullName.Location = new System.Drawing.Point(44, 70);
+            this.lblFullName.Name = "lblFullName";
+            this.lblFullName.Size = new System.Drawing.Size(0, 30);
+            this.lblFullName.TabIndex = 42;
             // 
             // btnSelectPerson
             // 
@@ -310,16 +321,6 @@
             this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPersonImage.TabIndex = 0;
             this.pbPersonImage.TabStop = false;
-            // 
-            // lblFullName
-            // 
-            this.lblFullName.AutoSize = true;
-            this.lblFullName.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblFullName.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFullName.Location = new System.Drawing.Point(44, 70);
-            this.lblFullName.Name = "lblFullName";
-            this.lblFullName.Size = new System.Drawing.Size(0, 30);
-            this.lblFullName.TabIndex = 42;
             // 
             // AddLocalDLApplicationCard
             // 

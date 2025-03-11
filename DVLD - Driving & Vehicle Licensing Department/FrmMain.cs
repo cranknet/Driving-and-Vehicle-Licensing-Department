@@ -5,6 +5,7 @@ using DVLD_UI.Utils;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using Application = System.Windows.Forms.Application;
 namespace DVLD_UI
 {
     public partial class FrmMain : Form
@@ -81,15 +82,15 @@ namespace DVLD_UI
         }
         private void userInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Read, Settings.LoggedUserID, SelectedMenuOption);
+            DisplayProfileCard(CardUtils.EnDisplayMode.Read, AppSettings.LoggedUserID, SelectedMenuOption);
         }
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Update, Settings.LoggedUserID, SelectedMenuOption);
+            DisplayProfileCard(CardUtils.EnDisplayMode.Update, AppSettings.LoggedUserID, SelectedMenuOption);
         }
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings.LoggedUserID = Settings.DefaultUserID;
+            AppSettings.LoggedUserID = AppSettings.DefaultUserID;
             CurrentUser = null;
             this.Close();
         }
@@ -103,21 +104,21 @@ namespace DVLD_UI
         }
         private void mainGridView_SelectionChanged(object sender, EventArgs e)
         {
-            if (mainGridView.Columns.Contains(Settings.UserIDCellName))
+            if (mainGridView.Columns.Contains(AppSettings.UserIDCellName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(Settings.UserIDCellName, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.UserIDCellName, mainGridView);
             }
-            else if (mainGridView.Columns.Contains(Settings.PersonIDCellName))
+            else if (mainGridView.Columns.Contains(AppSettings.PersonIDCellName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(Settings.PersonIDCellName, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.PersonIDCellName, mainGridView);
             }
-            else if (mainGridView.Columns.Contains(Settings.ApplicationTypeIDCellName))
+            else if (mainGridView.Columns.Contains(AppSettings.ApplicationTypeIDCellName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(Settings.ApplicationTypeIDCellName, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.ApplicationTypeIDCellName, mainGridView);
             }
-            else if (mainGridView.Columns.Contains(Settings.TestITypeDCellName))
+            else if (mainGridView.Columns.Contains(AppSettings.TestITypeDCellName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(Settings.TestITypeDCellName, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.TestITypeDCellName, mainGridView);
             }
             else
             {
@@ -134,12 +135,12 @@ namespace DVLD_UI
         }
         private void editApplicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            enApplicationSubMenuOption = Settings.EnApplicationSubMenuOptions.enApplicationType;
+            enApplicationSubMenuOption = AppSettings.EnApplicationSubMenuOptions.enApplicationType;
             DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
         }
         private void editTestTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            enApplicationSubMenuOption = Settings.EnApplicationSubMenuOptions.enTestType;
+            enApplicationSubMenuOption = AppSettings.EnApplicationSubMenuOptions.enTestType;
             DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
         }
         private void contextMenuStripMainDataVeiw_Opening(object sender, System.ComponentModel.CancelEventArgs e)
