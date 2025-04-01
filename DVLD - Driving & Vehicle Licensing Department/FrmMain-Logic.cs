@@ -3,7 +3,7 @@ using DVLD_Logic;
 using DVLD_UI.UserControls.Cards;
 using DVLD_UI.Utils;
 using System;
-using System.Linq;
+using System.Data;
 using System.Windows.Forms;
 namespace DVLD_UI
 {
@@ -20,8 +20,56 @@ namespace DVLD_UI
         private User CurrentUser = null;
         private Button HighlightedButton;
         public int SelectedID;
-        private AppSettings.EnApplicationSubMenuOptions enApplicationSubMenuOption;
+        private AppSettings.MenuItem SelectedMenuItem { get; set; }
         private string SelectedMenuOption { get; set; }
+        public void InitializeMenu()
+        {
+            // Main Menu Buttons
+            btnApplications.Tag = AppSettings.MenuItem.Applications;
+            btnDrivers.Tag = AppSettings.MenuItem.Drivers;
+            btnPeoples.Tag = AppSettings.MenuItem.Peoples;
+            btnUsers.Tag = AppSettings.MenuItem.Users;
+            AttachClickEventsToMainButtons(panelMainMenu.Controls, HandleMainMenuClick);
+            // Applications Menu ToolStrips
+            applicationTypesToolStripMenuItem.Tag = AppSettings.MenuItem.ApplicationType;
+            testTypesToolStripMenuItem.Tag = AppSettings.MenuItem.TestType;
+            localLicensesToolStripMenuItem.Tag = AppSettings.MenuItem.LocalDLApplication;
+            addLocalLicenseToolStripMenuItem.Tag = AppSettings.MenuItem.AddLDLApplication;
+            AttachClickEventsToToolStripItems(contextMenuStripApplicationMenu.Items, HandleApplicationMenuClick);
+            // Test Type Menu ToolStrips
+            editTestTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditTestType;
+            AttachClickEventsToToolStripItems(contextMenuStripTestTypes.Items, HandleTestTypeMenuClick);
+            // Application Type Menu ToolStrips
+            editApplicationTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditApplicationType;
+            AttachClickEventsToToolStripItems(contextMenuStripApplicationTypes.Items, HandleApplicationTypeMenuClick);
+            // LDL Application Menu ToolStrips
+        }
+        private void AttachClickEventsToMainButtons(Control.ControlCollection controls, EventHandler eventHandler)
+        {
+            foreach (Control control in controls)
+            {
+                if (control is Button button)
+                {
+                    button.Click -= eventHandler;
+                    button.Click += eventHandler;
+                }
+            }
+        }
+        private void AttachClickEventsToToolStripItems(ToolStripItemCollection items, EventHandler eventHandler)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                if (item is ToolStripMenuItem toolStripMenuItem)
+                {
+                    toolStripMenuItem.Click -= eventHandler;
+                    toolStripMenuItem.Click += eventHandler;
+                    if (toolStripMenuItem.DropDownItems.Count > 0)
+                    {
+                        AttachClickEventsToToolStripItems(toolStripMenuItem.DropDownItems, eventHandler);
+                    }
+                }
+            }
+        }
         private void HighlightButton(Button button)
         {
             if (HighlightedButton != null)
@@ -32,16 +80,8 @@ namespace DVLD_UI
             HighlightedButton.FlatAppearance.BorderSize = 2;
             HighlightedButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(31, 95, 137);
             SelectedMenuOption = button.Text;
-
         }
-        private void HighlightMenuButtons(Panel currentForm)
-        {
-            foreach (Button button in currentForm.Controls.OfType<Button>())
-            {
-                button.Click += (s, e) => HighlightButton((Button)s);
-            }
-        }
-        private void DisplayProfileCard(CardUtils.EnDisplayMode enMode, int selectedID, string selectedMenuOption)
+        private void DisplayProfileCard(AppSettings.EnMode enMode, int selectedID, string selectedMenuOption)
         {
             if (string.IsNullOrEmpty(selectedMenuOption) || selectedID < 0) return;
             if (selectedMenuOption.Equals(MainMenuOptions.Peoples))
@@ -49,7 +89,7 @@ namespace DVLD_UI
                 PersonProfileCard card = new PersonProfileCard(enMode, selectedID);
                 using (FrmHost frmHost = new FrmHost(card))
                 {
-                    frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
+                    frmHost.FormClosing += (s, e) => RefreshMainGridView();
                     frmHost.ShowDialog();
                 }
             }
@@ -58,37 +98,58 @@ namespace DVLD_UI
                 UserProfileCard card = new UserProfileCard(enMode, selectedID);
                 using (FrmHost frmHost = new FrmHost(card))
                 {
-                    frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
+                    frmHost.FormClosing += (s, e) => RefreshMainGridView();
                     frmHost.ShowDialog();
-                }
-            }
-            else if (selectedMenuOption.Equals(MainMenuOptions.Applications))
-            {
-                switch (enApplicationSubMenuOption)
-                {
-                    case AppSettings.EnApplicationSubMenuOptions.enApplicationType:
-                        ApplicationTypeCard applicationTypeCard = new ApplicationTypeCard(enMode, selectedID);
-                        using (FrmHost frmHost = new FrmHost(applicationTypeCard))
-                        {
-                            frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
-                            frmHost.ShowDialog();
-                        }
-                        break;
-                    case AppSettings.EnApplicationSubMenuOptions.enTestType:
-                        TestTypeCard testTypeCard = new TestTypeCard(enMode, selectedID);
-                        using (FrmHost frmHost = new FrmHost(testTypeCard))
-                        {
-                            frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
-                            frmHost.ShowDialog();
-                        }
-                        break;
-                    default:
-                        break;
                 }
             }
             else
             {
                 MessageBox.Show("Can't display any profile Card for selected menu option!");
+            }
+        }
+        private void ShowCard(AppSettings.MenuItem options, int selectedID)
+        {
+            switch (options)
+            {
+                case AppSettings.MenuItem.ApplicationType:
+                    ApplicationTypeCard applicationTypeCard = new ApplicationTypeCard(selectedID);
+                    using (FrmHost frmHost = new FrmHost(applicationTypeCard))
+                    {
+                        frmHost.FormClosing += (s, e) =>
+                        {
+                            DataCache.Instance.RefreshApplicationTypes();
+                            LoadMainGridView(DataCache.Instance.GetApplicationTypes());
+                        };
+                        frmHost.ShowDialog();
+                    }
+                    break;
+                case AppSettings.MenuItem.TestType:
+                    TestTypeCard testTypeCard = new TestTypeCard(selectedID);
+                    using (FrmHost frmHost = new FrmHost(testTypeCard))
+                    {
+                        frmHost.FormClosing += (s, e) =>
+                        {
+                            DataCache.Instance.RefreshTestTypes();
+                            LoadMainGridView(DataCache.Instance.GetTestTypes());
+                        };
+                        frmHost.ShowDialog();
+                    }
+                    break;
+                case AppSettings.MenuItem.AddLDLApplication:
+                    AddLDLApplicationCard addLDLApplicationCard = new AddLDLApplicationCard();
+                    using (FrmHost frmHost = new FrmHost(addLDLApplicationCard))
+                    {
+                        frmHost.FormClosing += (s, e) =>
+                        {
+                            DataCache.Instance.RefreshLDLApplications();
+                            LoadMainGridView(DataCache.Instance.GetLDLApplications());
+                            SelectedMenuItem = AppSettings.MenuItem.LocalDLApplication;
+                        };
+                        frmHost.ShowDialog();
+                    }
+                    break;
+                default:
+                    break;
             }
         }
         private bool DeleteDialog(int selectedID)
@@ -139,57 +200,72 @@ namespace DVLD_UI
         }
         private void RefreshMainGridView()
         {
-            if (SelectedMenuOption == null) return;
-            if (SelectedMenuOption.Equals(MainMenuOptions.Peoples))
+            switch (SelectedMenuItem)
             {
-                DataCache.Instance.RefreshPersons();
-                mainGridView.DataSource = DataCache.Instance.GetPersons();
-            }
-            else if (SelectedMenuOption.Equals(MainMenuOptions.Users))
-            {
-                DataCache.Instance.RefreshUsers();
-                mainGridView.DataSource = DataCache.Instance.GetUsers();
-            }
-            else if (SelectedMenuOption.Equals(MainMenuOptions.UserSettings))
-            {
-                DataCache.Instance.RefreshUsers();
-            }
-            else if (SelectedMenuOption.Equals(MainMenuOptions.Applications))
-            {
-                DataCache.Instance.RefreshApplicationTypes();
-                mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
-                switch (enApplicationSubMenuOption)
-                {
-                    case AppSettings.EnApplicationSubMenuOptions.enApplicationType:
-                        DataCache.Instance.RefreshApplicationTypes();
-                        mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
-                        break;
-                    case AppSettings.EnApplicationSubMenuOptions.enTestType:
-                        DataCache.Instance.RefreshTestTypes();
-                        mainGridView.DataSource = DataCache.Instance.GetTestTypes();
-                        break;
-                    default:
-                        break;
-                }
+                case AppSettings.MenuItem.Peoples:
+                    DataCache.Instance.RefreshPersons();
+                    LoadMainGridView(DataCache.Instance.GetPersons());
+                    break;
+                case AppSettings.MenuItem.Users:
+                    DataCache.Instance.RefreshUsers();
+                    LoadMainGridView(DataCache.Instance.GetUsers());
+                    break;
+                case AppSettings.MenuItem.UserSettings:
+                    DataCache.Instance.RefreshUsers();
+                    break;
+                default:
+                    return;
             }
         }
-        private void RefreshMainGridViewOnFromClosing(object sender, FormClosingEventArgs e)
+        private void LoadMainGridView(DataTable dataTable)
         {
-            RefreshMainGridView();
+            if (dataTable == null) return;
+            mainGridView.DataSource = dataTable;
         }
-        private void LoadApplicationTypes()
+        private void ReLoadFilterOptions()
         {
-
-            mainGridView.DataSource = DataCache.Instance.GetApplicationTypes();
             Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
-            iconButtonAdd.Enabled = false;
-
         }
-        private void LoadTestTypes()
+        private void ClearGridView()
         {
-            mainGridView.DataSource = DataCache.Instance.GetTestTypes();
-            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
-            iconButtonAdd.Enabled = false;
+            mainGridView.DataSource = null;
+        }
+        private void ApplyFilter()
+        {
+            Utils.Utils.ApplyFilter(mainGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
+        }
+        private void AssignContextMainMenuGridView()
+        {
+            mainGridView.ContextMenuStrip = null;
+            switch (SelectedMenuItem)
+            {
+                case AppSettings.MenuItem.Users:
+                case AppSettings.MenuItem.Peoples:
+                    mainGridView.ContextMenuStrip = contextMenuStripUsersPeoples;
+                    break;
+                default:
+                    mainGridView.ContextMenuStrip = null;
+                    break;
+            }
+        }
+        private void AssignContextApplicationsMenuGridView()
+        {
+            mainGridView.ContextMenuStrip = null;
+            switch (SelectedMenuItem)
+            {
+                case AppSettings.MenuItem.LocalDLApplication:
+                    mainGridView.ContextMenuStrip = contextMenuStripLDLApplication;
+                    break;
+                case AppSettings.MenuItem.ApplicationType:
+                    mainGridView.ContextMenuStrip = contextMenuStripApplicationTypes;
+                    break;
+                case AppSettings.MenuItem.TestType:
+                    mainGridView.ContextMenuStrip = contextMenuStripTestTypes;
+                    break;
+                default:
+                    mainGridView.ContextMenuStrip = null;
+                    break;
+            }
         }
     }
 }

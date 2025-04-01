@@ -7,7 +7,7 @@ namespace DVLD_UI.UserControls.Cards
 {
     public partial class PersonProfileCard : UserControl
     {
-        public PersonProfileCard(CardUtils.EnDisplayMode enMode, int personID)
+        public PersonProfileCard(AppSettings.EnMode enMode, int personID)
         {
             InitializeComponent();
             EnMode = enMode;

@@ -4,11 +4,10 @@ namespace DVLD_UI.UserControls.Cards
 {
     public partial class TestTypeCard : UserControl
     {
-        public TestTypeCard(CardUtils.EnDisplayMode enMode, int testTypeID)
+        public TestTypeCard(int testTypeID)
         {
             InitializeComponent();
-            EnMode = enMode;
-            testType = (EnMode == CardUtils.EnDisplayMode.Update) ? TestType.Find(testTypeID) : null;
+            testType = TestType.Find(testTypeID);
         }
         private void pbCloseCard_Click(object sender, System.EventArgs e)
         {

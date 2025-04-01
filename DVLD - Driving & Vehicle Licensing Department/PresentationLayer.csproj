@@ -158,11 +158,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\Cards\AddLocalDLApplicationCard.cs">
+    <Compile Include="UserControls\Cards\AddLDLApplicationCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Cards\AddLocalDLApplicationCard.Designer.cs">
-      <DependentUpon>AddLocalDLApplicationCard.cs</DependentUpon>
+    <Compile Include="UserControls\Cards\AddLDLApplicationCard.Designer.cs">
+      <DependentUpon>AddLDLApplicationCard.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Cards\ApplicationTypeCard-Logic.cs">
       <SubType>UserControl</SubType>
@@ -173,7 +173,6 @@
     <Compile Include="UserControls\Cards\ApplicationTypeCard.Designer.cs">
       <DependentUpon>ApplicationTypeCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Cards\CardUtils.cs" />
     <Compile Include="UserControls\Cards\PersonProfileCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -231,8 +230,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UserControls\Cards\AddLocalDLApplicationCard.resx">
-      <DependentUpon>AddLocalDLApplicationCard.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Cards\AddLDLApplicationCard.resx">
+      <DependentUpon>AddLDLApplicationCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Cards\ApplicationTypeCard.resx">
       <DependentUpon>ApplicationTypeCard.cs</DependentUpon>

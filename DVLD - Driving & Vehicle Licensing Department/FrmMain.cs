@@ -1,9 +1,7 @@
 ﻿using DVLD_Data;
 using DVLD_Logic;
-using DVLD_UI.UserControls.Cards;
 using DVLD_UI.Utils;
 using System;
-using System.Data;
 using System.Windows.Forms;
 using Application = System.Windows.Forms.Application;
 namespace DVLD_UI
@@ -13,56 +11,18 @@ namespace DVLD_UI
         public FrmMain(int loggedUserID)
         {
             InitializeComponent();
-            HighlightMenuButtons(panelMainMenu);
             CurrentUser = User.Find(loggedUserID);
             filterOptionsUC.txtFilterValue.TextChanged += (s, e) => ApplyFilter();
             filterOptionsUC.cmbFilterOptions.SelectedIndexChanged += (s, e) => ApplyFilter();
         }
-        private void ApplyFilter()
+        private void FrmMain_Load(object sender, EventArgs e)
         {
-            Utils.Utils.ApplyFilter(mainGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
-        }
-        private void btnApplications_Click(object sender, EventArgs e)
-        {
-            LoadApplicationTypes();
-        }
-        private void btnDrivers_Click(object sender, EventArgs e)
-        {
-            DataCache.Instance.RefreshDrivers();
-            mainGridView.DataSource = DataCache.Instance.GetDrivers();
-            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
-            iconButtonAdd.Enabled = true;
-        }
-        private void btnPeoples_Click(object sender, EventArgs e)
-        {
-            mainGridView.DataSource = DataCache.Instance.GetPersons();
-            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
-            iconButtonAdd.Enabled = true;
-        }
-        private void btnUsers_Click(object sender, EventArgs e)
-        {
-            mainGridView.DataSource = DataCache.Instance.GetUsers();
-            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
-            iconButtonAdd.Enabled = true;
-        }
-        private void mainGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // On Application Menu Show Update Mode instead of Read Mode
-            if (SelectedMenuOption.Equals(MainMenuOptions.Applications))
-            {
-                DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
-            }
-            else
-            {
-                DisplayProfileCard(CardUtils.EnDisplayMode.Read, SelectedID, SelectedMenuOption);
-            }
+            InitializeMenu();
+            Utils.Utils.AdjustGridViewColumns(mainGridView);
         }
         private void toolStripMenuPeopleCardShow_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Read, SelectedID, SelectedMenuOption);
-        }
-        private void toolStripMenuIPeopleEdit_Click(object sender, EventArgs e)
-        {
+            DisplayProfileCard(AppSettings.EnMode.Read, SelectedID, SelectedMenuOption);
         }
         private void toolStripMenuPeopleDelete_Click(object sender, EventArgs e)
         {
@@ -71,10 +31,6 @@ namespace DVLD_UI
                 RefreshMainGridView();
             }
         }
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-            Utils.Utils.AdjustGridViewColumns(mainGridView);
-        }
         private void pbUserPicture_Click(object sender, EventArgs e)
         {
             SelectedMenuOption = MainMenuOptions.UserSettings;
@@ -82,11 +38,11 @@ namespace DVLD_UI
         }
         private void userInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Read, AppSettings.LoggedUserID, SelectedMenuOption);
+            DisplayProfileCard(AppSettings.EnMode.Read, AppSettings.LoggedUserID, SelectedMenuOption);
         }
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Update, AppSettings.LoggedUserID, SelectedMenuOption);
+            DisplayProfileCard(AppSettings.EnMode.Update, AppSettings.LoggedUserID, SelectedMenuOption);
         }
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -100,7 +56,7 @@ namespace DVLD_UI
         }
         private void iconButtonAdd_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Add, SelectedID, SelectedMenuOption);
+            DisplayProfileCard(AppSettings.EnMode.Add, SelectedID, SelectedMenuOption);
         }
         private void mainGridView_SelectionChanged(object sender, EventArgs e)
         {
@@ -120,6 +76,10 @@ namespace DVLD_UI
             {
                 SelectedID = Utils.Utils.GetIDFrom(AppSettings.TestITypeDCellName, mainGridView);
             }
+            else if (mainGridView.Columns.Contains(AppSettings.LDLApplicationID))
+            {
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.LDLApplicationID, mainGridView);
+            }
             else
             {
                 SelectedID = -1;
@@ -127,59 +87,114 @@ namespace DVLD_UI
         }
         private void editPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
+            DisplayProfileCard(AppSettings.EnMode.Update, SelectedID, SelectedMenuOption);
         }
         private void editUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
+            DisplayProfileCard(AppSettings.EnMode.Update, SelectedID, SelectedMenuOption);
         }
-        private void editApplicationTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void contextMenuStripMainDataView_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            enApplicationSubMenuOption = AppSettings.EnApplicationSubMenuOptions.enApplicationType;
-            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
+            editUserToolStripMenuItem.Visible = SelectedMenuItem == AppSettings.MenuItem.Users;
+            editPersonToolStripMenuItem.Visible = SelectedMenuItem == AppSettings.MenuItem.Peoples;
         }
-        private void editTestTypeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            enApplicationSubMenuOption = AppSettings.EnApplicationSubMenuOptions.enTestType;
-            DisplayProfileCard(CardUtils.EnDisplayMode.Update, SelectedID, SelectedMenuOption);
-        }
-        private void contextMenuStripMainDataVeiw_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            toolStripMenuDetails.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
-            toolStripMenuDelete.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
-            toolStripSeparator.Visible = !SelectedMenuOption.Equals(MainMenuOptions.Applications);
-            editUserToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Users);
-            editPersonToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Peoples);
-            editApplicationTypeToolStripMenuItem.Visible = SelectedMenuOption.Equals(MainMenuOptions.Applications);
-            //editApplicationTypeToolStripMenuItem.Visible = (enApplicationSubMenuOption == Settings.EnApplicationSubMenuOptions.enApplicationType);
-            //editTestTypeToolStripMenuItem.Visible = (enApplicationSubMenuOption == Settings.EnApplicationSubMenuOptions.enTestType);
-        }
-
         private void btnApplications_MouseHover(object sender, EventArgs e)
         {
-
             contextMenuStripApplicationMenu.Show(btnApplications, 0, btnApplications.Height);
         }
-
-        private void applicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HandleMainMenuClick(object sender, EventArgs e)
         {
-            HighlightButton(btnApplications);
-            LoadApplicationTypes();
-        }
-
-        private void testTypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HighlightButton(btnApplications);
-            LoadTestTypes();
-        }
-
-        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddLocalDLApplicationCard addLocalDLApplicationCard = new AddLocalDLApplicationCard();
-            using (FrmHost frmHost = new FrmHost(addLocalDLApplicationCard))
+            if (sender is Button btnMenu && btnMenu.Tag is AppSettings.MenuItem menuItem)
             {
-                frmHost.FormClosing += RefreshMainGridViewOnFromClosing;
-                frmHost.ShowDialog();
+                SelectedMenuItem = menuItem;
+                HighlightButton(btnMenu);
+                iconButtonAdd.Enabled = true;
+                AssignContextMainMenuGridView();
+                ClearGridView();
+                switch (menuItem)
+                {
+                    case AppSettings.MenuItem.Drivers:
+                        DataCache.Instance.RefreshDrivers();
+                        LoadMainGridView(DataCache.Instance.GetDrivers());
+                        ReLoadFilterOptions();
+                        break;
+                    case AppSettings.MenuItem.Peoples:
+                        DataCache.Instance.RefreshPersons();
+                        LoadMainGridView(DataCache.Instance.GetPersons());
+                        ReLoadFilterOptions();
+                        break;
+                    case AppSettings.MenuItem.Users:
+                        DataCache.Instance.RefreshUsers();
+                        LoadMainGridView(DataCache.Instance.GetUsers());
+                        ReLoadFilterOptions();
+                        break;
+                }
+            }
+        }
+        private void HandleApplicationMenuClick(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem toolStripMenuItem && toolStripMenuItem.Tag is AppSettings.MenuItem applicationMenu)
+            {
+                SelectedMenuItem = applicationMenu;
+                iconButtonAdd.Enabled = false;
+                AssignContextApplicationsMenuGridView();
+                ClearGridView();
+                switch (applicationMenu)
+                {
+                    case AppSettings.MenuItem.ApplicationType:
+                        DataCache.Instance.RefreshApplicationTypes();
+                        LoadMainGridView(DataCache.Instance.GetApplicationTypes());
+                        ReLoadFilterOptions();
+                        break;
+                    case AppSettings.MenuItem.TestType:
+                        DataCache.Instance.RefreshTestTypes();
+                        LoadMainGridView(DataCache.Instance.GetTestTypes());
+                        ReLoadFilterOptions();
+                        break;
+                    case AppSettings.MenuItem.LocalDLApplication:
+                        DataCache.Instance.RefreshLDLApplications();
+                        LoadMainGridView(DataCache.Instance.GetLDLApplications());
+                        ReLoadFilterOptions();
+                        break;
+                    case AppSettings.MenuItem.AddLDLApplication:
+                        ShowCard(AppSettings.MenuItem.AddLDLApplication, SelectedID);
+                        DataCache.Instance.RefreshLDLApplications();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void HandleApplicationTypeMenuClick(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem toolStripMenuItem && toolStripMenuItem.Tag is AppSettings.MenuItem applicationTypeMenu)
+            {
+                SelectedMenuItem = applicationTypeMenu;
+                iconButtonAdd.Enabled = false;
+                switch (applicationTypeMenu)
+                {
+                    case AppSettings.MenuItem.EditApplicationType:
+                        ShowCard(AppSettings.MenuItem.ApplicationType, SelectedID);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void HandleTestTypeMenuClick(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem toolStripMenuItem && toolStripMenuItem.Tag is AppSettings.MenuItem testTypeMenu)
+            {
+                SelectedMenuItem = testTypeMenu;
+                iconButtonAdd.Enabled = false;
+                switch (testTypeMenu)
+                {
+                    case AppSettings.MenuItem.EditTestType:
+                        ShowCard(AppSettings.MenuItem.TestType, SelectedID);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

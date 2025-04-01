@@ -5,19 +5,9 @@ namespace DVLD_UI.UserControls.Cards
     public partial class TestTypeCard : UserControl
     {
         TestType testType = null;
-        CardUtils.EnDisplayMode EnMode { get; set; }
         private void Display()
         {
-            switch (EnMode)
-            {
-                case CardUtils.EnDisplayMode.Read:
-                    break;
-                case CardUtils.EnDisplayMode.Update:
-                    ShowTestTypeUpdate();
-                    break;
-                case CardUtils.EnDisplayMode.Add:
-                    break;
-            }
+            ShowTestTypeUpdate();
         }
         private void LoadTestType()
         {
@@ -41,13 +31,10 @@ namespace DVLD_UI.UserControls.Cards
         }
         private bool SaveTestType()
         {
-            if (EnMode == CardUtils.EnDisplayMode.Update)
-            {
-                if (!ValidateAllFields()) return false;
-                testType.Title = txtTitle.Text;
-                testType.Description = txtDescription.Text;
-                testType.Fees = decimal.Parse(txtFee.Text);
-            }
+            if (!ValidateAllFields()) return false;
+            testType.Title = txtTitle.Text;
+            testType.Description = txtDescription.Text;
+            testType.Fees = decimal.Parse(txtFee.Text);
             return testType.Save();
         }
     }

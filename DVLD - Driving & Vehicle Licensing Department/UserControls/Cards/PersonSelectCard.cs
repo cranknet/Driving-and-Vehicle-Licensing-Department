@@ -1,5 +1,5 @@
-﻿using DVLD_Data;
-using DVLD_Logic;
+﻿using DVLD_Logic;
+using DVLD_UI.Utils;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -10,10 +10,10 @@ namespace DVLD_UI.UserControls.Cards
         public Action<int> OnPersonIDSelected;
         People SelectedPerson { get; set; }
         private int selectedPersonID { get; set; }
-        public PersonSelectCard()
+        public PersonSelectCard(object personDataSource)
         {
             InitializeComponent();
-            selectPersonCardGridView.DataSource = DataCache.Instance.GetNonUserPersons();
+            selectPersonCardGridView.DataSource = personDataSource;
             filterOptionsUC.txtFilterValue.TextChanged += (s, e) => ApplyFilter();
             filterOptionsUC.cmbFilterOptions.SelectedIndexChanged += (s, e) => ApplyFilter();
             Utils.Utils.LoadFilterOptions(selectPersonCardGridView, filterOptionsUC.cmbFilterOptions);
@@ -34,7 +34,7 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void btnUserEditPerson_Click(object sender, EventArgs e)
         {
-            PersonProfileCard personProfileCard = new PersonProfileCard(CardUtils.EnDisplayMode.Update, selectedPersonID);
+            PersonProfileCard personProfileCard = new PersonProfileCard(AppSettings.EnMode.Update, selectedPersonID);
             using (FrmHost frmHost = new FrmHost(personProfileCard))
             {
                 frmHost.ShowDialog();

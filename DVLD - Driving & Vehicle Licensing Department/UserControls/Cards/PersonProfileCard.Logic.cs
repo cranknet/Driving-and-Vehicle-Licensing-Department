@@ -6,10 +6,10 @@ namespace DVLD_UI.UserControls.Cards
     public partial class PersonProfileCard : UserControl
     {
         People Person = null;
-        private CardUtils.EnDisplayMode EnMode { get; set; }
+        private AppSettings.EnMode EnMode { get; set; }
         private void InitializePerson(int personID)
         {
-            Person = (EnMode == CardUtils.EnDisplayMode.Read || EnMode == CardUtils.EnDisplayMode.Update) ? People.FindByPersonID(personID) : new People();
+            Person = (EnMode == AppSettings.EnMode.Read || EnMode == AppSettings.EnMode.Update) ? People.FindByPersonID(personID) : new People();
         }
         private void ShowReadMode()
         {
@@ -44,13 +44,13 @@ namespace DVLD_UI.UserControls.Cards
         {
             switch (EnMode)
             {
-                case CardUtils.EnDisplayMode.Read:
+                case AppSettings.EnMode.Read:
                     ShowReadMode();
                     break;
-                case CardUtils.EnDisplayMode.Update:
+                case AppSettings.EnMode.Update:
                     ShowUpdateMode();
                     break;
-                case CardUtils.EnDisplayMode.Add:
+                case AppSettings.EnMode.Add:
                     ShowAddMode();
                     break;
             }

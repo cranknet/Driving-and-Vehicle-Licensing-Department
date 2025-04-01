@@ -1,4 +1,5 @@
 ﻿using DVLD_Logic;
+using DVLD_UI.Utils;
 using System.Linq;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
@@ -7,10 +8,10 @@ namespace DVLD_UI.UserControls.Cards
     {
         User User = null;
         People Person = null;
-        private CardUtils.EnDisplayMode EnMode { get; set; }
+        private AppSettings.EnMode EnMode { get; set; }
         private void InitializeUser(int userID)
         {
-            User = (EnMode == CardUtils.EnDisplayMode.Read || EnMode == CardUtils.EnDisplayMode.Update) ? User.Find(userID) : new User();
+            User = (EnMode == AppSettings.EnMode.Read || EnMode == AppSettings.EnMode.Update) ? User.Find(userID) : new User();
             Person = People.FindByPersonID(User.PersonID);
         }
         private void LoadUserInfo()
@@ -51,13 +52,13 @@ namespace DVLD_UI.UserControls.Cards
         {
             switch (EnMode)
             {
-                case CardUtils.EnDisplayMode.Read:
+                case AppSettings.EnMode.Read:
                     ShowUserDetailsPage();
                     break;
-                case CardUtils.EnDisplayMode.Update:
+                case AppSettings.EnMode.Update:
                     ShowUserSettingsPage();
                     break;
-                case CardUtils.EnDisplayMode.Add:
+                case AppSettings.EnMode.Add:
                     ShowUserAddPage();
                     break;
             }
@@ -95,13 +96,13 @@ namespace DVLD_UI.UserControls.Cards
         }
         private bool SaveUser()
         {
-            if (EnMode == CardUtils.EnDisplayMode.Update)
+            if (EnMode == AppSettings.EnMode.Update)
             {
                 if (!ValidatePasswordFields()) return false;
                 User.Password = txtOldPassword.Text;
                 User.NewPassword = txtNewPassword.Text;
             }
-            else if (EnMode == CardUtils.EnDisplayMode.Add)
+            else if (EnMode == AppSettings.EnMode.Add)
             {
                 if (!ValidateAddUser()) return false;
                 User.PersonID = Person.PersonID;

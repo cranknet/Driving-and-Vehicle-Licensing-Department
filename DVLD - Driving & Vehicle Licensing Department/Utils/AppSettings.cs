@@ -49,25 +49,38 @@
         public const string LoginRecord = "{0}@-@{1}";
         public const string LoginSavePath = "LoginData.txt";
         public const string DefaultFilterOptionValue = "None";
-        public enum EnApplicationSubMenuOptions
+        //Add Local Driving License Application 
+        public const string AddLocalDLApplication = "Add Local Driving License Application";
+        public const string LocalDLDAddedSuccess = "Application Added Successfully!";
+        public const string LocalDLDAddedFailed = "Failed to add the application. Please try again.";
+        public const string ApplicationAlreadyExists = "Application already exists with ID:{0}";
+        public const string SelectPersonFirst = "Please select a person first";
+        public const string SelectLicenseClass = "Please select a license class";
+        public const string LDLApplicationID = "LDLApplicationID";
+        public enum MenuItem
         {
-            enApplicationType,
-            enTestType
-        }
-        public enum EnApplicationStatus
-        {
-            New = 1,
-            Cancelled = 2,
-            Completed = 3
+            // Main menu items
+            Peoples,
+            Users,
+            Applications,
+            Drivers,
+            UserSettings,
+            // Application sub-menu
+            ApplicationType,
+            TestType,
+            LocalDLApplication,
+            AddLDLApplication,
+            AddInternationalDLApplication,
+            // Test Type sub-menu
+            EditTestType,
+            // Application Type sub-menu
+            EditApplicationType
         }
         public enum EnMode
         {
-            Update = 0,
-            AddNew = 1,
-        }
-        public enum EnApplicationTypes
-        {
-            NewApplication = 1
+            Read = 0,
+            Add = 1,
+            Update = 2,
         }
     }
 }

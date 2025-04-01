@@ -1,6 +1,6 @@
 ﻿namespace DVLD_UI.UserControls.Cards
 {
-    partial class AddLocalDLApplicationCard
+    partial class AddLDLApplicationCard
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddLocalDLApplicationCard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddLDLApplicationCard));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pbCloseCard = new System.Windows.Forms.PictureBox();
             this.lblAddNewLocalDrivingLicenseApplication = new System.Windows.Forms.Label();

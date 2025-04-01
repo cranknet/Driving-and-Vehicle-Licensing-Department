@@ -5,11 +5,19 @@ namespace DVLD_Data
 {
     public class ApplicationDAL
     {
-        public static DataTable GetApplications()
+        public static DataTable GetLDLApplications()
         {
             DataTable dt = new DataTable();
-            string query = @"SELECT ApplicationID, ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID
-                                 FROM Applications";
+            string query = @"SELECT Applications.ApplicationID AS LDLApplicationID, LicenseClasses.ClassName, People.NationalNo, CONCAT(People.FirstName,' ', People.LastName) AS FullName , Applications.ApplicationDate, 
+                             CASE   Applications.ApplicationStatus 
+                             	   WHEN 1 THEN 'New'
+                             	   WHEN 2 THEN 'Cancelled'
+                             	   WHEN 3 THEN 'Completed'
+                             	   ELSE 'None'
+                             END AS Status
+                             FROM   Applications INNER JOIN LocalDrivingLicenseApplications ON Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID
+				             INNER JOIN LicenseClasses ON LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID
+				             INNER JOIN People ON Applications.ApplicantPersonID = People.PersonID";
             using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {
@@ -21,12 +29,12 @@ namespace DVLD_Data
                 }
                 catch (SqlException ex)
                 {
-                    Console.WriteLine($"GetApplications: Error getting applications: {ex.Message}");
+                    Console.WriteLine($"GetLDLApplications: Error getting applications: {ex.Message}");
                 }
             }
             return null;
         }
-        public static bool Find(int applicationID, ref int applicantPersonID, ref DateTime applicationDate, ref int applicationTypeID, ref int applicationStatus, ref DateTime lastStatusDate, ref decimal paidFees, ref int createdByUserID)
+        public static bool Find(int applicationID, ref int applicantPersonID, ref DateTime applicationDate, ref int applicationTypeID, ref byte applicationStatus, ref DateTime lastStatusDate, ref decimal paidFees, ref int createdByUserID)
         {
             bool isFound = false;
             string query = @"SELECT ApplicationID, ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID 
@@ -47,7 +55,7 @@ namespace DVLD_Data
                         applicantPersonID = (int)reader["ApplicantPersonID"];
                         applicationDate = (DateTime)reader["ApplicationDate"];
                         applicationTypeID = (int)reader["ApplicationTypeID"];
-                        applicationStatus = (int)reader["ApplicationStatus"];
+                        applicationStatus = (byte)reader["ApplicationStatus"];
                         lastStatusDate = (DateTime)reader["LastStatusDate"];
                         paidFees = (decimal)reader["PaidFees"];
                         createdByUserID = (int)reader["CreatedByUserID"];
@@ -60,7 +68,7 @@ namespace DVLD_Data
             }
             return isFound;
         }
-        public static int AddNewApplication(int applicantPersonID, DateTime applicationDate, int applicationTypeID, int applicationStatus, DateTime lastStatusDate, decimal paidFees, int createdByUserID)
+        public static int AddNewApplication(int applicantPersonID, DateTime applicationDate, int applicationTypeID, byte applicationStatus, DateTime lastStatusDate, decimal paidFees, int createdByUserID)
         {
             string query = @"INSERT INTO Applications (ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID)
                                  VALUES (@ApplicantPersonID, @ApplicationDate, @ApplicationTypeID, @ApplicationStatus, @LastStatusDate, @PaidFees, @CreatedByUserID);
@@ -87,7 +95,7 @@ namespace DVLD_Data
             }
             return -1;
         }
-        public static bool UpdateApplicationStatus(int applicationID, int applicationStatus, DateTime lastStatusDate)
+        public static bool UpdateApplicationStatus(int applicationID, byte applicationStatus, DateTime lastStatusDate)
         {
             string query = @"UPDATE Applications
                                  SET ApplicationStatus = @ApplicationStatus, LastStatusDate = @LastStatusDate
@@ -132,6 +140,25 @@ namespace DVLD_Data
                 }
             }
             return false;
+        }
+        public static int GetActiveLDLApplicationIDForLicenseClass(int personID, int licenseClassID, int applicationStatus)
+        {
+            const string query = @" SELECT TOP 1 a.ApplicationID FROM Applications a
+                                    JOIN LocalDrivingLicenseApplications l 
+                                        ON a.ApplicationID = l.ApplicationID
+                                    WHERE a.ApplicantPersonID = @PersonID 
+                                        AND l.LicenseClassID = @LicenseClassID 
+                                        AND a.ApplicationStatus = @ApplicationStatus;";
+            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@PersonID", personID);
+                command.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
+                command.Parameters.AddWithValue("@ApplicationStatus", applicationStatus);
+                connection.Open();
+                object result = command.ExecuteScalar();
+                return result != null ? Convert.ToInt32(result) : -1;
+            }
         }
     }
 }

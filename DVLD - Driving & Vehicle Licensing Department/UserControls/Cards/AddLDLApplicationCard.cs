@@ -1,17 +1,18 @@
-﻿using DVLD_Logic;
+﻿using DVLD_Data;
+using DVLD_Logic;
 using DVLD_UI.Utils;
 using System;
 using System.Data;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
 {
-    public partial class AddLocalDLApplicationCard : UserControl
+    public partial class AddLDLApplicationCard : UserControl
     {
         clsApplication LocalLicenseApplication;
         People Person { get; set; }
         User CreatedByUser { get; set; }
         ApplicationType LocalLicenseType { get; set; }
-        public AddLocalDLApplicationCard()
+        public AddLDLApplicationCard()
         {
             InitializeComponent();
             Utils.Utils.LoadLicenseClasses(cmbApplicationLicenseClass, new DataTable());
@@ -30,7 +31,7 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void btnSelectPerson_Click(object sender, System.EventArgs e)
         {
-            PersonSelectCard personSelectCard = new PersonSelectCard();
+            PersonSelectCard personSelectCard = new PersonSelectCard(DataCache.Instance.GetPersons());
             using (FrmHost frmHost = new FrmHost(personSelectCard))
             {
                 //frmHost.FormClosing += FrmHost_FormClosing;
@@ -47,6 +48,7 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void LoadFieldsValues()
         {
+            lblApplicationID.Text = $"{LocalLicenseApplication.ApplicationID}";
             lblApplicationDate.Text = $"{DateTime.Now.ToShortDateString()}";
             lblApplicationFees.Text = $"{LocalLicenseType?.Fees ?? 0}";
             lblApplicationCreatedByUserID.Text = $"{CreatedByUser?.UserID ?? -1}";
@@ -55,12 +57,12 @@ namespace DVLD_UI.UserControls.Cards
         {
             if (Person == null)
             {
-                MessageBox.Show("Please select a person first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppSettings.SelectPersonFirst, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if (cmbApplicationLicenseClass.SelectedIndex == -1)
             {
-                MessageBox.Show("Please select a license class", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppSettings.SelectLicenseClass, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -76,17 +78,26 @@ namespace DVLD_UI.UserControls.Cards
             LocalLicenseApplication.PaidFees = LocalLicenseType.Fees;
             LocalLicenseApplication.CreatedByUserID = CreatedByUser.UserID;
             LocalLicenseApplication.LicenseClassID = Convert.ToInt32(cmbApplicationLicenseClass.SelectedValue);
+            int existingApplicationID = LocalLicenseApplication.CheckLDLApplicationExists();
+            if (existingApplicationID != -1)
+            {
+                MessageBox.Show(string.Format(AppSettings.ApplicationAlreadyExists, existingApplicationID), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             return LocalLicenseApplication.Save();
         }
         private void btnSaveApplication_Click(object sender, EventArgs e)
         {
             if (SaveApplication())
             {
-                MessageBox.Show("Application Added Successfully!");
+
+                MessageBox.Show(AppSettings.LocalDLDAddedSuccess, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.FindForm()?.Close();
+
             }
             else
             {
-
+                MessageBox.Show(AppSettings.LocalDLDAddedFailed, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -1,10 +1,12 @@
-﻿using DVLD_Logic;
+﻿using DVLD_Data;
+using DVLD_Logic;
+using DVLD_UI.Utils;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
 {
     public partial class UserProfileCard : UserControl
     {
-        public UserProfileCard(CardUtils.EnDisplayMode enMode, int userID)
+        public UserProfileCard(AppSettings.EnMode enMode, int userID)
         {
             InitializeComponent();
             EnMode = enMode;
@@ -42,7 +44,7 @@ namespace DVLD_UI.UserControls.Cards
 
             if (SaveUser())
             {
-                if (EnMode == CardUtils.EnDisplayMode.Update)
+                if (EnMode == AppSettings.EnMode.Update)
                 {
                     DialogResult result = MessageBox.Show("User Password updated successfully\nDo you want to close the card?", "User Password Update", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
@@ -66,7 +68,7 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void btnPersonSelect_Click(object sender, System.EventArgs e)
         {
-            PersonSelectCard personSelectCard = new PersonSelectCard();
+            PersonSelectCard personSelectCard = new PersonSelectCard(DataCache.Instance.GetNonUserPersons());
             using (FrmHost frmHost = new FrmHost(personSelectCard))
             {
                 //frmHost.FormClosing += FrmHost_FormClosing;

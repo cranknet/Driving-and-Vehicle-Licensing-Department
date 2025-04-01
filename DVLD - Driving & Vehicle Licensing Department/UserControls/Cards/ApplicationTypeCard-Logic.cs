@@ -5,19 +5,9 @@ namespace DVLD_UI.UserControls.Cards
     public partial class ApplicationTypeCard : UserControl
     {
         ApplicationType applicationType = null;
-        CardUtils.EnDisplayMode EnMode { get; set; }
         private void Display()
         {
-            switch (EnMode)
-            {
-                case CardUtils.EnDisplayMode.Read:
-                    break;
-                case CardUtils.EnDisplayMode.Update:
-                    ShowApplicationTypeUpdate();
-                    break;
-                case CardUtils.EnDisplayMode.Add:
-                    break;
-            }
+            ShowApplicationTypeUpdate();
         }
         private void LoadApplicationType()
         {
@@ -39,12 +29,9 @@ namespace DVLD_UI.UserControls.Cards
         }
         private bool SaveApplicationType()
         {
-            if (EnMode == CardUtils.EnDisplayMode.Update)
-            {
-                if (!ValidateAllFields()) return false;
-                applicationType.Title = txtTitle.Text;
-                applicationType.Fees = decimal.Parse(txtFee.Text);
-            }
+            if (!ValidateAllFields()) return false;
+            applicationType.Title = txtTitle.Text;
+            applicationType.Fees = decimal.Parse(txtFee.Text);
             return applicationType.Save();
         }
     }
