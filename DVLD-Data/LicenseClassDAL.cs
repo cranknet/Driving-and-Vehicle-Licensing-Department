@@ -25,10 +25,10 @@ namespace DVLD_Data
             }
             return null;
         }
-        public static bool Find(int licenseClassID, ref string licenseClassName, ref string classDescription, ref int minimumAllowedAge, ref int defaultValidityLength, ref decimal classFees)
+        public static bool Find(int licenseClassID, ref string ClassName, ref string classDescription, ref byte minimumAllowedAge, ref byte defaultValidityLength, ref decimal classFees)
         {
-            bool isFound = true;
-            string query = @"SELECT LicenseClassID, LicenseClassName, ClassDescription, MinimumAllowedAge, DefaultValidityLength, ClassFees
+            bool isFound = false;
+            string query = @"SELECT LicenseClassID, ClassName, ClassDescription, MinimumAllowedAge, DefaultValidityLength, ClassFees
                                   FROM LicenseClasses
                                   WHERE LicenseClassID = @LicenseClassID";
             using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
@@ -43,10 +43,10 @@ namespace DVLD_Data
                     {
                         isFound = true;
                         licenseClassID = (int)reader["LicenseClassID"];
-                        licenseClassName = (string)reader["LicenseClassName"];
+                        ClassName = (string)reader["ClassName"];
                         classDescription = (string)reader["ClassDescription"];
-                        minimumAllowedAge = (int)reader["MinimumAllowedAge"];
-                        defaultValidityLength = (int)reader["DefaultValidityLength"];
+                        minimumAllowedAge = (byte)reader["MinimumAllowedAge"];
+                        defaultValidityLength = (byte)reader["DefaultValidityLength"];
                         classFees = (decimal)reader["ClassFees"];
                     }
                     else

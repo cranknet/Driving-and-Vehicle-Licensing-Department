@@ -45,9 +45,12 @@
     <Compile Include="ApplicationTypeDAL.cs" />
     <Compile Include="CountryDAL.cs" />
     <Compile Include="DriverDAL.cs" />
+    <Compile Include="LDLApplicationDAL.cs" />
     <Compile Include="LicenseClassDAL.cs" />
     <Compile Include="PeopleDAL.cs" />
     <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="TestAppointmentDAL.cs" />
+    <Compile Include="TestDAL.cs" />
     <Compile Include="TestTypeDAL.cs" />
     <Compile Include="UserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

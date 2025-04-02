@@ -13,8 +13,8 @@ namespace DVLD_Logic
         public int LicenseClassID { get; set; }
         public string LicenseClassName { get; set; }
         public string ClassDescription { get; set; }
-        public int MinimumAllowedAge { get; set; }
-        public int DefaultValidityLength { get; set; }
+        public byte MinimumAllowedAge { get; set; }
+        public byte DefaultValidityLength { get; set; }
         public decimal ClassFees { get; set; }
         public LicenseClass()
         {
@@ -26,7 +26,7 @@ namespace DVLD_Logic
             this.ClassFees = 0;
             Mode = EnMode.AddNew;
         }
-        private LicenseClass(int licenseClassID, string licenseClassName, string classDescription, int minimumAgeAllowed, int defaultValidityLength, decimal classFees)
+        private LicenseClass(int licenseClassID, string licenseClassName, string classDescription, byte minimumAgeAllowed, byte defaultValidityLength, decimal classFees)
         {
             this.LicenseClassID = licenseClassID;
             this.LicenseClassName = licenseClassName;
@@ -40,16 +40,16 @@ namespace DVLD_Logic
         {
             return LicenseClassDAL.GetLicenseClasses();
         }
-        public static LicenseClass FindByLicenseClassID(int licenseClassID)
+        public static LicenseClass Find(int licenseClassID)
         {
-            string licenseClassName = string.Empty;
+            string className = string.Empty;
             string classDescription = string.Empty;
-            int minimumAllowedAge = 0;
-            int defaultValidityLength = 0;
+            byte minimumAllowedAge = 0;
+            byte defaultValidityLength = 0;
             decimal classFees = 0;
-            if (LicenseClassDAL.Find(licenseClassID, ref licenseClassName, ref classDescription, ref minimumAllowedAge, ref defaultValidityLength, ref classFees))
+            if (LicenseClassDAL.Find(licenseClassID, ref className, ref classDescription, ref minimumAllowedAge, ref defaultValidityLength, ref classFees))
             {
-                return new LicenseClass(licenseClassID, licenseClassName, classDescription, minimumAllowedAge, defaultValidityLength, classFees);
+                return new LicenseClass(licenseClassID, className, classDescription, minimumAllowedAge, defaultValidityLength, classFees);
             }
             else
             {

@@ -1,39 +1,9 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 namespace DVLD_Data
 {
     public class ApplicationDAL
     {
-        public static DataTable GetLDLApplications()
-        {
-            DataTable dt = new DataTable();
-            string query = @"SELECT Applications.ApplicationID AS LDLApplicationID, LicenseClasses.ClassName, People.NationalNo, CONCAT(People.FirstName,' ', People.LastName) AS FullName , Applications.ApplicationDate, 
-                             CASE   Applications.ApplicationStatus 
-                             	   WHEN 1 THEN 'New'
-                             	   WHEN 2 THEN 'Cancelled'
-                             	   WHEN 3 THEN 'Completed'
-                             	   ELSE 'None'
-                             END AS Status
-                             FROM   Applications INNER JOIN LocalDrivingLicenseApplications ON Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID
-				             INNER JOIN LicenseClasses ON LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID
-				             INNER JOIN People ON Applications.ApplicantPersonID = People.PersonID";
-            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
-            using (SqlCommand cmd = new SqlCommand(query, connection))
-            {
-                try
-                {
-                    connection.Open();
-                    dt.Load(cmd.ExecuteReader());
-                    return dt;
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine($"GetLDLApplications: Error getting applications: {ex.Message}");
-                }
-            }
-            return null;
-        }
         public static bool Find(int applicationID, ref int applicantPersonID, ref DateTime applicationDate, ref int applicationTypeID, ref byte applicationStatus, ref DateTime lastStatusDate, ref decimal paidFees, ref int createdByUserID)
         {
             bool isFound = false;
@@ -118,47 +88,6 @@ namespace DVLD_Data
                 }
             }
             return false;
-        }
-        public static bool AddLocalLicenseApplication(int applicationType, int licenseClassID)
-        {
-            string query = @"INSERT INTO LocalDrivingLicenseApplications (ApplicationID, LicenseClassID)
-                             OUTPUT INSERTED.ApplicationID
-                             VALUES (@ApplicationID, @LicenseClassID)";
-            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
-            using (SqlCommand cmd = new SqlCommand(query, connection))
-            {
-                cmd.Parameters.AddWithValue("@ApplicationID", applicationType);
-                cmd.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
-                try
-                {
-                    connection.Open();
-                    return (int)cmd.ExecuteScalar() > 0;
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine($"AddLocalLicenseApplication: Error adding new application: {ex.Message}");
-                }
-            }
-            return false;
-        }
-        public static int GetActiveLDLApplicationIDForLicenseClass(int personID, int licenseClassID, int applicationStatus)
-        {
-            const string query = @" SELECT TOP 1 a.ApplicationID FROM Applications a
-                                    JOIN LocalDrivingLicenseApplications l 
-                                        ON a.ApplicationID = l.ApplicationID
-                                    WHERE a.ApplicantPersonID = @PersonID 
-                                        AND l.LicenseClassID = @LicenseClassID 
-                                        AND a.ApplicationStatus = @ApplicationStatus;";
-            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@PersonID", personID);
-                command.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
-                command.Parameters.AddWithValue("@ApplicationStatus", applicationStatus);
-                connection.Open();
-                object result = command.ExecuteScalar();
-                return result != null ? Convert.ToInt32(result) : -1;
-            }
         }
     }
 }

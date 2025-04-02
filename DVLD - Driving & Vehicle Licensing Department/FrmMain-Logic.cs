@@ -43,6 +43,11 @@ namespace DVLD_UI
             editApplicationTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditApplicationType;
             AttachClickEventsToToolStripItems(contextMenuStripApplicationTypes.Items, HandleApplicationTypeMenuClick);
             // LDL Application Menu ToolStrips
+            // Schedule Test Menu ToolStrips
+            scheduleVisionTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleVisionTest;
+            scheduleWritingTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleWritingTest;
+            scheduleDrivingTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleDrivingTest;
+            AttachClickEventsToToolStripItems(contextMenuStripLDLApplication.Items, HandleLDLApplicationMenuClick);
         }
         private void AttachClickEventsToMainButtons(Control.ControlCollection controls, EventHandler eventHandler)
         {
@@ -147,6 +152,25 @@ namespace DVLD_UI
                         };
                         frmHost.ShowDialog();
                     }
+                    break;
+                case AppSettings.MenuItem.ScheduleVisionTest:
+                    VisionTestAppointment appTestAppointment = new VisionTestAppointment(selectedID);
+                    using (FrmHost frmHost = new FrmHost(appTestAppointment))
+                    {
+                        frmHost.FormClosing += (s, e) =>
+                        {
+                            DataCache.Instance.RefreshLDLApplications();
+                            LoadMainGridView(DataCache.Instance.GetLDLApplications());
+                            SelectedMenuItem = AppSettings.MenuItem.LocalDLApplication;
+                        };
+                        frmHost.ShowDialog();
+                    }
+                    break;
+                case AppSettings.MenuItem.ScheduleWritingTest:
+                    throw new NotImplementedException();
+                    break;
+                case AppSettings.MenuItem.ScheduleDrivingTest:
+                    throw new NotImplementedException();
                     break;
                 default:
                     break;

@@ -1,6 +1,5 @@
 ﻿using DVLD_Data;
 using System;
-using System.Data;
 namespace DVLD_Logic
 {
     public class clsApplication
@@ -43,10 +42,6 @@ namespace DVLD_Logic
             CreatedByUserID = createdByUserID;
             Mode = EnMode.Update;
         }
-        public static DataTable GetAllLDLApplications()
-        {
-            return ApplicationDAL.GetLDLApplications();
-        }
         public static clsApplication Find(int applicationID)
         {
             int applicantPersonID = -1;
@@ -74,7 +69,7 @@ namespace DVLD_Logic
             this.ApplicationID = ApplicationDAL.AddNewApplication(ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID);
             if (ApplicationID != -1)
             {
-                return ApplicationDAL.AddLocalLicenseApplication(ApplicationID, LicenseClassID);
+                return LDLApplicationDAL.AddNewLDLApplication(LicenseClassID, ApplicationID) != 1;
             }
             return false;
         }
@@ -100,7 +95,7 @@ namespace DVLD_Logic
         }
         public int CheckLDLApplicationExists()
         {
-            return ApplicationDAL.GetActiveLDLApplicationIDForLicenseClass(ApplicantPersonID, LicenseClassID, ApplicationStatus);
+            return LDLApplicationDAL.GetActiveLDLApplicationIDForLicenseClass(ApplicantPersonID, LicenseClassID, ApplicationStatus);
         }
     }
 }

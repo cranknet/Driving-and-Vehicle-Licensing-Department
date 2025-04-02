@@ -27,7 +27,7 @@ namespace DVLD_Data
         }
         public static bool FindByID(int testTypeID, ref string testTypeTitle, ref string testTypeDescription, ref decimal testTypeFees)
         {
-            bool isFound = true;
+            bool isFound = false;
             string query = @"SELECT TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees 
                              FROM TestTypes
                              WHERE TestTypeID = @TestTypeID";

@@ -45,9 +45,12 @@
     <Compile Include="ApplicationType.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="LDLApplication.cs" />
     <Compile Include="LicenseClass.cs" />
     <Compile Include="People.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="TestAppointment.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="TestType.cs" />
     <Compile Include="User.cs" />
     <Compile Include="DataCache.cs" />

@@ -30,7 +30,7 @@ namespace DVLD_Data
         }
         public static bool FindByID(int driverID, ref int personID, ref int createdByUserID, ref DateTime createdDate)
         {
-            bool isFound = true;
+            bool isFound = false;
             string query = @"SELECT * FROM Drivers Where DriverID = @DriverID";
             using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand command = new SqlCommand(query, connection))

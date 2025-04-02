@@ -74,7 +74,13 @@
             // Test Type sub-menu
             EditTestType,
             // Application Type sub-menu
-            EditApplicationType
+            EditApplicationType,
+            // LDL Application sub-menu
+            //Schudule Test sub-menu
+            ScheduleVisionTest,
+            ScheduleWritingTest,
+            ScheduleDrivingTest
+
         }
         public enum EnMode
         {

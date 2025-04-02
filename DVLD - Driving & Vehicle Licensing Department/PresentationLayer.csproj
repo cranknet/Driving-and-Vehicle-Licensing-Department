@@ -203,6 +203,15 @@
     <Compile Include="UserControls\Cards\UserProfileCard.Designer.cs">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Cards\VisionTestAppointment-Logic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Cards\VisionTestAppointment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Cards\VisionTestAppointment.Designer.cs">
+      <DependentUpon>VisionTestAppointment.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\FilterUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Cards\UserProfileCard.resx">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Cards\VisionTestAppointment.resx">
+      <DependentUpon>VisionTestAppointment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\FilterUC.resx">
       <DependentUpon>FilterUC.cs</DependentUpon>

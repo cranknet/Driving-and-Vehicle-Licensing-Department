@@ -111,24 +111,7 @@ namespace DVLD_UI
                 iconButtonAdd.Enabled = true;
                 AssignContextMainMenuGridView();
                 ClearGridView();
-                switch (menuItem)
-                {
-                    case AppSettings.MenuItem.Drivers:
-                        DataCache.Instance.RefreshDrivers();
-                        LoadMainGridView(DataCache.Instance.GetDrivers());
-                        ReLoadFilterOptions();
-                        break;
-                    case AppSettings.MenuItem.Peoples:
-                        DataCache.Instance.RefreshPersons();
-                        LoadMainGridView(DataCache.Instance.GetPersons());
-                        ReLoadFilterOptions();
-                        break;
-                    case AppSettings.MenuItem.Users:
-                        DataCache.Instance.RefreshUsers();
-                        LoadMainGridView(DataCache.Instance.GetUsers());
-                        ReLoadFilterOptions();
-                        break;
-                }
+                HandleSelectedMenuItem(menuItem);
             }
         }
         private void HandleApplicationMenuClick(object sender, EventArgs e)
@@ -139,30 +122,7 @@ namespace DVLD_UI
                 iconButtonAdd.Enabled = false;
                 AssignContextApplicationsMenuGridView();
                 ClearGridView();
-                switch (applicationMenu)
-                {
-                    case AppSettings.MenuItem.ApplicationType:
-                        DataCache.Instance.RefreshApplicationTypes();
-                        LoadMainGridView(DataCache.Instance.GetApplicationTypes());
-                        ReLoadFilterOptions();
-                        break;
-                    case AppSettings.MenuItem.TestType:
-                        DataCache.Instance.RefreshTestTypes();
-                        LoadMainGridView(DataCache.Instance.GetTestTypes());
-                        ReLoadFilterOptions();
-                        break;
-                    case AppSettings.MenuItem.LocalDLApplication:
-                        DataCache.Instance.RefreshLDLApplications();
-                        LoadMainGridView(DataCache.Instance.GetLDLApplications());
-                        ReLoadFilterOptions();
-                        break;
-                    case AppSettings.MenuItem.AddLDLApplication:
-                        ShowCard(AppSettings.MenuItem.AddLDLApplication, SelectedID);
-                        DataCache.Instance.RefreshLDLApplications();
-                        break;
-                    default:
-                        break;
-                }
+                HandleSelectedMenuItem(applicationMenu);
             }
         }
         private void HandleApplicationTypeMenuClick(object sender, EventArgs e)
@@ -171,14 +131,7 @@ namespace DVLD_UI
             {
                 SelectedMenuItem = applicationTypeMenu;
                 iconButtonAdd.Enabled = false;
-                switch (applicationTypeMenu)
-                {
-                    case AppSettings.MenuItem.EditApplicationType:
-                        ShowCard(AppSettings.MenuItem.ApplicationType, SelectedID);
-                        break;
-                    default:
-                        break;
-                }
+                HandleSelectedMenuItem(applicationTypeMenu);
             }
         }
         private void HandleTestTypeMenuClick(object sender, EventArgs e)
@@ -187,14 +140,78 @@ namespace DVLD_UI
             {
                 SelectedMenuItem = testTypeMenu;
                 iconButtonAdd.Enabled = false;
-                switch (testTypeMenu)
-                {
-                    case AppSettings.MenuItem.EditTestType:
-                        ShowCard(AppSettings.MenuItem.TestType, SelectedID);
-                        break;
-                    default:
-                        break;
-                }
+                HandleSelectedMenuItem(testTypeMenu);
+            }
+        }
+        private void HandleLDLApplicationMenuClick(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem toolStripMenuItem && toolStripMenuItem.Tag is AppSettings.MenuItem ldlApplicationMenu)
+            {
+                SelectedMenuItem = ldlApplicationMenu;
+                iconButtonAdd.Enabled = false;
+                HandleSelectedMenuItem(ldlApplicationMenu);
+            }
+        }
+        // Handle Menu Items Click
+        private void HandleSelectedMenuItem(AppSettings.MenuItem menuItem)
+        {
+            switch (menuItem)
+            {
+                // Main menu items
+                case AppSettings.MenuItem.Drivers:
+                    DataCache.Instance.RefreshDrivers();
+                    LoadMainGridView(DataCache.Instance.GetDrivers());
+                    ReLoadFilterOptions();
+                    break;
+                case AppSettings.MenuItem.Peoples:
+                    DataCache.Instance.RefreshPersons();
+                    LoadMainGridView(DataCache.Instance.GetPersons());
+                    ReLoadFilterOptions();
+                    break;
+                case AppSettings.MenuItem.Users:
+                    DataCache.Instance.RefreshUsers();
+                    LoadMainGridView(DataCache.Instance.GetUsers());
+                    ReLoadFilterOptions();
+                    break;
+                // Application sub-menu
+
+                case AppSettings.MenuItem.ApplicationType:
+                    DataCache.Instance.RefreshApplicationTypes();
+                    LoadMainGridView(DataCache.Instance.GetApplicationTypes());
+                    ReLoadFilterOptions();
+                    break;
+                case AppSettings.MenuItem.TestType:
+                    DataCache.Instance.RefreshTestTypes();
+                    LoadMainGridView(DataCache.Instance.GetTestTypes());
+                    ReLoadFilterOptions();
+                    break;
+                case AppSettings.MenuItem.LocalDLApplication:
+                    DataCache.Instance.RefreshLDLApplications();
+                    LoadMainGridView(DataCache.Instance.GetLDLApplications());
+                    ReLoadFilterOptions();
+                    break;
+                case AppSettings.MenuItem.AddLDLApplication:
+                    ShowCard(AppSettings.MenuItem.AddLDLApplication, SelectedID);
+                    DataCache.Instance.RefreshLDLApplications();
+                    break;
+                case AppSettings.MenuItem.AddInternationalDLApplication:
+                    throw new NotImplementedException();
+                case AppSettings.MenuItem.EditTestType:
+                    ShowCard(AppSettings.MenuItem.TestType, SelectedID);
+                    break;
+                case AppSettings.MenuItem.EditApplicationType:
+                    ShowCard(AppSettings.MenuItem.ApplicationType, SelectedID);
+                    break;
+                // LDL Application sub-menu
+                case AppSettings.MenuItem.ScheduleVisionTest:
+                    ShowCard(AppSettings.MenuItem.ScheduleVisionTest, SelectedID);
+                    break;
+                case AppSettings.MenuItem.ScheduleWritingTest:
+                    throw new NotImplementedException();
+                case AppSettings.MenuItem.ScheduleDrivingTest:
+                    throw new NotImplementedException();
+                default:
+                    break;
             }
         }
     }

@@ -7,7 +7,7 @@ namespace DVLD_Data
     {
         public static bool Find(int userID, ref int personID, ref string userName, ref string password, ref bool isActive)
         {
-            bool isFound = true;
+            bool isFound = false;
             string query = @"SELECT UserID, PersonID, UserName, Password, IsActive 
                                  FROM Users
                                  WHERE UserID = @UserID";

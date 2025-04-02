@@ -148,7 +148,7 @@ namespace DVLD_Data
         }
         private DataTable LoadLDLApplications()
         {
-            return clsApplication.GetAllLDLApplications();
+            return LDLApplication.GetAllLDLApplications();
         }
     }
 }
