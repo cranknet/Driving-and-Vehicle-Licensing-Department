@@ -15,7 +15,7 @@ namespace DVLD_Logic
         public int TestTypeID { get; set; }
         public int LDLAppID { get; set; }
         public DateTime AppointmentDate { get; set; }
-        public double PaidFees { get; set; }
+        public decimal PaidFees { get; set; }
         public int CreatedByUserID { get; set; }
         public bool IsLocked { get; set; }
         public TestAppointment()
@@ -29,7 +29,7 @@ namespace DVLD_Logic
             IsLocked = false;
             Mode = EnMode.AddNew;
         }
-        private TestAppointment(int testAppointmentID, int testTypeID, int lDLAppID, DateTime appointmentDate, double paidFees, int createdByUserID, bool isLocked)
+        private TestAppointment(int testAppointmentID, int testTypeID, int lDLAppID, DateTime appointmentDate, decimal paidFees, int createdByUserID, bool isLocked)
         {
             TestAppointmentID = testAppointmentID;
             TestTypeID = testTypeID;
@@ -45,7 +45,7 @@ namespace DVLD_Logic
             int testTypeID = -1;
             int lDLAppID = -1;
             DateTime appointmentDate = DateTime.Now;
-            double paidFees = 0;
+            decimal paidFees = 0;
             int createdByUserID = -1;
             bool isLocked = false;
             if (TestAppointmentDAL.FindBy(testAppointmentID, ref testTypeID, ref lDLAppID, ref appointmentDate, ref paidFees, ref createdByUserID, ref isLocked))
@@ -65,6 +65,14 @@ namespace DVLD_Logic
         public static DataTable GetTestAppointments(int testTypeID, int lDLAppID)
         {
             return TestAppointmentDAL.GetAllTestAppointments(testTypeID, lDLAppID);
+        }
+        public static bool ActiveTestAppointmentExistsBy(int testTypeID, int lDLAppID)
+        {
+            return TestAppointmentDAL.DoesActiveTestAppointmentExist(testTypeID, lDLAppID);
+        }
+        public static bool TestAppointmentExistsBy(int testAppointmentID)
+        {
+            return TestAppointmentDAL.DoesTestAppointmentExist(testAppointmentID);
         }
         private bool _Add()
         {

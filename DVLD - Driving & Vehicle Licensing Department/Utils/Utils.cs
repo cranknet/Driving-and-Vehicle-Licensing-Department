@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 namespace DVLD_UI.Utils
 {
-    public class Utils
+    public static class Utils
     {
         public static string ImageHandler(PictureBox pictureBox, string imageFolder)
         {
@@ -191,6 +191,42 @@ namespace DVLD_UI.Utils
             cmbLicenseClasses.DataSource = licenseClasses;
             cmbLicenseClasses.DisplayMember = "ClassName";
             cmbLicenseClasses.ValueMember = "LicenseClassID";
+        }
+        // Validate is an extension method for the DateTimePicker class  
+        public static void Validate(this DateTimePicker dtPicker, DateTime value, short minYears = 0, short maxYears = 1)
+        {
+            //dtPicker.Format = DateTimePickerFormat.Short;
+            //value = value.Date;
+            //dtPicker.MinDate = value.AddYears(-minYears);
+            //dtPicker.MaxDate = value.AddYears(maxYears);
+            //value = (value < dtPicker.MinDate) ? dtPicker.MinDate : value;
+            //dtPicker.Value = value;
+        }
+        public static void AttachClickEventsToMainButtons(Control.ControlCollection controls, EventHandler eventHandler)
+        {
+            foreach (Control control in controls)
+            {
+                if (control is Button button)
+                {
+                    button.Click -= eventHandler;
+                    button.Click += eventHandler;
+                }
+            }
+        }
+        public static void AttachClickEventsToToolStripItems(ToolStripItemCollection items, EventHandler eventHandler)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                if (item is ToolStripMenuItem toolStripMenuItem)
+                {
+                    toolStripMenuItem.Click -= eventHandler;
+                    toolStripMenuItem.Click += eventHandler;
+                    if (toolStripMenuItem.DropDownItems.Count > 0)
+                    {
+                        AttachClickEventsToToolStripItems(toolStripMenuItem.DropDownItems, eventHandler);
+                    }
+                }
+            }
         }
     }
 }

@@ -41,10 +41,13 @@
         // Other common notifications and messages
         public const string ProfileSavedSuccess = "Person saved successfully";
         public const string ProfileSaveFailed = "Can't save Person";
-        public const string UserIDCellName = "UserID";
-        public const string PersonIDCellName = "PersonID";
-        public const string ApplicationTypeIDCellName = "ApplicationTypeID";
-        public const string TestITypeDCellName = "TestTypeID";
+        // Grid View Column ID Names
+        public const string UserIDColumnName = "UserID";
+        public const string PersonIDColumnName = "PersonID";
+        public const string ApplicationTypeIDColumnName = "ApplicationTypeID";
+        public const string TestITypeDColumnName = "TestTypeID";
+        public const string TestAppointmentIDColumnName = "TestAppointmentID";
+        public const string LDLApplicationIDColumnName = "LDLApplicationID";
         //Login Data Path & Record
         public const string LoginRecord = "{0}@-@{1}";
         public const string LoginSavePath = "LoginData.txt";
@@ -56,7 +59,13 @@
         public const string ApplicationAlreadyExists = "Application already exists with ID:{0}";
         public const string SelectPersonFirst = "Please select a person first";
         public const string SelectLicenseClass = "Please select a license class";
-        public const string LDLApplicationID = "LDLApplicationID";
+        // Test Appointments
+        public const string TestAppointmentTypeTitle = "{0} Appointments";
+        public const string ScheduleTestTitle = "Schedule {0}";
+        public const string TestAppointmentLoadFailedFromCell = "Couldn't load the Test Appointment from the selected cell, invalid ID received!";
+        public const string TestAppointmentScheduledSuccessfully = "Test Appointment has been scheduled successfully!";
+
+
         public enum MenuItem
         {
             // Main menu items
@@ -87,6 +96,12 @@
             Read = 0,
             Add = 1,
             Update = 2,
+        }
+        public enum TestType
+        {
+            Vision = 1,
+            Writing = 2,
+            Driving = 3
         }
     }
 }

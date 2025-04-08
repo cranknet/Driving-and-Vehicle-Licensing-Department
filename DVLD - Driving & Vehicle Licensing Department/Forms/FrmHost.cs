@@ -1,14 +1,13 @@
 ﻿using System.Windows.Forms;
-
 namespace DVLD_UI
 {
     public partial class FrmHost : Form
     {
-        public FrmHost(UserControl personProfileCard)
+        public FrmHost(UserControl userControlCard)
         {
             InitializeComponent();
-            this.Controls.Add(personProfileCard);
-            personProfileCard.Dock = DockStyle.Fill;
+            this.Controls.Add(userControlCard);
+            userControlCard.Dock = DockStyle.Fill;
         }
     }
 }

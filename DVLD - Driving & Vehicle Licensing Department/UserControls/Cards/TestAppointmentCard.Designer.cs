@@ -1,6 +1,6 @@
 ﻿namespace DVLD_UI.UserControls.Cards
 {
-    partial class VisionTestAppointment
+    partial class TestAppointmentCard
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisionTestAppointment));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestAppointmentCard));
             this.panelMain = new System.Windows.Forms.Panel();
             this.AppointmentsGridView = new System.Windows.Forms.DataGridView();
-            this.iconButtonAddAppointment = new FontAwesome.Sharp.IconButton();
+            this.contextMenuStripAppointments = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.takeTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ButtonAddTestAppointment = new FontAwesome.Sharp.IconButton();
             this.LabelAppointments = new System.Windows.Forms.Label();
             this.GroupBoxApplicationInfo = new System.Windows.Forms.GroupBox();
             this.ButtonShowPersonInfo = new System.Windows.Forms.Button();
@@ -62,9 +66,10 @@
             this.lblLoginWelcome = new System.Windows.Forms.Label();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pbCloseCard = new System.Windows.Forms.PictureBox();
-            this.lblTestTypeID = new System.Windows.Forms.Label();
+            this.LabelTestType = new System.Windows.Forms.Label();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsGridView)).BeginInit();
+            this.contextMenuStripAppointments.SuspendLayout();
             this.GroupBoxApplicationInfo.SuspendLayout();
             this.GroupBoxLDLApplicationInfo.SuspendLayout();
             this.panelHeader.SuspendLayout();
@@ -74,7 +79,7 @@
             // panelMain
             // 
             this.panelMain.Controls.Add(this.AppointmentsGridView);
-            this.panelMain.Controls.Add(this.iconButtonAddAppointment);
+            this.panelMain.Controls.Add(this.ButtonAddTestAppointment);
             this.panelMain.Controls.Add(this.LabelAppointments);
             this.panelMain.Controls.Add(this.GroupBoxApplicationInfo);
             this.panelMain.Controls.Add(this.GroupBoxLDLApplicationInfo);
@@ -103,6 +108,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.AppointmentsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.AppointmentsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AppointmentsGridView.ContextMenuStrip = this.contextMenuStripAppointments;
             this.AppointmentsGridView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AppointmentsGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.AppointmentsGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(137)))));
@@ -119,24 +125,47 @@
             this.AppointmentsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppointmentsGridView.Size = new System.Drawing.Size(706, 212);
             this.AppointmentsGridView.TabIndex = 9;
+            this.AppointmentsGridView.SelectionChanged += new System.EventHandler(this.AppointmentsGridView_SelectionChanged);
             // 
-            // iconButtonAddAppointment
+            // contextMenuStripAppointments
             // 
-            this.iconButtonAddAppointment.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButtonAddAppointment.FlatAppearance.BorderSize = 0;
-            this.iconButtonAddAppointment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.iconButtonAddAppointment.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButtonAddAppointment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.iconButtonAddAppointment.IconChar = FontAwesome.Sharp.IconChar.Cuttlefish;
-            this.iconButtonAddAppointment.IconColor = System.Drawing.Color.Black;
-            this.iconButtonAddAppointment.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButtonAddAppointment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButtonAddAppointment.Location = new System.Drawing.Point(645, 458);
-            this.iconButtonAddAppointment.Margin = new System.Windows.Forms.Padding(0);
-            this.iconButtonAddAppointment.Name = "iconButtonAddAppointment";
-            this.iconButtonAddAppointment.Size = new System.Drawing.Size(44, 31);
-            this.iconButtonAddAppointment.TabIndex = 8;
-            this.iconButtonAddAppointment.UseVisualStyleBackColor = true;
+            this.contextMenuStripAppointments.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.takeTestToolStripMenuItem});
+            this.contextMenuStripAppointments.Name = "contextMenuStripAppointments";
+            this.contextMenuStripAppointments.Size = new System.Drawing.Size(123, 48);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // takeTestToolStripMenuItem
+            // 
+            this.takeTestToolStripMenuItem.Name = "takeTestToolStripMenuItem";
+            this.takeTestToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.takeTestToolStripMenuItem.Text = "Take Test";
+            // 
+            // ButtonAddTestAppointment
+            // 
+            this.ButtonAddTestAppointment.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonAddTestAppointment.FlatAppearance.BorderSize = 0;
+            this.ButtonAddTestAppointment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ButtonAddTestAppointment.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonAddTestAppointment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ButtonAddTestAppointment.IconChar = FontAwesome.Sharp.IconChar.Cuttlefish;
+            this.ButtonAddTestAppointment.IconColor = System.Drawing.Color.Black;
+            this.ButtonAddTestAppointment.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ButtonAddTestAppointment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ButtonAddTestAppointment.Location = new System.Drawing.Point(645, 458);
+            this.ButtonAddTestAppointment.Margin = new System.Windows.Forms.Padding(0);
+            this.ButtonAddTestAppointment.Name = "ButtonAddTestAppointment";
+            this.ButtonAddTestAppointment.Size = new System.Drawing.Size(44, 31);
+            this.ButtonAddTestAppointment.TabIndex = 8;
+            this.ButtonAddTestAppointment.UseVisualStyleBackColor = true;
+            this.ButtonAddTestAppointment.Click += new System.EventHandler(this.ButtonAddTestAppointment_Click);
             // 
             // LabelAppointments
             // 
@@ -438,7 +467,7 @@
             // 
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.panelHeader.Controls.Add(this.pbCloseCard);
-            this.panelHeader.Controls.Add(this.lblTestTypeID);
+            this.panelHeader.Controls.Add(this.LabelTestType);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
@@ -457,18 +486,18 @@
             this.pbCloseCard.TabStop = false;
             this.pbCloseCard.Click += new System.EventHandler(this.pbCloseCard_Click);
             // 
-            // lblTestTypeID
+            // LabelTestType
             // 
-            this.lblTestTypeID.AutoSize = true;
-            this.lblTestTypeID.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestTypeID.ForeColor = System.Drawing.Color.White;
-            this.lblTestTypeID.Location = new System.Drawing.Point(3, 3);
-            this.lblTestTypeID.Name = "lblTestTypeID";
-            this.lblTestTypeID.Size = new System.Drawing.Size(307, 32);
-            this.lblTestTypeID.TabIndex = 15;
-            this.lblTestTypeID.Text = "Vision Test Appointments";
+            this.LabelTestType.AutoSize = true;
+            this.LabelTestType.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelTestType.ForeColor = System.Drawing.Color.White;
+            this.LabelTestType.Location = new System.Drawing.Point(3, 3);
+            this.LabelTestType.Name = "LabelTestType";
+            this.LabelTestType.Size = new System.Drawing.Size(229, 32);
+            this.LabelTestType.TabIndex = 15;
+            this.LabelTestType.Text = "Test Appointments";
             // 
-            // VisionTestAppointment
+            // TestAppointmentCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -477,11 +506,12 @@
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.panelMain);
             this.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "VisionTestAppointment";
+            this.Name = "TestAppointmentCard";
             this.Size = new System.Drawing.Size(706, 592);
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsGridView)).EndInit();
+            this.contextMenuStripAppointments.ResumeLayout(false);
             this.GroupBoxApplicationInfo.ResumeLayout(false);
             this.GroupBoxApplicationInfo.PerformLayout();
             this.GroupBoxLDLApplicationInfo.ResumeLayout(false);
@@ -523,10 +553,13 @@
         private System.Windows.Forms.Label LabelCreatedBy;
         private System.Windows.Forms.Label LabelAppointments;
         private System.Windows.Forms.Button ButtonShowPersonInfo;
-        private FontAwesome.Sharp.IconButton iconButtonAddAppointment;
+        private FontAwesome.Sharp.IconButton ButtonAddTestAppointment;
         private System.Windows.Forms.DataGridView AppointmentsGridView;
         private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.PictureBox pbCloseCard;
-        private System.Windows.Forms.Label lblTestTypeID;
+        private System.Windows.Forms.Label LabelTestType;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripAppointments;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem takeTestToolStripMenuItem;
     }
 }

@@ -60,25 +60,25 @@ namespace DVLD_UI
         }
         private void mainGridView_SelectionChanged(object sender, EventArgs e)
         {
-            if (mainGridView.Columns.Contains(AppSettings.UserIDCellName))
+            if (mainGridView.Columns.Contains(AppSettings.UserIDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.UserIDCellName, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.UserIDColumnName, mainGridView);
             }
-            else if (mainGridView.Columns.Contains(AppSettings.PersonIDCellName))
+            else if (mainGridView.Columns.Contains(AppSettings.PersonIDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.PersonIDCellName, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.PersonIDColumnName, mainGridView);
             }
-            else if (mainGridView.Columns.Contains(AppSettings.ApplicationTypeIDCellName))
+            else if (mainGridView.Columns.Contains(AppSettings.ApplicationTypeIDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.ApplicationTypeIDCellName, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.ApplicationTypeIDColumnName, mainGridView);
             }
-            else if (mainGridView.Columns.Contains(AppSettings.TestITypeDCellName))
+            else if (mainGridView.Columns.Contains(AppSettings.TestITypeDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.TestITypeDCellName, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.TestITypeDColumnName, mainGridView);
             }
-            else if (mainGridView.Columns.Contains(AppSettings.LDLApplicationID))
+            else if (mainGridView.Columns.Contains(AppSettings.LDLApplicationIDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.LDLApplicationID, mainGridView);
+                SelectedID = Utils.Utils.GetIDFrom(AppSettings.LDLApplicationIDColumnName, mainGridView);
             }
             else
             {
@@ -202,14 +202,16 @@ namespace DVLD_UI
                 case AppSettings.MenuItem.EditApplicationType:
                     ShowCard(AppSettings.MenuItem.ApplicationType, SelectedID);
                     break;
-                // LDL Application sub-menu
+                // LDL Application Schedule Tests
                 case AppSettings.MenuItem.ScheduleVisionTest:
                     ShowCard(AppSettings.MenuItem.ScheduleVisionTest, SelectedID);
                     break;
                 case AppSettings.MenuItem.ScheduleWritingTest:
-                    throw new NotImplementedException();
+                    ShowCard(AppSettings.MenuItem.ScheduleWritingTest, SelectedID);
+                    break;
                 case AppSettings.MenuItem.ScheduleDrivingTest:
-                    throw new NotImplementedException();
+                    ShowCard(AppSettings.MenuItem.ScheduleDrivingTest, SelectedID);
+                    break;
                 default:
                     break;
             }

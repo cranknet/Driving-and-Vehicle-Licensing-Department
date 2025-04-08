@@ -188,6 +188,15 @@
     <Compile Include="UserControls\Cards\PersonSelectCard.Designer.cs">
       <DependentUpon>PersonSelectCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Cards\ScheduleTestAppointmentCard-Logic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Cards\ScheduleTestAppointmentCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Cards\ScheduleTestAppointmentCard.Designer.cs">
+      <DependentUpon>ScheduleTestAppointmentCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Cards\TestTypeCard-Logic.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -203,14 +212,14 @@
     <Compile Include="UserControls\Cards\UserProfileCard.Designer.cs">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Cards\VisionTestAppointment-Logic.cs">
+    <Compile Include="UserControls\Cards\TestAppointmentCard-Logic.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Cards\VisionTestAppointment.cs">
+    <Compile Include="UserControls\Cards\TestAppointmentCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Cards\VisionTestAppointment.Designer.cs">
-      <DependentUpon>VisionTestAppointment.cs</DependentUpon>
+    <Compile Include="UserControls\Cards\TestAppointmentCard.Designer.cs">
+      <DependentUpon>TestAppointmentCard.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\FilterUC.cs">
       <SubType>UserControl</SubType>
@@ -251,14 +260,17 @@
     <EmbeddedResource Include="UserControls\Cards\PersonSelectCard.resx">
       <DependentUpon>PersonSelectCard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Cards\ScheduleTestAppointmentCard.resx">
+      <DependentUpon>ScheduleTestAppointmentCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Cards\TestTypeCard.resx">
       <DependentUpon>TestTypeCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Cards\UserProfileCard.resx">
       <DependentUpon>UserProfileCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Cards\VisionTestAppointment.resx">
-      <DependentUpon>VisionTestAppointment.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Cards\TestAppointmentCard.resx">
+      <DependentUpon>TestAppointmentCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\FilterUC.resx">
       <DependentUpon>FilterUC.cs</DependentUpon>

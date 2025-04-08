@@ -29,51 +29,25 @@ namespace DVLD_UI
             btnDrivers.Tag = AppSettings.MenuItem.Drivers;
             btnPeoples.Tag = AppSettings.MenuItem.Peoples;
             btnUsers.Tag = AppSettings.MenuItem.Users;
-            AttachClickEventsToMainButtons(panelMainMenu.Controls, HandleMainMenuClick);
+            Utils.Utils.AttachClickEventsToMainButtons(panelMainMenu.Controls, HandleMainMenuClick);
             // Applications Menu ToolStrips
             applicationTypesToolStripMenuItem.Tag = AppSettings.MenuItem.ApplicationType;
             testTypesToolStripMenuItem.Tag = AppSettings.MenuItem.TestType;
             localLicensesToolStripMenuItem.Tag = AppSettings.MenuItem.LocalDLApplication;
             addLocalLicenseToolStripMenuItem.Tag = AppSettings.MenuItem.AddLDLApplication;
-            AttachClickEventsToToolStripItems(contextMenuStripApplicationMenu.Items, HandleApplicationMenuClick);
+            Utils.Utils.AttachClickEventsToToolStripItems(contextMenuStripApplicationMenu.Items, HandleApplicationMenuClick);
             // Test Type Menu ToolStrips
             editTestTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditTestType;
-            AttachClickEventsToToolStripItems(contextMenuStripTestTypes.Items, HandleTestTypeMenuClick);
+            Utils.Utils.AttachClickEventsToToolStripItems(contextMenuStripTestTypes.Items, HandleTestTypeMenuClick);
             // Application Type Menu ToolStrips
             editApplicationTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditApplicationType;
-            AttachClickEventsToToolStripItems(contextMenuStripApplicationTypes.Items, HandleApplicationTypeMenuClick);
+            Utils.Utils.AttachClickEventsToToolStripItems(contextMenuStripApplicationTypes.Items, HandleApplicationTypeMenuClick);
             // LDL Application Menu ToolStrips
             // Schedule Test Menu ToolStrips
             scheduleVisionTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleVisionTest;
             scheduleWritingTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleWritingTest;
             scheduleDrivingTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleDrivingTest;
-            AttachClickEventsToToolStripItems(contextMenuStripLDLApplication.Items, HandleLDLApplicationMenuClick);
-        }
-        private void AttachClickEventsToMainButtons(Control.ControlCollection controls, EventHandler eventHandler)
-        {
-            foreach (Control control in controls)
-            {
-                if (control is Button button)
-                {
-                    button.Click -= eventHandler;
-                    button.Click += eventHandler;
-                }
-            }
-        }
-        private void AttachClickEventsToToolStripItems(ToolStripItemCollection items, EventHandler eventHandler)
-        {
-            foreach (ToolStripItem item in items)
-            {
-                if (item is ToolStripMenuItem toolStripMenuItem)
-                {
-                    toolStripMenuItem.Click -= eventHandler;
-                    toolStripMenuItem.Click += eventHandler;
-                    if (toolStripMenuItem.DropDownItems.Count > 0)
-                    {
-                        AttachClickEventsToToolStripItems(toolStripMenuItem.DropDownItems, eventHandler);
-                    }
-                }
-            }
+            Utils.Utils.AttachClickEventsToToolStripItems(contextMenuStripLDLApplication.Items, HandleLDLApplicationMenuClick);
         }
         private void HighlightButton(Button button)
         {
@@ -153,24 +127,27 @@ namespace DVLD_UI
                         frmHost.ShowDialog();
                     }
                     break;
+                // Show Test Appointment Card for Each Local DL Application Test Type
                 case AppSettings.MenuItem.ScheduleVisionTest:
-                    VisionTestAppointment appTestAppointment = new VisionTestAppointment(selectedID);
-                    using (FrmHost frmHost = new FrmHost(appTestAppointment))
+                    TestAppointmentCard visionTestAppointmentCard = new TestAppointmentCard(selectedID, AppSettings.TestType.Vision);
+                    using (FrmHost frmHost = new FrmHost(visionTestAppointmentCard))
                     {
-                        frmHost.FormClosing += (s, e) =>
-                        {
-                            DataCache.Instance.RefreshLDLApplications();
-                            LoadMainGridView(DataCache.Instance.GetLDLApplications());
-                            SelectedMenuItem = AppSettings.MenuItem.LocalDLApplication;
-                        };
                         frmHost.ShowDialog();
                     }
                     break;
                 case AppSettings.MenuItem.ScheduleWritingTest:
-                    throw new NotImplementedException();
+                    TestAppointmentCard writingTestAppointmentCard = new TestAppointmentCard(selectedID, AppSettings.TestType.Writing);
+                    using (FrmHost frmHost = new FrmHost(writingTestAppointmentCard))
+                    {
+                        frmHost.ShowDialog();
+                    }
                     break;
                 case AppSettings.MenuItem.ScheduleDrivingTest:
-                    throw new NotImplementedException();
+                    TestAppointmentCard drivingTestAppointmentCard = new TestAppointmentCard(selectedID, AppSettings.TestType.Driving);
+                    using (FrmHost frmHost = new FrmHost(drivingTestAppointmentCard))
+                    {
+                        frmHost.ShowDialog();
+                    }
                     break;
                 default:
                     break;

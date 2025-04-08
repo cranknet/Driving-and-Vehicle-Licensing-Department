@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-
 namespace DVLD_Data
 {
     public class TestAppointmentDAL
@@ -29,8 +28,7 @@ namespace DVLD_Data
             }
             return null;
         }
-
-        public static bool FindBy(int testAppointmentID, ref int testTypeID, ref int lDLAppID, ref DateTime appointmentDate, ref double paidFees, ref int createdByUserID, ref bool isLocked)
+        public static bool FindBy(int testAppointmentID, ref int testTypeID, ref int lDLAppID, ref DateTime appointmentDate, ref decimal paidFees, ref int createdByUserID, ref bool isLocked)
         {
             bool isFound = false;
             string query = @"SELECT TestAppointmentID, TestTypeID, LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, CreatedByUserID, IsLocked
@@ -49,9 +47,9 @@ namespace DVLD_Data
                         isFound = true;
                         testAppointmentID = (int)reader["TestAppointmentID"];
                         testTypeID = (int)reader["TestTypeID"];
-                        lDLAppID = (int)reader["LDLAppID"];
+                        lDLAppID = (int)reader["LocalDrivingLicenseApplicationID"];
                         appointmentDate = (DateTime)reader["AppointmentDate"];
-                        paidFees = (double)reader["PaidFees"];
+                        paidFees = (decimal)reader["PaidFees"];
                         createdByUserID = (int)reader["CreatedByUserID"];
                         isLocked = (bool)reader["IsLocked"];
                     }
@@ -67,7 +65,7 @@ namespace DVLD_Data
             }
             return isFound;
         }
-        public static int AddTestAppointment(int testTypeID, int lDLAppID, DateTime appointmentDate, double paidFees, int createdByUserID, bool isLocked)
+        public static int AddTestAppointment(int testTypeID, int lDLAppID, DateTime appointmentDate, decimal paidFees, int createdByUserID, bool isLocked)
         {
             string query = @"INSERT INTO TestAppointments (TestTypeID, LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, CreatedByUserID, IsLocked)
                              VALUES (@TestTypeID, @LDLAppID, @AppointmentDate, @PaidFees, @CreatedByUserID, @IsLocked);
@@ -137,6 +135,50 @@ namespace DVLD_Data
                 }
             }
             return false;
+        }
+        public static bool DoesActiveTestAppointmentExist(int testTypeID, int lDlAppID)
+        {
+            string query = @"SELECT COUNT(*) FROM TestAppointments 
+                             WHERE TestTypeID = @TestTypeID 
+                             AND LocalDrivingLicenseApplicationID = @LDLAppID";
+            using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                command.Parameters.Add(DatabaseHelper.CreateParameter("@TestTypeID", SqlDbType.Int, testTypeID));
+                command.Parameters.Add(DatabaseHelper.CreateParameter("LDLAppID", SqlDbType.Int, lDlAppID));
+                try
+                {
+                    sqlConnection.Open();
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"TestAppointmentDAL DoesActiveTestAppointmentExist : SQL Error -> {ex.Message}");
+                    return false;
+                }
+            }
+        }
+        public static bool DoesTestAppointmentExist(int testAppointmentID)
+        {
+            string query = @"SELECT COUNT(*) FROM TestAppointments 
+                             WHERE TestAppointmentID = @TestAppointmentID";
+            using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                command.Parameters.Add(DatabaseHelper.CreateParameter("@TestAppointmentID", SqlDbType.Int, testAppointmentID));
+                try
+                {
+                    sqlConnection.Open();
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"TestAppointmentDAL DoesActiveTestAppointmentExist : SQL Error -> {ex.Message}");
+                    return false;
+                }
+            }
         }
     }
 }
