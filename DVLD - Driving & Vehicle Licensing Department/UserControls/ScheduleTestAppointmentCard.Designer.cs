@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduleTestAppointmentCard));
             this.panelHeader = new System.Windows.Forms.Panel();
-            this.PictureBoxClose = new System.Windows.Forms.PictureBox();
             this.LabelScheduleTestTitle = new System.Windows.Forms.Label();
             this.GroupBoxTestTypeValue = new System.Windows.Forms.GroupBox();
+            this.dateTimePickerScheduleTestDateValue = new System.Windows.Forms.DateTimePicker();
             this.LabelTotalFeesValue = new System.Windows.Forms.Label();
             this.LabelTotalFees = new System.Windows.Forms.Label();
             this.GroupBoxRetakeTest = new System.Windows.Forms.GroupBox();
@@ -54,11 +54,11 @@
             this.LabelApplicationID = new System.Windows.Forms.Label();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonClose = new System.Windows.Forms.Button();
-            this.dateTimePickerScheduleTestDateValue = new System.Windows.Forms.DateTimePicker();
+            this.PictureBoxClose = new System.Windows.Forms.PictureBox();
             this.panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).BeginInit();
             this.GroupBoxTestTypeValue.SuspendLayout();
             this.GroupBoxRetakeTest.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -71,18 +71,6 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(398, 45);
             this.panelHeader.TabIndex = 23;
-            // 
-            // PictureBoxClose
-            // 
-            this.PictureBoxClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxClose.Image")));
-            this.PictureBoxClose.Location = new System.Drawing.Point(363, -1);
-            this.PictureBoxClose.Name = "PictureBoxClose";
-            this.PictureBoxClose.Size = new System.Drawing.Size(37, 43);
-            this.PictureBoxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PictureBoxClose.TabIndex = 17;
-            this.PictureBoxClose.TabStop = false;
-            this.PictureBoxClose.Click += new System.EventHandler(this.PictureBoxClose_Click);
             // 
             // LabelScheduleTestTitle
             // 
@@ -120,6 +108,13 @@
             this.GroupBoxTestTypeValue.TabIndex = 25;
             this.GroupBoxTestTypeValue.TabStop = false;
             this.GroupBoxTestTypeValue.Text = "Test Type";
+            // 
+            // dateTimePickerScheduleTestDateValue
+            // 
+            this.dateTimePickerScheduleTestDateValue.Location = new System.Drawing.Point(126, 283);
+            this.dateTimePickerScheduleTestDateValue.Name = "dateTimePickerScheduleTestDateValue";
+            this.dateTimePickerScheduleTestDateValue.Size = new System.Drawing.Size(200, 29);
+            this.dateTimePickerScheduleTestDateValue.TabIndex = 48;
             // 
             // LabelTotalFeesValue
             // 
@@ -349,13 +344,19 @@
             this.ButtonClose.TabStop = false;
             this.ButtonClose.Text = "CLOSE";
             this.ButtonClose.UseVisualStyleBackColor = false;
+            this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
-            // dateTimePickerScheduleTestDateValue
+            // PictureBoxClose
             // 
-            this.dateTimePickerScheduleTestDateValue.Location = new System.Drawing.Point(126, 283);
-            this.dateTimePickerScheduleTestDateValue.Name = "dateTimePickerScheduleTestDateValue";
-            this.dateTimePickerScheduleTestDateValue.Size = new System.Drawing.Size(200, 29);
-            this.dateTimePickerScheduleTestDateValue.TabIndex = 48;
+            this.PictureBoxClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxClose.Image")));
+            this.PictureBoxClose.Location = new System.Drawing.Point(363, -1);
+            this.PictureBoxClose.Name = "PictureBoxClose";
+            this.PictureBoxClose.Size = new System.Drawing.Size(37, 43);
+            this.PictureBoxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBoxClose.TabIndex = 17;
+            this.PictureBoxClose.TabStop = false;
+            this.PictureBoxClose.Click += new System.EventHandler(this.PictureBoxClose_Click);
             // 
             // ScheduleTestAppointmentCard
             // 
@@ -372,11 +373,11 @@
             this.Size = new System.Drawing.Size(398, 598);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).EndInit();
             this.GroupBoxTestTypeValue.ResumeLayout(false);
             this.GroupBoxTestTypeValue.PerformLayout();
             this.GroupBoxRetakeTest.ResumeLayout(false);
             this.GroupBoxRetakeTest.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).EndInit();
             this.ResumeLayout(false);
 
         }

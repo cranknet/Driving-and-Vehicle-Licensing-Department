@@ -12,24 +12,14 @@ namespace DVLD_UI.UserControls.Cards
         private User _User;
         private ApplicationType _ApplicationType;
         private TestType _TestType;
+        private TestAppointment _TestAppointment;
         public int SelectedTestAppointmentID { get; private set; }
         public int TestTypeID { get; private set; }
         public int LDLAppID { get; private set; }
 
         private void InitializeValues(int ldlAppID, AppSettings.TestType testType)
         {
-            _LocalDLApplication = LDLApplication.Find(ldlAppID);
-            if (_LocalDLApplication != null)
-            {
-                LDLAppID = _LocalDLApplication.LDLApplicationID;
-                _Application = clsApplication.Find(_LocalDLApplication.ApplicationID);
-                _ApplicationType = ApplicationType.Find(_Application.ApplicationTypeID);
-                _TestType = TestType.Find((int)testType);
-                TestTypeID = _TestType.TestTypeID;
-                _LicenseClass = LicenseClass.Find(_LocalDLApplication.LicenseClassID);
-                _Person = People.FindByPersonID(_Application.ApplicantPersonID);
-                _User = User.Find(_Application.CreatedByUserID);
-            }
+
             // Change UserControl Title based on Test Type
             LabelTestType.Text = string.Format(AppSettings.TestAppointmentTypeTitle, _TestType.Title);
 

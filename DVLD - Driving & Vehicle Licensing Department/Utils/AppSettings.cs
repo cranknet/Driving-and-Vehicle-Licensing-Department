@@ -64,6 +64,11 @@
         public const string ScheduleTestTitle = "Schedule {0}";
         public const string TestAppointmentLoadFailedFromCell = "Couldn't load the Test Appointment from the selected cell, invalid ID received!";
         public const string TestAppointmentScheduledSuccessfully = "Test Appointment has been scheduled successfully!";
+        // Take Test
+        public const string TakeTestTitle = "Take {0} Test";
+        public const string TakeTestSuccessUpdate = "Test updated successfully!";
+        public const string TakeTestSuccessAdded = "Test added successfully!";
+        public const string TakeTestFailAdd = "Couldn't add test!";
 
 
         public enum MenuItem

@@ -140,7 +140,7 @@ namespace DVLD_Data
         {
             string query = @"SELECT COUNT(*) FROM TestAppointments 
                              WHERE TestTypeID = @TestTypeID 
-                             AND LocalDrivingLicenseApplicationID = @LDLAppID";
+                             AND LocalDrivingLicenseApplicationID = @LDLAppID AND IsLocked = 1;";
             using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand command = new SqlCommand(query, sqlConnection))
             {
@@ -170,15 +170,43 @@ namespace DVLD_Data
                 try
                 {
                     sqlConnection.Open();
-                    int count = (int)command.ExecuteScalar();
-                    return count > 0;
+                    object result = command.ExecuteScalar();
+                    if (result is int testAppointmentExists && testAppointmentExists > 0)
+                    {
+                        return true;
+                    }
                 }
                 catch (SqlException ex)
                 {
                     Console.WriteLine($"TestAppointmentDAL DoesActiveTestAppointmentExist : SQL Error -> {ex.Message}");
-                    return false;
                 }
             }
+            return false;
+
+        }
+        public static bool GetTestAppointmentLockedStatus(int testAppointmentID)
+        {
+            string query = @"SELECT Top 1 IsLocked FROM TestAppointments 
+                             WHERE TestAppointmentID = @TestAppointmentID";
+            using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                command.Parameters.Add(DatabaseHelper.CreateParameter("@TestAppointmentID", SqlDbType.Int, testAppointmentID));
+                try
+                {
+                    sqlConnection.Open();
+                    object result = command.ExecuteScalar();
+                    if (result is bool isLocked)
+                    {
+                        return isLocked;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"TestAppointmentDAL GetTestAppointmentLockedStatus  : SQL Error -> {ex.Message}");
+                }
+            }
+            return false;
         }
     }
 }

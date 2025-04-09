@@ -23,5 +23,10 @@ namespace DVLD_UI.UserControls.Cards
         {
             if (Save()) MessageBox.Show(AppSettings.TestAppointmentScheduledSuccessfully);
         }
+
+        private void ButtonClose_Click(object sender, System.EventArgs e)
+        {
+            this.FindForm().Close();
+        }
     }
 }

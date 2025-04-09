@@ -70,6 +70,10 @@ namespace DVLD_Logic
         {
             return TestAppointmentDAL.DoesActiveTestAppointmentExist(testTypeID, lDLAppID);
         }
+        public static bool GetTestAppointmentLockedStatus(int testAppointmentID)
+        {
+            return TestAppointmentDAL.GetTestAppointmentLockedStatus(testAppointmentID);
+        }
         public static bool TestAppointmentExistsBy(int testAppointmentID)
         {
             return TestAppointmentDAL.DoesTestAppointmentExist(testAppointmentID);
