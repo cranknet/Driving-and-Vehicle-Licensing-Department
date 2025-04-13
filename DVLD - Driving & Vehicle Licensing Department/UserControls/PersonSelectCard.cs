@@ -1,5 +1,5 @@
 ﻿using DVLD_Logic;
-using DVLD_UI.Utils;
+using DVLD_UI.Config;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -16,11 +16,11 @@ namespace DVLD_UI.UserControls.Cards
             selectPersonCardGridView.DataSource = personDataSource;
             filterOptionsUC.txtFilterValue.TextChanged += (s, e) => ApplyFilter();
             filterOptionsUC.cmbFilterOptions.SelectedIndexChanged += (s, e) => ApplyFilter();
-            Utils.Utils.LoadFilterOptions(selectPersonCardGridView, filterOptionsUC.cmbFilterOptions);
+            Utils.LoadFilterOptions(selectPersonCardGridView, filterOptionsUC.cmbFilterOptions);
         }
         private void ApplyFilter()
         {
-            Utils.Utils.ApplyFilter(selectPersonCardGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
+            Utils.ApplyFilter(selectPersonCardGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
         }
         private void pbCloseCard_Click(object sender, System.EventArgs e)
         {

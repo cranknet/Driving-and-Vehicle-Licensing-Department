@@ -14,7 +14,7 @@ namespace DVLD_Data
                              	   WHEN 2 THEN 'Cancelled'
                              	   WHEN 3 THEN 'Completed'
                              	   ELSE 'None'
-                             END AS Status
+                             END AS ApplicationStatus
                              FROM   LocalDrivingLicenseApplications INNER JOIN Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
 				             INNER JOIN LicenseClasses ON LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID
 				             INNER JOIN People ON Applications.ApplicantPersonID = People.PersonID;";
@@ -53,28 +53,6 @@ namespace DVLD_Data
                 return result != null ? Convert.ToInt32(result) : -1;
             }
         }
-        public static bool AddLocalLicenseApplication(int applicationType, int licenseClassID)
-        {
-            string query = @"INSERT INTO LocalDrivingLicenseApplications (ApplicationID, LicenseClassID)
-                             OUTPUT INSERTED.ApplicationID
-                             VALUES (@ApplicationID, @LicenseClassID)";
-            using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
-            using (SqlCommand cmd = new SqlCommand(query, connection))
-            {
-                cmd.Parameters.AddWithValue("@ApplicationID", applicationType);
-                cmd.Parameters.AddWithValue("@LicenseClassID", licenseClassID);
-                try
-                {
-                    connection.Open();
-                    return (int)cmd.ExecuteScalar() > 0;
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine($"AddLocalLicenseApplication: Error adding new application: {ex.Message}");
-                }
-            }
-            return false;
-        }
         public static bool FindBy(int ldlApplicationID, ref int licenseClassID, ref int applicationID)
         {
             bool isFound = false;
@@ -103,7 +81,7 @@ namespace DVLD_Data
             }
             return isFound;
         }
-        public static int AddNewLDLApplication(int licenseClassID, int applicationID)
+        public static int AddNewLDLApplication(int applicationID, int licenseClassID)
         {
             string query = @"INSERT INTO LocalDrivingLicenseApplications (LicenseClassID, ApplicationID)
                              OUTPUT INSERTED.LocalDrivingLicenseApplicationID

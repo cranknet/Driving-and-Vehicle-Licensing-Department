@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScheduleTestAppointmentCard));
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.PictureBoxClose = new System.Windows.Forms.PictureBox();
             this.LabelScheduleTestTitle = new System.Windows.Forms.Label();
             this.GroupBoxTestTypeValue = new System.Windows.Forms.GroupBox();
             this.dateTimePickerScheduleTestDateValue = new System.Windows.Forms.DateTimePicker();
@@ -54,11 +55,10 @@
             this.LabelApplicationID = new System.Windows.Forms.Label();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonClose = new System.Windows.Forms.Button();
-            this.PictureBoxClose = new System.Windows.Forms.PictureBox();
             this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).BeginInit();
             this.GroupBoxTestTypeValue.SuspendLayout();
             this.GroupBoxRetakeTest.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -71,6 +71,18 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(398, 45);
             this.panelHeader.TabIndex = 23;
+            // 
+            // PictureBoxClose
+            // 
+            this.PictureBoxClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxClose.Image")));
+            this.PictureBoxClose.Location = new System.Drawing.Point(363, -1);
+            this.PictureBoxClose.Name = "PictureBoxClose";
+            this.PictureBoxClose.Size = new System.Drawing.Size(37, 43);
+            this.PictureBoxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBoxClose.TabIndex = 17;
+            this.PictureBoxClose.TabStop = false;
+            this.PictureBoxClose.Click += new System.EventHandler(this.PictureBoxClose_Click);
             // 
             // LabelScheduleTestTitle
             // 
@@ -142,6 +154,7 @@
             this.GroupBoxRetakeTest.Controls.Add(this.LabelRetakeTestFee);
             this.GroupBoxRetakeTest.Controls.Add(this.LabelRetakeTestApplicationIDValue);
             this.GroupBoxRetakeTest.Controls.Add(this.LabelRetakeTestApplicationID);
+            this.GroupBoxRetakeTest.Enabled = false;
             this.GroupBoxRetakeTest.Location = new System.Drawing.Point(6, 348);
             this.GroupBoxRetakeTest.Name = "GroupBoxRetakeTest";
             this.GroupBoxRetakeTest.Size = new System.Drawing.Size(382, 100);
@@ -346,18 +359,6 @@
             this.ButtonClose.UseVisualStyleBackColor = false;
             this.ButtonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
-            // PictureBoxClose
-            // 
-            this.PictureBoxClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxClose.Image")));
-            this.PictureBoxClose.Location = new System.Drawing.Point(363, -1);
-            this.PictureBoxClose.Name = "PictureBoxClose";
-            this.PictureBoxClose.Size = new System.Drawing.Size(37, 43);
-            this.PictureBoxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PictureBoxClose.TabIndex = 17;
-            this.PictureBoxClose.TabStop = false;
-            this.PictureBoxClose.Click += new System.EventHandler(this.PictureBoxClose_Click);
-            // 
             // ScheduleTestAppointmentCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -373,11 +374,11 @@
             this.Size = new System.Drawing.Size(398, 598);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).EndInit();
             this.GroupBoxTestTypeValue.ResumeLayout(false);
             this.GroupBoxTestTypeValue.PerformLayout();
             this.GroupBoxRetakeTest.ResumeLayout(false);
             this.GroupBoxRetakeTest.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\AppSettings.cs" />
     <Compile Include="clsApplication.cs" />
     <Compile Include="ApplicationType.cs" />
+    <Compile Include="Config\DataCache.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="LDLApplication.cs" />
@@ -53,7 +55,6 @@
     <Compile Include="Test.cs" />
     <Compile Include="TestType.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="DataCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

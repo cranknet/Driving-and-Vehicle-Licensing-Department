@@ -62,6 +62,14 @@ namespace DVLD_Logic
                 return null;
             }
         }
+        public static bool DoesTestExistsByAppointmentID(int testAppointmentID)
+        {
+            return TestDAL.DoesTestExistsBy(testAppointmentID);
+        }
+        public static bool GetTestResultStatus(int testAppointmentID)
+        {
+            return TestDAL.GetTestResultStatusByTestAppointmentID(testAppointmentID);
+        }
         private bool _Add()
         {
             this.TestID = TestDAL.AddTest(TestAppointmentID, TestResult, Notes, CreatedByUserID);

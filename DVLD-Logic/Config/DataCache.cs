@@ -1,6 +1,5 @@
-﻿using DVLD_Logic;
-using System.Data;
-namespace DVLD_Data
+﻿using System.Data;
+namespace DVLD_Logic.Config
 {
     public class DataCache
     {

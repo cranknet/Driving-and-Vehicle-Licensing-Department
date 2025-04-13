@@ -1,23 +1,25 @@
-﻿using DVLD_Data;
-using DVLD_Logic;
-using DVLD_UI.Utils;
+﻿using DVLD_Logic;
+using DVLD_Logic.Config;
+using DVLD_UI.Config;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using AppSettings = DVLD_Logic.AppSettings;
 namespace DVLD_UI.UserControls.Cards
 {
     public partial class AddLDLApplicationCard : UserControl
     {
-        clsApplication LocalLicenseApplication;
+        clsApplication _LocalDrivingLicenseApplication;
         People Person { get; set; }
         User CreatedByUser { get; set; }
         ApplicationType LocalLicenseType { get; set; }
+        LDLApplication _LDLApplication;
         public AddLDLApplicationCard()
         {
             InitializeComponent();
-            Utils.Utils.LoadLicenseClasses(cmbApplicationLicenseClass, new DataTable());
-            LocalLicenseApplication = new clsApplication();
-            LocalLicenseType = ApplicationType.Find(1);
+            Utils.LoadLicenseClasses(cmbApplicationLicenseClass, new DataTable());
+            _LocalDrivingLicenseApplication = new clsApplication();
+            LocalLicenseType = ApplicationType.Find((int)AppSettings.EnApplicationTypes.LocalDrivingLicense);
             CreatedByUser = User.Find(AppSettings.LoggedUserID);
             LoadFieldsValues();
         }
@@ -48,7 +50,7 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void LoadFieldsValues()
         {
-            lblApplicationID.Text = $"{LocalLicenseApplication.ApplicationID}";
+            lblApplicationID.Text = $"{_LocalDrivingLicenseApplication.ApplicationID}";
             lblApplicationDate.Text = $"{DateTime.Now.ToShortDateString()}";
             lblApplicationFees.Text = $"{LocalLicenseType?.Fees ?? 0}";
             lblApplicationCreatedByUserID.Text = $"{CreatedByUser?.UserID ?? -1}";
@@ -70,30 +72,39 @@ namespace DVLD_UI.UserControls.Cards
         private bool SaveApplication()
         {
             if (!ValidateFields()) return false;
-            LocalLicenseApplication.ApplicantPersonID = Person.PersonID;
-            LocalLicenseApplication.ApplicationDate = DateTime.Now;
-            LocalLicenseApplication.ApplicationTypeID = LocalLicenseType.ID;
-            LocalLicenseApplication.ApplicationStatus = 1;
-            LocalLicenseApplication.LastStatusDate = DateTime.Now;
-            LocalLicenseApplication.PaidFees = LocalLicenseType.Fees;
-            LocalLicenseApplication.CreatedByUserID = CreatedByUser.UserID;
-            LocalLicenseApplication.LicenseClassID = Convert.ToInt32(cmbApplicationLicenseClass.SelectedValue);
-            int existingApplicationID = LocalLicenseApplication.CheckLDLApplicationExists();
+            _LocalDrivingLicenseApplication.ApplicantPersonID = Person.PersonID;
+            _LocalDrivingLicenseApplication.ApplicationDate = DateTime.Now;
+            _LocalDrivingLicenseApplication.ApplicationTypeID = LocalLicenseType.ID;
+            _LocalDrivingLicenseApplication.ApplicationStatus = 1;
+            _LocalDrivingLicenseApplication.LastStatusDate = DateTime.Now;
+            _LocalDrivingLicenseApplication.PaidFees = LocalLicenseType.Fees;
+            _LocalDrivingLicenseApplication.CreatedByUserID = CreatedByUser.UserID;
+            int licenseClassID = Convert.ToInt32(cmbApplicationLicenseClass.SelectedValue);
+            int existingApplicationID = LDLApplication.CheckLDLApplicationExists(Person.PersonID, licenseClassID, (int)AppSettings.EnApplicationStatus.New);
             if (existingApplicationID != -1)
             {
                 MessageBox.Show(string.Format(AppSettings.ApplicationAlreadyExists, existingApplicationID), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            return LocalLicenseApplication.Save();
+            if (_LocalDrivingLicenseApplication.Mode == AppSettings.EnMode.AddNew)
+            {
+                if (!_LocalDrivingLicenseApplication.Save())
+                    return false;
+                _LDLApplication = new LDLApplication
+                {
+                    ApplicationID = _LocalDrivingLicenseApplication.ApplicationID,
+                    LicenseClassID = licenseClassID
+                };
+                return _LDLApplication.Save();
+            }
+            return _LocalDrivingLicenseApplication.Save();
         }
         private void btnSaveApplication_Click(object sender, EventArgs e)
         {
             if (SaveApplication())
             {
-
                 MessageBox.Show(AppSettings.LocalDLDAddedSuccess, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.FindForm()?.Close();
-
             }
             else
             {

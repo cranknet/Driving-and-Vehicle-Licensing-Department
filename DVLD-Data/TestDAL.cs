@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 namespace DVLD_Data
 {
@@ -119,6 +120,55 @@ namespace DVLD_Data
                 catch (SqlException ex)
                 {
                     Console.WriteLine($"TestDAL UpdateTest : SQL Error -> {ex.Message}");
+                }
+            }
+            return false;
+        }
+        public static bool DoesTestExistsBy(int testAppointmentID)
+        {
+            string query = @"SELECT COUNT(*) FROM Tests 
+                             WHERE TestAppointmentID = @TestAppointmentID";
+            using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                command.Parameters.Add(DatabaseHelper.CreateParameter("@TestAppointmentID", SqlDbType.Int, testAppointmentID));
+                try
+                {
+                    sqlConnection.Open();
+                    object result = command.ExecuteScalar();
+                    if (result is int testAppointmentExists && testAppointmentExists > 0)
+                    {
+                        return true;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"TestDAL TestExistsByAppointmentID : SQL Error -> {ex.Message}");
+                }
+            }
+            return false;
+
+        }
+        public static bool GetTestResultStatusByTestAppointmentID(int testAppointmentID)
+        {
+            string query = @"SELECT TOP 1 TestResult FROM Tests 
+                             WHERE TestAppointmentID = @TestAppointmentID;";
+            using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                command.Parameters.Add(DatabaseHelper.CreateParameter("@TestAppointmentID", SqlDbType.Int, testAppointmentID));
+                try
+                {
+                    sqlConnection.Open();
+                    object result = command.ExecuteScalar();
+                    if (result != DBNull.Value && result is bool testResult)
+                    {
+                        return testResult;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"TestDAL GetTestResult  : SQL Error -> {ex.Message}");
                 }
             }
             return false;

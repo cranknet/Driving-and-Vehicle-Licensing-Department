@@ -32,6 +32,7 @@
             this.ButtonClose = new System.Windows.Forms.Button();
             this.LabelScheduledTestValue = new System.Windows.Forms.Label();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.PictureBoxClose = new System.Windows.Forms.PictureBox();
             this.LabelTakTestTitle = new System.Windows.Forms.Label();
             this.LabelTestFeesValue = new System.Windows.Forms.Label();
             this.LabelTestTrialValue = new System.Windows.Forms.Label();
@@ -46,18 +47,17 @@
             this.LabelApplicationID = new System.Windows.Forms.Label();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.GroupBoxTestTypeValue = new System.Windows.Forms.GroupBox();
-            this.PictureBoxClose = new System.Windows.Forms.PictureBox();
-            this.LabelScheduledTestDateValue = new System.Windows.Forms.Label();
             this.LabelTestIDValue = new System.Windows.Forms.Label();
             this.LabelTestID = new System.Windows.Forms.Label();
+            this.LabelScheduledTestDateValue = new System.Windows.Forms.Label();
             this.RadioButtonPass = new System.Windows.Forms.RadioButton();
             this.LabelNotes = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.RadioButtonFail = new System.Windows.Forms.RadioButton();
             this.TextBoxNotesValue = new System.Windows.Forms.TextBox();
             this.panelHeader.SuspendLayout();
-            this.GroupBoxTestTypeValue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).BeginInit();
+            this.GroupBoxTestTypeValue.SuspendLayout();
             this.SuspendLayout();
             // 
             // ButtonClose
@@ -99,6 +99,18 @@
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(398, 45);
             this.panelHeader.TabIndex = 41;
+            // 
+            // PictureBoxClose
+            // 
+            this.PictureBoxClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxClose.Image")));
+            this.PictureBoxClose.Location = new System.Drawing.Point(363, -1);
+            this.PictureBoxClose.Name = "PictureBoxClose";
+            this.PictureBoxClose.Size = new System.Drawing.Size(37, 43);
+            this.PictureBoxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBoxClose.TabIndex = 17;
+            this.PictureBoxClose.TabStop = false;
+            this.PictureBoxClose.Click += new System.EventHandler(this.PictureBoxClose_Click);
             // 
             // LabelTakTestTitle
             // 
@@ -263,28 +275,6 @@
             this.GroupBoxTestTypeValue.TabStop = false;
             this.GroupBoxTestTypeValue.Text = "Test Type";
             // 
-            // PictureBoxClose
-            // 
-            this.PictureBoxClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxClose.Image")));
-            this.PictureBoxClose.Location = new System.Drawing.Point(363, -1);
-            this.PictureBoxClose.Name = "PictureBoxClose";
-            this.PictureBoxClose.Size = new System.Drawing.Size(37, 43);
-            this.PictureBoxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PictureBoxClose.TabIndex = 17;
-            this.PictureBoxClose.TabStop = false;
-            this.PictureBoxClose.Click += new System.EventHandler(this.PictureBoxClose_Click);
-            // 
-            // LabelScheduledTestDateValue
-            // 
-            this.LabelScheduledTestDateValue.AutoSize = true;
-            this.LabelScheduledTestDateValue.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelScheduledTestDateValue.Location = new System.Drawing.Point(184, 302);
-            this.LabelScheduledTestDateValue.Name = "LabelScheduledTestDateValue";
-            this.LabelScheduledTestDateValue.Size = new System.Drawing.Size(96, 21);
-            this.LabelScheduledTestDateValue.TabIndex = 48;
-            this.LabelScheduledTestDateValue.Text = "00/00/0000";
-            // 
             // LabelTestIDValue
             // 
             this.LabelTestIDValue.AutoSize = true;
@@ -304,6 +294,16 @@
             this.LabelTestID.Size = new System.Drawing.Size(65, 21);
             this.LabelTestID.TabIndex = 49;
             this.LabelTestID.Text = "Test ID:";
+            // 
+            // LabelScheduledTestDateValue
+            // 
+            this.LabelScheduledTestDateValue.AutoSize = true;
+            this.LabelScheduledTestDateValue.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelScheduledTestDateValue.Location = new System.Drawing.Point(184, 302);
+            this.LabelScheduledTestDateValue.Name = "LabelScheduledTestDateValue";
+            this.LabelScheduledTestDateValue.Size = new System.Drawing.Size(96, 21);
+            this.LabelScheduledTestDateValue.TabIndex = 48;
+            this.LabelScheduledTestDateValue.Text = "00/00/0000";
             // 
             // RadioButtonPass
             // 
@@ -330,11 +330,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(39, 440);
+            this.label2.Location = new System.Drawing.Point(9, 440);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 21);
+            this.label2.Size = new System.Drawing.Size(91, 21);
             this.label2.TabIndex = 52;
-            this.label2.Text = "Date:";
+            this.label2.Text = "Test Result";
             // 
             // RadioButtonFail
             // 
@@ -374,9 +374,9 @@
             this.Size = new System.Drawing.Size(398, 598);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).EndInit();
             this.GroupBoxTestTypeValue.ResumeLayout(false);
             this.GroupBoxTestTypeValue.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClose)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -43,9 +43,13 @@ namespace DVLD_Logic
         {
             return LDLApplicationDAL.GetLDLApplications();
         }
+        public static int CheckLDLApplicationExists(int applicantPersonID, int licenseClassID, int applicationStatus)
+        {
+            return LDLApplicationDAL.GetActiveLDLApplicationIDForLicenseClass(applicantPersonID, licenseClassID, applicationStatus);
+        }
         private bool _Add()
         {
-            this.LDLApplicationID = LDLApplicationDAL.AddNewLDLApplication(LicenseClassID, ApplicationID);
+            this.LDLApplicationID = LDLApplicationDAL.AddNewLDLApplication(ApplicationID, LicenseClassID);
             return LDLApplicationID != -1;
         }
         private bool _Update()

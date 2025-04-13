@@ -18,6 +18,8 @@ namespace DVLD_Logic
         public decimal PaidFees { get; set; }
         public int CreatedByUserID { get; set; }
         public bool IsLocked { get; set; }
+        public int RetakeTestApplicationID { get; set; }
+
         public TestAppointment()
         {
             TestAppointmentID = -1;
@@ -27,9 +29,10 @@ namespace DVLD_Logic
             PaidFees = 0;
             CreatedByUserID = -1;
             IsLocked = false;
+            RetakeTestApplicationID = -1;
             Mode = EnMode.AddNew;
         }
-        private TestAppointment(int testAppointmentID, int testTypeID, int lDLAppID, DateTime appointmentDate, decimal paidFees, int createdByUserID, bool isLocked)
+        private TestAppointment(int testAppointmentID, int testTypeID, int lDLAppID, DateTime appointmentDate, decimal paidFees, int createdByUserID, bool isLocked, int retakeTestApplicationID)
         {
             TestAppointmentID = testAppointmentID;
             TestTypeID = testTypeID;
@@ -38,6 +41,7 @@ namespace DVLD_Logic
             PaidFees = paidFees;
             CreatedByUserID = createdByUserID;
             IsLocked = isLocked;
+            RetakeTestApplicationID = retakeTestApplicationID;
             Mode = EnMode.Update;
         }
         public static TestAppointment Find(int testAppointmentID)
@@ -48,9 +52,10 @@ namespace DVLD_Logic
             decimal paidFees = 0;
             int createdByUserID = -1;
             bool isLocked = false;
-            if (TestAppointmentDAL.FindBy(testAppointmentID, ref testTypeID, ref lDLAppID, ref appointmentDate, ref paidFees, ref createdByUserID, ref isLocked))
+            int retakeTestApplicationID = -1;
+            if (TestAppointmentDAL.FindBy(testAppointmentID, ref testTypeID, ref lDLAppID, ref appointmentDate, ref paidFees, ref createdByUserID, ref isLocked, ref retakeTestApplicationID))
             {
-                return new TestAppointment(testAppointmentID, testTypeID, lDLAppID, appointmentDate, paidFees, createdByUserID, isLocked);
+                return new TestAppointment(testAppointmentID, testTypeID, lDLAppID, appointmentDate, paidFees, createdByUserID, isLocked, retakeTestApplicationID);
             }
             else
             {
@@ -78,9 +83,13 @@ namespace DVLD_Logic
         {
             return TestAppointmentDAL.DoesTestAppointmentExist(testAppointmentID);
         }
+        public static int GetLastTestAppointmentID(int testTypeID, int lDlAppID, bool isLocked = true)
+        {
+            return TestAppointmentDAL.GetLatestAppointmentIDBy(testTypeID, lDlAppID, isLocked);
+        }
         private bool _Add()
         {
-            this.TestAppointmentID = TestAppointmentDAL.AddTestAppointment(TestTypeID, LDLAppID, AppointmentDate, PaidFees, CreatedByUserID, IsLocked);
+            this.TestAppointmentID = TestAppointmentDAL.AddTestAppointment(TestTypeID, LDLAppID, AppointmentDate, PaidFees, CreatedByUserID, IsLocked, RetakeTestApplicationID);
             return this.TestAppointmentID != -1;
         }
         private bool _Update()

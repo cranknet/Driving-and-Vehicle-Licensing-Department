@@ -28,10 +28,10 @@ namespace DVLD_Data
             }
             return null;
         }
-        public static bool FindBy(int testAppointmentID, ref int testTypeID, ref int lDLAppID, ref DateTime appointmentDate, ref decimal paidFees, ref int createdByUserID, ref bool isLocked)
+        public static bool FindBy(int testAppointmentID, ref int testTypeID, ref int lDLAppID, ref DateTime appointmentDate, ref decimal paidFees, ref int createdByUserID, ref bool isLocked, ref int retakeTestApplicationID)
         {
             bool isFound = false;
-            string query = @"SELECT TestAppointmentID, TestTypeID, LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, CreatedByUserID, IsLocked
+            string query = @"SELECT TestAppointmentID, TestTypeID, LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, CreatedByUserID, IsLocked, RetakeTestApplicationID
                              FROM TestAppointments
                              WHERE TestAppointmentID = @TestAppointmentID";
             using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
@@ -52,6 +52,7 @@ namespace DVLD_Data
                         paidFees = (decimal)reader["PaidFees"];
                         createdByUserID = (int)reader["CreatedByUserID"];
                         isLocked = (bool)reader["IsLocked"];
+                        retakeTestApplicationID = reader["RetakeTestApplicationID"] != DBNull.Value ? (int)reader["RetakeTestApplicationID"] : -1;
                     }
                     else
                     {
@@ -65,11 +66,12 @@ namespace DVLD_Data
             }
             return isFound;
         }
-        public static int AddTestAppointment(int testTypeID, int lDLAppID, DateTime appointmentDate, decimal paidFees, int createdByUserID, bool isLocked)
+        public static int AddTestAppointment(int testTypeID, int lDLAppID, DateTime appointmentDate, decimal paidFees, int createdByUserID, bool isLocked, int retakeTestApplicationID)
         {
-            string query = @"INSERT INTO TestAppointments (TestTypeID, LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, CreatedByUserID, IsLocked)
-                             VALUES (@TestTypeID, @LDLAppID, @AppointmentDate, @PaidFees, @CreatedByUserID, @IsLocked);
+            string query = @"INSERT INTO TestAppointments (TestTypeID, LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, CreatedByUserID, IsLocked, RetakeTestApplicationID)
+                             VALUES (@TestTypeID, @LDLAppID, @AppointmentDate, @PaidFees, @CreatedByUserID, @IsLocked, @RetakeTestApplicationID);
                              SELECT SCOPE_IDENTITY();";
+
             using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -79,6 +81,15 @@ namespace DVLD_Data
                 command.Parameters.AddWithValue("@PaidFees", paidFees);
                 command.Parameters.AddWithValue("@CreatedByUserID", createdByUserID);
                 command.Parameters.AddWithValue("@IsLocked", isLocked);
+                if (retakeTestApplicationID != -1)
+                {
+                    command.Parameters.AddWithValue("@RetakeTestApplicationID", retakeTestApplicationID);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@RetakeTestApplicationID", DBNull.Value);
+                }
+
                 try
                 {
                     connection.Open();
@@ -140,7 +151,7 @@ namespace DVLD_Data
         {
             string query = @"SELECT COUNT(*) FROM TestAppointments 
                              WHERE TestTypeID = @TestTypeID 
-                             AND LocalDrivingLicenseApplicationID = @LDLAppID AND IsLocked = 1;";
+                             AND LocalDrivingLicenseApplicationID = @LDLAppID AND IsLocked = 0;";
             using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand command = new SqlCommand(query, sqlConnection))
             {
@@ -207,6 +218,34 @@ namespace DVLD_Data
                 }
             }
             return false;
+        }
+        public static int GetLatestAppointmentIDBy(int testTypeID, int lDlAppID, bool isLocked)
+        {
+            string query = @"SELECT TOP 1 TestAppointmentID FROM TestAppointments 
+                             WHERE TestTypeID = @TestTypeID
+                             AND LocalDrivingLicenseApplicationID = @LDLAppID AND IsLocked = @IsLocked
+                             ORDER BY TestAppointmentID DESC;";
+            using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                command.Parameters.Add(DatabaseHelper.CreateParameter("@TestTypeID", SqlDbType.Int, testTypeID));
+                command.Parameters.Add(DatabaseHelper.CreateParameter("@LDLAppID", SqlDbType.Int, lDlAppID));
+                command.Parameters.Add(DatabaseHelper.CreateParameter("@IsLocked", SqlDbType.Bit, isLocked));
+                try
+                {
+                    sqlConnection.Open();
+                    object result = command.ExecuteScalar();
+                    if (result is int latestAppointmentID)
+                    {
+                        return latestAppointmentID;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"TestAppointmentDAL GetLatestAppointmentID : SQL Error -> {ex.Message}");
+                }
+            }
+            return -1;
         }
     }
 }

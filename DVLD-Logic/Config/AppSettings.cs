@@ -1,4 +1,4 @@
-﻿namespace DVLD_UI.Utils
+﻿namespace DVLD_Logic
 {
     public static class AppSettings
     {
@@ -48,6 +48,7 @@
         public const string TestITypeDColumnName = "TestTypeID";
         public const string TestAppointmentIDColumnName = "TestAppointmentID";
         public const string LDLApplicationIDColumnName = "LDLApplicationID";
+        public const string LDLApplicationStatusColumnName = "ApplicationStatus";
         //Login Data Path & Record
         public const string LoginRecord = "{0}@-@{1}";
         public const string LoginSavePath = "LoginData.txt";
@@ -69,8 +70,6 @@
         public const string TakeTestSuccessUpdate = "Test updated successfully!";
         public const string TakeTestSuccessAdded = "Test added successfully!";
         public const string TakeTestFailAdd = "Couldn't add test!";
-
-
         public enum MenuItem
         {
             // Main menu items
@@ -94,12 +93,11 @@
             ScheduleVisionTest,
             ScheduleWritingTest,
             ScheduleDrivingTest
-
         }
         public enum EnMode
         {
             Read = 0,
-            Add = 1,
+            AddNew = 1,
             Update = 2,
         }
         public enum TestType
@@ -107,6 +105,17 @@
             Vision = 1,
             Writing = 2,
             Driving = 3
+        }
+        public enum EnApplicationTypes
+        {
+            LocalDrivingLicense = 1,
+            RetakeTest = 7
+        }
+        public enum EnApplicationStatus
+        {
+            New = 1,
+            Cancelled = 2,
+            Completed = 3
         }
     }
 }

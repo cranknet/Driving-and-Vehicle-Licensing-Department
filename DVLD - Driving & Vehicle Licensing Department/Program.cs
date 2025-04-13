@@ -1,5 +1,5 @@
-﻿using DVLD_UI.Login;
-using DVLD_UI.Utils;
+﻿using DVLD_Logic;
+using DVLD_UI.Login;
 using System;
 using System.Windows.Forms;
 namespace DVLD_UI

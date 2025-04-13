@@ -1,4 +1,5 @@
 ﻿using DVLD_Logic;
+using DVLD_UI.Config;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
 {
@@ -23,8 +24,8 @@ namespace DVLD_UI.UserControls.Cards
         private bool ValidateAllFields()
         {
             bool isValid = true;
-            isValid &= Utils.Utils.ValidateField(txtTitle, "Title must not be empty!", errorProvider);
-            isValid &= Utils.Utils.ValidateField(txtFee, "Fees must not be empty!", errorProvider);
+            isValid &= Utils.ValidateField(txtTitle, "Title must not be empty!", errorProvider);
+            isValid &= Utils.ValidateField(txtFee, "Fees must not be empty!", errorProvider);
             return isValid;
         }
         private bool SaveApplicationType()

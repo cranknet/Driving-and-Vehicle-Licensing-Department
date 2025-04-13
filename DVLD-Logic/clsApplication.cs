@@ -4,11 +4,7 @@ namespace DVLD_Logic
 {
     public class clsApplication
     {
-        enum EnMode
-        {
-            Update = 0, AddNew = 1
-        }
-        EnMode Mode = EnMode.Update;
+        public AppSettings.EnMode Mode = AppSettings.EnMode.Update;
         public int ApplicationID { get; set; }
         public int ApplicantPersonID { get; set; }
         public DateTime ApplicationDate { get; set; }
@@ -17,7 +13,6 @@ namespace DVLD_Logic
         public DateTime LastStatusDate { get; set; }
         public decimal PaidFees { get; set; }
         public int CreatedByUserID { get; set; }
-        public int LicenseClassID { get; set; }
         public clsApplication()
         {
             ApplicationID = -1;
@@ -28,7 +23,7 @@ namespace DVLD_Logic
             LastStatusDate = DateTime.Now;
             PaidFees = 0;
             CreatedByUserID = -1;
-            Mode = EnMode.AddNew;
+            Mode = AppSettings.EnMode.AddNew;
         }
         private clsApplication(int applicationID, int applicantPersonID, DateTime applicationDate, int applicationTypeID, byte applicationStatus, DateTime lastStatusDate, decimal paidFees, int createdByUserID)
         {
@@ -40,7 +35,7 @@ namespace DVLD_Logic
             LastStatusDate = lastStatusDate;
             PaidFees = paidFees;
             CreatedByUserID = createdByUserID;
-            Mode = EnMode.Update;
+            Mode = AppSettings.EnMode.Update;
         }
         public static clsApplication Find(int applicationID)
         {
@@ -67,35 +62,27 @@ namespace DVLD_Logic
         private bool Add()
         {
             this.ApplicationID = ApplicationDAL.AddNewApplication(ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID);
-            if (ApplicationID != -1)
-            {
-                return LDLApplicationDAL.AddNewLDLApplication(LicenseClassID, ApplicationID) != 1;
-            }
-            return false;
+            return ApplicationID != 1;
         }
         public bool Save()
         {
             switch (Mode)
             {
-                case EnMode.AddNew:
+                case AppSettings.EnMode.AddNew:
                     if (Add())
                     {
-                        Mode = EnMode.Update;
+                        Mode = AppSettings.EnMode.Update;
                         return true;
                     }
                     else
                     {
                         return false;
                     }
-                case EnMode.Update:
+                case AppSettings.EnMode.Update:
                     // I will use another update function for application not the status
                     return UpdateStatus();
             }
             return false;
-        }
-        public int CheckLDLApplicationExists()
-        {
-            return LDLApplicationDAL.GetActiveLDLApplicationIDForLicenseClass(ApplicantPersonID, LicenseClassID, ApplicationStatus);
         }
     }
 }

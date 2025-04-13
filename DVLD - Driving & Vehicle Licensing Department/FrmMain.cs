@@ -1,6 +1,6 @@
-﻿using DVLD_Data;
-using DVLD_Logic;
-using DVLD_UI.Utils;
+﻿using DVLD_Logic;
+using DVLD_Logic.Config;
+using DVLD_UI.Config;
 using System;
 using System.Windows.Forms;
 using Application = System.Windows.Forms.Application;
@@ -18,7 +18,7 @@ namespace DVLD_UI
         private void FrmMain_Load(object sender, EventArgs e)
         {
             InitializeMenu();
-            Utils.Utils.AdjustGridViewColumns(mainGridView);
+            Utils.AdjustGridViewColumns(mainGridView);
         }
         private void toolStripMenuPeopleCardShow_Click(object sender, EventArgs e)
         {
@@ -56,29 +56,30 @@ namespace DVLD_UI
         }
         private void iconButtonAdd_Click(object sender, EventArgs e)
         {
-            DisplayProfileCard(AppSettings.EnMode.Add, SelectedID, SelectedMenuOption);
+            DisplayProfileCard(AppSettings.EnMode.AddNew, SelectedID, SelectedMenuOption);
         }
         private void mainGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (mainGridView.Columns.Contains(AppSettings.UserIDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.UserIDColumnName, mainGridView);
+                SelectedID = Convert.ToInt32(Utils.GetValueFromCell(AppSettings.UserIDColumnName, mainGridView));
             }
             else if (mainGridView.Columns.Contains(AppSettings.PersonIDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.PersonIDColumnName, mainGridView);
+                SelectedID = Convert.ToInt32(Utils.GetValueFromCell(AppSettings.PersonIDColumnName, mainGridView));
             }
             else if (mainGridView.Columns.Contains(AppSettings.ApplicationTypeIDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.ApplicationTypeIDColumnName, mainGridView);
+                SelectedID = Convert.ToInt32(Utils.GetValueFromCell(AppSettings.ApplicationTypeIDColumnName, mainGridView));
             }
             else if (mainGridView.Columns.Contains(AppSettings.TestITypeDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.TestITypeDColumnName, mainGridView);
+                SelectedID = Convert.ToInt32(Utils.GetValueFromCell(AppSettings.TestITypeDColumnName, mainGridView));
             }
             else if (mainGridView.Columns.Contains(AppSettings.LDLApplicationIDColumnName))
             {
-                SelectedID = Utils.Utils.GetIDFrom(AppSettings.LDLApplicationIDColumnName, mainGridView);
+                SelectedID = Convert.ToInt32(Utils.GetValueFromCell(AppSettings.LDLApplicationIDColumnName, mainGridView));
+                SelectedApplicationStatus = Convert.ToString(Utils.GetValueFromCell(AppSettings.LDLApplicationStatusColumnName, mainGridView));
             }
             else
             {
@@ -174,7 +175,6 @@ namespace DVLD_UI
                     ReLoadFilterOptions();
                     break;
                 // Application sub-menu
-
                 case AppSettings.MenuItem.ApplicationType:
                     DataCache.Instance.RefreshApplicationTypes();
                     LoadMainGridView(DataCache.Instance.GetApplicationTypes());
@@ -215,6 +215,10 @@ namespace DVLD_UI
                 default:
                     break;
             }
+        }
+        private void contextMenuStripLDLApplication_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ToggleScheduleTestMenuItems();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using DVLD_Logic;
-using DVLD_UI.Utils;
+using DVLD_UI.Config;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -12,7 +12,7 @@ namespace DVLD_UI.UserControls.Cards
             InitializeComponent();
             EnMode = enMode;
             InitializePerson(personID);
-            Utils.Utils.LoadCountryList(cmbCountryList, new DataTable());
+            Utils.LoadCountryList(cmbCountryList, new DataTable());
         }
         private void PersonProfileCard_Load(object sender, EventArgs e)
         {
@@ -22,9 +22,9 @@ namespace DVLD_UI.UserControls.Cards
         {
             if (Person != null)
             {
-                Utils.Utils.DeleteImage(Person.ImagePath);
+                Utils.DeleteImage(Person.ImagePath);
             }
-            Person.ImagePath = Utils.Utils.ImageHandler(pbPersonImage, "Images");
+            Person.ImagePath = Utils.ImageHandler(pbPersonImage, "Images");
         }
         private void btnReset_Click(object sender, System.EventArgs e)
         {

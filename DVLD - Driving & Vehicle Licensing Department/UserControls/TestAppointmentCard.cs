@@ -1,5 +1,6 @@
 ﻿using DVLD_Logic;
-using DVLD_UI.Utils;
+using DVLD_UI.Config;
+using System;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
 {
@@ -15,7 +16,7 @@ namespace DVLD_UI.UserControls.Cards
             _TestType = TestType.Find((int)testType);
             TestTypeID = _TestType.TestTypeID;
             _LicenseClass = LicenseClass.Find(_LocalDLApplication.LicenseClassID);
-            _Person = People.FindByPersonID(_Application.ApplicantPersonID);
+            _Applicant = People.FindByPersonID(_Application.ApplicantPersonID);
             _User = User.Find(_Application.CreatedByUserID);
             InitializeValues(ldlAppID, testType);
         }
@@ -25,7 +26,7 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void ButtonShowPersonInfo_Click(object sender, System.EventArgs e)
         {
-            PersonProfileCard personProfileCard = new PersonProfileCard(AppSettings.EnMode.Read, _Person.PersonID);
+            PersonProfileCard personProfileCard = new PersonProfileCard(AppSettings.EnMode.Read, _Applicant.PersonID);
             using (FrmHost frmHost = new FrmHost(personProfileCard))
             {
                 frmHost.ShowDialog();
@@ -33,30 +34,36 @@ namespace DVLD_UI.UserControls.Cards
         }
         private void ButtonAddTestAppointment_Click(object sender, System.EventArgs e)
         {
-            if (!TestAppointment.ActiveTestAppointmentExistsBy(TestTypeID, LDLAppID))
-            {
-                ScheduleTestAppointmentCard scheduleTestAppointmentCard = new ScheduleTestAppointmentCard(LDLAppID, (AppSettings.TestType)TestTypeID);
-                using (FrmHost frmHost = new FrmHost(scheduleTestAppointmentCard))
-                {
-                    frmHost.Text = string.Format(AppSettings.ScheduleTestTitle, _TestType.Title);
-                    frmHost.FormClosing += (s, ev) =>
-                    {
-                        LoadTestAppointments((AppSettings.TestType)TestTypeID, LDLAppID);
-                    };
-                    frmHost.ShowDialog();
-                }
-            }
-            else
+            if (TestAppointment.ActiveTestAppointmentExistsBy(TestTypeID, LDLAppID))
             {
                 MessageBox.Show($"An active appointment is already exists!");
+                return;
+            }
+            TestAppointmentID = TestAppointment.GetLastTestAppointmentID(TestTypeID, LDLAppID);
+            if (TestAppointmentID != -1)
+            {
+                if (Test.GetTestResultStatus(TestAppointmentID))
+                {
+                    MessageBox.Show($"Test Already passed, can't add another appointment!");
+                    return;
+                }
+            }
+            ScheduleTestAppointmentCard scheduleTestAppointmentCard = new ScheduleTestAppointmentCard(LDLAppID, (AppSettings.TestType)TestTypeID, _Applicant.PersonID);
+            using (FrmHost frmHost = new FrmHost(scheduleTestAppointmentCard))
+            {
+                frmHost.Text = string.Format(AppSettings.ScheduleTestTitle, _TestType.Title);
+                frmHost.FormClosing += (s, ev) =>
+                {
+                    LoadTestAppointments((AppSettings.TestType)TestTypeID, LDLAppID);
+                };
+                frmHost.ShowDialog();
             }
         }
         private void editToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            // Check if test appointment exists before show Edit User control
             if (TestAppointment.TestAppointmentExistsBy(SelectedTestAppointmentID))
             {
-                ScheduleTestAppointmentCard scheduleTestAppointmentCard = new ScheduleTestAppointmentCard(LDLAppID, (AppSettings.TestType)TestTypeID, SelectedTestAppointmentID);
+                ScheduleTestAppointmentCard scheduleTestAppointmentCard = new ScheduleTestAppointmentCard(LDLAppID, (AppSettings.TestType)TestTypeID, _Applicant.PersonID, SelectedTestAppointmentID);
                 using (FrmHost frmHost = new FrmHost(scheduleTestAppointmentCard))
                 {
                     frmHost.Text = string.Format(AppSettings.ScheduleTestTitle, _TestType.Title);
@@ -73,7 +80,7 @@ namespace DVLD_UI.UserControls.Cards
         {
             if (AppointmentsGridView.Columns.Contains(AppSettings.TestAppointmentIDColumnName))
             {
-                SelectedTestAppointmentID = Utils.Utils.GetIDFrom(AppSettings.TestAppointmentIDColumnName, AppointmentsGridView);
+                SelectedTestAppointmentID = Convert.ToInt32(Utils.GetValueFromCell(AppSettings.TestAppointmentIDColumnName, AppointmentsGridView));
             }
             else
             {
@@ -84,6 +91,7 @@ namespace DVLD_UI.UserControls.Cards
         private void takeTestToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             TakeTestCard takeTestCard = new TakeTestCard(LDLAppID, SelectedTestAppointmentID, (AppSettings.TestType)TestTypeID);
+            takeTestCard.OnTestsCompeleted += HandleTestCompletion;
             using (FrmHost frmHost = new FrmHost(takeTestCard))
             {
                 frmHost.Text = string.Format(AppSettings.TakeTestTitle, _TestType.Title);
@@ -100,6 +108,11 @@ namespace DVLD_UI.UserControls.Cards
             {
                 editToolStripMenuItem.Enabled = false;
                 takeTestToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                editToolStripMenuItem.Enabled = true;
+                takeTestToolStripMenuItem.Enabled = true;
             }
         }
     }

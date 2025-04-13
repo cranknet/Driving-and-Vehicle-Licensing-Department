@@ -1,5 +1,5 @@
 ﻿using DVLD_Logic;
-using DVLD_UI.Utils;
+using DVLD_UI.Config;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
 {
@@ -19,7 +19,7 @@ namespace DVLD_UI.UserControls.Cards
             txtFirstName.Text = Person.FirstName;
             txtLastName.Text = Person.LastName;
             txtNationalNo.Text = Person.NationalNo;
-            dtpBirthDate.Value = (Person.PersonID == -1) ? Utils.Utils.AllowedDate(18) : Person.DateOfBirth;
+            dtpBirthDate.Value = (Person.PersonID == -1) ? Utils.AllowedDate(18) : Person.DateOfBirth;
             cmbGender.SelectedItem = Person.Gender;
             txtAddress.Text = Person.Address;
             txtEmail.Text = Person.Email;
@@ -37,7 +37,7 @@ namespace DVLD_UI.UserControls.Cards
         {
             ShowReadMode();
             ToggleControlStatus();
-            dtpBirthDate.MaxDate = Utils.Utils.AllowedDate(18);
+            dtpBirthDate.MaxDate = Utils.AllowedDate(18);
             pbPersonImage.Image = Properties.Resources.Body;
         }
         private void Display()
@@ -50,7 +50,7 @@ namespace DVLD_UI.UserControls.Cards
                 case AppSettings.EnMode.Update:
                     ShowUpdateMode();
                     break;
-                case AppSettings.EnMode.Add:
+                case AppSettings.EnMode.AddNew:
                     ShowAddMode();
                     break;
             }
@@ -84,31 +84,31 @@ namespace DVLD_UI.UserControls.Cards
         private bool ValidateAllFields()
         {
             bool isValid = true;
-            if (!Utils.Utils.IsValidText(txtFirstName.Text))
+            if (!Utils.IsValidText(txtFirstName.Text))
             {
                 errorProvider.SetError(txtFirstName, "FirstName must be letters only!");
                 isValid = false;
             }
             else errorProvider.SetError(txtFirstName, "");
-            if (!Utils.Utils.IsValidText(txtLastName.Text))
+            if (!Utils.IsValidText(txtLastName.Text))
             {
                 errorProvider.SetError(txtLastName, "LastName must be letters only!");
                 isValid = false;
             }
             else errorProvider.SetError(txtLastName, "");
-            if (!Utils.Utils.IsValidEmail(txtEmail.Text))
+            if (!Utils.IsValidEmail(txtEmail.Text))
             {
                 errorProvider.SetError(txtEmail, "Invalid Email format");
                 isValid = false;
             }
             else errorProvider.SetError(txtEmail, "");
-            if (!Utils.Utils.IsValidPhone(txtPhone.Text))
+            if (!Utils.IsValidPhone(txtPhone.Text))
             {
                 errorProvider.SetError(txtPhone, "Invalid phone number format");
                 isValid = false;
             }
             else errorProvider.SetError(txtPhone, "");
-            if (!Utils.Utils.IsValidDate(dtpBirthDate.Value))
+            if (!Utils.IsValidDate(dtpBirthDate.Value))
             {
                 errorProvider.SetError(dtpBirthDate, "You must be at least 18 years old");
                 isValid = false;

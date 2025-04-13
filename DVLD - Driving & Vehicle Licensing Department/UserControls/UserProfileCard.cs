@@ -1,6 +1,5 @@
-﻿using DVLD_Data;
-using DVLD_Logic;
-using DVLD_UI.Utils;
+﻿using DVLD_Logic;
+using DVLD_Logic.Config;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
 {

@@ -1,7 +1,7 @@
-﻿using DVLD_Data;
-using DVLD_Logic;
+﻿using DVLD_Logic;
+using DVLD_Logic.Config;
+using DVLD_UI.Config;
 using DVLD_UI.UserControls.Cards;
-using DVLD_UI.Utils;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -20,6 +20,7 @@ namespace DVLD_UI
         private User CurrentUser = null;
         private Button HighlightedButton;
         public int SelectedID;
+        private string SelectedApplicationStatus;
         private AppSettings.MenuItem SelectedMenuItem { get; set; }
         private string SelectedMenuOption { get; set; }
         public void InitializeMenu()
@@ -29,25 +30,25 @@ namespace DVLD_UI
             btnDrivers.Tag = AppSettings.MenuItem.Drivers;
             btnPeoples.Tag = AppSettings.MenuItem.Peoples;
             btnUsers.Tag = AppSettings.MenuItem.Users;
-            Utils.Utils.AttachClickEventsToMainButtons(panelMainMenu.Controls, HandleMainMenuClick);
+            Utils.AttachClickEventsToMainButtons(panelMainMenu.Controls, HandleMainMenuClick);
             // Applications Menu ToolStrips
             applicationTypesToolStripMenuItem.Tag = AppSettings.MenuItem.ApplicationType;
             testTypesToolStripMenuItem.Tag = AppSettings.MenuItem.TestType;
             localLicensesToolStripMenuItem.Tag = AppSettings.MenuItem.LocalDLApplication;
             addLocalLicenseToolStripMenuItem.Tag = AppSettings.MenuItem.AddLDLApplication;
-            Utils.Utils.AttachClickEventsToToolStripItems(contextMenuStripApplicationMenu.Items, HandleApplicationMenuClick);
+            Utils.AttachClickEventsToToolStripItems(contextMenuStripApplicationMenu.Items, HandleApplicationMenuClick);
             // Test Type Menu ToolStrips
             editTestTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditTestType;
-            Utils.Utils.AttachClickEventsToToolStripItems(contextMenuStripTestTypes.Items, HandleTestTypeMenuClick);
+            Utils.AttachClickEventsToToolStripItems(contextMenuStripTestTypes.Items, HandleTestTypeMenuClick);
             // Application Type Menu ToolStrips
             editApplicationTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditApplicationType;
-            Utils.Utils.AttachClickEventsToToolStripItems(contextMenuStripApplicationTypes.Items, HandleApplicationTypeMenuClick);
+            Utils.AttachClickEventsToToolStripItems(contextMenuStripApplicationTypes.Items, HandleApplicationTypeMenuClick);
             // LDL Application Menu ToolStrips
             // Schedule Test Menu ToolStrips
             scheduleVisionTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleVisionTest;
             scheduleWritingTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleWritingTest;
             scheduleDrivingTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleDrivingTest;
-            Utils.Utils.AttachClickEventsToToolStripItems(contextMenuStripLDLApplication.Items, HandleLDLApplicationMenuClick);
+            Utils.AttachClickEventsToToolStripItems(contextMenuStripLDLApplication.Items, HandleLDLApplicationMenuClick);
         }
         private void HighlightButton(Button button)
         {
@@ -225,7 +226,7 @@ namespace DVLD_UI
         }
         private void ReLoadFilterOptions()
         {
-            Utils.Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
+            Utils.LoadFilterOptions(mainGridView, filterOptionsUC.cmbFilterOptions);
         }
         private void ClearGridView()
         {
@@ -233,7 +234,7 @@ namespace DVLD_UI
         }
         private void ApplyFilter()
         {
-            Utils.Utils.ApplyFilter(mainGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
+            Utils.ApplyFilter(mainGridView.DataSource as DataTable, filterOptionsUC.cmbFilterOptions, filterOptionsUC.txtFilterValue);
         }
         private void AssignContextMainMenuGridView()
         {
@@ -267,6 +268,20 @@ namespace DVLD_UI
                     mainGridView.ContextMenuStrip = null;
                     break;
             }
+        }
+        private void ToggleScheduleTestMenuItems()
+        {
+            int lastVisionTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Vision, SelectedID, true);
+            int lastWritingTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Writing, SelectedID, true);
+            int lastDrivingTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Driving, SelectedID, true);
+            ScheduleToolStripMenuItem.Enabled = (SelectedApplicationStatus != string.Empty && SelectedApplicationStatus == AppSettings.EnApplicationStatus.New.ToString());
+            scheduleVisionTestToolStripMenuItem.Enabled = !Test.GetTestResultStatus(lastVisionTestAppointmentID);
+            scheduleWritingTestToolStripMenuItem.Enabled = !scheduleVisionTestToolStripMenuItem.Enabled && !Test.GetTestResultStatus(lastWritingTestAppointmentID);
+            scheduleDrivingTestToolStripMenuItem.Enabled = !scheduleWritingTestToolStripMenuItem.Enabled && !Test.GetTestResultStatus(lastDrivingTestAppointmentID);
+        }
+        private int GetLastTestAppointmentID(AppSettings.TestType testType, int lDlAppID, bool appointmentLockedStatus = true)
+        {
+            return TestAppointment.GetLastTestAppointmentID((int)testType, lDlAppID, appointmentLockedStatus);
         }
     }
 }

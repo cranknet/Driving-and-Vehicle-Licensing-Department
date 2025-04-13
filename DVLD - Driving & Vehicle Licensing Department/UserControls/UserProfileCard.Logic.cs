@@ -1,5 +1,5 @@
 ﻿using DVLD_Logic;
-using DVLD_UI.Utils;
+using DVLD_UI.Config;
 using System.Linq;
 using System.Windows.Forms;
 namespace DVLD_UI.UserControls.Cards
@@ -58,7 +58,7 @@ namespace DVLD_UI.UserControls.Cards
                 case AppSettings.EnMode.Update:
                     ShowUserSettingsPage();
                     break;
-                case AppSettings.EnMode.Add:
+                case AppSettings.EnMode.AddNew:
                     ShowUserAddPage();
                     break;
             }
@@ -81,17 +81,17 @@ namespace DVLD_UI.UserControls.Cards
         private bool ValidatePasswordFields()
         {
             bool isValid = true;
-            isValid &= Utils.Utils.ValidateField(txtOldPassword, "Old Password must not be empty!", errorProvider, 6, "password must be at least 6 characters!");
-            isValid &= Utils.Utils.ValidateField(txtNewPassword, "New Password must not be empty!", errorProvider, 6, "New password must be at least 6 characters!");
-            isValid &= Utils.Utils.ValidateField(txtConfimPassword, "Confirm Password must not be empty!", errorProvider, 6, "New password must be at least 6 characters!");
-            isValid &= Utils.Utils.ValidatePasswordMatch(txtNewPassword, txtConfimPassword, "Passwords do not match!", errorProvider);
+            isValid &= Utils.ValidateField(txtOldPassword, "Old Password must not be empty!", errorProvider, 6, "password must be at least 6 characters!");
+            isValid &= Utils.ValidateField(txtNewPassword, "New Password must not be empty!", errorProvider, 6, "New password must be at least 6 characters!");
+            isValid &= Utils.ValidateField(txtConfimPassword, "Confirm Password must not be empty!", errorProvider, 6, "New password must be at least 6 characters!");
+            isValid &= Utils.ValidatePasswordMatch(txtNewPassword, txtConfimPassword, "Passwords do not match!", errorProvider);
             return isValid;
         }
         private bool ValidateAddUser()
         {
             bool isValid = true;
-            isValid &= Utils.Utils.ValidateField(txtNewUserName, "User Name must not be empty!", errorProvider);
-            isValid &= Utils.Utils.ValidateField(txtNewUserPassword, "User Name must not be empty!", errorProvider, 6, "Password must be at least 6 characters!");
+            isValid &= Utils.ValidateField(txtNewUserName, "User Name must not be empty!", errorProvider);
+            isValid &= Utils.ValidateField(txtNewUserPassword, "User Name must not be empty!", errorProvider, 6, "Password must be at least 6 characters!");
             return isValid;
         }
         private bool SaveUser()
@@ -102,7 +102,7 @@ namespace DVLD_UI.UserControls.Cards
                 User.Password = txtOldPassword.Text;
                 User.NewPassword = txtNewPassword.Text;
             }
-            else if (EnMode == AppSettings.EnMode.Add)
+            else if (EnMode == AppSettings.EnMode.AddNew)
             {
                 if (!ValidateAddUser()) return false;
                 User.PersonID = Person.PersonID;

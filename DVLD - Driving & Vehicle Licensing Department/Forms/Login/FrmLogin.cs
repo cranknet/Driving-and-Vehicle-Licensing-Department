@@ -1,4 +1,4 @@
-﻿using DVLD_UI.Utils;
+﻿using DVLD_Logic;
 using System;
 using System.Windows.Forms;
 namespace DVLD_UI.Login

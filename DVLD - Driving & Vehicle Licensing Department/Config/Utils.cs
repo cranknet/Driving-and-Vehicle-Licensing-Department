@@ -1,11 +1,12 @@
-﻿using DVLD_Data;
-using DVLD_Logic;
+﻿using DVLD_Logic;
+using DVLD_Logic.Config;
 using System;
 using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-namespace DVLD_UI.Utils
+
+namespace DVLD_UI.Config
 {
     public static class Utils
     {
@@ -19,7 +20,7 @@ namespace DVLD_UI.Utils
                 if (ofdImage.ShowDialog() == DialogResult.OK)
                 {
                     string sourcePath = ofdImage.FileName;
-                    string imagesFolder = Path.Combine(System.Windows.Forms.Application.StartupPath, imageFolder);
+                    string imagesFolder = Path.Combine(Application.StartupPath, imageFolder);
                     if (!Directory.Exists(imagesFolder))
                     {
                         Directory.CreateDirectory(imagesFolder);
@@ -98,10 +99,11 @@ namespace DVLD_UI.Utils
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
         }
-        public static int GetIDFrom(string cellName, DataGridView dataGridView)
+        public static object GetValueFromCell(string cellName, DataGridView dataGridView)
         {
-            if (dataGridView?.CurrentRow?.Cells[cellName]?.Value is int ID) return ID;
-            return -1;
+            object value = dataGridView?.CurrentRow?.Cells[cellName]?.Value;
+            if (value is int || value is string) return value;
+            return null;
         }
         public static void LoadUserControl(Panel panel, UserControl userControl)
         {
@@ -229,4 +231,5 @@ namespace DVLD_UI.Utils
             }
         }
     }
+
 }

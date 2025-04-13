@@ -1,11 +1,13 @@
 ﻿using DVLD_Logic;
-using DVLD_UI.Utils;
+using System;
 using System.Windows.Forms;
 
 namespace DVLD_UI.UserControls
 {
     public partial class TakeTestCard : UserControl
     {
+        // Raise an event when All Tests Get Passed;
+        public event Action OnTestsCompeleted;
         Test _Test;
         TestType _TestType;
         TestAppointment _Appointment;
@@ -22,6 +24,12 @@ namespace DVLD_UI.UserControls
             _Test.TestResult = RadioButtonPass.Checked;
             _Test.Notes = TextBoxNotesValue.Text;
             _Test.CreatedByUserID = AppSettings.LoggedUserID;
+            if ((AppSettings.TestType)_TestType.TestTypeID == AppSettings.TestType.Driving && RadioButtonPass.Checked && _Test.Save())
+            {
+                // I will handle Compeleted status from Database
+                OnTestsCompeleted?.Invoke();
+                return true;
+            }
             return _Test.Save();
         }
     }
