@@ -44,6 +44,11 @@ namespace DVLD_UI
             editApplicationTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditApplicationType;
             Utils.AttachClickEventsToToolStripItems(contextMenuStripApplicationTypes.Items, HandleApplicationTypeMenuClick);
             // LDL Application Menu ToolStrips
+
+            showApplicationDetailsToolStripMenuItem.Tag = AppSettings.MenuItem.ShowLDLApplication;
+            editApplicationToolStripMenuItem.Tag = AppSettings.MenuItem.EditLDLApplication;
+            deleteApplicationToolStripMenuItem.Tag = AppSettings.MenuItem.DeleteLDLApplication;
+            cancelApplicationToolStripMenuItem.Tag = AppSettings.MenuItem.CancelLDLApplication;
             // Schedule Test Menu ToolStrips
             scheduleVisionTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleVisionTest;
             scheduleWritingTestToolStripMenuItem.Tag = AppSettings.MenuItem.ScheduleWritingTest;
@@ -274,14 +279,33 @@ namespace DVLD_UI
             int lastVisionTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Vision, SelectedID, true);
             int lastWritingTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Writing, SelectedID, true);
             int lastDrivingTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Driving, SelectedID, true);
-            ScheduleToolStripMenuItem.Enabled = (SelectedApplicationStatus != string.Empty && SelectedApplicationStatus == AppSettings.EnApplicationStatus.New.ToString());
+            cancelApplicationToolStripMenuItem.Enabled = ScheduleToolStripMenuItem.Enabled = (SelectedApplicationStatus != string.Empty && SelectedApplicationStatus == AppSettings.EnApplicationStatus.New.ToString());
             scheduleVisionTestToolStripMenuItem.Enabled = !Test.GetTestResultStatus(lastVisionTestAppointmentID);
             scheduleWritingTestToolStripMenuItem.Enabled = !scheduleVisionTestToolStripMenuItem.Enabled && !Test.GetTestResultStatus(lastWritingTestAppointmentID);
-            scheduleDrivingTestToolStripMenuItem.Enabled = !scheduleWritingTestToolStripMenuItem.Enabled && !Test.GetTestResultStatus(lastDrivingTestAppointmentID);
+            scheduleDrivingTestToolStripMenuItem.Enabled = scheduleWritingTestToolStripMenuItem.Enabled && !Test.GetTestResultStatus(lastDrivingTestAppointmentID);
         }
         private int GetLastTestAppointmentID(AppSettings.TestType testType, int lDlAppID, bool appointmentLockedStatus = true)
         {
             return TestAppointment.GetLastTestAppointmentID((int)testType, lDlAppID, appointmentLockedStatus);
+        }
+        private void CancelLDLApplication(int selectedID)
+        {
+            DialogResult result = MessageBox.Show(AppSettings.CancelApplication, AppSettings.CancelApplicationCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                LDLApplication lDLApplicationToCancel = LDLApplication.Find(selectedID);
+                clsApplication applicationToCancel = clsApplication.Find(lDLApplicationToCancel.ApplicationID);
+                if (applicationToCancel != null)
+                {
+                    applicationToCancel.LastStatusDate = DateTime.Now;
+                    applicationToCancel.ApplicationStatus = (byte)AppSettings.EnApplicationStatus.Cancelled;
+                    if (!applicationToCancel.Save())
+                    {
+                        MessageBox.Show(AppSettings.CancelApplicationFailed);
+                    }
+                }
+            }
+
         }
     }
 }

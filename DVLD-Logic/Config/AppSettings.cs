@@ -59,6 +59,9 @@
         public const string LocalDLDAddedFailed = "Failed to add the application. Please try again.";
         public const string ApplicationAlreadyExists = "Application already exists with ID:{0}";
         public const string SelectPersonFirst = "Please select a person first";
+        public const string CancelApplication = "Are you sure you want to cancel the application?";
+        public const string CancelApplicationCaption = "Application Cancelletion";
+        public const string CancelApplicationFailed = "Can't cancel the selected Application!";
         public const string SelectLicenseClass = "Please select a license class";
         // Test Appointments
         public const string TestAppointmentTypeTitle = "{0} Appointments";
@@ -89,6 +92,10 @@
             // Application Type sub-menu
             EditApplicationType,
             // LDL Application sub-menu
+            ShowLDLApplication,
+            EditLDLApplication,
+            DeleteLDLApplication,
+            CancelLDLApplication,
             //Schudule Test sub-menu
             ScheduleVisionTest,
             ScheduleWritingTest,

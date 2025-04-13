@@ -202,6 +202,10 @@ namespace DVLD_UI
                 case AppSettings.MenuItem.EditApplicationType:
                     ShowCard(AppSettings.MenuItem.ApplicationType, SelectedID);
                     break;
+                // LDL Application Menu
+                case AppSettings.MenuItem.CancelLDLApplication:
+                    CancelLDLApplication(SelectedID);
+                    break;
                 // LDL Application Schedule Tests
                 case AppSettings.MenuItem.ScheduleVisionTest:
                     ShowCard(AppSettings.MenuItem.ScheduleVisionTest, SelectedID);
@@ -216,6 +220,9 @@ namespace DVLD_UI
                     break;
             }
         }
+
+
+
         private void contextMenuStripLDLApplication_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             ToggleScheduleTestMenuItems();
