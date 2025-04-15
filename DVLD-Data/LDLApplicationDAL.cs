@@ -8,16 +8,35 @@ namespace DVLD_Data
         public static DataTable GetLDLApplications()
         {
             DataTable dt = new DataTable();
-            string query = @"SELECT LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID AS LDLApplicationID, LicenseClasses.ClassName, People.NationalNo, CONCAT(People.FirstName,' ', People.LastName) AS FullName , Applications.ApplicationDate, 
-                             CASE   Applications.ApplicationStatus 
-                             	   WHEN 1 THEN 'New'
-                             	   WHEN 2 THEN 'Cancelled'
-                             	   WHEN 3 THEN 'Completed'
-                             	   ELSE 'None'
-                             END AS ApplicationStatus
-                             FROM   LocalDrivingLicenseApplications INNER JOIN Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
-				             INNER JOIN LicenseClasses ON LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID
-				             INNER JOIN People ON Applications.ApplicantPersonID = People.PersonID;";
+            string query = @"SELECT 
+                                LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID AS LDLApplicationID,
+                                LicenseClasses.ClassName,
+                                People.NationalNo,
+                                CONCAT(COALESCE(People.FirstName, ''), ' ', COALESCE(People.LastName, '')) AS FullName,
+                                Applications.ApplicationDate,
+                                CASE Applications.ApplicationStatus 
+                                    WHEN 1 THEN 'New'
+                                    WHEN 2 THEN 'Cancelled'
+                                    WHEN 3 THEN 'Completed'
+                                    ELSE 'None'
+                                END AS ApplicationStatus,
+                                COUNT(CASE WHEN Tests.TestResult = 1 THEN 1 END) AS PassedTests
+                            FROM 
+                                LocalDrivingLicenseApplications
+                                INNER JOIN Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
+                                INNER JOIN LicenseClasses ON LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID
+                                INNER JOIN People ON Applications.ApplicantPersonID = People.PersonID
+                                LEFT JOIN TestAppointments ON TestAppointments.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID
+                                LEFT JOIN Tests ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+                            GROUP BY 
+                                LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID,
+                                LicenseClasses.ClassName,
+                                People.NationalNo,
+                                People.FirstName,
+                                People.LastName,
+                                Applications.ApplicationDate,
+                                Applications.ApplicationStatus;
+";
             using (SqlConnection connection = new SqlConnection(DatabaseHelper.ConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, connection))
             {

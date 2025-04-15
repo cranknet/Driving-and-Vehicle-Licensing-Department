@@ -91,7 +91,6 @@ namespace DVLD_UI.UserControls.Cards
         private void takeTestToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             TakeTestCard takeTestCard = new TakeTestCard(LDLAppID, SelectedTestAppointmentID, (AppSettings.TestType)TestTypeID);
-            takeTestCard.OnTestsCompeleted += HandleTestCompletion;
             using (FrmHost frmHost = new FrmHost(takeTestCard))
             {
                 frmHost.Text = string.Format(AppSettings.TakeTestTitle, _TestType.Title);

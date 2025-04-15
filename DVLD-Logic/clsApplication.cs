@@ -59,6 +59,10 @@ namespace DVLD_Logic
         {
             return ApplicationDAL.UpdateApplicationStatus(ApplicationID, ApplicationStatus, LastStatusDate);
         }
+        public static int GetApplicationIDByLDLAppID(int lDlAppID)
+        {
+            return ApplicationDAL.GetApplicationIDByLDLAppID(lDlAppID);
+        }
         private bool Add()
         {
             this.ApplicationID = ApplicationDAL.AddNewApplication(ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID);

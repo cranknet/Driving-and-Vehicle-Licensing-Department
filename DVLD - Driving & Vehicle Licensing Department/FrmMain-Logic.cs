@@ -3,6 +3,7 @@ using DVLD_Logic.Config;
 using DVLD_UI.Config;
 using DVLD_UI.UserControls.Cards;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 namespace DVLD_UI
@@ -44,7 +45,6 @@ namespace DVLD_UI
             editApplicationTypeToolStripMenuItem.Tag = AppSettings.MenuItem.EditApplicationType;
             Utils.AttachClickEventsToToolStripItems(contextMenuStripApplicationTypes.Items, HandleApplicationTypeMenuClick);
             // LDL Application Menu ToolStrips
-
             showApplicationDetailsToolStripMenuItem.Tag = AppSettings.MenuItem.ShowLDLApplication;
             editApplicationToolStripMenuItem.Tag = AppSettings.MenuItem.EditLDLApplication;
             deleteApplicationToolStripMenuItem.Tag = AppSettings.MenuItem.DeleteLDLApplication;
@@ -274,19 +274,40 @@ namespace DVLD_UI
                     break;
             }
         }
-        private void ToggleScheduleTestMenuItems()
+        private void ToggleLDLApplicationContextMenuOptions()
         {
-            int lastVisionTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Vision, SelectedID, true);
-            int lastWritingTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Writing, SelectedID, true);
-            int lastDrivingTestAppointmentID = GetLastTestAppointmentID(AppSettings.TestType.Driving, SelectedID, true);
-            cancelApplicationToolStripMenuItem.Enabled = ScheduleToolStripMenuItem.Enabled = (SelectedApplicationStatus != string.Empty && SelectedApplicationStatus == AppSettings.EnApplicationStatus.New.ToString());
-            scheduleVisionTestToolStripMenuItem.Enabled = !Test.GetTestResultStatus(lastVisionTestAppointmentID);
-            scheduleWritingTestToolStripMenuItem.Enabled = !scheduleVisionTestToolStripMenuItem.Enabled && !Test.GetTestResultStatus(lastWritingTestAppointmentID);
-            scheduleDrivingTestToolStripMenuItem.Enabled = scheduleWritingTestToolStripMenuItem.Enabled && !Test.GetTestResultStatus(lastDrivingTestAppointmentID);
+            bool isApplicationStatusNew = (SelectedApplicationStatus == AppSettings.EnApplicationStatus.New.ToString());
+            bool isApplicationStatusCompleted = (SelectedApplicationStatus == AppSettings.EnApplicationStatus.Completed.ToString());
+            ToggleScheduleTestMenuOptions();
+            editApplicationToolStripMenuItem.Enabled = isApplicationStatusNew ? true : false;
+            deleteApplicationToolStripMenuItem.Enabled = isApplicationStatusNew ? true : false;
+            cancelApplicationToolStripMenuItem.Enabled = isApplicationStatusNew ? true : false;
+            ScheduleToolStripMenuItem.Enabled = isApplicationStatusNew ? true : false;
+            issueDrivingLicense1stTimeToolStripMenuItem.Enabled = isApplicationStatusCompleted ? true : false;
         }
-        private int GetLastTestAppointmentID(AppSettings.TestType testType, int lDlAppID, bool appointmentLockedStatus = true)
+        private void ToggleScheduleTestMenuOptions()
         {
-            return TestAppointment.GetLastTestAppointmentID((int)testType, lDlAppID, appointmentLockedStatus);
+            var testSquence = new List<(AppSettings.TestType type, ToolStripMenuItem menuItem)>
+            {
+                (AppSettings.TestType.Vision, scheduleVisionTestToolStripMenuItem),
+                (AppSettings.TestType.Writing, scheduleWritingTestToolStripMenuItem),
+                (AppSettings.TestType.Driving, scheduleDrivingTestToolStripMenuItem)
+            };
+            bool enableNext = true;
+            foreach (var (type, menuItem) in testSquence)
+            {
+                int appointmentID = TestAppointment.GetLastTestAppointmentID((int)type, SelectedID);
+                bool passed = (appointmentID != -1 && Test.GetTestResultStatus(appointmentID));
+                if (enableNext && !passed)
+                {
+                    menuItem.Enabled = true;
+                    enableNext = false;
+                }
+                else
+                {
+                    menuItem.Enabled = false;
+                }
+            }
         }
         private void CancelLDLApplication(int selectedID)
         {
@@ -305,7 +326,6 @@ namespace DVLD_UI
                     }
                 }
             }
-
         }
     }
 }

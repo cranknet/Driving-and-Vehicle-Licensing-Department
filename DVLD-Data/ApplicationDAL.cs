@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 namespace DVLD_Data
 {
@@ -88,6 +89,29 @@ namespace DVLD_Data
                 }
             }
             return false;
+        }
+        public static int GetApplicationIDByLDLAppID(int lDlAppID)
+        {
+            string query = "SELECT ApplicationID FROM LocalDrivingLicenseApplications WHERE LocalDrivingLicenseApplicationID = @LDLAppID;";
+            using (SqlConnection sqlConnection = new SqlConnection(DatabaseHelper.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
+            {
+                cmd.Parameters.Add(DatabaseHelper.CreateParameter("@LDLAppID", SqlDbType.Int, lDlAppID));
+                try
+                {
+                    sqlConnection.Open();
+                    object result = cmd.ExecuteScalar();
+                    if (result is int applicationID)
+                    {
+                        return applicationID;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"GetApplicationIDByLDLAppID: Error updating application status: {ex.Message}");
+                }
+            }
+            return -1;
         }
     }
 }

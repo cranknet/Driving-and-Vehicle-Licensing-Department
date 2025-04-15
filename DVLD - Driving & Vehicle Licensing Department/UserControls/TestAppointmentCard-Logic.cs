@@ -39,15 +39,15 @@ namespace DVLD_UI.UserControls.Cards
         {
             AppointmentsGridView.DataSource = TestAppointment.GetTestAppointments((int)testType, lDLAppID);
         }
-        private void HandleTestCompletion()
-        {
-            // Change Application Status to Completed
-            _Application.LastStatusDate = System.DateTime.Now;
-            _Application.ApplicationStatus = (int)AppSettings.EnApplicationStatus.Completed;
-            if (!_Application.Save())
-            {
-                MessageBox.Show("Couldn't update Application Status to Compeleted!");
-            }
-        }
+        //private void HandleTestCompletion()
+        //{
+        //    // Change Application Status to Completed
+        //    _Application.LastStatusDate = System.DateTime.Now;
+        //    _Application.ApplicationStatus = (int)AppSettings.EnApplicationStatus.Completed;
+        //    if (!_Application.Save())
+        //    {
+        //        MessageBox.Show("Couldn't update Application Status to Compeleted!");
+        //    }
+        //}
     }
 }

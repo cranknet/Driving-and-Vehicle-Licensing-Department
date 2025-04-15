@@ -220,12 +220,9 @@ namespace DVLD_UI
                     break;
             }
         }
-
-
-
         private void contextMenuStripLDLApplication_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ToggleScheduleTestMenuItems();
+            ToggleLDLApplicationContextMenuOptions();
         }
     }
 }
